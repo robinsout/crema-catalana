@@ -1,5 +1,6 @@
 // Page layer: renders navigation, the study plan and lessons. Logic lives in model.js and storage.js.
 import { createStore } from './storage.js';
+import { clipFor } from './say.js';
 import {
   PLAN_ID, normalizeCatalog, allLessons, findLesson, resolveRoute,
   progress, neighbours, lessonLabel, relatedExtras,
@@ -102,6 +103,7 @@ function extraRow(x) {
 function showPlan(focusId) {
   current = PLAN_ID;
   store.setLast(PLAN_ID);
+  loadSay(PLAN_ID);
   renderNav();
   closeNav();
   const c = catalog.course;
@@ -142,6 +144,7 @@ function showPlan(focusId) {
 async function showLesson(lesson) {
   current = lesson.id;
   store.setLast(lesson.id);
+  loadSay(lesson.id);
   renderNav();
   closeNav();
 
@@ -222,37 +225,37 @@ const jump = (e) => {
 $('toc').addEventListener('click', jump);
 $('main').addEventListener('click', jump);
 
-/* ---------- pronunciation (speech synthesis) ---------- */
-let voice = null;
-const synth = window.speechSynthesis;
-function pickVoice() {
-  if (!synth) return;
-  voice = synth.getVoices().find((v) => /^ca([-_]|$)/i.test(v.lang)) || null;
-  document.documentElement.classList.toggle('can-say', !!voice);
-  $('sayHint').textContent = voice
-    ? `Нажмите на любое каталанское слово или фразу, чтобы услышать произношение (голос: ${voice.name}).`
-    : 'Чтобы слушать произношение, добавьте в систему каталанский голос (например, Montse на macOS или iOS) и обновите страницу.';
+/* ---------- pronunciation (recorded clips) ---------- */
+let sayManifest = null;
+let sayFor = null;
+const player = new Audio();
+
+async function loadSay(id) {
+  sayFor = id;
+  sayManifest = null;
+  document.documentElement.classList.remove('can-say');
+  try {
+    const res = await fetch(`audio/${id}.json`);
+    if (!res.ok || sayFor !== id) return;
+    sayManifest = await res.json();
+    document.documentElement.classList.add('can-say');
+  } catch (e) { /* no audio for this page */ }
 }
-if (synth) { pickVoice(); synth.addEventListener('voiceschanged', pickVoice); }
-else { $('sayHint').textContent = 'Этот браузер не умеет озвучивать текст.'; }
+
+$('sayHint').textContent = 'Нажмите на каталанское слово или фразу, чтобы услышать произношение. Озвучка: нейросетевой голос Joana (ca-ES).';
 
 $('main').addEventListener('click', (e) => {
-  if (!voice || e.target.closest('summary, a, button')) return;
+  if (!sayManifest || e.target.closest('summary, a, button')) return;
   const host = e.target.closest('.lesson [lang="ca"]');
   if (!host) return;
   const el = host.tagName === 'TABLE' ? e.target.closest('td') : host;
-  if (!el) return;
-  const text = el.textContent.replace(/\s+/g, ' ').trim();
-  if (!text) return;
-  synth.cancel();
+  const clip = el && clipFor(sayManifest, el.textContent);
+  if (!clip) return;
   document.querySelectorAll('.speaking').forEach((n) => n.classList.remove('speaking'));
-  const u = new SpeechSynthesisUtterance(text);
-  u.voice = voice;
-  u.lang = voice.lang;
-  u.rate = 0.85;
   el.classList.add('speaking');
-  u.onend = u.onerror = () => el.classList.remove('speaking');
-  synth.speak(u);
+  player.onended = player.onerror = () => el.classList.remove('speaking');
+  player.src = `audio/${clip}`;
+  player.play().catch(() => el.classList.remove('speaking'));
 });
 
 window.addEventListener('hashchange', route);

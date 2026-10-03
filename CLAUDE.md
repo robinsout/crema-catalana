@@ -1,18 +1,36 @@
 # Quadern de català
 
-Личный портал с уроками каталанского. Опубликован как Artifact: https://claude.ai/artifact/CweuEQKKz9GLPtxfS7riYc
+Личный портал с уроками каталанского к курсу Passos 1 (Octaedro, Bàsic 1–3, A2).
+- Сайт: https://robinsout.github.io/crema-catalana/ (GitHub Pages, основной)
+- Приватная копия: claude.ai Artifact https://claude.ai/artifact/CweuEQKKz9GLPtxfS7riYc
+
+## Две линии уроков
+1. **Уроки по юнитам** (`parts[].units[]` в `lessons.json`, id вида `b1-04`). Пользователь просит урок к юниту, который прошёл в школе. Основа — план юнита: `topic`, `grammar`, `vocab`, `extra`, `mission`.
+2. **Тематические и обзорные уроки** (`extras[]`, id вида `x-pronoms-febles`; `kind`: `topic` или `overview`). Пишутся по запросу; полем `related` урок связывается с юнитами. Вводный урок лежит в `extras` с id `intro`.
 
 ## Структура
-- `portal/index.html` — оболочка: навигация, прогресс (localStorage), оглавление, озвучка через speechSynthesis.
-- `portal/lessons.json` — учебный план и список уроков: `intro` (вводный урок) и `parts` (модули Bàsic 1–3 учебника Passos 1, Octaedro). Каждый юнит содержит `id` (`b1-04`), `unit`, `title` (название юнита из учебника), `topic`, `grammar[]`, `vocab`, `extra`, `mission`. Страница «Учебный план» (`#pla`) строится из этих данных. Юнит без поля `file` показывается как «урок появится».
-- `portal/content/NN-slug.html` — урок в виде HTML-фрагмента без `<html>`/`<head>`. Фрагмент подгружается в оболочку через fetch.
+- `portal/index.html` — разметка и стили; логика в `portal/js/`:
+  - `storage.js` — прогресс в localStorage (контракт совместимости, см. ниже);
+  - `model.js` — каталог уроков, маршрутизация, прогресс, валидация;
+  - `say.js` — поиск аудиоклипа по фразе;
+  - `app.js` — отрисовка страницы.
+- `portal/lessons.json` — курс, `extras`, `parts`. Страница «Учебный план» (`#pla`) строится из него. Урок без `file` показывается как «урок появится».
+- `portal/content/<id>.html` — урок в виде HTML-фрагмента (без `<html>`/`<head>`/`<body>`).
+- `portal/audio/<id>.json` и `portal/audio/<id>/*.mp3` — озвучка каталанских фраз урока; `audio/pla.json` — названия уроков на странице плана.
 
 ## Как добавить урок
-1. Создать `portal/content/<id юнита>.html`, например `b1-04.html`. Каждый раздел оформляется как `<section id="...">` с `<h2>`, из них строится оглавление.
-2. Разметка, которую понимают стили: `.tw > table` (таблица со скроллом), `table.conj` (спряжение), `aside.tip|warn|ru` с `<p class="label">`, `.ex` (пример), `.ipa` (транскрипция), `.wrong` (ошибочная форма), `blockquote.reading`, `<details><summary>` (ответы).
-3. Каталанский текст помечается `lang="ca"`, тогда его можно озвучить кликом. Если `lang="ca"` стоит на `<table>`, озвучивается каждая ячейка; русские пояснения держать вне `lang="ca"`.
-4. В `lessons.json` добавить соответствующему юниту `file` и `date`. Один урок портала соответствует одному юниту учебника; грамматику, лексику и миссию берём из плана юнита.
-5. Перепубликовать: Artifact publish `portal/index.html`, в `files` передать `lessons.json` и новый фрагмент (уже опубликованные файлы сохраняются).
+1. Создать `portal/content/<id>.html`. Каждый раздел — `<section id="...">` с `<h2>`, из них строится оглавление.
+2. Разметка, которую понимают стили: `.tw > table`, `table.conj`, `aside.tip|warn|ru` с `<p class="label">`, `.ex`, `.ipa`, `.wrong`, `blockquote.reading`, `<details><summary>`.
+3. Каталанский текст помечается `lang="ca"` (span, td, li, blockquote; если `lang="ca"` стоит на `<table>`, озвучивается каждая ячейка `td`). Русские пояснения держать вне `lang="ca"`.
+4. В `lessons.json` добавить уроку `file` и `date`; id урока добавить в `tests/published-ids.json`.
+5. `npm run audio` — записать озвучку (нужен edge-tts: `pip install edge-tts` или `EDGE_TTS=/путь/к/edge-tts`). Голос ca-ES-JoanaNeural.
+6. `npm run check`, коммит, пуш. Целостность урока (файл, разделы, озвучка всех фраз) проверяет `tests/catalog.test.js`.
+
+## Разработка
+- **TDD**: сначала тест в `tests/` (node:test, без зависимостей), убедиться, что он падает, потом код.
+- **Совместимость localStorage**: ключ `quadern-catala` и формат `{ done: {id: bool}, last: id }` не меняются. Новое добавляется только новыми полями; неизвестные поля сохраняются. Опубликованные id уроков вечные (`tests/published-ids.json`); переименование — только через `ID_ALIASES` в `storage.js` с тестом на старые данные.
+- Локальный пайплайн: `npm run check` (тесты + сборка). Хук `.githooks/pre-push` запускает его перед пушем; включается командой `git config core.hooksPath .githooks`.
+- `npm run serve` — собрать сайт и открыть на http://localhost:8000.
 
 ## Содержание
 Пишем на русском, сравниваем с испанским, французским и русским. Вариант языка — центральный (барселонский), орфография по реформе IEC 2016 (soc, dona, vens; диакритик осталось 15).
@@ -20,6 +38,5 @@
 ## Деплой
 - Репозиторий: git@github.com:robinsout/crema-catalana.git (ветка `master`). Пушить с личным SSH-ключом `~/.ssh/mygithub`, он прописан в `core.sshCommand` этого репозитория.
 - Коммиты делать от личного адреса robinsout@gmail.com (он задан в локальном git config), а не от рабочего.
-- `.github/workflows/pages.yml` собирает `portal/` в `_site/` и при каждом пуше в `master` публикует сайт на GitHub Pages: https://robinsout.github.io/crema-catalana/
-- `portal/index.html` написан без `<html>`/`<head>`, потому что claude.ai Artifact добавляет их сам. Для Pages этот каркас добавляет workflow.
-- Новый урок публиковать в оба места: перепубликовать Artifact и закоммитить с пушем.
+- `.github/workflows/pages.yml`: тесты и сборка на каждый пуш и PR; деплой на Pages только из `master` и только если тесты прошли.
+- `portal/index.html` написан без `<html>`/`<head>`, потому что claude.ai Artifact добавляет их сам; для Pages каркас добавляет `scripts/build.mjs`.

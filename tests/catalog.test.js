@@ -5,6 +5,8 @@ import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join, dirname } from 'node:path';
 import { normalizeCatalog, allLessons, validateCatalog } from '../portal/js/model.js';
+import { clipFor } from '../portal/js/say.js';
+import { extractSayTexts } from '../scripts/lib/say-texts.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const portal = join(root, 'portal');
@@ -36,6 +38,27 @@ test('every lesson file exists and is a fragment with sections', () => {
     assert.doesNotMatch(html, /<html|<head|<body/i, `${l.file} must be a fragment`);
     assert.match(html, /<section id="[^"]+">\s*<h2>/, `${l.file} needs <section id> with <h2>`);
   }
+});
+
+test('every Catalan phrase in a lesson has a recorded clip (run: npm run audio)', () => {
+  for (const l of allLessons(catalog).filter((x) => x.file)) {
+    const manifestPath = join(portal, 'audio', `${l.id}.json`);
+    assert.ok(existsSync(manifestPath), `${l.id}: audio/${l.id}.json missing — run npm run audio`);
+    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    const missing = extractSayTexts(readFileSync(join(portal, l.file), 'utf8')).filter((t) => !clipFor(manifest, t));
+    assert.deepEqual(missing, [], `${l.id}: phrases without audio — run npm run audio`);
+    for (const file of Object.values(manifest.clips)) {
+      assert.ok(existsSync(join(portal, 'audio', file)), `${l.id}: audio/${file} missing`);
+    }
+  }
+});
+
+test('every lesson title on the study plan has a recorded clip (run: npm run audio)', () => {
+  const manifestPath = join(portal, 'audio', 'pla.json');
+  assert.ok(existsSync(manifestPath), 'audio/pla.json missing — run npm run audio');
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  const missing = allLessons(catalog).map((l) => l.title).filter((t) => !clipFor(manifest, t));
+  assert.deepEqual(missing, [], 'titles without audio — run npm run audio');
 });
 
 test('published lesson ids are never removed', () => {
