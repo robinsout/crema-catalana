@@ -33,6 +33,8 @@
     "vite.config.ts",
     "env.d.ts",
     "e2e/**/*",
-    "playwright.config.ts"
+    "playwright.config.ts",
+    "server/**/*",
+    "shared/**/*"
   ]
 }

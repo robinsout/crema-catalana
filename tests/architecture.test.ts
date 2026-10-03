@@ -11,7 +11,9 @@ const src = join(dirname(fileURLToPath(import.meta.url)), '..', 'src');
 type Layer = 'types' | 'api' | 'services' | 'stores' | 'ui' | 'app';
 
 function layerOf(file: string): Layer {
-  const top = relative(src, file).split(/[\\/]/)[0] ?? '';
+  const rel = relative(src, file);
+  if (rel.startsWith(`..${'/'}shared${'/'}`) || rel.startsWith('..\\shared\\')) return 'types'; // contracts shared with the server
+  const top = rel.split(/[\\/]/)[0] ?? '';
   if (top === 'types') return 'types';
   if (top === 'api') return 'api';
   if (top === 'services') return 'services';
