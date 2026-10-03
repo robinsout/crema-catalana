@@ -1,8 +1,8 @@
 # Quadern de català
 
 Личный портал с уроками каталанского к курсу Passos 1 (Octaedro, Bàsic 1–3, A2).
-- Сайт: https://robinsout.github.io/crema-catalana/ (GitHub Pages, основной)
-- Приватная копия: claude.ai Artifact https://claude.ai/artifact/CweuEQKKz9GLPtxfS7riYc
+- Сайт: https://robinsout.github.io/crema-catalana/ (GitHub Pages) — единственное место публикации.
+- Старая копия в claude.ai Artifact (https://claude.ai/artifact/CweuEQKKz9GLPtxfS7riYc) больше не поддерживается: не обновлять и не публиковать туда уроки.
 
 ## Две линии уроков
 1. **Уроки по юнитам** (`parts[].units[]` в `lessons.json`, id вида `b1-04`). Пользователь просит урок к юниту, который прошёл в школе. Основа — план юнита: `topic`, `grammar`, `vocab`, `extra`, `mission`.
@@ -39,4 +39,4 @@
 - Репозиторий: git@github.com:robinsout/crema-catalana.git (ветка `master`). Пушить с личным SSH-ключом `~/.ssh/mygithub`, он прописан в `core.sshCommand` этого репозитория.
 - Коммиты делать от личного адреса robinsout@gmail.com (он задан в локальном git config), а не от рабочего.
 - `.github/workflows/pages.yml`: тесты и сборка на каждый пуш и PR; деплой на Pages только из `master` и только если тесты прошли.
-- `portal/index.html` написан без `<html>`/`<head>`, потому что claude.ai Artifact добавляет их сам; для Pages каркас добавляет `scripts/build.mjs`.
+- `portal/index.html` написан без `<html>`/`<head>` (наследие версии для Artifact); каркас добавляет `scripts/build.mjs`.
