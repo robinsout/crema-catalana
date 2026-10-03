@@ -1,7 +1,7 @@
 // Checks the real lesson catalog and content files.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join, dirname } from 'node:path';
 import { normalizeCatalog, allLessons, validateCatalog } from '../portal/js/model.js';
@@ -40,25 +40,34 @@ test('every lesson file exists and is a fragment with sections', () => {
   }
 });
 
+// Shared audio store: audio/index.json maps a phrase to clips/<hash>.mp3, one file per phrase.
+const audioDir = join(portal, 'audio');
+const audioIndex = existsSync(join(audioDir, 'index.json')) ? JSON.parse(readFileSync(join(audioDir, 'index.json'), 'utf8')) : null;
+
+test('audio index exists (run: npm run audio)', () => {
+  assert.ok(audioIndex, 'audio/index.json missing — run npm run audio');
+});
+
 test('every Catalan phrase in a lesson has a recorded clip (run: npm run audio)', () => {
   for (const l of allLessons(catalog).filter((x) => x.file)) {
-    const manifestPath = join(portal, 'audio', `${l.id}.json`);
-    assert.ok(existsSync(manifestPath), `${l.id}: audio/${l.id}.json missing — run npm run audio`);
-    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
-    const missing = extractSayTexts(readFileSync(join(portal, l.file), 'utf8')).filter((t) => !clipFor(manifest, t));
+    const missing = extractSayTexts(readFileSync(join(portal, l.file), 'utf8')).filter((t) => !clipFor(audioIndex, t));
     assert.deepEqual(missing, [], `${l.id}: phrases without audio — run npm run audio`);
-    for (const file of Object.values(manifest.clips)) {
-      assert.ok(existsSync(join(portal, 'audio', file)), `${l.id}: audio/${file} missing`);
-    }
   }
 });
 
 test('every lesson title on the study plan has a recorded clip (run: npm run audio)', () => {
-  const manifestPath = join(portal, 'audio', 'pla.json');
-  assert.ok(existsSync(manifestPath), 'audio/pla.json missing — run npm run audio');
-  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
-  const missing = allLessons(catalog).map((l) => l.title).filter((t) => !clipFor(manifest, t));
+  const missing = allLessons(catalog).map((l) => l.title).filter((t) => !clipFor(audioIndex, t));
   assert.deepEqual(missing, [], 'titles without audio — run npm run audio');
+});
+
+test('audio store holds each phrase once: every clip file exists and nothing is orphaned', () => {
+  const files = Object.values(audioIndex.clips);
+  assert.equal(new Set(files).size, files.length, 'two phrases share one clip file');
+  for (const f of files) assert.ok(existsSync(join(audioDir, f)), `audio/${f} missing`);
+  const onDisk = readdirSync(join(audioDir, 'clips')).filter((f) => f.endsWith('.mp3')).map((f) => `clips/${f}`);
+  const orphans = onDisk.filter((f) => !files.includes(f));
+  assert.deepEqual(orphans, [], 'clips not in audio/index.json — run npm run audio');
+  assert.deepEqual(readdirSync(audioDir).sort(), ['clips', 'index.json'], 'audio/ must contain only index.json and clips/');
 });
 
 test('published lesson ids are never removed', () => {

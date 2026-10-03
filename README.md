@@ -42,7 +42,7 @@ portal/
   js/                 storage.js · model.js · say.js · app.js
   lessons.json        курс, учебный план, список уроков
   content/<id>.html   уроки (HTML-фрагменты)
-  audio/              озвучка: <id>.json и mp3
+  audio/              озвучка: index.json и clips/<hash>.mp3 (одна запись на фразу)
 scripts/              сборка сайта и генератор озвучки
 tests/                тесты логики, данных и сборки
 ```

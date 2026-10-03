@@ -1,5 +1,5 @@
-// Pronunciation clips. Each lesson has audio/<lesson id>.json:
-//   { voice, clips: { "<normalized Catalan text>": "<lesson id>/<file>.mp3" } }
+// Pronunciation clips. One shared index for all lessons, audio/index.json:
+//   { voice, rate, clips: { "<normalized Catalan text>": "clips/<hash>.mp3" } }
 // The page looks a clicked phrase up by its normalized text.
 
 export const normalizeSayText = (text) => String(text == null ? '' : text).replace(/\s+/g, ' ').trim();

@@ -18,7 +18,7 @@ test('build produces a standalone site for GitHub Pages', () => {
     assert.match(index, /<meta name="viewport"/);
     assert.match(index, /<title>Quadern de català<\/title>/);
     assert.equal((index.match(/<body>/g) || []).length, 1);
-    for (const f of ['lessons.json', 'js/app.js', 'js/model.js', 'js/storage.js', 'js/say.js', 'audio/intro.json', 'audio/pla.json', '.nojekyll']) {
+    for (const f of ['lessons.json', 'js/app.js', 'js/model.js', 'js/storage.js', 'js/say.js', 'audio/index.json', '.nojekyll']) {
       assert.ok(existsSync(join(out, f)), `${f} missing in build`);
     }
   } finally {

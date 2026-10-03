@@ -103,7 +103,6 @@ function extraRow(x) {
 function showPlan(focusId) {
   current = PLAN_ID;
   store.setLast(PLAN_ID);
-  loadSay(PLAN_ID);
   renderNav();
   closeNav();
   const c = catalog.course;
@@ -144,7 +143,6 @@ function showPlan(focusId) {
 async function showLesson(lesson) {
   current = lesson.id;
   store.setLast(lesson.id);
-  loadSay(lesson.id);
   renderNav();
   closeNav();
 
@@ -227,20 +225,16 @@ $('main').addEventListener('click', jump);
 
 /* ---------- pronunciation (recorded clips) ---------- */
 let sayManifest = null;
-let sayFor = null;
 const player = new Audio();
 
-async function loadSay(id) {
-  sayFor = id;
-  sayManifest = null;
-  document.documentElement.classList.remove('can-say');
-  try {
-    const res = await fetch(`audio/${id}.json`);
-    if (!res.ok || sayFor !== id) return;
-    sayManifest = await res.json();
-    document.documentElement.classList.add('can-say');
-  } catch (e) { /* no audio for this page */ }
-}
+// one shared index for the whole site: phrase → clips/<hash>.mp3
+fetch('audio/index.json')
+  .then((r) => (r.ok ? r.json() : null))
+  .then((index) => {
+    sayManifest = index;
+    document.documentElement.classList.toggle('can-say', !!index);
+  })
+  .catch(() => { /* no audio: phrases stay plain text */ });
 
 $('sayHint').textContent = 'Нажмите на каталанское слово или фразу, чтобы услышать произношение. Озвучка: нейросетевой голос Joana (ca-ES).';
 
