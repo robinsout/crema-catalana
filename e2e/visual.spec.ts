@@ -44,3 +44,20 @@ for (const scheme of ['light', 'dark'] as const) {
     await expect(ex).toHaveScreenshot(`exercise-checked-${scheme}.png`);
   });
 }
+
+for (const scheme of ['light', 'dark'] as const) {
+  test(`sync page, ${scheme} theme @visual`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: scheme });
+    await page.goto('./#/ru/sync');
+    await expect(page.locator('.lesson-head h2')).toBeVisible();
+    await page.evaluate(() => document.fonts.ready);
+    await expect(page).toHaveScreenshot(`sync-off-${scheme}.png`);
+    await page.getByRole('button', { name: 'Включить синхронизацию' }).click();
+    await expect(page.locator('.lesson .sync-status')).toHaveClass(/ok/);
+    // the code and the QR code are random: masked
+    await expect(page).toHaveScreenshot(`sync-on-${scheme}.png`, {
+      fullPage: true,
+      mask: [page.locator('.sync-qr'), page.locator('.sync-code'), page.locator('.sync-link-text'), page.locator('.sync-status')],
+    });
+  });
+}

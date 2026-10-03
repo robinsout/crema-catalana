@@ -3,7 +3,7 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { PLAN_ID, progress as summarize } from '../services/catalog.ts';
-import { markDone, readSavedProgress, recordExercise, writeSavedProgress } from '../services/progress.ts';
+import { markDone, readSavedProgress, recordExercise, writeSavedProgress, type Progress } from '../services/progress.ts';
 import type { ExerciseResult } from '../types/index.ts';
 import { useCatalogStore } from './catalog.ts';
 
@@ -30,11 +30,19 @@ export const useProgressStore = defineStore('progress', () => {
     save();
   }
 
+  // takes marks and exercise results merged with other devices; `last` stays local
+  function applySynced(merged: Pick<Progress, 'done' | 'doneAt' | 'exercises'>): void {
+    data.value.done = merged.done;
+    data.value.doneAt = merged.doneAt;
+    data.value.exercises = merged.exercises;
+    save();
+  }
+
   function setLast(id: string | typeof PLAN_ID): void {
     if (data.value.last === id) return;
     data.value.last = id;
     save();
   }
 
-  return { data, done, last, summary, isDone, toggleDone, setLast, result, saveResult };
+  return { data, done, last, summary, isDone, toggleDone, setLast, result, saveResult, applySynced };
 });

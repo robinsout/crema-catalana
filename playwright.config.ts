@@ -21,10 +21,20 @@ export default defineConfig({
     { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 900 } } },
     { name: 'phone', use: { ...devices['iPhone 13'] } },
   ],
-  webServer: {
-    command: 'npm run build && npx vite preview --port 4173 --strictPort',
-    url: 'http://localhost:4173/',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
-  },
+  webServer: [
+    {
+      // the site, built against the local sync server below
+      command: 'VITE_SYNC_URL=http://localhost:8787 npm run build && npx vite preview --port 4173 --strictPort',
+      url: 'http://localhost:4173/',
+      reuseExistingServer: !process.env.CI,
+      timeout: 120_000,
+    },
+    {
+      command: 'node server/main.ts',
+      url: 'http://localhost:8787/v1/health',
+      env: { PORT: '8787', HOST: '127.0.0.1', DB_PATH: ':memory:', ALLOWED_ORIGINS: 'http://localhost:4173', RATE_PER_MINUTE: '10000' },
+      reuseExistingServer: !process.env.CI,
+      timeout: 30_000,
+    },
+  ],
 });

@@ -2,6 +2,17 @@
 import { vi } from 'vitest';
 import type { Course, LocaleCatalog, LocalesIndex, UiStrings } from '../src/types/index.ts';
 import { STORAGE_KEY } from '../src/services/progress.ts';
+import { createHandler } from '../server/app.ts';
+import { SqliteBlobStore } from '../server/store.ts';
+import { RateLimiter } from '../server/ratelimit.ts';
+
+// The real sync server handler with an in-memory database; share one between "devices" in a test.
+export const SYNC_URL = 'https://188.245.182.47';
+export function syncServer() {
+  return createHandler({ store: new SqliteBlobStore(':memory:'), allowedOrigins: [], limiter: new RateLimiter({ perMinute: 10_000 }) });
+}
+let currentSync: ReturnType<typeof syncServer> | null = null;
+export function useSyncServer(server: ReturnType<typeof syncServer>): void { currentSync = server; }
 
 export const course: Course = {
   course: { title: 'Passos 1', publisher: 'Octaedro', level: 'Bàsic 1–3 · A2' },
@@ -44,6 +55,10 @@ export const ruUi: UiStrings = {
   'ex.last': 'Последний результат: {score} из {total}',
   'ex.solution': 'Ответ:',
   'ex.accent': 'проверьте ударения',
+  'sync.enable': 'Включить синхронизацию',
+  'sync.join': 'Подключить',
+  'sync.badCode': 'Код не подходит',
+  'sync.disable': 'Отключить на этом устройстве',
 };
 
 export const locales: LocalesIndex = { base: 'ru', default: 'ru', available: ['ru'] };
@@ -78,8 +93,12 @@ export function stubSite(overrides: Record<string, unknown> = {}): string[] {
     ...overrides,
   };
   const requested: string[] = [];
-  vi.stubGlobal('fetch', vi.fn(async (url: string) => {
+  vi.stubGlobal('fetch', vi.fn(async (url: string, init?: RequestInit) => {
     requested.push(url);
+    if (url.startsWith(SYNC_URL)) {
+      currentSync ??= syncServer();
+      return currentSync(new Request(url, init), 'test');
+    }
     const lesson = /^locales\/(\w+)\/lessons\/([\w-]+)\.html$/.exec(url);
     if (lesson) return new Response(lessonHtml(lesson[2] ?? ''), { status: 200 });
     if (!(url in files)) return new Response('not found', { status: 404 });

@@ -6,6 +6,7 @@ import TableOfContents from './components/TableOfContents.vue';
 import { useCatalogStore } from './stores/catalog.ts';
 import { useI18n } from './composables/useI18n.ts';
 import { useSay } from './composables/useSay.ts';
+import { useSyncStore } from './stores/sync.ts';
 
 const catalog = useCatalogStore();
 const { t } = useI18n();
@@ -15,8 +16,10 @@ useSay(main);
 // shown when even the interface strings could not be loaded
 const loadError = () => (catalog.ui['status.catalogError'] ? t('status.catalogError') : 'Could not load the course. Please reload the page.');
 
+const sync = useSyncStore();
 watchEffect(() => {
   if (catalog.lang) document.documentElement.lang = catalog.lang;
+  if (catalog.ready) sync.start();
 });
 </script>
 

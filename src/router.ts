@@ -33,6 +33,7 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     routes: [
       { path: '/:lang/plan/:focus?', name: 'plan', component: () => import('./views/PlanView.vue') },
       { path: '/:lang/lesson/:id', name: 'lesson', component: () => import('./views/LessonView.vue') },
+      { path: '/:lang/sync/:code?', name: 'sync', component: () => import('./views/SyncView.vue') },
       { path: '/:rest(.*)*', name: 'other', component: { render: () => null } },
     ],
     scrollBehavior: (to, from) => scrollFor(to, from),
@@ -58,6 +59,9 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     }
     if (to.name === 'plan' && lang !== requested) {
       return target({ view: 'plan', focus: param(to.params.focus) || null }, lang);
+    }
+    if (to.name === 'sync' && lang !== requested) {
+      return { name: 'sync', params: { lang, ...(param(to.params.code) ? { code: param(to.params.code) } : {}) } };
     }
     return true;
   });

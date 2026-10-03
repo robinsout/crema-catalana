@@ -7,6 +7,7 @@ import { useI18n } from '../composables/useI18n.ts';
 import { useLessonLink } from '../composables/useLessonLink.ts';
 import type { Lesson } from '../types/index.ts';
 import LessonBadge from './LessonBadge.vue';
+import SyncStatusLine from './SyncStatusLine.vue';
 
 const catalog = useCatalogStore();
 const progress = useProgressStore();
@@ -36,6 +37,9 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
         <span>{{ t('progress.ready', summary) }}</span>
       </p>
       <div class="progress-bar"><i :style="{ width }"></i></div>
+      <RouterLink class="sync-link" :to="{ name: 'sync', params: { lang: catalog.lang } }">
+        <span class="sync-icon" aria-hidden="true">⇅</span><SyncStatusLine />
+      </RouterLink>
       <ul class="lesson-list">
         <li>
           <RouterLink class="plan-link" :to="{ name: 'plan', params: { lang: catalog.lang } }" :aria-current="isPlan ? 'page' : undefined" active-class="" exact-active-class="">
