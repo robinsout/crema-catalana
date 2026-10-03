@@ -60,6 +60,12 @@
 ## Содержание
 Пишем на русском, сравниваем с испанским, французским и русским. Вариант языка — центральный (барселонский), орфография по реформе IEC 2016 (soc, dona, vens; диакритик осталось 15).
 
+## Синхронизация
+- Клиент: `src/services/sync.ts` (код, HKDF, AES-GCM, цикл слияния), `src/api/sync.ts` (адрес из `VITE_SYNC_URL`, по умолчанию `https://188.245.182.47`), стор `sync`, экран `#/<lang>/sync/:code?`. Код хранится отдельно от прогресса (localStorage `quadern-sync`) и сам не синхронизируется. На сервер уходят только `done`, `doneAt`, `exercises` — зашифрованными.
+- Сервер: `server/` (портативный обработчик `Request → Response` + `node:sqlite` + `node:http`), контракт — `shared/sync-api.ts` (слой «типы», общий с сайтом). Тесты сервера — в окружении `node` (`// @vitest-environment node`).
+- e2e поднимают локальный сервер синхронизации (`playwright.config.ts`, порт 8787) и собирают сайт с `VITE_SYNC_URL=http://localhost:8787`.
+- Эксплуатация, безопасность, деплой (`npm run deploy:sync`) — `deploy/README.md`. Мониторинг — `.github/workflows/monitor.yml`.
+
 ## Деплой
 - Репозиторий: git@github.com:robinsout/crema-catalana.git (ветка `master`). Пушить с личным SSH-ключом `~/.ssh/mygithub`, он прописан в `core.sshCommand` этого репозитория.
 - Коммиты делать от личного адреса robinsout@gmail.com (он задан в локальном git config), а не от рабочего.

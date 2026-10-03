@@ -1,0 +1,52 @@
+[Unit]
+Description=Quadern de català sync server (encrypted progress blobs)
+Documentation=https://github.com/robinsout/crema-catalana/blob/master/deploy/README.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Node 24 copied out of root's nvm by deploy/install.sh (the service has no access to /root)
+ExecStart=/opt/node/sync-current/bin/node /opt/quadern-sync/server/main.ts
+Environment=PORT=8787 HOST=127.0.0.1 ALLOWED_ORIGINS=https://robinsout.github.io RATE_PER_MINUTE=120 NODE_ENV=production
+# the database lives in /var/lib/quadern-sync (STATE_DIRECTORY)
+StateDirectory=quadern-sync
+StateDirectoryMode=0700
+Restart=always
+RestartSec=3
+KillSignal=SIGTERM
+TimeoutStopSec=10
+SyslogIdentifier=quadern-sync
+
+# sandbox: a throwaway unprivileged user, read-only system, writes only to its state directory
+DynamicUser=yes
+UMask=0077
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+AmbientCapabilities=
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+ProtectProc=invisible
+ProcSubset=pid
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RemoveIPC=yes
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources
+IPAddressDeny=any
+IPAddressAllow=localhost
+
+[Install]
+WantedBy=multi-user.target

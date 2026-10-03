@@ -5,6 +5,7 @@
 [![Node](https://img.shields.io/badge/node-24-339933?logo=nodedotjs&logoColor=white)](.nvmrc)
 [![Vue](https://img.shields.io/badge/vue-3-42b883?logo=vuedotjs&logoColor=white)](package.json)
 [![TypeScript](https://img.shields.io/badge/typescript-strict-3178c6?logo=typescript&logoColor=white)](tsconfig.json)
+[![Sync server](https://github.com/robinsout/crema-catalana/actions/workflows/monitor.yml/badge.svg)](https://github.com/robinsout/crema-catalana/actions/workflows/monitor.yml)
 [![Last commit](https://img.shields.io/github/last-commit/robinsout/crema-catalana)](https://github.com/robinsout/crema-catalana/commits/master)
 [![License](https://img.shields.io/github/license/robinsout/crema-catalana)](LICENSE)
 
@@ -18,7 +19,9 @@
 - **Две линии уроков:** уроки к юнитам, чтобы закреплять пройденное на занятиях, и тематические или обзорные уроки по запросу.
 - **Озвучка:** нажмите на каталанское слово или фразу, и прозвучит запись нейросетевого голоса ca-ES-JoanaNeural.
 - **Наглядные схемы:** карта времён на временной оси, циферблаты для системы «quarts», полоса суток, календарь праздников.
+- **Словарь урока** и **интерактивные упражнения** с проверкой ответа.
 - **Прогресс** хранится в браузере; формат сохранённых данных обратно совместим.
+- **Синхронизация между устройствами** без регистрации: код или QR, прогресс шифруется на устройстве, сервер видит только зашифрованные данные ([подробнее](deploy/README.md)).
 
 ## Разработка
 
@@ -53,7 +56,10 @@ content/                      данные курса, копируются на
   course.json                   структура курса: id, юниты, связи (без текстов)
   locales/<lang>/               язык ученика: ui.json, catalog.json, lessons/<id>.html
   audio/                        озвучка: index.json и clips/<hash>.mp3 (одна запись на фразу)
-scripts/                      генератор озвучки (TypeScript, запускается Node напрямую)
+scripts/                      генератор озвучки и иконок, деплой сервера синхронизации
+server/                       сервер синхронизации (Node 24, SQLite, без зависимостей)
+shared/                       контракт API синхронизации (общий для сайта и сервера)
+deploy/                       systemd, Caddy, установка на сервер, описание безопасности
 tests/                        тесты логики, данных, сторов, роутера, интерфейса, архитектуры и сборки (Vitest)
 e2e/                          тесты в браузере (Playwright) и эталонные скриншоты
 ```

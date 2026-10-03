@@ -1,0 +1,18 @@
+# Caddy in front of the sync server. HTTPS certificate for the bare IP address from Let's Encrypt:
+# IP certificates exist only in the "shortlived" profile (about 6 days); Caddy renews them itself.
+{
+	admin off
+}
+
+188.245.182.47 {
+	tls {
+		issuer acme {
+			profile shortlived
+		}
+	}
+	header {
+		-Server
+		Strict-Transport-Security "max-age=31536000"
+	}
+	reverse_proxy 127.0.0.1:8787
+}
