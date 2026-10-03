@@ -8,6 +8,8 @@ import { useTocStore } from '../stores/toc.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import { useLessonLink } from '../composables/useLessonLink.ts';
 import VocabSection from '../components/VocabSection.vue';
+import FillExercise from '../components/FillExercise.vue';
+import ChoiceExercise from '../components/ChoiceExercise.vue';
 
 const catalog = useCatalogStore();
 const lessons = useLessonsStore();
@@ -21,6 +23,7 @@ const lesson = computed(() => catalog.find(String(route.params.id ?? '')));
 const content = computed(() => (lesson.value ? lessons.content(lesson.value) : { state: 'error' as const }));
 const root = ref<HTMLElement | null>(null);
 const vocab = computed(() => (lesson.value ? lessons.vocab(lesson.value) : null));
+const exercises = computed(() => Object.entries(lesson.value ? lessons.exercises(lesson.value) : {}));
 
 const pager = computed(() => (lesson.value ? catalog.neighboursOf(lesson.value.id) : { prev: null, next: null }));
 const related = computed(() =>
@@ -55,6 +58,11 @@ watch(() => content.value.state, async (state) => {
       </header>
       <div ref="root">
         <article class="lesson" v-html="content.html"></article>
+        <!-- interactive exercises are mounted into their placeholders inside the lesson HTML -->
+        <Teleport v-for="[id, ex] in exercises" :key="`${lesson.id}/${id}`" :to="`[data-exercise='${id}']`" defer>
+          <FillExercise v-if="ex.type === 'fill'" :id="`${lesson.id}/${id}`" :items="ex.items" />
+          <ChoiceExercise v-else :id="`${lesson.id}/${id}`" :items="ex.items" />
+        </Teleport>
         <div v-if="vocab?.length" class="lesson">
           <VocabSection :groups="vocab" />
         </div>

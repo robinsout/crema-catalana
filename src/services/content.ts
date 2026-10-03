@@ -1,7 +1,8 @@
 // Loading course data: what to fetch for the course, a language, a lesson and the audio.
 import { contentApi } from '../api/content.ts';
 import { buildVocab } from './vocab.ts';
-import type { AudioIndex, Course, Lesson, LocaleCatalog, LocalesIndex, UiStrings, VocabGroup } from '../types/index.ts';
+import { exerciseIds } from './exercises.ts';
+import type { AudioIndex, Course, ExerciseSet, Lesson, LocaleCatalog, LocalesIndex, UiStrings, VocabGroup } from '../types/index.ts';
 
 export interface CourseBase {
   locales: LocalesIndex;
@@ -44,4 +45,10 @@ export async function loadVocab(lesson: Pick<Lesson, 'id' | 'hasVocab'>, lang: s
     contentApi.localeVocab(lang, lesson.id).catch(() => null),
   ]);
   return buildVocab(source, locale);
+}
+
+// Exercises placed in a lesson; nothing is fetched when the lesson has no placeholders.
+export async function loadExercises(lesson: Pick<Lesson, 'id'>, lang: string, html: string): Promise<ExerciseSet> {
+  if (!exerciseIds(html).length) return {};
+  return contentApi.exercises(lang, lesson.id);
 }

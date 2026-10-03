@@ -17,7 +17,7 @@
 **Слои** (импорты только вниз; проверяет `tests/architecture.test.ts` — расширять его, а не обходить):
 1. `src/api/` — только ввод-вывод: `http.ts` (`getJson`, `getText`), `content.ts` (файлы курса), `storage.ts` (localStorage). **`fetch` и localStorage — только здесь.**
 2. `src/services/` — бизнес-логика без Vue: `catalog.ts` (каталог, `buildCatalog`, `resolveRoute`, валидация), `progress.ts` (формат сохранений, контракт совместимости, `markDone`, `mergeProgress`), `content.ts` (что загружать для курса, языка, урока, озвучки), `i18n.ts`, `audio.ts`. Скрипты и будущий сервер синхронизации используют этот слой.
-3. `src/stores/` — Pinia, работают только через сервисы: `catalog` (курс + язык, геттеры для интерфейса), `progress` (без плагинов автосохранения), `lessons` (содержимое уроков с кешем), `audio` (индекс озвучки), `toc`.
+3. `src/stores/` — Pinia, работают только через сервисы: `catalog` (курс + язык, геттеры для интерфейса), `progress` (без плагинов автосохранения), `lessons` (содержимое, словарь и упражнения уроков с кешем), `exercises` (проверка ответов, результаты), `audio` (индекс озвучки), `toc`.
 4. Интерфейс — `src/views/`, `src/components/`, `src/composables/` (`useI18n`, `useSay`, `useLessonLink`), `App.vue`: только сторы и composables, никакой логики данных.
 - `src/types/` — общие контракты данных, доступны всем слоям.
 - `src/router.ts`, `src/main.ts` — сборка приложения (могут использовать сервисы и сторы). Роутер: `/:lang/plan/:focus?`, `/:lang/lesson/:id`; старые ссылки и сохранённый последний экран — через `resolveRoute`.
@@ -28,6 +28,7 @@
   - `locales/<lang>/catalog.json` — тексты плана: `parts.<id>` (`period`, `focus`) и `lessons.<id>` (`subtitle` или `topic`, `grammar`, `vocab`, `extra`, `mission`, `date`). **Урок готов на языке, когда у него есть `date`**;
   - `locales/<lang>/lessons/<id>.html` — урок в виде HTML-фрагмента. Файл существует ⇔ есть `date` (тест);
   - `vocab/<id>.json` и `locales/<lang>/vocab/<id>.json` — словарь урока: каталанские слова (общие) и перевод;
+  - `locales/<lang>/exercises/<id>.json` — интерактивные упражнения урока;
   - `audio/index.json` + `audio/clips/<hash>.mp3` — общее хранилище озвучки: одна запись на фразу.
 - `scripts/gen-audio.ts`, `scripts/lib/` — TypeScript, запускается `node` напрямую (Node 24 убирает типы сам).
 
@@ -38,12 +39,13 @@
 4. Каталанский текст помечается `lang="ca"` (span, td, li, p, blockquote; если `lang="ca"` стоит на `<table>`, озвучивается каждая ячейка `td`). Русские пояснения держать вне `lang="ca"`, вложенные `lang="ca"` не делать.
 5. В `content/locales/ru/catalog.json` → `lessons.<id>`: тексты и `date`.
 5a. Словарь урока (по желанию): в `content/course.json` уроку `"hasVocab": true`; каталанская часть — `content/vocab/<id>.json` (`groups[].words[]`: `id`, `ca` с артиклем, `gender` m/f/mf, `plural`); перевод — `content/locales/<lang>/vocab/<id>.json` (`groups.<id>` — название группы, `words.<id>` — `tr`, `note`). Раздел «Слова урока» появляется в конце урока сам; тесты проверяют полноту перевода и озвучку слов.
+5b. Интерактивные упражнения (по желанию): в HTML урока на месте упражнения — `<div data-exercise="<id>"></div>`; данные — `content/locales/<lang>/exercises/<lesson id>.json`: `{ "<id>": { "type": "fill", "items": [{ "prompt": "<span lang=\"ca\">Ahir ___ (anar)…</span>", "answers": ["vaig anar"], "hint": "…" }] } }` или `"type": "choice"` с `options` и `answer` (индекс), `explain`. В `fill` первый ответ показывается как решение; варианты регистра, пробелов, апострофов и `l.l` принимаются сами, ошибка только в ударениях — «почти». Свободный перевод с множеством вариантов оставлять со спойлером `<details>`. Тесты сверяют блоки в уроке с данными и озвучку подсказок и ответов.
 6. `npm run audio` — записать озвучку (нужен edge-tts: `pip install edge-tts` или `EDGE_TTS=/путь/к/edge-tts`). Голос ca-ES-JoanaNeural.
 7. `npm run check`, коммит, пуш. Целостность урока (файл, разделы, озвучка всех фраз, тексты) проверяют тесты.
 
 ## Разработка
 - **TDD**: сначала тест в `tests/` (Vitest; утверждения через `node:assert/strict`), убедиться, что он падает, потом код. Тесты интерфейса монтируют `App` с роутером на `createMemoryHistory` и тестовым «сайтом» из `tests/helpers.ts` (подмена `fetch`).
-- **Совместимость localStorage**: ключ `quadern-catala` и формат `{ done: {id: bool}, last: id }` не меняются. С v3 добавлено `doneAt: {id: ms}` — время последнего изменения отметки (для `mergeProgress`). Новое — только новыми полями; неизвестные поля сохраняются. Опубликованные id уроков вечные (`tests/published-ids.json`); переименование — только через `ID_ALIASES` в `storage.ts` с тестом на старые данные. Старые ссылки (`#b1-04`, `#intro`, `#pla`, `l01`) покрыты тестами роутера.
+- **Совместимость localStorage**: ключ `quadern-catala` и формат `{ done: {id: bool}, last: id }` не меняются. С v3 добавлено `doneAt: {id: ms}` — время последнего изменения отметки (для `mergeProgress`); с v4 — `exercises: {"<урок>/<упражнение>": {score, total, at}}`, последний результат. Новое — только новыми полями; неизвестные поля сохраняются. Опубликованные id уроков вечные (`tests/published-ids.json`); переименование — только через `ID_ALIASES` в `storage.ts` с тестом на старые данные. Старые ссылки (`#b1-04`, `#intro`, `#pla`, `l01`) покрыты тестами роутера.
 - `npm run check` = `vue-tsc` + тесты + сборка; так же в CI. Хуки (`git config core.hooksPath .githooks`): `pre-commit` — проверка типов, `pre-push` — полная проверка. Оба переключаются на Node из `.nvmrc` через nvm.
 - **TypeScript закреплён на 6.x**: `vue-tsc` пока не поддерживает TypeScript 7 (новый компилятор на Go). Не обновлять, пока vue-tsc не заявит поддержку.
 - Импорты внутри `src/lib` и `scripts` — с расширением `.ts` (их запускает Node без сборки); синтаксис только стираемый (`erasableSyntaxOnly`: без enum, namespace).

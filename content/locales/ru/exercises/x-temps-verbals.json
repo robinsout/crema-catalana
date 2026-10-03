@@ -1,0 +1,106 @@
+{
+ "tenses": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Ahir ___ (anar) al mercat.</span>",
+    "answers": [
+     "vaig anar"
+    ],
+    "hint": "«вчера»"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Avui ___ (treballar) fins a les set.</span>",
+    "answers": [
+     "he treballat"
+    ],
+    "hint": "«сегодня»"
+   },
+   {
+    "prompt": "<span lang=\"ca\">De petit, ___ (viure) a Moscou.</span>",
+    "answers": [
+     "vivia"
+    ],
+    "hint": "фон, детство"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Demà ___ (fer) sol.</span>",
+    "answers": [
+     "farà"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Quan vaig arribar, la classe ja ___ (començar).</span>",
+    "answers": [
+     "havia començat"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Si tingués temps, ___ (viatjar) més.</span>",
+    "answers": [
+     "viatjaria"
+    ]
+   }
+  ]
+ },
+ "which-tense": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Aquest matí he esmorzat a casa.</span>",
+    "options": [
+     "Perfet",
+     "Passat perifràstic",
+     "Imperfet",
+     "Present"
+    ],
+    "answer": 0,
+    "explain": "«Этим утром» — период ещё не закончился."
+   },
+   {
+    "prompt": "<span lang=\"ca\">L'escriptor nasqué a Girona.</span>",
+    "options": [
+     "Passat perifràstic",
+     "Passat simple",
+     "Imperfet",
+     "Futur"
+    ],
+    "answer": 1,
+    "explain": "Книжная форма; в речи было бы va néixer."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Ara estic cuinant.</span>",
+    "options": [
+     "Present",
+     "Estar + gerundi",
+     "Futur",
+     "Perfet"
+    ],
+    "answer": 1,
+    "explain": "Действие прямо сейчас."
+   },
+   {
+    "prompt": "<span lang=\"ca\">A les deu ja hauré sortit.</span>",
+    "options": [
+     "Futur",
+     "Condicional",
+     "Futur perfet",
+     "Plusquamperfet"
+    ],
+    "answer": 2,
+    "explain": "К десяти часам действие уже закончится."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Cada estiu anàvem a la platja.</span>",
+    "options": [
+     "Passat perifràstic",
+     "Imperfet",
+     "Perfet",
+     "Present"
+    ],
+    "answer": 1,
+    "explain": "Привычка в прошлом."
+   }
+  ]
+ }
+}

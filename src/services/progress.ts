@@ -7,9 +7,10 @@
 // Versions of the saved data:
 //   v1, v2  { done, last }
 //   v3      + doneAt: { id: ms timestamp of the last change of done[id] } — used to merge devices
+//   v4      + exercises: { "<lesson>/<exercise>": { score, total, at } } — the latest result
 
 import { browserStorage } from '../api/storage.ts';
-import type { StorageBackend } from '../types/index.ts';
+import type { ExerciseResult, StorageBackend } from '../types/index.ts';
 
 export const STORAGE_KEY = 'quadern-catala';
 
@@ -20,6 +21,7 @@ export const ID_ALIASES: Record<string, string> = {
 export interface Progress {
   done: Record<string, boolean>;
   doneAt: Record<string, number>;
+  exercises: Record<string, ExerciseResult>;
   last: string | null;
   [field: string]: unknown; // fields written by future versions are kept
 }
@@ -51,8 +53,16 @@ export function parseProgress(raw: string | null | undefined): Progress {
 
   const done = readIdMap(src.done, (v) => v === true);
   const doneAt = readIdMap(src.doneAt, (v) => (typeof v === 'number' && Number.isFinite(v) ? v : undefined));
+  const exercises: Record<string, ExerciseResult> = {};
+  if (isObject(src.exercises)) {
+    for (const [key, r] of Object.entries(src.exercises)) {
+      if (isObject(r) && [r.score, r.total, r.at].every((n) => typeof n === 'number' && Number.isFinite(n))) {
+        exercises[key] = { score: r.score as number, total: r.total as number, at: r.at as number };
+      }
+    }
+  }
   const last = typeof src.last === 'string' && src.last ? canonicalId(src.last) : null;
-  return { ...src, done, doneAt, last };
+  return { ...src, done, doneAt, exercises, last };
 }
 
 export function serializeProgress(state: Partial<Progress>): string {
@@ -67,6 +77,11 @@ export function loadProgress(backend: StorageBackend | null | undefined): Progre
 
 export function saveProgress(backend: StorageBackend | null | undefined, state: Progress): void {
   try { if (backend) backend.setItem(STORAGE_KEY, serializeProgress(state)); } catch { /* storage unavailable */ }
+}
+
+// Saves the latest result of an exercise. Mutates `state`.
+export function recordExercise(state: Progress, key: string, score: number, total: number, at: number): void {
+  state.exercises[key] = { score, total, at };
 }
 
 // Sets a done mark and stamps the time of the change. Mutates `state` (it may be a reactive store).
@@ -95,7 +110,12 @@ export function mergeProgress(local: Partial<Progress>, remote: Partial<Progress
     done[id] = win.done;
     if (win.at >= 0) doneAt[id] = win.at;
   }
-  return { last: null, ...local, done, doneAt };
+  const exercises: Record<string, ExerciseResult> = { ...(remote.exercises ?? {}) };
+  for (const [key, r] of Object.entries(local.exercises ?? {})) {
+    const other = exercises[key];
+    if (!other || r.at >= other.at) exercises[key] = r;
+  }
+  return { last: null, ...local, done, doneAt, exercises };
 }
 
 // Progress of this browser (the Pinia store keeps it reactive)

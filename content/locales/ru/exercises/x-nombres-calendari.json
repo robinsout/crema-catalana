@@ -1,0 +1,63 @@
+{
+ "numbers": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "22 чашки (<span lang=\"ca\">tasses</span>, ж. р.)",
+    "answers": [
+     "vint-i-dues tasses",
+     "vint-i-dues"
+    ]
+   },
+   {
+    "prompt": "48",
+    "answers": [
+     "quaranta-vuit"
+    ]
+   },
+   {
+    "prompt": "2026 (год)",
+    "answers": [
+     "dos mil vint-i-sis"
+    ]
+   },
+   {
+    "prompt": "200 страниц (<span lang=\"ca\">pàgines</span>, ж. р.)",
+    "answers": [
+     "dues-centes pàgines",
+     "dues-centes"
+    ]
+   }
+  ]
+ },
+ "quarts": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "9:15",
+    "answers": [
+     "un quart de deu"
+    ]
+   },
+   {
+    "prompt": "6:30",
+    "answers": [
+     "dos quarts de set"
+    ]
+   },
+   {
+    "prompt": "12:45",
+    "answers": [
+     "tres quarts d'una"
+    ]
+   },
+   {
+    "prompt": "10:15",
+    "answers": [
+     "un quart d'onze"
+    ],
+    "hint": "перед onze — d'"
+   }
+  ]
+ }
+}

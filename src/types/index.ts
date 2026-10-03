@@ -137,3 +137,33 @@ export interface VocabGroup {
   title: string;
   words: VocabWord[];
 }
+
+// Interactive exercises of a lesson: content/locales/<lang>/exercises/<lesson>.json,
+// placed in the lesson HTML with <div data-exercise="<id>"></div>
+export interface FillItem {
+  prompt: string; // HTML; Catalan inside <span lang="ca">
+  answers: string[]; // accepted answers in Catalan; the first is shown as the solution
+  hint?: string;
+}
+
+export interface ChoiceItem {
+  prompt: string;
+  options: string[];
+  answer: number; // index of the right option
+  explain?: string;
+}
+
+export type Exercise =
+  | { type: 'fill'; title?: string; items: FillItem[] }
+  | { type: 'choice'; title?: string; items: ChoiceItem[] };
+
+export type ExerciseSet = Record<string, Exercise>;
+
+export type AnswerCheck = 'correct' | 'accent' | 'wrong' | 'empty';
+
+// The latest result of an exercise, saved in progress (key "<lesson id>/<exercise id>")
+export interface ExerciseResult {
+  score: number;
+  total: number;
+  at: number; // ms timestamp
+}

@@ -8,6 +8,8 @@ import { normalizeCatalog, allLessons, validateCatalog } from '../src/services/c
 import { loadCatalog, lessonPath } from '../scripts/lib/catalog.ts';
 import { loadVocabSource, loadLocaleVocab, vocabTexts } from '../scripts/lib/vocab.ts';
 import { validateVocab } from '../src/services/vocab.ts';
+import { validateExercises } from '../src/services/exercises.ts';
+import { loadExercises, exerciseTexts } from '../scripts/lib/exercises.ts';
 import { clipFor } from '../src/services/audio.ts';
 import type { AudioIndex } from '../src/services/audio.ts';
 import type { Course, LocaleCatalog, LocalesIndex } from '../src/types/index.ts';
@@ -122,6 +124,22 @@ test('every Catalan word of a vocabulary has a recorded clip (run: npm run audio
     .flatMap((l) => vocabTexts(loadVocabSource(portal, l.id)))
     .filter((t) => !clipFor(audioIndex, t));
   assert.deepEqual(missing, [], 'words without audio — run npm run audio');
+});
+
+test('exercises: every placeholder in a lesson has data and every exercise is placed', () => {
+  for (const lang of locales.available) {
+    for (const l of allLessons(loadCatalog(portal, lang)).filter((x) => x.file)) {
+      const html = readFileSync(join(portal, l.file ?? ''), 'utf8');
+      assert.deepEqual(validateExercises(html, loadExercises(portal, lang, l.id)), [], `${lang}: exercises of ${l.id}`);
+    }
+  }
+});
+
+test('Catalan prompts and solutions of exercises have recorded clips (run: npm run audio)', () => {
+  const missing = allLessons(catalog).filter((l) => l.file)
+    .flatMap((l) => exerciseTexts(loadExercises(portal, locales.base, l.id)))
+    .filter((t) => !clipFor(audioIndex, t));
+  assert.deepEqual(missing, [], 'exercise texts without audio — run npm run audio');
 });
 
 test('published lesson ids are never removed', () => {

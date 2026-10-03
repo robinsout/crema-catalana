@@ -3,7 +3,8 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { PLAN_ID, progress as summarize } from '../services/catalog.ts';
-import { markDone, readSavedProgress, writeSavedProgress } from '../services/progress.ts';
+import { markDone, readSavedProgress, recordExercise, writeSavedProgress } from '../services/progress.ts';
+import type { ExerciseResult } from '../types/index.ts';
 import { useCatalogStore } from './catalog.ts';
 
 export const useProgressStore = defineStore('progress', () => {
@@ -22,11 +23,18 @@ export const useProgressStore = defineStore('progress', () => {
     return value;
   }
 
+  const result = (key: string): ExerciseResult | null => data.value.exercises[key] ?? null;
+
+  function saveResult(key: string, score: number, total: number): void {
+    recordExercise(data.value, key, score, total, Date.now());
+    save();
+  }
+
   function setLast(id: string | typeof PLAN_ID): void {
     if (data.value.last === id) return;
     data.value.last = id;
     save();
   }
 
-  return { data, done, last, summary, isDone, toggleDone, setLast };
+  return { data, done, last, summary, isDone, toggleDone, setLast, result, saveResult };
 });

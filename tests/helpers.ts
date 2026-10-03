@@ -38,12 +38,31 @@ export const ruUi: UiStrings = {
   'pill.open': 'Открыть урок →',
   'pill.done': '✓ Пройден',
   'vocab.title': 'Слова урока',
+  'ex.check': 'Проверить',
+  'ex.retry': 'Ещё раз',
+  'ex.score': 'Верно: {score} из {total}',
+  'ex.last': 'Последний результат: {score} из {total}',
+  'ex.solution': 'Ответ:',
+  'ex.accent': 'проверьте ударения',
 };
 
 export const locales: LocalesIndex = { base: 'ru', default: 'ru', available: ['ru'] };
 
 export const lessonHtml = (id: string): string =>
-  `<section id="s1"><h2>1. Раздел ${id}</h2><p><span lang="ca">Bon dia</span></p></section>`;
+  `<section id="s1"><h2>1. Раздел ${id}</h2><p><span lang="ca">Bon dia</span></p>` +
+  (id === 'x-temps' ? '<div data-exercise="fill1"></div><div data-exercise="pick"></div>' : '') +
+  '</section>';
+
+export const exercises = {
+  fill1: { type: 'fill', items: [
+    { prompt: '<span lang="ca">Ahir ___ (anar) al mercat.</span>', answers: ['vaig anar'] },
+    { prompt: '<span lang="ca">On ___ el metro?</span>', answers: ['és'] },
+    { prompt: '<span lang="ca">Demà ___ sol.</span>', answers: ['farà'], hint: 'futur' },
+  ] },
+  pick: { type: 'choice', items: [
+    { prompt: '<span lang="ca">Avui he menjat.</span>', options: ['perfet', 'imperfet'], answer: 0, explain: 'avui → perfet' },
+  ] },
+};
 
 // Serves the fake site through global fetch; returns the list of requested urls.
 export function stubSite(overrides: Record<string, unknown> = {}): string[] {
@@ -53,6 +72,7 @@ export function stubSite(overrides: Record<string, unknown> = {}): string[] {
     'locales/ru/catalog.json': ruCatalog,
     'locales/ru/ui.json': ruUi,
     'audio/index.json': { clips: { 'Bon dia': 'clips/abc.mp3', 'el dilluns': 'clips/def.mp3' } },
+    'locales/ru/exercises/x-temps.json': exercises,
     'vocab/b1-01.json': { groups: [{ id: 'dies', words: [{ id: 'dilluns', ca: 'el dilluns', gender: 'm' }, { id: 'tardor', ca: 'la tardor', gender: 'f' }] }] },
     'locales/ru/vocab/b1-01.json': { groups: { dies: 'Дни' }, words: { dilluns: { tr: 'понедельник' }, tardor: { tr: 'осень', note: 'не otoño' } } },
     ...overrides,

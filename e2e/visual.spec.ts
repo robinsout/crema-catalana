@@ -30,3 +30,17 @@ for (const scheme of ['light', 'dark'] as const) {
     await expect(vocab.locator('.vocab-table').nth(4)).toHaveScreenshot(`vocab-week-${scheme}.png`);
   });
 }
+
+for (const scheme of ['light', 'dark'] as const) {
+  test(`checked exercise, ${scheme} theme @visual`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: scheme });
+    await page.goto('./#/ru/lesson/x-temps-verbals');
+    const ex = page.locator('[data-exercise="tenses"] .ex');
+    const inputs = ex.locator('input');
+    for (const [i, v] of ['vaig anar', 'he treballat', 'vivia', 'fara', 'havia comencat', 'viatjaré'].entries()) await inputs.nth(i).fill(v);
+    await ex.getByRole('button', { name: 'Проверить' }).click();
+    await ex.scrollIntoViewIfNeeded();
+    await page.evaluate(() => document.fonts.ready);
+    await expect(ex).toHaveScreenshot(`exercise-checked-${scheme}.png`);
+  });
+}

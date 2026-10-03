@@ -103,3 +103,29 @@ test('a lesson vocabulary is listed at the end and its words can be heard', asyn
   await clip;
   expect(await noHorizontalScroll(page)).toBe(true);
 });
+
+test('an exercise checks typed answers and remembers the result', async ({ page }) => {
+  await page.goto('./#/ru/lesson/x-nombres-calendari');
+  const ex = page.locator('[data-exercise="quarts"] .ex');
+  const inputs = ex.locator('input');
+  await expect(inputs).toHaveCount(4);
+  await inputs.nth(0).fill('un quart de deu');
+  await inputs.nth(1).fill('Dos quarts de set.');
+  await inputs.nth(2).fill('tres quarts d’una');
+  await inputs.nth(3).fill('un quart de onze');
+  await inputs.nth(3).press('Enter');
+  await expect(ex.locator('.ex-score')).toHaveText('Верно: 3 из 4');
+  await expect(ex.locator('li').nth(3)).toHaveClass(/is-wrong/);
+  await expect(ex.locator('li').nth(3).locator('.ex-solution')).toContainText("un quart d'onze");
+  await page.reload();
+  await expect(page.locator('[data-exercise="quarts"] .ex-last')).toHaveText('Последний результат: 3 из 4');
+});
+
+test('a choice exercise shows the right option after a pick', async ({ page }) => {
+  await page.goto('./#/ru/lesson/x-temps-verbals');
+  const first = page.locator('[data-exercise="which-tense"] li').first();
+  await first.getByRole('button', { name: 'Imperfet', exact: true }).click();
+  await expect(first).toHaveClass(/is-wrong/);
+  await expect(first.getByRole('button', { name: 'Perfet', exact: true })).toHaveClass(/right/);
+  await expect(first).toContainText('период ещё не закончился');
+});

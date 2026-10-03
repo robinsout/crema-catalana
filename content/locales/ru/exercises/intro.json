@@ -1,0 +1,26 @@
+{
+ "castellanisms": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\" class=\"wrong\">Tinc que estudiar.</span>",
+    "answers": [
+     "He d'estudiar.",
+     "Haig d'estudiar."
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\" class=\"wrong\">On està el metro?</span>",
+    "answers": [
+     "On és el metro?"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\" class=\"wrong\">Mi casa és gran.</span>",
+    "answers": [
+     "La meva casa és gran."
+    ]
+   }
+  ]
+ }
+}

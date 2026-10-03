@@ -1,6 +1,6 @@
 // Course data published with the site (content/ → site root).
 import { getJson, getText } from './http.ts';
-import type { AudioIndex, Course, LocaleCatalog, LocaleVocab, LocalesIndex, UiStrings, VocabSource } from '../types/index.ts';
+import type { AudioIndex, Course, ExerciseSet, LocaleCatalog, LocaleVocab, LocalesIndex, UiStrings, VocabSource } from '../types/index.ts';
 
 export const contentApi = {
   locales: () => getJson<LocalesIndex>('locales/index.json'),
@@ -11,4 +11,5 @@ export const contentApi = {
   audioIndex: () => getJson<AudioIndex>('audio/index.json'),
   vocab: (lessonId: string) => getJson<VocabSource>(`vocab/${lessonId}.json`),
   localeVocab: (lang: string, lessonId: string) => getJson<LocaleVocab>(`locales/${lang}/vocab/${lessonId}.json`),
+  exercises: (lang: string, lessonId: string) => getJson<ExerciseSet>(`locales/${lang}/exercises/${lessonId}.json`),
 };

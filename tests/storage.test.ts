@@ -85,7 +85,7 @@ test('store loads, updates and saves through the backend', () => {
   store.setDone('b1-01', true);
   store.setLast('b1-01');
   const saved = JSON.parse(backend.data[STORAGE_KEY] ?? 'null');
-  assert.deepEqual(saved, { done: { intro: true, 'b1-01': true }, doneAt: { 'b1-01': 42 }, last: 'b1-01' });
+  assert.deepEqual(saved, { done: { intro: true, 'b1-01': true }, doneAt: { 'b1-01': 42 }, exercises: {}, last: 'b1-01' });
 });
 
 test('store toggles a done mark and stamps the time of every change', () => {
@@ -142,4 +142,18 @@ test('store works without any backend', () => {
   const store = createStore(null);
   store.setLast('pla');
   assert.equal(store.state.last, 'pla');
+});
+
+test('v4: exercise results load; invalid entries are dropped; older data has none', () => {
+  assert.deepEqual(parseProgress(SAVED.v2).exercises, {});
+  const p = parseProgress('{"done":{},"last":null,"exercises":{"x-temps/tenses":{"score":2,"total":3,"at":5},"bad":{"score":"x"}}}');
+  assert.deepEqual(p.exercises, { 'x-temps/tenses': { score: 2, total: 3, at: 5 } });
+});
+
+test('merge: per exercise the later result wins', () => {
+  const local = { done: {}, exercises: { a: { score: 1, total: 3, at: 10 }, b: { score: 3, total: 3, at: 50 } } };
+  const remote = { done: {}, exercises: { a: { score: 3, total: 3, at: 20 }, c: { score: 0, total: 2, at: 1 } } };
+  assert.deepEqual(mergeProgress(local, remote).exercises, {
+    a: { score: 3, total: 3, at: 20 }, b: { score: 3, total: 3, at: 50 }, c: { score: 0, total: 2, at: 1 },
+  });
 });

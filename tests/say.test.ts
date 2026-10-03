@@ -15,6 +15,10 @@ test('ttsText drops syllable dots but keeps the ela geminada', () => {
   assert.equal(ttsText('col·legi'), 'col·legi');
 });
 
+test('ttsText reads a blank of an exercise as a pause', () => {
+  assert.equal(ttsText('Ahir ___ (anar) al mercat.'), 'Ahir … (anar) al mercat.');
+});
+
 test('ttsText drops the dash of suffix markers', () => {
   assert.equal(ttsText('-gut'), 'gut');
   assert.equal(ttsText('-car'), 'car');

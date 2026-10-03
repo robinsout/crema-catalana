@@ -47,5 +47,11 @@
   "vocab.m": "м.",
   "vocab.f": "ж.",
   "vocab.mf": "м./ж.",
-  "vocab.plural": "мн."
+  "vocab.plural": "мн.",
+  "ex.check": "Проверить",
+  "ex.retry": "Ещё раз",
+  "ex.score": "Верно: {score} из {total}",
+  "ex.last": "Последний результат: {score} из {total}",
+  "ex.solution": "Ответ:",
+  "ex.accent": "проверьте ударения"
 }

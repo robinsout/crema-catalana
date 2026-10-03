@@ -6,6 +6,7 @@ import { createMemoryHistory } from 'vue-router';
 import App from '../src/App.vue';
 import { createAppRouter } from '../src/router.ts';
 import { stubSite, saveProgress } from './helpers.ts';
+import { STORAGE_KEY } from '../src/services/progress.ts';
 
 let wrapper: VueWrapper | null = null;
 
@@ -120,4 +121,43 @@ test('a broken site shows an error instead of an empty page', async () => {
   wrapper = mount(App, { global: { plugins: [pinia, router] } });
   await flushPromises();
   assert.ok(wrapper.find('.status').exists());
+});
+
+test('a fill-in exercise checks answers, shows solutions and saves the result', async () => {
+  const { w } = await openApp('/ru/lesson/x-temps');
+  const ex = w.find('[data-exercise="fill1"] .ex');
+  assert.ok(ex.exists(), 'the exercise is mounted into its placeholder');
+  const inputs = ex.findAll('input');
+  assert.equal(inputs.length, 3);
+  await inputs[0]?.setValue('Vaig  anar');
+  await inputs[1]?.setValue('es');
+  await inputs[2]?.setValue('plourà');
+  await ex.find('button.ex-check').trigger('click');
+  const items = ex.findAll('li');
+  assert.ok(items[0]?.classes().includes('is-correct'));
+  assert.ok(items[1]?.classes().includes('is-accent'));
+  assert.match(items[1]?.text() ?? '', /проверьте ударения/);
+  assert.ok(items[2]?.classes().includes('is-wrong'));
+  assert.match(items[2]?.find('.ex-solution').text() ?? '', /farà/);
+  assert.match(ex.find('.ex-score').text(), /Верно: 1 из 3/);
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
+  assert.equal(saved.exercises['x-temps/fill1'].score, 1);
+  assert.equal(saved.exercises['x-temps/fill1'].total, 3);
+  await ex.find('button.ex-retry').trigger('click');
+  assert.equal((ex.find('input').element as HTMLInputElement).value, '');
+  assert.match(ex.text(), /Последний результат: 1 из 3/);
+});
+
+test('a choice exercise marks the picked option at once and saves the result', async () => {
+  const { w } = await openApp('/ru/lesson/x-temps');
+  const ex = w.find('[data-exercise="pick"] .ex');
+  const options = ex.findAll('button.ex-option');
+  assert.deepEqual(options.map((o) => o.text()), ['perfet', 'imperfet']);
+  await options[1]?.trigger('click');
+  assert.ok(ex.find('li').classes().includes('is-wrong'));
+  assert.ok(options[0]?.classes().includes('right'));
+  assert.match(ex.text(), /avui → perfet/);
+  assert.match(ex.find('.ex-score').text(), /Верно: 0 из 1/);
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
+  assert.equal(saved.exercises['x-temps/pick'].total, 1);
 });

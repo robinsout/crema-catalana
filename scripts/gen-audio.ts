@@ -17,6 +17,7 @@ import type { AudioIndex } from '../src/services/audio.ts';
 import { extractSayTexts } from './lib/say-texts.ts';
 import { loadCatalog, loadLocales } from './lib/catalog.ts';
 import { loadVocabSource, vocabTexts } from './lib/vocab.ts';
+import { loadExercises, exerciseTexts } from './lib/exercises.ts';
 
 const run = promisify(execFile);
 const VOICE = 'ca-ES-JoanaNeural';
@@ -35,6 +36,7 @@ const texts = [...new Set(loadLocales(contentDir).available.flatMap((lang) => {
     ...allLessons(catalog).filter((l) => l.file).flatMap((l) => extractSayTexts(readFileSync(join(contentDir, l.file ?? ''), 'utf8'))),
     ...allLessons(catalog).map((l) => normalizeSayText(l.title)),
     ...allLessons(catalog).filter((l) => l.hasVocab).flatMap((l) => vocabTexts(loadVocabSource(contentDir, l.id))),
+    ...allLessons(catalog).filter((l) => l.file).flatMap((l) => exerciseTexts(loadExercises(contentDir, lang, l.id))),
   ];
 }))];
 

@@ -33,7 +33,7 @@ test('progress store toggles a mark, stamps the time and saves in the same forma
   const p = useProgressStore();
   p.toggleDone('b1-01');
   assert.equal(p.isDone('b1-01'), true);
-  assert.deepEqual(stored(), { done: { intro: true, 'b1-01': true }, doneAt: { 'b1-01': 1000 }, last: 'pla', notes: 'kept' });
+  assert.deepEqual(stored(), { done: { intro: true, 'b1-01': true }, doneAt: { 'b1-01': 1000 }, exercises: {}, last: 'pla', notes: 'kept' });
   p.toggleDone('b1-01');
   assert.equal(p.isDone('b1-01'), false);
 });
