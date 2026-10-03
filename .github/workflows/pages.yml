@@ -1,55 +1,40 @@
-name: Deploy to GitHub Pages
+name: CI and Pages
 
 on:
   push:
     branches: [master]
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      # portal/index.html is written for the claude.ai Artifact host, which adds
-      # the <html>/<head> skeleton itself. For Pages we add that skeleton here.
-      - name: Build site
-        run: |
-          mkdir -p _site
-          cp -R portal/. _site/
-          {
-            echo '<!doctype html>'
-            echo '<html lang="ru">'
-            echo '<head>'
-            echo '<meta charset="utf-8">'
-            echo '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">'
-            echo '<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>'
-            echo '</head>'
-            echo '<body>'
-            cat portal/index.html
-            echo '</body>'
-            echo '</html>'
-          } > _site/index.html
-          touch _site/.nojekyll
-
-      - uses: actions/configure-pages@v5
-
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm test
+      - run: npm run build
       - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
         with:
           path: _site
 
   deploy:
-    needs: build
+    needs: test
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

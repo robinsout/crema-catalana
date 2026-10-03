@@ -1,0 +1,13 @@
+{
+  "name": "crema-catalana",
+  "private": true,
+  "type": "module",
+  "description": "Quadern de català — lesson portal for the Passos 1 course",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test",
+    "build": "node scripts/build.mjs",
+    "check": "npm test && npm run build",
+    "serve": "npm run build && python3 -m http.server 8000 -d _site"
+  }
+}

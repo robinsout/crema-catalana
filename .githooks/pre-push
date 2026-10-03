@@ -1,0 +1,5 @@
+#!/bin/sh
+# Runs the same checks as CI before anything reaches GitHub.
+# Enable once per clone: git config core.hooksPath .githooks
+echo "pre-push: npm run check"
+npm run check --silent || { echo "pre-push: checks failed, push aborted"; exit 1; }
