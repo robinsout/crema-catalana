@@ -7,14 +7,16 @@ import { createPinia, setActivePinia } from 'pinia';
 import { createMemoryHistory } from 'vue-router';
 import App from '../src/App.vue';
 import { createAppRouter } from '../src/router.ts';
-import { stubSite, syncServer, useSyncServer } from './helpers.ts';
+import { stubSite, syncServer, useSyncServer, SYNC_URL } from './helpers.ts';
 
 let mounted: VueWrapper[] = [];
+let requested: string[] = [];
+const syncRequests = () => requested.filter((u) => u.startsWith(SYNC_URL)).length;
 
 beforeEach(() => {
   localStorage.clear();
   useSyncServer(syncServer());
-  stubSite();
+  requested = stubSite();
   window.HTMLElement.prototype.scrollIntoView = () => {};
 });
 afterEach(() => {
@@ -67,7 +69,9 @@ test('two devices with one code end up with the same progress', async () => {
   await laptop.router.push('/ru/lesson/intro');
   await settle();
   await laptop.w.find('.head-actions .btn').trigger('click');
-  await new Promise((r) => setTimeout(r, 1700)); // sync after a change is debounced
+  await laptop.router.push('/ru/sync');
+  await settle();
+  await laptop.w.find('button.sync-now').trigger('click'); // sync runs only on request
   await settle();
   const laptopStorage = snapshot();
   laptop.w.unmount();
@@ -101,4 +105,39 @@ test('sync can be turned off on a device', async () => {
   await settle();
   assert.ok(w.find('button.sync-enable').exists());
   assert.equal(localStorage.getItem('quadern-sync'), null);
+});
+
+test('sync runs only when asked: no requests after changes, over time or on start', { timeout: 15_000 }, async () => {
+  const first = await device('/ru/sync');
+  await first.w.find('button.sync-enable').trigger('click');
+  await settle();
+  const afterEnable = syncRequests();
+  assert.ok(afterEnable >= 2, 'enabling syncs once (read + write)');
+
+  // a change and some time pass: nothing goes to the server
+  await first.router.push('/ru/lesson/intro');
+  await settle();
+  await first.w.find('.head-actions .btn').trigger('click');
+  await new Promise((r) => setTimeout(r, 2000));
+  await settle();
+  assert.equal(syncRequests(), afterEnable);
+  const saved = Object.fromEntries(Object.keys(localStorage).map((k) => [k, localStorage.getItem(k) ?? '']));
+  first.w.unmount();
+  mounted = [];
+
+  // opening the site again with sync on: no requests either, the last sync time is remembered
+  for (const [k, v] of Object.entries(saved)) localStorage.setItem(k, v);
+  const again = await device('/ru/sync');
+  await settle();
+  assert.equal(syncRequests(), afterEnable);
+  assert.ok(again.w.find('.lesson .sync-status.ok').exists(), 'shows when it last synced');
+
+  // the button syncs once
+  await again.w.find('button.sync-now').trigger('click');
+  await settle();
+  const afterButton = syncRequests();
+  assert.ok(afterButton > afterEnable);
+  await new Promise((r) => setTimeout(r, 2000));
+  await settle();
+  assert.equal(syncRequests(), afterButton, 'no follow-up requests after a sync');
 });

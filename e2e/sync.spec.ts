@@ -44,3 +44,20 @@ test('a typed code with a typo is refused', async ({ page }) => {
   await page.getByRole('button', { name: 'Подключить' }).click();
   await expect(page.locator('.sync-error')).toBeVisible();
 });
+
+test('the sync page sends nothing on its own; only the button syncs', async ({ page }) => {
+  const toServer: string[] = [];
+  page.on('request', (r) => { if (r.url().startsWith('http://localhost:8787')) toServer.push(r.url()); });
+  await page.goto('./#/ru/sync');
+  await page.getByRole('button', { name: 'Включить синхронизацию' }).click();
+  await expect(page.locator('.lesson .sync-status')).toHaveClass(/ok/);
+  const afterEnable = toServer.length;
+  await page.waitForTimeout(4000);
+  expect(toServer.length).toBe(afterEnable);
+  await page.reload();
+  await expect(page.locator('.lesson .sync-status')).toHaveClass(/ok/);
+  await page.waitForTimeout(2000);
+  expect(toServer.length).toBe(afterEnable);
+  await page.getByRole('button', { name: 'Синхронизировать сейчас' }).click();
+  await expect.poll(() => toServer.length).toBeGreaterThan(afterEnable);
+});

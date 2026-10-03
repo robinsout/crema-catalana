@@ -5,7 +5,7 @@
 // AES-GCM key that never leaves the device. The server stores only encrypted progress.
 import { mergeProgress, parseProgress, type Progress } from './progress.ts';
 import { syncApi, SyncHttpError } from '../api/sync.ts';
-import { syncCodeStorage } from '../api/storage.ts';
+import { syncStorage } from '../api/storage.ts';
 
 const ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'; // Crockford: no I, L, O, U
 const DATA_CHARS = 26; // 128 bits (+2 zero bits)
@@ -145,12 +145,14 @@ export async function syncOnce(api: SyncApi, keys: SyncKeys, local: Progress, at
 
 export { SYNC_URL } from '../api/sync.ts';
 
-export const savedSyncCode = (): string | null => {
-  const code = syncCodeStorage.read();
-  return code && parseCode(code) ? code : null;
-};
-export const saveSyncCode = (code: string): void => syncCodeStorage.write(code);
-export const clearSyncCode = (): void => syncCodeStorage.clear();
+// the saved sync of this device, when its code is still valid
+export function savedSync(): { code: string; lastSyncAt: number | null } | null {
+  const r = syncStorage.read();
+  return r && parseCode(r.code) ? { code: r.code, lastSyncAt: r.lastSyncAt ?? null } : null;
+}
+export const saveSync = (code: string, lastSyncAt: number | null): void =>
+  syncStorage.write(lastSyncAt === null ? { code } : { code, lastSyncAt });
+export const clearSync = (): void => syncStorage.clear();
 
 let cached: { code: string; keys: Promise<SyncKeys> } | null = null;
 const keysFor = (code: string): Promise<SyncKeys> => {

@@ -5,15 +5,25 @@ export function browserStorage(): StorageBackend | null {
   try { return globalThis.localStorage ?? null; } catch { return null; }
 }
 
-// The sync code of this device, kept apart from progress (it is never synced itself).
+// Sync of this device: its code and when it last synced, kept apart from progress (never synced itself).
 const SYNC_KEY = 'quadern-sync';
 
-export const syncCodeStorage = {
-  read(): string | null {
-    try { return (JSON.parse(browserStorage()?.getItem(SYNC_KEY) ?? 'null') as { code?: string } | null)?.code ?? null; } catch { return null; }
+export interface SyncRecord {
+  code: string;
+  lastSyncAt?: number;
+}
+
+export const syncStorage = {
+  read(): SyncRecord | null {
+    try {
+      const r = JSON.parse(browserStorage()?.getItem(SYNC_KEY) ?? 'null') as Partial<SyncRecord> | null;
+      return r && typeof r.code === 'string'
+        ? { code: r.code, ...(typeof r.lastSyncAt === 'number' ? { lastSyncAt: r.lastSyncAt } : {}) }
+        : null;
+    } catch { return null; }
   },
-  write(code: string): void {
-    try { browserStorage()?.setItem(SYNC_KEY, JSON.stringify({ code })); } catch { /* storage unavailable */ }
+  write(record: SyncRecord): void {
+    try { browserStorage()?.setItem(SYNC_KEY, JSON.stringify(record)); } catch { /* storage unavailable */ }
   },
   clear(): void {
     try { (browserStorage() as Storage | null)?.removeItem(SYNC_KEY); } catch { /* storage unavailable */ }

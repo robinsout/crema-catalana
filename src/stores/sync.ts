@@ -1,63 +1,51 @@
-// Sync of this device: the code, the state shown in the interface, and when to sync.
+// Sync of this device. It runs only when the reader asks (turn on, join, "sync now"):
+// no background requests.
 import { defineStore } from 'pinia';
-import { computed, ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 import {
-  clearSyncCode, forgetRemoteProgress, formatCode, generateCode, parseCode, savedSyncCode, saveSyncCode,
+  clearSync, forgetRemoteProgress, formatCode, generateCode, parseCode, savedSync, saveSync,
   syncFailure, syncProgress, type SyncFailure,
 } from '../services/sync.ts';
 import { useProgressStore } from './progress.ts';
 
-export type SyncStatus = 'off' | 'syncing' | 'ok' | 'error';
-
-const AFTER_CHANGE_MS = 1500; // a burst of changes is sent once
+export type SyncStatus = 'off' | 'idle' | 'syncing' | 'ok' | 'error';
 
 export const useSyncStore = defineStore('sync', () => {
   const progress = useProgressStore();
-  const code = ref<string | null>(savedSyncCode());
+  const saved = savedSync();
+  const code = ref<string | null>(saved?.code ?? null);
+  const lastSyncAt = ref<number | null>(saved?.lastSyncAt ?? null);
   const running = ref(false);
   const failure = ref<SyncFailure | null>(null);
-  const lastSyncAt = ref<number | null>(null);
-  let again = false;
-  let applying = false;
-  let timer: ReturnType<typeof setTimeout> | null = null;
 
   const enabled = computed(() => code.value !== null);
   const displayCode = computed(() => (code.value ? formatCode(code.value) : ''));
-  const status = computed<SyncStatus>(() =>
-    !code.value ? 'off' : running.value ? 'syncing' : failure.value ? 'error' : lastSyncAt.value ? 'ok' : 'syncing');
+  const status = computed<SyncStatus>(() => {
+    if (!code.value) return 'off';
+    if (running.value) return 'syncing';
+    if (failure.value) return 'error';
+    return lastSyncAt.value ? 'ok' : 'idle';
+  });
 
   async function syncNow(): Promise<void> {
-    if (!code.value) return;
-    if (running.value) { again = true; return; }
+    if (!code.value || running.value) return;
     running.value = true;
     try {
-      do {
-        again = false;
-        const merged = await syncProgress(code.value, progress.data);
-        applying = true;
-        progress.applySynced(merged);
-        applying = false;
-        failure.value = null;
-        lastSyncAt.value = Date.now();
-      } while (again && code.value);
+      progress.applySynced(await syncProgress(code.value, progress.data));
+      failure.value = null;
+      lastSyncAt.value = Date.now();
+      saveSync(code.value, lastSyncAt.value);
     } catch (e) {
       failure.value = syncFailure(e);
     } finally {
-      applying = false;
       running.value = false;
     }
   }
 
-  // changes made on this device go out shortly after
-  watch(() => [progress.data.done, progress.data.doneAt, progress.data.exercises], () => {
-    if (!code.value || applying) return;
-    if (timer) clearTimeout(timer);
-    timer = setTimeout(() => { timer = null; void syncNow(); }, AFTER_CHANGE_MS);
-  }, { deep: true });
-
   async function enable(): Promise<void> {
     code.value = generateCode();
-    saveSyncCode(code.value);
+    lastSyncAt.value = null;
+    saveSync(code.value, null);
     await syncNow();
   }
 
@@ -66,8 +54,9 @@ export const useSyncStore = defineStore('sync', () => {
     const parsed = parseCode(input);
     if (!parsed) return false;
     code.value = parsed;
-    saveSyncCode(parsed);
     lastSyncAt.value = null;
+    failure.value = null;
+    saveSync(parsed, null);
     await syncNow();
     return true;
   }
@@ -76,7 +65,7 @@ export const useSyncStore = defineStore('sync', () => {
     code.value = null;
     failure.value = null;
     lastSyncAt.value = null;
-    clearSyncCode();
+    clearSync();
   }
 
   // deletes the shared copy on the server; every device keeps its own progress
@@ -85,17 +74,5 @@ export const useSyncStore = defineStore('sync', () => {
     disable();
   }
 
-  // on start, when the tab comes back and when the network returns
-  let started = false;
-  function start(): void {
-    if (started) return;
-    started = true;
-    void syncNow();
-    if (typeof window !== 'undefined') {
-      window.addEventListener('online', () => void syncNow());
-      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') void syncNow(); });
-    }
-  }
-
-  return { code, enabled, displayCode, status, failure, lastSyncAt, syncNow, enable, link, disable, forgetEverywhere, start };
+  return { code, enabled, displayCode, status, failure, lastSyncAt, syncNow, enable, link, disable, forgetEverywhere };
 });

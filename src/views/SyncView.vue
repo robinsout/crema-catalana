@@ -84,6 +84,7 @@ onMounted(() => toc.collect(null, 'plan'));
 
     <template v-else>
       <SyncStatusLine />
+      <p class="meta">{{ t('sync.manualNote') }}</p>
       <section class="sync-card">
         <h3>{{ t('sync.otherDevice') }}</h3>
         <p>{{ t('sync.scan') }}</p>
@@ -97,7 +98,7 @@ onMounted(() => toc.collect(null, 'plan'));
         <p class="meta">{{ t('sync.keepSecret') }}</p>
       </section>
       <div class="sync-actions">
-        <button class="btn" type="button" @click="sync.syncNow()">{{ t('sync.now') }}</button>
+        <button class="btn sync-now" type="button" :disabled="sync.status === 'syncing'" @click="sync.syncNow()">{{ t('sync.now') }}</button>
         <button class="btn sync-disable" type="button" @click="sync.disable()">{{ t('sync.disable') }}</button>
         <button class="btn sync-forget" :class="{ danger: confirmForget }" type="button" @click="forget">
           {{ confirmForget ? t('sync.forgetConfirm') : t('sync.forget') }}

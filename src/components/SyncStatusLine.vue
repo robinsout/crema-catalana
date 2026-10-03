@@ -9,6 +9,7 @@ const { t, formatRelative } = useI18n();
 const text = computed(() => {
   switch (sync.status) {
     case 'off': return t('sync.statusOff');
+    case 'idle': return t('sync.statusIdle');
     case 'syncing': return t('sync.statusSyncing');
     case 'ok': return t('sync.statusOk', { when: formatRelative(sync.lastSyncAt ?? Date.now()) });
     default:
