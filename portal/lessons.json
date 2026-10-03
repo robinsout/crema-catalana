@@ -29,6 +29,22 @@
         "b3-03",
         "b3-05"
       ]
+    },
+    {
+      "id": "x-nombres-calendari",
+      "kind": "topic",
+      "title": "Els nombres i el calendari",
+      "subtitle": "Числительные, часы, части суток, дни недели, месяцы и времена года",
+      "file": "content/x-nombres-calendari.html",
+      "date": "2026-10-03",
+      "related": [
+        "b1-01",
+        "b1-02",
+        "b1-03",
+        "b1-04",
+        "b1-05",
+        "b2-07"
+      ]
     }
   ],
   "parts": [

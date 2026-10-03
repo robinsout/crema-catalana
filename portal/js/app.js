@@ -38,7 +38,7 @@ function renderNav() {
   }
   $('lessonList').innerHTML = html;
   const pr = progress(catalog, store.state.done);
-  $('progressText').textContent = `Пройдено ${pr.done} из ${pr.ready} · готово уроков: ${pr.ready} из ${pr.total}`;
+  $('progressText').innerHTML = `<span>Пройдено: ${pr.done} из ${pr.ready}</span><span>Готово уроков: ${pr.ready} из ${pr.total}</span>`;
   $('progressBar').style.width = pr.ready ? (pr.done / pr.ready * 100) + '%' : '0';
 }
 
