@@ -144,10 +144,10 @@ body {
 .lesson-list .part-h span { color: var(--accent); }
 
 /* study plan */
-.plan .parts { list-style: none; padding: 0; margin: 28px 0 8px; max-width: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.plan .parts { list-style: none; padding: 0; margin: 28px 0 8px; max-width: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
 .plan .parts li { margin: 0; }
 .plan .parts a {
-  display: grid; gap: 4px; height: 100%;
+  display: grid; gap: 4px; height: 100%; align-content: start;
   padding: 14px 16px;
   background: var(--surface);
   border: 1px solid var(--line);

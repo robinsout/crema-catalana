@@ -16,3 +16,5 @@ fi
 
 echo "pre-push: npm run check (Node $(node --version))"
 npm run check --silent || { echo "pre-push: checks failed, push aborted"; exit 1; }
+echo "pre-push: npm run e2e (browser tests)"
+npm run e2e --silent || { echo "pre-push: browser tests failed, push aborted"; exit 1; }

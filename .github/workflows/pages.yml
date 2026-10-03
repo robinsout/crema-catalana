@@ -24,7 +24,15 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check   # types + tests + build
-      - run: touch dist/.nojekyll
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run e2e     # functional browser tests; screenshot tests are local only
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-traces
+          path: test-results/
+          retention-days: 7
+      - run: npm run build && touch dist/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
         with:

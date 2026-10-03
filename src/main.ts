@@ -1,3 +1,10 @@
+// fonts are served with the site (no requests to Google Fonts)
+import '@fontsource/unbounded/500.css';
+import '@fontsource/unbounded/700.css';
+import '@fontsource/literata/400.css';
+import '@fontsource/literata/400-italic.css';
+import '@fontsource/literata/600.css';
+import '@fontsource/jetbrains-mono/400.css';
 import './styles/main.css';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';

@@ -30,6 +30,8 @@ npm ci                                 # зависимости
 git config core.hooksPath .githooks    # хуки: типы перед коммитом, полная проверка перед пушем
 npm run dev                            # сайт с горячей перезагрузкой
 npm run check                          # типы (vue-tsc) + тесты (Vitest) + сборка в dist/
+npm run e2e                            # тесты в браузере (Playwright: компьютер и iPhone)
+npm run e2e:visual                     # скриншотные тесты, только локально
 npm run audio                          # записать озвучку новых фраз (нужен edge-tts)
 ```
 
@@ -52,14 +54,15 @@ content/                      данные курса, копируются на
   locales/<lang>/               язык ученика: ui.json, catalog.json, lessons/<id>.html
   audio/                        озвучка: index.json и clips/<hash>.mp3 (одна запись на фразу)
 scripts/                      генератор озвучки (TypeScript, запускается Node напрямую)
-tests/                        тесты логики, данных, сторов, роутера, интерфейса и сборки
+tests/                        тесты логики, данных, сторов, роутера, интерфейса, архитектуры и сборки (Vitest)
+e2e/                          тесты в браузере (Playwright) и эталонные скриншоты
 ```
 
 Как добавить урок, описано в [CLAUDE.md](CLAUDE.md). Планы развития — в [BACKLOG.md](BACKLOG.md).
 
 ## CI/CD
 
-Workflow [`pages.yml`](.github/workflows/pages.yml) на каждый пуш и pull request запускает `npm run check`: проверку типов, тесты и сборку. Из ветки `master` сайт публикуется на GitHub Pages, но только если всё прошло. Локально хук [`.githooks/pre-commit`](.githooks/pre-commit) проверяет типы, а [`.githooks/pre-push`](.githooks/pre-push) выполняет полную проверку.
+Workflow [`pages.yml`](.github/workflows/pages.yml) на каждый пуш и pull request запускает `npm run check`: проверку типов, тесты и сборку. Из ветки `master` сайт публикуется на GitHub Pages, но только если всё прошло. Затем запускаются функциональные тесты в браузере (Playwright). Локально хук [`.githooks/pre-commit`](.githooks/pre-commit) проверяет типы, а [`.githooks/pre-push`](.githooks/pre-push) выполняет полную проверку и браузерные тесты. Скриншотные тесты — только локальный инструмент: macOS и Linux по-разному рисуют шрифты.
 
 ## Совместимость сохранённого прогресса
 
