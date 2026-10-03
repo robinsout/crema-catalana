@@ -1,0 +1,58 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # portal/index.html is written for the claude.ai Artifact host, which adds
+      # the <html>/<head> skeleton itself. For Pages we add that skeleton here.
+      - name: Build site
+        run: |
+          mkdir -p _site
+          cp -R portal/. _site/
+          {
+            echo '<!doctype html>'
+            echo '<html lang="ru">'
+            echo '<head>'
+            echo '<meta charset="utf-8">'
+            echo '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">'
+            echo '<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>'
+            echo '</head>'
+            echo '<body>'
+            cat portal/index.html
+            echo '</body>'
+            echo '</html>'
+          } > _site/index.html
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

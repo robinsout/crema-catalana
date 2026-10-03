@@ -1,0 +1,17 @@
+{
+  "lessons": [
+    {
+      "id": "l01",
+      "num": 1,
+      "title": "Introducció al català",
+      "subtitle": "Фонетика, орфография, грамматика, глаголы и исключения",
+      "file": "content/01-introduccio.html",
+      "date": "2026-10-03"
+    },
+    { "id": "l02", "num": 2, "title": "Els pronoms febles", "subtitle": "em, et, es, en, hi, ho" },
+    { "id": "l03", "num": 3, "title": "El passat", "subtitle": "vaig fer, he fet, feia: когда что" },
+    { "id": "l04", "num": 4, "title": "El subjuntiu", "subtitle": "Сослагательное наклонение" },
+    { "id": "l05", "num": 5, "title": "Vocabulari quotidià", "subtitle": "Магазин, бар, транспорт, работа" },
+    { "id": "l06", "num": 6, "title": "Fonètica 2", "subtitle": "Дифтонги, ассимиляция, интонация" }
+  ]
+}

@@ -1,0 +1,479 @@
+<title>Quadern de català</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: notebook — lesson index on the left, reading column in the middle, section contents on the right (wide screens). Panot-tile strip as the one ornament. */
+:root {
+  --bg: #F3F5F2;
+  --surface: #FFFFFF;
+  --ink: #1A2130;
+  --muted: #5B6372;
+  --line: #D9DDD6;
+  --accent: #1D4F9A;
+  --accent-soft: #E4ECF7;
+  --mark: #E9AE1C;
+  --warn: #A9441D;
+  --warn-soft: #F7E7DF;
+  --ok: #2B7A4B;
+  --font-display: "Unbounded", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --font-body: "Literata", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --step--1: 0.85rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: 2.1rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11151C; --surface: #181D26; --ink: #E4E7EC; --muted: #9AA3B2; --line: #2A313D;
+    --accent: #8DB1EE; --accent-soft: #1D2940; --mark: #E6BE55; --warn: #F0946C; --warn-soft: #36211A; --ok: #6CC08F;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11151C; --surface: #181D26; --ink: #E4E7EC; --muted: #9AA3B2; --line: #2A313D;
+  --accent: #8DB1EE; --accent-soft: #1D2940; --mark: #E6BE55; --warn: #F0946C; --warn-soft: #36211A; --ok: #6CC08F;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  padding-inline: 16px;
+}
+
+.app {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 40px;
+}
+@media (min-width: 900px) {
+  .app { grid-template-columns: 250px minmax(0, 1fr); }
+}
+@media (min-width: 1240px) {
+  .app { grid-template-columns: 250px minmax(0, 720px) 200px; }
+}
+
+/* ---------- sidebar ---------- */
+.side { padding-block: 20px 8px; min-width: 0; }
+@media (min-width: 900px) {
+  .side { position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; max-height: 100vh; overflow-y: auto; padding-block: 32px; }
+}
+.brand { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.brand h1 span { display: block; font-weight: 500; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 4px; }
+.panot {
+  height: 14px;
+  margin-block: 16px;
+  background: var(--accent);
+  opacity: 0.55;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14' viewBox='0 0 28 14'%3E%3Cg fill='%23000'%3E%3Ccircle cx='0' cy='0' r='4'/%3E%3Ccircle cx='28' cy='0' r='4'/%3E%3Ccircle cx='0' cy='14' r='4'/%3E%3Ccircle cx='28' cy='14' r='4'/%3E%3Ccircle cx='14' cy='3.5' r='2.6'/%3E%3Ccircle cx='14' cy='10.5' r='2.6'/%3E%3Ccircle cx='10.5' cy='7' r='2.6'/%3E%3Ccircle cx='17.5' cy='7' r='2.6'/%3E%3C/g%3E%3C/svg%3E") repeat-x left center / 28px 14px;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14' viewBox='0 0 28 14'%3E%3Cg fill='%23000'%3E%3Ccircle cx='0' cy='0' r='4'/%3E%3Ccircle cx='28' cy='0' r='4'/%3E%3Ccircle cx='0' cy='14' r='4'/%3E%3Ccircle cx='28' cy='14' r='4'/%3E%3Ccircle cx='14' cy='3.5' r='2.6'/%3E%3Ccircle cx='14' cy='10.5' r='2.6'/%3E%3Ccircle cx='10.5' cy='7' r='2.6'/%3E%3Ccircle cx='17.5' cy='7' r='2.6'/%3E%3C/g%3E%3C/svg%3E") repeat-x left center / 28px 14px;
+}
+.nav-toggle {
+  font: 600 var(--step--1) var(--font-body);
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+@media (min-width: 900px) { .nav-toggle { display: none; } }
+.nav { display: none; }
+.nav.open { display: block; }
+@media (min-width: 900px) { .nav { display: block; } }
+
+.progress { font-size: var(--step--1); color: var(--muted); margin: 0 0 10px; font-variant-numeric: tabular-nums; }
+.progress-bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; margin-bottom: 18px; }
+.progress-bar i { display: block; height: 100%; background: var(--ok); width: 0; transition: width .3s; }
+
+.lesson-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.lesson-list a, .lesson-list .soon {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+  line-height: 1.3;
+}
+.lesson-list a:hover { background: var(--accent-soft); }
+.lesson-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.lesson-list a[aria-current="page"] { background: var(--surface); box-shadow: 0 0 0 1px var(--line); }
+.lesson-list .n {
+  font-family: var(--font-display); font-size: 0.72rem; font-weight: 500;
+  width: 24px; height: 24px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1.5px solid var(--line); color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.lesson-list a[aria-current="page"] .n { border-color: var(--accent); color: var(--accent); }
+.lesson-list .done .n { background: var(--ok); border-color: var(--ok); color: var(--surface); }
+.lesson-list .t { font-weight: 600; font-size: 0.95rem; }
+.lesson-list .s { display: block; font-size: var(--step--1); color: var(--muted); font-weight: 400; margin-top: 2px; }
+.lesson-list .soon { opacity: .55; }
+.lesson-list .soon .t::after { content: "скоро"; font: 500 0.62rem var(--font-display); letter-spacing: .06em; text-transform: uppercase; margin-left: 8px; color: var(--muted); }
+
+.say-hint { margin-top: 22px; font-size: var(--step--1); color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
+
+/* ---------- main ---------- */
+main { min-width: 0; padding-block: 8px 80px; }
+@media (min-width: 900px) { main { padding-block: 40px 96px; } }
+.lesson-head { margin-bottom: 36px; }
+.eyebrow { font: 500 0.72rem var(--font-display); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+.lesson-head h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 4.5vw, var(--step-3));
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+  text-wrap: balance;
+}
+.lesson-head .sub { color: var(--muted); margin: 0 0 18px; font-size: var(--step-1); }
+.head-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btn {
+  font: 600 var(--step--1) var(--font-body);
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+  border-radius: 999px;
+  padding: 7px 16px;
+  cursor: pointer;
+}
+.btn:hover { background: var(--accent-soft); }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn.is-done { border-color: var(--ok); color: var(--ok); }
+.meta { font-size: var(--step--1); color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* lesson content */
+.lesson section { margin-bottom: 56px; scroll-margin-top: 20px; }
+.lesson h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-2);
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin: 0 0 20px;
+  padding-top: 20px;
+  border-top: 2px solid var(--ink);
+  text-wrap: balance;
+}
+.lesson h3 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--step-1);
+  line-height: 1.3;
+  margin: 34px 0 10px;
+  text-wrap: balance;
+}
+.lesson p, .lesson ul, .lesson ol { margin: 0 0 14px; max-width: 66ch; }
+.lesson ul, .lesson ol { padding-left: 1.3em; }
+.lesson li { margin-bottom: 6px; }
+.lesson b { color: var(--accent); font-weight: 600; }
+.lesson strong { font-weight: 600; }
+.lesson i { color: var(--muted); }
+.ipa { font-family: var(--font-mono); font-size: 0.86em; color: var(--muted); white-space: nowrap; }
+.ex { padding-left: 14px; border-left: 2px solid var(--line); }
+.wrong { text-decoration: line-through; text-decoration-color: var(--warn); text-decoration-thickness: 2px; }
+
+.tw { overflow-x: auto; margin: 0 0 18px; }
+.lesson table {
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  min-width: 100%;
+}
+.lesson table.compact { min-width: 0; }
+.lesson th, .lesson td { text-align: left; vertical-align: top; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); }
+.lesson thead th {
+  font: 500 0.68rem var(--font-display);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1.5px solid var(--ink);
+  white-space: nowrap;
+}
+.lesson thead th small { font: inherit; opacity: .7; text-transform: none; letter-spacing: 0; }
+.lesson tbody th { font-weight: 400; font-style: italic; color: var(--muted); white-space: nowrap; }
+.lesson table.conj td { white-space: nowrap; }
+
+aside.tip, aside.warn, aside.ru {
+  margin: 4px 0 20px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  max-width: 66ch;
+  background: var(--accent-soft);
+}
+aside.warn { background: var(--warn-soft); }
+aside p { margin: 0 !important; }
+aside .label { font: 500 0.68rem var(--font-display); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px !important; }
+aside.warn .label { color: var(--warn); }
+
+blockquote.reading {
+  margin: 0 0 16px;
+  padding: 18px 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: var(--step-1);
+  line-height: 1.65;
+  max-width: 66ch;
+}
+details { margin: 0 0 18px; max-width: 66ch; }
+summary {
+  cursor: pointer;
+  display: inline-block;
+  font: 600 var(--step--1) var(--font-body);
+  color: var(--accent);
+  padding: 4px 0;
+  list-style: none;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "▸ "; }
+details[open] summary::before { content: "▾ "; }
+summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+
+/* pronunciation */
+.can-say .lesson span[lang="ca"], .can-say .lesson td[lang="ca"], .can-say .lesson li[lang="ca"],
+.can-say .lesson table[lang="ca"] td, .can-say .lesson blockquote[lang="ca"] {
+  cursor: pointer;
+  text-decoration: underline dotted transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color .15s;
+}
+.can-say .lesson span[lang="ca"]:hover, .can-say .lesson td[lang="ca"]:hover, .can-say .lesson li[lang="ca"]:hover,
+.can-say .lesson table[lang="ca"] td:hover, .can-say .lesson blockquote[lang="ca"]:hover { text-decoration-color: var(--accent); }
+.speaking { background: color-mix(in srgb, var(--mark) 30%, transparent); border-radius: 3px; }
+
+.pager { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 20px; }
+.pager a, .pager span { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+.pager span { color: var(--muted); font-weight: 400; }
+.pager a:hover { text-decoration: underline; }
+
+.status { color: var(--muted); padding: 40px 0; }
+
+/* ---------- right TOC ---------- */
+.toc { display: none; }
+@media (min-width: 1240px) {
+  .toc { display: block; position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; padding-block: 48px; font-size: var(--step--1); }
+}
+.toc p { font: 500 0.66rem var(--font-display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.toc a { display: block; padding: 4px 0 4px 12px; border-left: 2px solid var(--line); color: var(--muted); text-decoration: none; line-height: 1.35; }
+.toc a:hover { color: var(--ink); }
+.toc a.active { border-left-color: var(--accent); color: var(--ink); }
+</style>
+
+<div class="app">
+  <div class="side">
+    <div class="brand">
+      <h1>Quadern de català<span>Уроки к курсу</span></h1>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav">Уроки</button>
+    </div>
+    <div class="panot" aria-hidden="true"></div>
+    <nav class="nav" id="nav" aria-label="Уроки">
+      <p class="progress" id="progressText">Пройдено 0 из 0</p>
+      <div class="progress-bar"><i id="progressBar"></i></div>
+      <ul class="lesson-list" id="lessonList"></ul>
+      <p class="say-hint" id="sayHint"></p>
+    </nav>
+  </div>
+
+  <main id="main">
+    <p class="status">Загружаем урок…</p>
+  </main>
+
+  <aside class="toc" id="toc" aria-label="Содержание урока"></aside>
+</div>
+
+<script>
+(function () {
+  const KEY = 'quadern-catala';
+  const store = load();
+  let lessons = [];
+  let current = null;
+
+  function load() {
+    try { return Object.assign({ done: {}, last: null }, JSON.parse(localStorage.getItem(KEY) || '{}')); }
+    catch (e) { return { done: {}, last: null }; }
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {}
+  }
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const ready = () => lessons.filter((l) => l.file);
+
+  /* ---------- navigation ---------- */
+  function renderNav() {
+    $('lessonList').innerHTML = lessons.map((l) => {
+      const inner = `<span class="n">${l.num}</span><span><span class="t">${esc(l.title)}</span><span class="s">${esc(l.subtitle || '')}</span></span>`;
+      if (!l.file) return `<li><div class="soon">${inner}</div></li>`;
+      const cls = store.done[l.id] ? 'done' : '';
+      const cur = current && current.id === l.id ? ' aria-current="page"' : '';
+      return `<li><a href="#${l.id}" class="${cls}"${cur}>${inner}</a></li>`;
+    }).join('');
+    const total = ready().length;
+    const done = ready().filter((l) => store.done[l.id]).length;
+    $('progressText').textContent = `Пройдено ${done} из ${total}`;
+    $('progressBar').style.width = total ? (done / total * 100) + '%' : '0';
+  }
+
+  $('navToggle').addEventListener('click', () => {
+    const open = $('nav').classList.toggle('open');
+    $('navToggle').setAttribute('aria-expanded', String(open));
+  });
+
+  function route() {
+    const id = location.hash.slice(1);
+    const list = ready();
+    const target = list.find((l) => l.id === id) || list.find((l) => l.id === store.last) || list[0];
+    if (target) show(target);
+  }
+
+  async function show(lesson) {
+    current = lesson;
+    store.last = lesson.id;
+    save();
+    renderNav();
+    $('nav').classList.remove('open');
+    $('navToggle').setAttribute('aria-expanded', 'false');
+
+    let body;
+    try {
+      const res = await fetch(lesson.file);
+      if (!res.ok) throw new Error(res.status);
+      body = await res.text();
+    } catch (e) {
+      $('main').innerHTML = `<p class="status">Не удалось загрузить урок «${esc(lesson.title)}». Обновите страницу.</p>`;
+      return;
+    }
+    if (current !== lesson) return;
+
+    const list = ready();
+    const i = list.indexOf(lesson);
+    const prev = list[i - 1], next = list[i + 1];
+    const date = lesson.date ? new Date(lesson.date + 'T12:00:00').toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+
+    $('main').innerHTML = `
+      <header class="lesson-head">
+        <p class="eyebrow">Урок ${lesson.num}</p>
+        <h2 lang="ca">${esc(lesson.title)}</h2>
+        <p class="sub">${esc(lesson.subtitle || '')}</p>
+        <div class="head-actions">
+          <button class="btn" id="doneBtn" type="button"></button>
+          ${date ? `<span class="meta">${date}</span>` : ''}
+        </div>
+      </header>
+      <article class="lesson">${body}</article>
+      <nav class="pager" aria-label="Соседние уроки">
+        ${prev ? `<a href="#${prev.id}">← ${esc(prev.title)}</a>` : '<span></span>'}
+        ${next ? `<a href="#${next.id}">${esc(next.title)} →</a>` : '<span>Следующий урок скоро появится</span>'}
+      </nav>`;
+    paintDone();
+    $('doneBtn').addEventListener('click', () => {
+      store.done[lesson.id] = !store.done[lesson.id];
+      save();
+      paintDone();
+      renderNav();
+    });
+    buildToc();
+    window.scrollTo(0, 0);
+  }
+
+  function paintDone() {
+    const b = $('doneBtn');
+    const d = !!store.done[current.id];
+    b.textContent = d ? '✓ Урок пройден' : 'Отметить как пройденный';
+    b.classList.toggle('is-done', d);
+  }
+
+  /* ---------- table of contents ---------- */
+  let spy;
+  function buildToc() {
+    const secs = [...document.querySelectorAll('.lesson section[id]')];
+    $('toc').innerHTML = secs.length ? `<p>В этом уроке</p><ol>${secs.map((s) => {
+      const h = s.querySelector('h2');
+      return `<li><a href="#" data-sec="${s.id}">${esc(h ? h.textContent.replace(/^\d+\.\s*/, '') : s.id)}</a></li>`;
+    }).join('')}</ol>` : '';
+    if (spy) spy.disconnect();
+    if (!('IntersectionObserver' in window)) return;
+    spy = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        document.querySelectorAll('.toc a').forEach((a) => a.classList.toggle('active', a.dataset.sec === e.target.id));
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    secs.forEach((s) => spy.observe(s));
+  }
+  $('toc').addEventListener('click', (e) => {
+    const a = e.target.closest('a[data-sec]');
+    if (!a) return;
+    e.preventDefault();
+    const el = document.getElementById(a.dataset.sec);
+    if (el) el.scrollIntoView();
+  });
+
+  /* ---------- pronunciation (speech synthesis) ---------- */
+  let voice = null;
+  const synth = window.speechSynthesis;
+  function pickVoice() {
+    if (!synth) return;
+    const vs = synth.getVoices();
+    voice = vs.find((v) => /^ca([-_]|$)/i.test(v.lang)) || null;
+    document.documentElement.classList.toggle('can-say', !!voice);
+    $('sayHint').textContent = voice
+      ? `Нажмите на любое каталанское слово или фразу, чтобы услышать произношение (голос: ${voice.name}).`
+      : 'Чтобы слушать произношение, добавьте в систему каталанский голос (например, Montse на macOS или iOS) и обновите страницу.';
+  }
+  if (synth) { pickVoice(); synth.addEventListener('voiceschanged', pickVoice); }
+  else { $('sayHint').textContent = 'Этот браузер не умеет озвучивать текст.'; }
+
+  $('main').addEventListener('click', (e) => {
+    if (!voice || e.target.closest('summary, a, button')) return;
+    const host = e.target.closest('.lesson [lang="ca"]');
+    if (!host) return;
+    const el = host.tagName === 'TABLE' ? e.target.closest('td') : host;
+    if (!el) return;
+    const text = el.textContent.replace(/\s+/g, ' ').trim();
+    if (!text) return;
+    synth.cancel();
+    document.querySelectorAll('.speaking').forEach((n) => n.classList.remove('speaking'));
+    const u = new SpeechSynthesisUtterance(text);
+    u.voice = voice;
+    u.lang = voice.lang;
+    u.rate = 0.85;
+    el.classList.add('speaking');
+    u.onend = u.onerror = () => el.classList.remove('speaking');
+    synth.speak(u);
+  });
+
+  window.addEventListener('hashchange', route);
+
+  fetch('lessons.json')
+    .then((r) => r.json())
+    .then((data) => { lessons = data.lessons || []; renderNav(); route(); })
+    .catch(() => { $('main').innerHTML = '<p class="status">Не удалось загрузить список уроков. Обновите страницу.</p>'; });
+})();
+</script>
