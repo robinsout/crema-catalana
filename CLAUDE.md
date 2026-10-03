@@ -4,6 +4,9 @@
 - Сайт: https://robinsout.github.io/crema-catalana/ (GitHub Pages) — единственное место публикации.
 - Старая копия в claude.ai Artifact (https://claude.ai/artifact/CweuEQKKz9GLPtxfS7riYc) больше не поддерживается: не обновлять и не публиковать туда уроки.
 
+## Бэклог
+Фичи и идеи — в `BACKLOG.md` (статусы, архитектура, флоу). Перед работой над фичей сверяться с ним и обновлять статус.
+
 ## Две линии уроков
 1. **Уроки по юнитам** (`parts[].units[]` в `lessons.json`, id вида `b1-04`). Пользователь просит урок к юниту, который прошёл в школе. Основа — план юнита: `topic`, `grammar`, `vocab`, `extra`, `mission`.
 2. **Тематические и обзорные уроки** (`extras[]`, id вида `x-pronoms-febles`; `kind`: `topic` или `overview`). Пишутся по запросу; полем `related` урок связывается с юнитами. Вводный урок лежит в `extras` с id `intro`.
