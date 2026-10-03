@@ -27,6 +27,7 @@
   - `locales/<lang>/ui.json` — строки интерфейса (ключи `_…` — настройки, например `_dateLocale`). В коде строки только через `t('key')`: тест сверяет использованные и объявленные ключи;
   - `locales/<lang>/catalog.json` — тексты плана: `parts.<id>` (`period`, `focus`) и `lessons.<id>` (`subtitle` или `topic`, `grammar`, `vocab`, `extra`, `mission`, `date`). **Урок готов на языке, когда у него есть `date`**;
   - `locales/<lang>/lessons/<id>.html` — урок в виде HTML-фрагмента. Файл существует ⇔ есть `date` (тест);
+  - `vocab/<id>.json` и `locales/<lang>/vocab/<id>.json` — словарь урока: каталанские слова (общие) и перевод;
   - `audio/index.json` + `audio/clips/<hash>.mp3` — общее хранилище озвучки: одна запись на фразу.
 - `scripts/gen-audio.ts`, `scripts/lib/` — TypeScript, запускается `node` напрямую (Node 24 убирает типы сам).
 
@@ -36,6 +37,7 @@
 3. Урок — обычный HTML (не Vue), чтобы его можно было адаптировать на другие языки без знания фреймворка. Разметка, которую понимают стили: `.tw > table`, `table.conj`, `aside.tip|warn|ru` с `<p class="label">`, `.ex`, `.ipa`, `.wrong`, `blockquote.reading`, `<details><summary>`, а также схемы `.tmap`, `ol.story`, `.quarts`, `.daybar`, `.year`.
 4. Каталанский текст помечается `lang="ca"` (span, td, li, p, blockquote; если `lang="ca"` стоит на `<table>`, озвучивается каждая ячейка `td`). Русские пояснения держать вне `lang="ca"`, вложенные `lang="ca"` не делать.
 5. В `content/locales/ru/catalog.json` → `lessons.<id>`: тексты и `date`.
+5a. Словарь урока (по желанию): в `content/course.json` уроку `"hasVocab": true`; каталанская часть — `content/vocab/<id>.json` (`groups[].words[]`: `id`, `ca` с артиклем, `gender` m/f/mf, `plural`); перевод — `content/locales/<lang>/vocab/<id>.json` (`groups.<id>` — название группы, `words.<id>` — `tr`, `note`). Раздел «Слова урока» появляется в конце урока сам; тесты проверяют полноту перевода и озвучку слов.
 6. `npm run audio` — записать озвучку (нужен edge-tts: `pip install edge-tts` или `EDGE_TTS=/путь/к/edge-tts`). Голос ca-ES-JoanaNeural.
 7. `npm run check`, коммит, пуш. Целостность урока (файл, разделы, озвучка всех фраз, тексты) проверяют тесты.
 

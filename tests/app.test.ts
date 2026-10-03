@@ -40,7 +40,26 @@ test('a lesson shows its header, content and pager', async () => {
   assert.match(w.find('.eyebrow').text(), /Bàsic 1 · Unitat 1/);
   assert.match(w.find('article.lesson').html(), /Раздел b1-01/);
   assert.match(w.find('.related').text(), /Els temps/);
-  assert.equal(w.findAll('.toc li').length, 1);
+  assert.equal(w.findAll('.toc li').length, 2); // the lesson section and its vocabulary
+});
+
+test('a lesson with a vocabulary shows it as the last section, clickable for audio', async () => {
+  const { w } = await openApp('/ru/lesson/b1-01');
+  const vocab = w.find('#vocab');
+  assert.ok(vocab.exists());
+  assert.match(vocab.find('h2').text(), /Слова урока/);
+  assert.match(vocab.text(), /Дни/);
+  const first = vocab.find('tbody tr');
+  assert.match(first.text(), /el dilluns/);
+  assert.match(first.text(), /понедельник/);
+  assert.ok(vocab.find('[lang="ca"]').exists());
+  assert.match(vocab.text(), /не otoño/);
+  assert.deepEqual(w.findAll('.toc li').map((li) => li.text()), ['Раздел b1-01', 'Слова урока']);
+});
+
+test('a lesson without a vocabulary has no vocabulary section', async () => {
+  const { w } = await openApp('/ru/lesson/intro');
+  assert.equal(w.find('#vocab').exists(), false);
 });
 
 test('marking a lesson as done updates the button and the progress in the menu', async () => {

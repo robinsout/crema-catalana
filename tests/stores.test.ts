@@ -93,8 +93,8 @@ test('lessons store loads a lesson once and keeps it', async () => {
   const lessons = useLessonsStore();
   const lesson = { id: 'b1-01', file: 'locales/ru/lessons/b1-01.html' };
   assert.equal(lessons.content(lesson).state, 'loading');
-  await lessons.load(lesson);
-  await lessons.load(lesson);
+  await lessons.load(lesson, 'ru');
+  await lessons.load(lesson, 'ru');
   const c = lessons.content(lesson);
   assert.equal(c.state, 'ready');
   assert.match(c.state === 'ready' ? c.html : '', /Раздел b1-01/);
@@ -106,7 +106,7 @@ test('lessons store reports a lesson that cannot be loaded', async () => {
   vi.stubGlobal('fetch', vi.fn(async () => new Response('', { status: 404 })));
   const lessons = useLessonsStore();
   const lesson = { id: 'x', file: 'locales/ru/lessons/x.html' };
-  await lessons.load(lesson);
+  await lessons.load(lesson, 'ru');
   assert.equal(lessons.content(lesson).state, 'error');
 });
 
@@ -126,4 +126,14 @@ test('audio store: no audio index means no audio, not an error', async () => {
   const audio = useAudioStore();
   await audio.load();
   assert.equal(audio.available, false);
+});
+
+test('lessons store loads the vocabulary of a lesson that has one', async () => {
+  const requested = stubSite();
+  const lessons = useLessonsStore();
+  const lesson = { id: 'b1-01', file: 'locales/ru/lessons/b1-01.html', hasVocab: true };
+  await lessons.load(lesson, 'ru');
+  assert.deepEqual(lessons.vocab(lesson)?.[0]?.words.map((w) => w.tr), ['понедельник', 'осень']);
+  await lessons.load({ id: 'intro', file: 'locales/ru/lessons/intro.html' }, 'ru');
+  assert.ok(!requested.includes('vocab/intro.json'), 'no request for a lesson without vocabulary');
 });

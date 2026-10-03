@@ -89,3 +89,17 @@ test('the menu leads from the plan to a lesson and back', async ({ page, isMobil
   await page.locator('.lesson-list a.plan-link').click();
   await expect(page).toHaveURL(/#\/ru\/plan$/);
 });
+
+test('a lesson vocabulary is listed at the end and its words can be heard', async ({ page }) => {
+  await page.goto('./#/ru/lesson/x-nombres-calendari');
+  const vocab = page.locator('#vocab');
+  await expect(vocab.locator('h2')).toHaveText('Слова урока');
+  const row = vocab.locator('tr', { hasText: 'el dilluns' });
+  await expect(row).toContainText('понедельник');
+  const word = row.locator('.vocab-ca');
+  await expect(page.locator('html')).toHaveClass(/can-say/);
+  const clip = page.waitForRequest(/\/audio\/clips\/[0-9a-f]+\.mp3$/);
+  await word.click();
+  await clip;
+  expect(await noHorizontalScroll(page)).toBe(true);
+});

@@ -1,0 +1,93 @@
+{
+ "groups": {
+  "passat": "Прошлое",
+  "recent": "Сегодня, уже, никогда",
+  "ara": "Сейчас",
+  "futur": "Будущее"
+ },
+ "words": {
+  "ahir": {
+   "tr": "вчера",
+   "note": "→ vaig fer"
+  },
+  "abans": {
+   "tr": "раньше",
+   "note": "→ feia"
+  },
+  "de-petit": {
+   "tr": "в детстве",
+   "note": "→ feia"
+  },
+  "any-passat": {
+   "tr": "в прошлом году",
+   "note": "→ vaig fer"
+  },
+  "setmana-passada": {
+   "tr": "на прошлой неделе",
+   "note": "→ vaig fer"
+  },
+  "fa": {
+   "tr": "два года назад",
+   "note": "→ vaig fer"
+  },
+  "mentre": {
+   "tr": "пока, в то время как",
+   "note": "фон → feia"
+  },
+  "avui": {
+   "tr": "сегодня",
+   "note": "→ he fet"
+  },
+  "aquest-mati": {
+   "tr": "этим утром",
+   "note": "→ he fet"
+  },
+  "aquest-any": {
+   "tr": "в этом году",
+   "note": "→ he fet"
+  },
+  "ja": {
+   "tr": "уже"
+  },
+  "encara": {
+   "tr": "ещё, всё ещё"
+  },
+  "mai": {
+   "tr": "никогда"
+  },
+  "sempre": {
+   "tr": "всегда"
+  },
+  "sovint": {
+   "tr": "часто"
+  },
+  "ara": {
+   "tr": "сейчас",
+   "note": "→ faig"
+  },
+  "ara-mateix": {
+   "tr": "прямо сейчас",
+   "note": "→ estic fent"
+  },
+  "cada-dia": {
+   "tr": "каждый день",
+   "note": "→ faig"
+  },
+  "dema": {
+   "tr": "завтра",
+   "note": "→ faré"
+  },
+  "dema-passat": {
+   "tr": "послезавтра",
+   "note": "→ faré"
+  },
+  "any-que-ve": {
+   "tr": "в следующем году",
+   "note": "→ faré"
+  },
+  "quan": {
+   "tr": "когда",
+   "note": "quan + subj. в будущем: quan arribis"
+  }
+ }
+}

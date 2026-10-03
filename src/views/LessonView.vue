@@ -7,6 +7,7 @@ import { useProgressStore } from '../stores/progress.ts';
 import { useTocStore } from '../stores/toc.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import { useLessonLink } from '../composables/useLessonLink.ts';
+import VocabSection from '../components/VocabSection.vue';
 
 const catalog = useCatalogStore();
 const lessons = useLessonsStore();
@@ -18,7 +19,8 @@ const route = useRoute();
 
 const lesson = computed(() => catalog.find(String(route.params.id ?? '')));
 const content = computed(() => (lesson.value ? lessons.content(lesson.value) : { state: 'error' as const }));
-const article = ref<HTMLElement | null>(null);
+const root = ref<HTMLElement | null>(null);
+const vocab = computed(() => (lesson.value ? lessons.vocab(lesson.value) : null));
 
 const pager = computed(() => (lesson.value ? catalog.neighboursOf(lesson.value.id) : { prev: null, next: null }));
 const related = computed(() =>
@@ -26,12 +28,12 @@ const related = computed(() =>
 const done = computed(() => (lesson.value ? progress.isDone(lesson.value.id) : false));
 const plan = computed(() => ({ name: 'plan', params: { lang: catalog.lang } }));
 
-watch(lesson, (l) => { if (l) lessons.load(l); }, { immediate: true });
+watch(lesson, (l) => { if (l) lessons.load(l, catalog.lang); }, { immediate: true });
 
 // the table of contents follows the rendered lesson
 watch(() => content.value.state, async (state) => {
   await nextTick();
-  toc.collect(state === 'ready' ? article.value : null, 'lesson');
+  toc.collect(state === 'ready' ? root.value : null, 'lesson');
 }, { immediate: true });
 </script>
 
@@ -51,7 +53,12 @@ watch(() => content.value.state, async (state) => {
           <span v-if="lesson.date" class="meta">{{ formatDate(lesson.date) }}</span>
         </div>
       </header>
-      <article ref="article" class="lesson" v-html="content.html"></article>
+      <div ref="root">
+        <article class="lesson" v-html="content.html"></article>
+        <div v-if="vocab?.length" class="lesson">
+          <VocabSection :groups="vocab" />
+        </div>
+      </div>
       <p v-if="related.length" class="related">
         {{ t('lesson.related') }}
         <template v-for="(x, i) in related" :key="x.id">{{ i ? ', ' : '' }}<RouterLink :to="linkTo(x)" lang="ca">{{ x.title }}</RouterLink></template>

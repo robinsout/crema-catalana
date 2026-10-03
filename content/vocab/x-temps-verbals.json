@@ -1,0 +1,112 @@
+{
+ "groups": [
+  {
+   "id": "passat",
+   "words": [
+    {
+     "id": "ahir",
+     "ca": "ahir"
+    },
+    {
+     "id": "abans",
+     "ca": "abans"
+    },
+    {
+     "id": "de-petit",
+     "ca": "de petit"
+    },
+    {
+     "id": "any-passat",
+     "ca": "l'any passat"
+    },
+    {
+     "id": "setmana-passada",
+     "ca": "la setmana passada"
+    },
+    {
+     "id": "fa",
+     "ca": "fa dos anys"
+    },
+    {
+     "id": "mentre",
+     "ca": "mentre"
+    }
+   ]
+  },
+  {
+   "id": "recent",
+   "words": [
+    {
+     "id": "avui",
+     "ca": "avui"
+    },
+    {
+     "id": "aquest-mati",
+     "ca": "aquest matí"
+    },
+    {
+     "id": "aquest-any",
+     "ca": "aquest any"
+    },
+    {
+     "id": "ja",
+     "ca": "ja"
+    },
+    {
+     "id": "encara",
+     "ca": "encara"
+    },
+    {
+     "id": "mai",
+     "ca": "mai"
+    },
+    {
+     "id": "sempre",
+     "ca": "sempre"
+    },
+    {
+     "id": "sovint",
+     "ca": "sovint"
+    }
+   ]
+  },
+  {
+   "id": "ara",
+   "words": [
+    {
+     "id": "ara",
+     "ca": "ara"
+    },
+    {
+     "id": "ara-mateix",
+     "ca": "ara mateix"
+    },
+    {
+     "id": "cada-dia",
+     "ca": "cada dia"
+    }
+   ]
+  },
+  {
+   "id": "futur",
+   "words": [
+    {
+     "id": "dema",
+     "ca": "demà"
+    },
+    {
+     "id": "dema-passat",
+     "ca": "demà passat"
+    },
+    {
+     "id": "any-que-ve",
+     "ca": "l'any que ve"
+    },
+    {
+     "id": "quan",
+     "ca": "quan"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,408 @@
+{
+ "groups": [
+  {
+   "id": "nombres",
+   "words": [
+    {
+     "id": "zero",
+     "ca": "zero"
+    },
+    {
+     "id": "u",
+     "ca": "u, un, una"
+    },
+    {
+     "id": "dos",
+     "ca": "dos, dues"
+    },
+    {
+     "id": "tres",
+     "ca": "tres"
+    },
+    {
+     "id": "quatre",
+     "ca": "quatre"
+    },
+    {
+     "id": "cinc",
+     "ca": "cinc"
+    },
+    {
+     "id": "sis",
+     "ca": "sis"
+    },
+    {
+     "id": "set",
+     "ca": "set"
+    },
+    {
+     "id": "vuit",
+     "ca": "vuit"
+    },
+    {
+     "id": "nou",
+     "ca": "nou"
+    },
+    {
+     "id": "deu",
+     "ca": "deu"
+    },
+    {
+     "id": "onze",
+     "ca": "onze"
+    },
+    {
+     "id": "dotze",
+     "ca": "dotze"
+    },
+    {
+     "id": "tretze",
+     "ca": "tretze"
+    },
+    {
+     "id": "catorze",
+     "ca": "catorze"
+    },
+    {
+     "id": "quinze",
+     "ca": "quinze"
+    },
+    {
+     "id": "setze",
+     "ca": "setze"
+    },
+    {
+     "id": "disset",
+     "ca": "disset"
+    },
+    {
+     "id": "divuit",
+     "ca": "divuit"
+    },
+    {
+     "id": "dinou",
+     "ca": "dinou"
+    },
+    {
+     "id": "vint",
+     "ca": "vint"
+    },
+    {
+     "id": "trenta",
+     "ca": "trenta"
+    },
+    {
+     "id": "quaranta",
+     "ca": "quaranta"
+    },
+    {
+     "id": "cinquanta",
+     "ca": "cinquanta"
+    },
+    {
+     "id": "seixanta",
+     "ca": "seixanta"
+    },
+    {
+     "id": "setanta",
+     "ca": "setanta"
+    },
+    {
+     "id": "vuitanta",
+     "ca": "vuitanta"
+    },
+    {
+     "id": "noranta",
+     "ca": "noranta"
+    },
+    {
+     "id": "cent",
+     "ca": "cent"
+    },
+    {
+     "id": "mil",
+     "ca": "mil"
+    },
+    {
+     "id": "milio",
+     "ca": "un milió"
+    }
+   ]
+  },
+  {
+   "id": "ordinals",
+   "words": [
+    {
+     "id": "primer",
+     "ca": "primer, primera"
+    },
+    {
+     "id": "segon",
+     "ca": "segon, segona"
+    },
+    {
+     "id": "tercer",
+     "ca": "tercer, tercera"
+    },
+    {
+     "id": "quart-o",
+     "ca": "quart, quarta"
+    },
+    {
+     "id": "cinque",
+     "ca": "cinquè, cinquena"
+    },
+    {
+     "id": "sise",
+     "ca": "sisè, sisena"
+    },
+    {
+     "id": "sete",
+     "ca": "setè, setena"
+    },
+    {
+     "id": "vuite",
+     "ca": "vuitè, vuitena"
+    },
+    {
+     "id": "nove",
+     "ca": "novè, novena"
+    },
+    {
+     "id": "dese",
+     "ca": "desè, desena"
+    }
+   ]
+  },
+  {
+   "id": "hora",
+   "words": [
+    {
+     "id": "hora",
+     "ca": "l'hora",
+     "gender": "f",
+     "plural": "les hores"
+    },
+    {
+     "id": "minut",
+     "ca": "el minut",
+     "gender": "m",
+     "plural": "els minuts"
+    },
+    {
+     "id": "quart",
+     "ca": "el quart",
+     "gender": "m",
+     "plural": "els quarts"
+    },
+    {
+     "id": "mitja",
+     "ca": "i mitja"
+    },
+    {
+     "id": "menys",
+     "ca": "menys"
+    },
+    {
+     "id": "migdia",
+     "ca": "el migdia",
+     "gender": "m"
+    },
+    {
+     "id": "mitjanit",
+     "ca": "la mitjanit",
+     "gender": "f"
+    }
+   ]
+  },
+  {
+   "id": "dia",
+   "words": [
+    {
+     "id": "mati",
+     "ca": "el matí",
+     "gender": "m"
+    },
+    {
+     "id": "tarda",
+     "ca": "la tarda",
+     "gender": "f"
+    },
+    {
+     "id": "vespre",
+     "ca": "el vespre",
+     "gender": "m"
+    },
+    {
+     "id": "nit",
+     "ca": "la nit",
+     "gender": "f"
+    },
+    {
+     "id": "matinada",
+     "ca": "la matinada",
+     "gender": "f"
+    },
+    {
+     "id": "dia",
+     "ca": "el dia",
+     "gender": "m",
+     "plural": "els dies"
+    }
+   ]
+  },
+  {
+   "id": "setmana",
+   "words": [
+    {
+     "id": "dilluns",
+     "ca": "el dilluns",
+     "gender": "m"
+    },
+    {
+     "id": "dimarts",
+     "ca": "el dimarts",
+     "gender": "m"
+    },
+    {
+     "id": "dimecres",
+     "ca": "el dimecres",
+     "gender": "m"
+    },
+    {
+     "id": "dijous",
+     "ca": "el dijous",
+     "gender": "m"
+    },
+    {
+     "id": "divendres",
+     "ca": "el divendres",
+     "gender": "m"
+    },
+    {
+     "id": "dissabte",
+     "ca": "el dissabte",
+     "gender": "m"
+    },
+    {
+     "id": "diumenge",
+     "ca": "el diumenge",
+     "gender": "m"
+    },
+    {
+     "id": "setmana",
+     "ca": "la setmana",
+     "gender": "f",
+     "plural": "les setmanes"
+    },
+    {
+     "id": "cap-de-setmana",
+     "ca": "el cap de setmana",
+     "gender": "m"
+    }
+   ]
+  },
+  {
+   "id": "mesos",
+   "words": [
+    {
+     "id": "gener",
+     "ca": "gener",
+     "gender": "m"
+    },
+    {
+     "id": "febrer",
+     "ca": "febrer",
+     "gender": "m"
+    },
+    {
+     "id": "marc",
+     "ca": "març",
+     "gender": "m"
+    },
+    {
+     "id": "abril",
+     "ca": "abril",
+     "gender": "m"
+    },
+    {
+     "id": "maig",
+     "ca": "maig",
+     "gender": "m"
+    },
+    {
+     "id": "juny",
+     "ca": "juny",
+     "gender": "m"
+    },
+    {
+     "id": "juliol",
+     "ca": "juliol",
+     "gender": "m"
+    },
+    {
+     "id": "agost",
+     "ca": "agost",
+     "gender": "m"
+    },
+    {
+     "id": "setembre",
+     "ca": "setembre",
+     "gender": "m"
+    },
+    {
+     "id": "octubre",
+     "ca": "octubre",
+     "gender": "m"
+    },
+    {
+     "id": "novembre",
+     "ca": "novembre",
+     "gender": "m"
+    },
+    {
+     "id": "desembre",
+     "ca": "desembre",
+     "gender": "m"
+    }
+   ]
+  },
+  {
+   "id": "estacions",
+   "words": [
+    {
+     "id": "primavera",
+     "ca": "la primavera",
+     "gender": "f"
+    },
+    {
+     "id": "estiu",
+     "ca": "l'estiu",
+     "gender": "m"
+    },
+    {
+     "id": "tardor",
+     "ca": "la tardor",
+     "gender": "f"
+    },
+    {
+     "id": "hivern",
+     "ca": "l'hivern",
+     "gender": "m"
+    },
+    {
+     "id": "mes",
+     "ca": "el mes",
+     "gender": "m",
+     "plural": "els mesos"
+    },
+    {
+     "id": "any",
+     "ca": "l'any",
+     "gender": "m",
+     "plural": "els anys"
+    }
+   ]
+  }
+ ]
+}

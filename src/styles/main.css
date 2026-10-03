@@ -458,3 +458,11 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
 .toc a { display: block; padding: 4px 0 4px 12px; border-left: 2px solid var(--line); color: var(--muted); text-decoration: none; line-height: 1.35; }
 .toc a:hover { color: var(--ink); }
 .toc a.active { border-left-color: var(--accent); color: var(--ink); }
+
+/* lesson vocabulary: the word (gender, plural under it) | translation (note under it) */
+.lesson .vocab-table { min-width: 0; width: 100%; max-width: 40rem; }
+.lesson .vocab-table th, .lesson .vocab-table td { padding: 7px 18px 7px 0; vertical-align: top; }
+.lesson .vocab-table th { width: 45%; font-style: normal; color: var(--ink); white-space: normal; }
+.vocab-ca { font-weight: 600; }
+.vocab-meta { display: block; font-size: 0.78rem; color: var(--muted); font-weight: 400; margin-top: 1px; }
+.vocab-note { display: block; font-size: 0.82rem; color: var(--muted); margin-top: 2px; }

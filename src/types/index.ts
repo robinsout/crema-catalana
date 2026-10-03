@@ -13,6 +13,7 @@ export interface UnitDef {
   id: string;
   unit: number;
   title: string; // Catalan
+  hasVocab?: boolean; // has content/vocab/<id>.json
 }
 
 export interface ExtraDef {
@@ -20,6 +21,7 @@ export interface ExtraDef {
   kind: LessonKind;
   title: string; // Catalan
   related?: string[]; // unit ids
+  hasVocab?: boolean; // has content/vocab/<id>.json
 }
 
 export interface PartDef {
@@ -67,6 +69,7 @@ export interface LocalesIndex {
 export interface LessonData extends LessonTexts {
   id: string;
   title: string;
+  hasVocab?: boolean;
   kind?: LessonKind;
   unit?: number;
   related?: string[];
@@ -102,3 +105,35 @@ export interface AudioIndex {
 
 // Where progress is persisted (localStorage in the browser, a fake in tests)
 export type StorageBackend = Pick<Storage, 'getItem' | 'setItem'>;
+
+// Lesson vocabulary: Catalan words (content/vocab/<lesson>.json, the same for every language)
+export type Gender = 'm' | 'f' | 'mf';
+
+export interface VocabWordDef {
+  id: string;
+  ca: string; // with the article when it helps: "la tardor", "l'estiu"
+  gender?: Gender;
+  plural?: string;
+}
+
+export interface VocabSource {
+  groups: { id: string; words: VocabWordDef[] }[];
+}
+
+// ...and their translation (content/locales/<lang>/vocab/<lesson>.json)
+export interface LocaleVocab {
+  groups: Record<string, string>; // group id → title
+  words: Record<string, { tr: string; note?: string }>;
+}
+
+// merged, for the page
+export interface VocabWord extends VocabWordDef {
+  tr: string;
+  note?: string;
+}
+
+export interface VocabGroup {
+  id: string;
+  title: string;
+  words: VocabWord[];
+}

@@ -19,3 +19,14 @@ for (const scheme of ['light', 'dark'] as const) {
     });
   }
 }
+
+for (const scheme of ['light', 'dark'] as const) {
+  test(`lesson vocabulary, ${scheme} theme @visual`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: scheme });
+    await page.goto('./#/ru/lesson/x-nombres-calendari');
+    const vocab = page.locator('#vocab');
+    await vocab.scrollIntoViewIfNeeded();
+    await page.evaluate(() => document.fonts.ready);
+    await expect(vocab.locator('.vocab-table').nth(4)).toHaveScreenshot(`vocab-week-${scheme}.png`);
+  });
+}

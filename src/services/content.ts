@@ -1,6 +1,7 @@
 // Loading course data: what to fetch for the course, a language, a lesson and the audio.
 import { contentApi } from '../api/content.ts';
-import type { AudioIndex, Course, Lesson, LocaleCatalog, LocalesIndex, UiStrings } from '../types/index.ts';
+import { buildVocab } from './vocab.ts';
+import type { AudioIndex, Course, Lesson, LocaleCatalog, LocalesIndex, UiStrings, VocabGroup } from '../types/index.ts';
 
 export interface CourseBase {
   locales: LocalesIndex;
@@ -33,3 +34,14 @@ export function loadLessonHtml(lesson: Pick<Lesson, 'id' | 'file'>): Promise<str
 
 // No audio is not an error: phrases just stay plain text
 export const loadAudioIndex = (): Promise<AudioIndex | null> => contentApi.audioIndex().catch(() => null);
+
+// The vocabulary of a lesson in a language; null when the lesson has none.
+// Missing translations do not hide the Catalan words.
+export async function loadVocab(lesson: Pick<Lesson, 'id' | 'hasVocab'>, lang: string): Promise<VocabGroup[] | null> {
+  if (!lesson.hasVocab) return null;
+  const [source, locale] = await Promise.all([
+    contentApi.vocab(lesson.id),
+    contentApi.localeVocab(lang, lesson.id).catch(() => null),
+  ]);
+  return buildVocab(source, locale);
+}

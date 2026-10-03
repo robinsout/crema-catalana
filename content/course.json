@@ -22,7 +22,8 @@
         "b2-10",
         "b3-03",
         "b3-05"
-      ]
+      ],
+      "hasVocab": true
     },
     {
       "id": "x-nombres-calendari",
@@ -35,7 +36,8 @@
         "b1-04",
         "b1-05",
         "b2-07"
-      ]
+      ],
+      "hasVocab": true
     }
   ],
   "parts": [

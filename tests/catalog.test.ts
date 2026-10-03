@@ -6,6 +6,8 @@ import { fileURLToPath } from 'node:url';
 import { join, dirname } from 'node:path';
 import { normalizeCatalog, allLessons, validateCatalog } from '../src/services/catalog.ts';
 import { loadCatalog, lessonPath } from '../scripts/lib/catalog.ts';
+import { loadVocabSource, loadLocaleVocab, vocabTexts } from '../scripts/lib/vocab.ts';
+import { validateVocab } from '../src/services/vocab.ts';
 import { clipFor } from '../src/services/audio.ts';
 import type { AudioIndex } from '../src/services/audio.ts';
 import type { Course, LocaleCatalog, LocalesIndex } from '../src/types/index.ts';
@@ -99,6 +101,27 @@ test('audio store holds each phrase once: every clip file exists and nothing is 
   const orphans = onDisk.filter((f) => !files.includes(f));
   assert.deepEqual(orphans, [], 'clips not in audio/index.json — run npm run audio');
   assert.deepEqual(readdirSync(audioDir).sort(), ['clips', 'index.json'], 'audio/ must contain only index.json and clips/');
+});
+
+test('vocabularies: a lesson has one exactly when course.json says so, and it is complete in every language', () => {
+  const dir = join(portal, 'vocab');
+  const files = existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => f.replace(/\.json$/, '')) : [];
+  const flagged = allLessons(catalog).filter((l) => l.hasVocab).map((l) => l.id);
+  assert.deepEqual([...files].sort(), [...flagged].sort(), 'content/vocab/*.json must match lessons with "hasVocab": true');
+  for (const lang of locales.available) {
+    for (const l of allLessons(loadCatalog(portal, lang)).filter((x) => x.hasVocab && x.file)) {
+      const loc = loadLocaleVocab(portal, lang, l.id);
+      assert.ok(loc, `${lang}: vocab/${l.id}.json missing`);
+      assert.deepEqual(validateVocab(loadVocabSource(portal, l.id), loc), [], `${lang}: vocab of ${l.id}`);
+    }
+  }
+});
+
+test('every Catalan word of a vocabulary has a recorded clip (run: npm run audio)', () => {
+  const missing = allLessons(catalog).filter((l) => l.hasVocab)
+    .flatMap((l) => vocabTexts(loadVocabSource(portal, l.id)))
+    .filter((t) => !clipFor(audioIndex, t));
+  assert.deepEqual(missing, [], 'words without audio — run npm run audio');
 });
 
 test('published lesson ids are never removed', () => {

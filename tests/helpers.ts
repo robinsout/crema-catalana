@@ -10,7 +10,7 @@ export const course: Course = {
     { id: 'x-temps', kind: 'overview', title: 'Els temps', related: ['b1-01'] },
   ],
   parts: [{ id: 'b1', title: 'Bàsic 1', units: [
-    { id: 'b1-01', unit: 1, title: 'Hola, soc la Maria' },
+    { id: 'b1-01', unit: 1, title: 'Hola, soc la Maria', hasVocab: true },
     { id: 'b1-02', unit: 2, title: 'Aquesta és la meva família' },
   ] }],
 };
@@ -37,6 +37,7 @@ export const ruUi: UiStrings = {
   'pill.soon': 'Урок появится',
   'pill.open': 'Открыть урок →',
   'pill.done': '✓ Пройден',
+  'vocab.title': 'Слова урока',
 };
 
 export const locales: LocalesIndex = { base: 'ru', default: 'ru', available: ['ru'] };
@@ -51,7 +52,9 @@ export function stubSite(overrides: Record<string, unknown> = {}): string[] {
     'course.json': course,
     'locales/ru/catalog.json': ruCatalog,
     'locales/ru/ui.json': ruUi,
-    'audio/index.json': { clips: { 'Bon dia': 'clips/abc.mp3' } },
+    'audio/index.json': { clips: { 'Bon dia': 'clips/abc.mp3', 'el dilluns': 'clips/def.mp3' } },
+    'vocab/b1-01.json': { groups: [{ id: 'dies', words: [{ id: 'dilluns', ca: 'el dilluns', gender: 'm' }, { id: 'tardor', ca: 'la tardor', gender: 'f' }] }] },
+    'locales/ru/vocab/b1-01.json': { groups: { dies: 'Дни' }, words: { dilluns: { tr: 'понедельник' }, tardor: { tr: 'осень', note: 'не otoño' } } },
     ...overrides,
   };
   const requested: string[] = [];
