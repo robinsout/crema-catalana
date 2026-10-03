@@ -91,4 +91,4 @@ export type Lesson = ExtraLesson | UnitLesson;
 
 // Interface strings: content/locales/<lang>/ui.json
 export type UiStrings = Record<string, string>;
-export type Translate = (key: string, vars?: Record<string, string | number>) => string;
+export type Translate = (key: string, vars?: object) => string;

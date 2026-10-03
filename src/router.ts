@@ -18,6 +18,15 @@ function target(r: Route, lang: string): RouteLocationRaw {
 
 const param = (v: unknown): string => (typeof v === 'string' ? v : '');
 
+interface ScrollTarget { name?: unknown; path: string; params?: Record<string, unknown> }
+
+// A new page starts at the top; staying on the same page keeps the position. The plan with a
+// focused unit scrolls to it itself (PlanView), once the page is laid out.
+export function scrollFor(to: ScrollTarget, from: { path: string }): false | { top: number } {
+  if (to.name === 'plan' && param(to.params?.focus)) return false;
+  return to.path === from.path ? false : { top: 0 };
+}
+
 export function createAppRouter(history: RouterHistory = createWebHashHistory()) {
   const router = createRouter({
     history,
@@ -26,7 +35,7 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
       { path: '/:lang/lesson/:id', name: 'lesson', component: () => import('./views/LessonView.vue') },
       { path: '/:rest(.*)*', name: 'other', component: { render: () => null } },
     ],
-    scrollBehavior: (to, from) => (to.path === from.path ? false : { top: 0 }),
+    scrollBehavior: (to, from) => scrollFor(to, from),
   });
 
   router.beforeEach(async (to) => {

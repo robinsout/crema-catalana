@@ -2,7 +2,7 @@ import { test, beforeEach, afterEach, vi } from 'vitest';
 import assert from 'node:assert/strict';
 import { setActivePinia, createPinia } from 'pinia';
 import { createMemoryHistory } from 'vue-router';
-import { createAppRouter, legacyHashToPath } from '../src/router.ts';
+import { createAppRouter, legacyHashToPath, scrollFor } from '../src/router.ts';
 import { useProgressStore } from '../src/stores/progress.ts';
 import { stubSite, saveProgress } from './helpers.ts';
 
@@ -76,4 +76,10 @@ test('opening a view remembers it as the last one', async () => {
   assert.equal(useProgressStore().last, 'b1-01');
   await open('/ru/plan');
   assert.equal(useProgressStore().last, 'pla');
+});
+
+test('scrolling: the plan scrolls to a focused unit itself, other pages start at the top', () => {
+  assert.equal(scrollFor({ name: 'plan', path: '/ru/plan/b1-02', params: { focus: 'b1-02' } }, { path: '/ru/plan' }), false);
+  assert.deepEqual(scrollFor({ name: 'lesson', path: '/ru/lesson/intro', params: { id: 'intro' } }, { path: '/ru/plan' }), { top: 0 });
+  assert.equal(scrollFor({ name: 'lesson', path: '/ru/lesson/intro', params: { id: 'intro' } }, { path: '/ru/lesson/intro' }), false);
 });

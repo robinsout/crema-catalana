@@ -3,7 +3,8 @@
 [![CI and Pages](https://github.com/robinsout/crema-catalana/actions/workflows/pages.yml/badge.svg?branch=master)](https://github.com/robinsout/crema-catalana/actions/workflows/pages.yml)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Frobinsout.github.io%2Fcrema-catalana%2F&label=site)](https://robinsout.github.io/crema-catalana/)
 [![Node](https://img.shields.io/badge/node-24-339933?logo=nodedotjs&logoColor=white)](.nvmrc)
-[![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](package.json)
+[![Vue](https://img.shields.io/badge/vue-3-42b883?logo=vuedotjs&logoColor=white)](package.json)
+[![TypeScript](https://img.shields.io/badge/typescript-strict-3178c6?logo=typescript&logoColor=white)](tsconfig.json)
 [![Last commit](https://img.shields.io/github/last-commit/robinsout/crema-catalana)](https://github.com/robinsout/crema-catalana/commits/master)
 [![License](https://img.shields.io/github/license/robinsout/crema-catalana)](LICENSE)
 
@@ -21,14 +22,14 @@
 
 ## Разработка
 
-Нужны Node 24 (версия в `.nvmrc`) и Python 3 для локального сервера. Внешних зависимостей у проекта нет.
+Стек: Vue 3 + vue-router + Pinia, TypeScript (strict), Vite, Vitest. Нужен Node 24 (версия в `.nvmrc`).
 
 ```sh
 nvm use                                # Node из .nvmrc
-git config core.hooksPath .githooks    # проверки перед каждым пушем
-npm test                               # тесты (node:test)
-npm run check                          # тесты + сборка в _site/
-npm run serve                          # сборка и сайт на http://localhost:8000
+npm ci                                 # зависимости
+git config core.hooksPath .githooks    # хуки: типы перед коммитом, полная проверка перед пушем
+npm run dev                            # сайт с горячей перезагрузкой
+npm run check                          # типы (vue-tsc) + тесты (Vitest) + сборка в dist/
 npm run audio                          # записать озвучку новых фраз (нужен edge-tts)
 ```
 
@@ -37,21 +38,27 @@ npm run audio                          # записать озвучку нов�
 ## Структура
 
 ```
-portal/
-  index.html                  разметка и стили
-  js/                         storage · model · i18n · say · app
-  course.json                 структура курса: id, юниты, связи (без текстов)
-  locales/<lang>/             язык ученика: ui.json, catalog.json, lessons/<id>.html
-  audio/                      озвучка: index.json и clips/<hash>.mp3 (одна запись на фразу)
-scripts/                      сборка сайта, генератор озвучки
-tests/                        тесты логики, данных, переводов и сборки
+index.html                    страница (точка входа Vite)
+src/
+  main.ts, App.vue, router.ts   приложение и маршруты (/:lang/plan, /:lang/lesson/:id)
+  views/, components/           экраны и компоненты Vue
+  stores/                       Pinia: progress, catalog, toc
+  composables/                  useI18n, useSay, useLessonLink
+  lib/                          чистая логика без Vue: types, storage, model, i18n, say
+  styles/main.css               стили
+content/                      данные курса, копируются на сайт как есть
+  course.json                   структура курса: id, юниты, связи (без текстов)
+  locales/<lang>/               язык ученика: ui.json, catalog.json, lessons/<id>.html
+  audio/                        озвучка: index.json и clips/<hash>.mp3 (одна запись на фразу)
+scripts/                      генератор озвучки (TypeScript, запускается Node напрямую)
+tests/                        тесты логики, данных, сторов, роутера, интерфейса и сборки
 ```
 
 Как добавить урок, описано в [CLAUDE.md](CLAUDE.md). Планы развития — в [BACKLOG.md](BACKLOG.md).
 
 ## CI/CD
 
-Workflow [`pages.yml`](.github/workflows/pages.yml) на каждый пуш и pull request запускает тесты и сборку. Из ветки `master` сайт публикуется на GitHub Pages, но только если тесты прошли. Локально те же проверки выполняет хук [`.githooks/pre-push`](.githooks/pre-push).
+Workflow [`pages.yml`](.github/workflows/pages.yml) на каждый пуш и pull request запускает `npm run check`: проверку типов, тесты и сборку. Из ветки `master` сайт публикуется на GitHub Pages, но только если всё прошло. Локально хук [`.githooks/pre-commit`](.githooks/pre-commit) проверяет типы, а [`.githooks/pre-push`](.githooks/pre-push) выполняет полную проверку.
 
 ## Совместимость сохранённого прогресса
 

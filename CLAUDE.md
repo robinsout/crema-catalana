@@ -12,34 +12,41 @@
 2. **Тематические и обзорные уроки** (`extras[]`, id вида `x-pronoms-febles`; `kind`: `topic` или `overview`). Пишутся по запросу; полем `related` урок связывается с юнитами. Вводный урок лежит в `extras` с id `intro`.
 
 ## Структура
-- `portal/index.html` — разметка и стили; логика в `portal/js/`:
-  - `storage.js` — прогресс в localStorage (контракт совместимости, см. ниже), `mergeProgress` для синхронизации;
-  - `model.js` — каталог уроков (`buildCatalog` склеивает структуру и тексты языка), маршрутизация, прогресс, валидация;
-  - `i18n.js` — строки интерфейса (`t('key', vars)`);
-  - `say.js` — поиск аудиоклипа по фразе;
-  - `app.js` — отрисовка страницы.
-- `portal/course.json` — **структура курса**, одинаковая для всех языков: id, юниты, модули, связи `related`, `kind`, каталанские названия (`title`). Тексты на языке ученика сюда не пишем.
-- `portal/locales/index.json` — `base` (язык-исходник, сейчас `ru`), `default`, `available`.
-- `portal/locales/<lang>/`:
-  - `ui.json` — строки интерфейса (ключи `_…` — настройки, например `_dateLocale`);
-  - `catalog.json` — тексты плана: `parts.<id>` (`period`, `focus`) и `lessons.<id>` (`subtitle` или `topic`, `grammar`, `vocab`, `extra`, `mission`, `date`). **Урок готов на языке, когда у него есть `date`**;
-  - `lessons/<id>.html` — урок в виде HTML-фрагмента (без `<html>`/`<head>`/`<body>`). Файл существует ⇔ в `catalog.json` есть `date` (проверяется тестом).
-- `portal/audio/index.json` + `portal/audio/clips/<hash>.mp3` — общее хранилище озвучки: одна запись на фразу для всех уроков, языков и названий.
+Стек: Vue 3 + vue-router (режим hash) + Pinia, TypeScript strict, Vite, Vitest.
+- `index.html` — точка входа Vite; `src/main.ts` переписывает старые ссылки `#<id>` в `#/<id>` и монтирует приложение.
+- `src/lib/` — **чистая логика без Vue** (её же используют скрипты и будущий сервер синхронизации):
+  - `types.ts` — контракты данных (курс, каталог языка, прогресс, …);
+  - `storage.ts` — прогресс в localStorage: контракт совместимости, `markDone`, `mergeProgress`;
+  - `model.ts` — каталог (`buildCatalog` склеивает структуру и тексты языка), `resolveRoute`, прогресс, валидация;
+  - `i18n.ts` — `createT`; `say.ts` — поиск аудиоклипа по фразе.
+- `src/stores/` — Pinia: `progress` (тонкая обёртка над `storage.ts`, **без плагинов автосохранения**), `catalog` (курс + язык), `toc` (оглавление страницы).
+- `src/router.ts` — маршруты `/:lang/plan/:focus?`, `/:lang/lesson/:id`; всё остальное (старые ссылки, сохранённый последний экран) разрешается через `resolveRoute`.
+- `src/views/` (`PlanView`, `LessonView`), `src/components/`, `src/composables/` (`useI18n`, `useSay`, `useLessonLink`), `src/styles/main.css`.
+- `content/` — данные, копируются на сайт как есть (Vite `publicDir`):
+  - `course.json` — **структура курса**, одинаковая для всех языков: id, юниты, модули, связи `related`, `kind`, каталанские названия (`title`);
+  - `locales/index.json` — `base` (язык-исходник, сейчас `ru`), `default`, `available`;
+  - `locales/<lang>/ui.json` — строки интерфейса (ключи `_…` — настройки, например `_dateLocale`). В коде строки только через `t('key')`: тест сверяет использованные и объявленные ключи;
+  - `locales/<lang>/catalog.json` — тексты плана: `parts.<id>` (`period`, `focus`) и `lessons.<id>` (`subtitle` или `topic`, `grammar`, `vocab`, `extra`, `mission`, `date`). **Урок готов на языке, когда у него есть `date`**;
+  - `locales/<lang>/lessons/<id>.html` — урок в виде HTML-фрагмента. Файл существует ⇔ есть `date` (тест);
+  - `audio/index.json` + `audio/clips/<hash>.mp3` — общее хранилище озвучки: одна запись на фразу.
+- `scripts/gen-audio.ts`, `scripts/lib/` — TypeScript, запускается `node` напрямую (Node 24 убирает типы сам).
 
 ## Как добавить урок
-1. Новый id: добавить в `course.json` (в `extras` или юнит в `parts`) и в `tests/published-ids.json`. Id вечные.
-2. Создать `portal/locales/ru/lessons/<id>.html`. Каждый раздел — `<section id="...">` с `<h2>`, из них строится оглавление.
-3. Разметка, которую понимают стили: `.tw > table`, `table.conj`, `aside.tip|warn|ru` с `<p class="label">`, `.ex`, `.ipa`, `.wrong`, `blockquote.reading`, `<details><summary>`, а также схемы `.tmap`, `ol.story`, `.quarts`, `.daybar`, `.year`.
+1. Новый id: добавить в `content/course.json` (в `extras` или юнит в `parts`) и в `tests/published-ids.json`. Id вечные.
+2. Создать `content/locales/ru/lessons/<id>.html`. Каждый раздел — `<section id="...">` с `<h2>`, из них строится оглавление.
+3. Урок — обычный HTML (не Vue), чтобы его можно было адаптировать на другие языки без знания фреймворка. Разметка, которую понимают стили: `.tw > table`, `table.conj`, `aside.tip|warn|ru` с `<p class="label">`, `.ex`, `.ipa`, `.wrong`, `blockquote.reading`, `<details><summary>`, а также схемы `.tmap`, `ol.story`, `.quarts`, `.daybar`, `.year`.
 4. Каталанский текст помечается `lang="ca"` (span, td, li, p, blockquote; если `lang="ca"` стоит на `<table>`, озвучивается каждая ячейка `td`). Русские пояснения держать вне `lang="ca"`, вложенные `lang="ca"` не делать.
-5. В `locales/ru/catalog.json` → `lessons.<id>`: тексты и `date`.
+5. В `content/locales/ru/catalog.json` → `lessons.<id>`: тексты и `date`.
 6. `npm run audio` — записать озвучку (нужен edge-tts: `pip install edge-tts` или `EDGE_TTS=/путь/к/edge-tts`). Голос ca-ES-JoanaNeural.
 7. `npm run check`, коммит, пуш. Целостность урока (файл, разделы, озвучка всех фраз, тексты) проверяют тесты.
 
 ## Разработка
-- **TDD**: сначала тест в `tests/` (node:test, без зависимостей), убедиться, что он падает, потом код.
-- **Совместимость localStorage**: ключ `quadern-catala` и формат `{ done: {id: bool}, last: id }` не меняются. С v3 добавлено поле `doneAt: {id: ms}` — время последнего изменения отметки, нужно для слияния устройств (`mergeProgress`). Новое добавляется только новыми полями; неизвестные поля сохраняются. Опубликованные id уроков вечные (`tests/published-ids.json`); переименование — только через `ID_ALIASES` в `storage.js` с тестом на старые данные.
-- Локальный пайплайн: `npm run check` (тесты + сборка). Хук `.githooks/pre-push` запускает его перед пушем; включается командой `git config core.hooksPath .githooks`.
-- `npm run serve` — собрать сайт и открыть на http://localhost:8000.
+- **TDD**: сначала тест в `tests/` (Vitest; утверждения через `node:assert/strict`), убедиться, что он падает, потом код. Тесты интерфейса монтируют `App` с роутером на `createMemoryHistory` и тестовым «сайтом» из `tests/helpers.ts` (подмена `fetch`).
+- **Совместимость localStorage**: ключ `quadern-catala` и формат `{ done: {id: bool}, last: id }` не меняются. С v3 добавлено `doneAt: {id: ms}` — время последнего изменения отметки (для `mergeProgress`). Новое — только новыми полями; неизвестные поля сохраняются. Опубликованные id уроков вечные (`tests/published-ids.json`); переименование — только через `ID_ALIASES` в `storage.ts` с тестом на старые данные. Старые ссылки (`#b1-04`, `#intro`, `#pla`, `l01`) покрыты тестами роутера.
+- `npm run check` = `vue-tsc` + тесты + сборка; так же в CI. Хуки (`git config core.hooksPath .githooks`): `pre-commit` — проверка типов, `pre-push` — полная проверка. Оба переключаются на Node из `.nvmrc` через nvm.
+- **TypeScript закреплён на 6.x**: `vue-tsc` пока не поддерживает TypeScript 7 (новый компилятор на Go). Не обновлять, пока vue-tsc не заявит поддержку.
+- Импорты внутри `src/lib` и `scripts` — с расширением `.ts` (их запускает Node без сборки); синтаксис только стираемый (`erasableSyntaxOnly`: без enum, namespace).
+- `npm run dev` — сайт с горячей перезагрузкой; `npm run preview` — собранный `dist/`.
 - Node 24 (версия в `.nvmrc`; на машине стоит nvm, `nvm use` в папке проекта). CI берёт версию из того же `.nvmrc`.
 
 ## Содержание
@@ -48,5 +55,4 @@
 ## Деплой
 - Репозиторий: git@github.com:robinsout/crema-catalana.git (ветка `master`). Пушить с личным SSH-ключом `~/.ssh/mygithub`, он прописан в `core.sshCommand` этого репозитория.
 - Коммиты делать от личного адреса robinsout@gmail.com (он задан в локальном git config), а не от рабочего.
-- `.github/workflows/pages.yml`: тесты и сборка на каждый пуш и PR; деплой на Pages только из `master` и только если тесты прошли.
-- `portal/index.html` написан без `<html>`/`<head>` (наследие версии для Artifact); каркас добавляет `scripts/build.mjs`.
+- `.github/workflows/pages.yml`: `npm ci` + `npm run check` на каждый пуш и PR; деплой `dist/` на Pages только из `master` и только если всё прошло.

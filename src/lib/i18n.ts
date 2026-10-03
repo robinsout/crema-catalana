@@ -7,6 +7,7 @@ export function createT(strings: UiStrings | null | undefined): Translate {
   return (key, vars) => {
     const s = Object.prototype.hasOwnProperty.call(dict, key) ? (dict[key] as string) : key;
     if (!vars) return s;
-    return s.replace(/\{(\w+)\}/g, (m, name: string) => (name in vars ? String(vars[name]) : m));
+    const values = vars as Record<string, unknown>;
+    return s.replace(/\{(\w+)\}/g, (m, name: string) => (name in values ? String(values[name]) : m));
   };
 }
