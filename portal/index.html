@@ -130,8 +130,73 @@ body {
 .lesson-list .done .n { background: var(--ok); border-color: var(--ok); color: var(--surface); }
 .lesson-list .t { font-weight: 600; font-size: 0.95rem; }
 .lesson-list .s { display: block; font-size: var(--step--1); color: var(--muted); font-weight: 400; margin-top: 2px; }
-.lesson-list .soon { opacity: .55; }
-.lesson-list .soon .t::after { content: "скоро"; font: 500 0.62rem var(--font-display); letter-spacing: .06em; text-transform: uppercase; margin-left: 8px; color: var(--muted); }
+.lesson-list a.soon { color: var(--muted); }
+.lesson-list a.soon .t { font-weight: 400; }
+.lesson-list a.soon .n { border-style: dashed; }
+.lesson-list .plan-link .n { border-color: var(--accent); color: var(--accent); font-size: 0.8rem; }
+.lesson-list .part-h {
+  font: 500 0.66rem var(--font-display);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 18px 10px 6px;
+}
+.lesson-list .part-h span { color: var(--accent); }
+
+/* study plan */
+.plan .parts { list-style: none; padding: 0; margin: 28px 0 8px; max-width: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.plan .parts li { margin: 0; }
+.plan .parts a {
+  display: grid; gap: 4px; height: 100%;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: inherit; text-decoration: none;
+}
+.plan .parts a:hover { border-color: var(--accent); }
+.plan .parts a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.parts-t { font: 700 1.05rem var(--font-display); color: var(--accent); }
+.parts-p { font: 500 0.68rem var(--font-display); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.parts-f { font-size: var(--step--1); line-height: 1.45; }
+.h-period { font: 500 0.7rem var(--font-display); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-left: 8px; vertical-align: middle; }
+.unit {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 20px;
+}
+.unit.focus { background: var(--accent-soft); margin-inline: -12px; padding-inline: 12px; border-radius: 10px; }
+.unit.focus .chips li { background: var(--surface); }
+.unit-n { font: 700 1.6rem/1.1 var(--font-display); color: var(--accent); font-variant-numeric: tabular-nums; }
+.unit-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 14px; }
+.plan .unit h3 { margin: 0; font-size: var(--step-1); }
+.unit-topic { margin: 4px 0 10px !important; color: var(--muted); }
+.pill {
+  font: 500 0.66rem var(--font-display);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.pill.ok { color: var(--ok); border: 1px solid var(--ok); }
+.pill.ok:hover { background: var(--accent-soft); }
+.chips { list-style: none; padding: 0 !important; margin: 0 0 12px !important; display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li { margin: 0; font-size: 0.85rem; line-height: 1.3; padding: 3px 10px; border-radius: 6px; background: var(--accent-soft); }
+.unit-dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; margin: 0; font-size: 0.95rem; max-width: 66ch; }
+.unit-dl dt { font: 500 0.66rem/2 var(--font-display); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.unit-dl dd { margin: 0; }
+@media (max-width: 520px) {
+  .unit { grid-template-columns: 1fr; gap: 4px; }
+  .unit-dl { grid-template-columns: 1fr; gap: 0; }
+  .unit-dl dd { margin-bottom: 8px; }
+}
 
 .say-hint { margin-top: 22px; font-size: var(--step--1); color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
 
@@ -311,7 +376,7 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
 (function () {
   const KEY = 'quadern-catala';
   const store = load();
-  let lessons = [];
+  let data = { intro: null, parts: [] };
   let current = null;
 
   function load() {
@@ -323,20 +388,30 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
   }
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const ready = () => lessons.filter((l) => l.file);
+  const units = () => data.parts.flatMap((p) => p.units.map((u) => Object.assign({ part: p }, u)));
+  const all = () => (data.intro ? [data.intro] : []).concat(units());
+  const ready = () => all().filter((l) => l.file);
+  const label = (l) => (l.part ? `${l.part.title} · Unitat ${l.unit}` : 'Вводный урок');
 
   /* ---------- navigation ---------- */
   function renderNav() {
-    $('lessonList').innerHTML = lessons.map((l) => {
-      const inner = `<span class="n">${l.num}</span><span><span class="t">${esc(l.title)}</span><span class="s">${esc(l.subtitle || '')}</span></span>`;
-      if (!l.file) return `<li><div class="soon">${inner}</div></li>`;
-      const cls = store.done[l.id] ? 'done' : '';
+    const item = (l, n) => {
+      const inner = `<span class="n">${n}</span><span><span class="t" lang="ca">${esc(l.title)}</span>${l.subtitle ? `<span class="s">${esc(l.subtitle)}</span>` : ''}</span>`;
       const cur = current && current.id === l.id ? ' aria-current="page"' : '';
+      const cls = [l.file ? '' : 'soon', store.done[l.id] ? 'done' : ''].join(' ').trim();
       return `<li><a href="#${l.id}" class="${cls}"${cur}>${inner}</a></li>`;
-    }).join('');
+    };
+    const planCur = current === 'pla' ? ' aria-current="page"' : '';
+    let html = `<li><a href="#pla" class="plan-link"${planCur}><span class="n">☰</span><span><span class="t">Учебный план</span><span class="s">Passos 1 · ${data.parts.length} модуля</span></span></a></li>`;
+    if (data.intro) html += item(data.intro, '0');
+    data.parts.forEach((p) => {
+      html += `<li class="part-h"><span lang="ca">${esc(p.title)}</span> · ${esc(p.period)}</li>`;
+      html += p.units.map((u) => item(Object.assign({ part: p }, u), u.unit)).join('');
+    });
+    $('lessonList').innerHTML = html;
     const total = ready().length;
     const done = ready().filter((l) => store.done[l.id]).length;
-    $('progressText').textContent = `Пройдено ${done} из ${total}`;
+    $('progressText').textContent = `Пройдено ${done} из ${total} · готово уроков: ${total} из ${all().length}`;
     $('progressBar').style.width = total ? (done / total * 100) + '%' : '0';
   }
 
@@ -345,11 +420,67 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
     $('navToggle').setAttribute('aria-expanded', String(open));
   });
 
+  function closeNav() {
+    $('nav').classList.remove('open');
+    $('navToggle').setAttribute('aria-expanded', 'false');
+  }
+
   function route() {
-    const id = location.hash.slice(1);
-    const list = ready();
-    const target = list.find((l) => l.id === id) || list.find((l) => l.id === store.last) || list[0];
-    if (target) show(target);
+    const id = location.hash.slice(1) || store.last || 'pla';
+    const target = all().find((l) => l.id === id);
+    if (target && target.file) return show(target);
+    showPlan(target ? target.id : null);
+  }
+
+  /* ---------- study plan ---------- */
+  function showPlan(focusId) {
+    current = 'pla';
+    store.last = 'pla';
+    save();
+    renderNav();
+    closeNav();
+    const c = data.course || {};
+    const unitRow = (p, u) => {
+      const l = Object.assign({ part: p }, u);
+      const status = u.file
+        ? `<a class="pill ok" href="#${u.id}">${store.done[u.id] ? '✓ Пройден' : 'Открыть урок →'}</a>`
+        : '<span class="pill">Урок появится</span>';
+      return `<div class="unit" id="u-${u.id}">
+        <div class="unit-n">${u.unit}</div>
+        <div class="unit-body">
+          <div class="unit-top"><h3 lang="ca">${esc(u.title)}</h3>${status}</div>
+          <p class="unit-topic">${esc(u.topic)}</p>
+          <ul class="chips">${u.grammar.map((g) => `<li>${esc(g)}</li>`).join('')}</ul>
+          <dl class="unit-dl">
+            <dt>Лексика</dt><dd>${esc(u.vocab)}</dd>
+            <dt>Дополнительно</dt><dd>${esc(u.extra)}</dd>
+            <dt>Миссия</dt><dd>${esc(u.mission)}</dd>
+          </dl>
+        </div>
+      </div>`;
+    };
+    $('main').innerHTML = `
+      <header class="lesson-head">
+        <p class="eyebrow">Учебный план</p>
+        <h2 lang="ca">${esc(c.title || 'Passos 1')} · ${esc(c.level || '')}</h2>
+        <p class="sub">Дополнительные уроки по юнитам учебника ${esc(c.title || '')} (${esc(c.publisher || '')})</p>
+      </header>
+      <article class="lesson plan">
+        <p>Каждому юниту учебника соответствует урок здесь. После занятия в школе открывайте урок с тем же номером. В нём грамматика юнита разобрана глубже, с исключениями и сравнением с испанским, есть упражнения и <strong>миссия</strong>: небольшое задание, которое нужно выполнить по-каталански в реальной жизни.</p>
+        <p class="meta">Грамматические темы восстановлены по названиям юнитов и типовой программе уровня Bàsic. Когда сверите их с оглавлением учебника, план поправим.</p>
+        <ol class="parts">${data.parts.map((p) => `
+          <li><a href="#" data-sec="${p.id}"><span class="parts-t" lang="ca">${esc(p.title)}</span><span class="parts-p">${esc(p.period)}</span><span class="parts-f">${esc(p.focus)}</span></a></li>`).join('')}
+        </ol>
+        ${data.parts.map((p) => `
+        <section id="${p.id}">
+          <h2><span lang="ca">${esc(p.title)}</span> <span class="h-period">${esc(p.period)}</span></h2>
+          <p>${esc(p.focus)}.</p>
+          ${p.units.map((u) => unitRow(p, u)).join('')}
+        </section>`).join('')}
+      </article>`;
+    buildToc();
+    const el = focusId && document.getElementById('u-' + focusId);
+    if (el) { el.classList.add('focus'); el.scrollIntoView({ block: 'start' }); } else window.scrollTo(0, 0);
   }
 
   async function show(lesson) {
@@ -357,8 +488,7 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
     store.last = lesson.id;
     save();
     renderNav();
-    $('nav').classList.remove('open');
-    $('navToggle').setAttribute('aria-expanded', 'false');
+    closeNav();
 
     let body;
     try {
@@ -372,15 +502,15 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
     if (current !== lesson) return;
 
     const list = ready();
-    const i = list.indexOf(lesson);
+    const i = list.findIndex((l) => l.id === lesson.id);
     const prev = list[i - 1], next = list[i + 1];
     const date = lesson.date ? new Date(lesson.date + 'T12:00:00').toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
 
     $('main').innerHTML = `
       <header class="lesson-head">
-        <p class="eyebrow">Урок ${lesson.num}</p>
+        <p class="eyebrow">${esc(label(lesson))}</p>
         <h2 lang="ca">${esc(lesson.title)}</h2>
-        <p class="sub">${esc(lesson.subtitle || '')}</p>
+        <p class="sub">${esc(lesson.subtitle || lesson.topic || '')}</p>
         <div class="head-actions">
           <button class="btn" id="doneBtn" type="button"></button>
           ${date ? `<span class="meta">${date}</span>` : ''}
@@ -388,8 +518,8 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
       </header>
       <article class="lesson">${body}</article>
       <nav class="pager" aria-label="Соседние уроки">
-        ${prev ? `<a href="#${prev.id}">← ${esc(prev.title)}</a>` : '<span></span>'}
-        ${next ? `<a href="#${next.id}">${esc(next.title)} →</a>` : '<span>Следующий урок скоро появится</span>'}
+        ${prev ? `<a href="#${prev.id}">← ${esc(prev.title)}</a>` : '<a href="#pla">← Учебный план</a>'}
+        ${next ? `<a href="#${next.id}">${esc(next.title)} →</a>` : '<a href="#pla">Учебный план →</a>'}
       </nav>`;
     paintDone();
     $('doneBtn').addEventListener('click', () => {
@@ -413,9 +543,10 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
   let spy;
   function buildToc() {
     const secs = [...document.querySelectorAll('.lesson section[id]')];
-    $('toc').innerHTML = secs.length ? `<p>В этом уроке</p><ol>${secs.map((s) => {
+    $('toc').innerHTML = secs.length ? `<p>${current === 'pla' ? 'Модули' : 'В этом уроке'}</p><ol>${secs.map((s) => {
       const h = s.querySelector('h2');
-      return `<li><a href="#" data-sec="${s.id}">${esc(h ? h.textContent.replace(/^\d+\.\s*/, '') : s.id)}</a></li>`;
+      const t = h ? (h.querySelector('[lang]') || h).textContent.replace(/^\d+\.\s*/, '') : s.id;
+      return `<li><a href="#" data-sec="${s.id}">${esc(t)}</a></li>`;
     }).join('')}</ol>` : '';
     if (spy) spy.disconnect();
     if (!('IntersectionObserver' in window)) return;
@@ -427,13 +558,15 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
     }, { rootMargin: '-20% 0px -70% 0px' });
     secs.forEach((s) => spy.observe(s));
   }
-  $('toc').addEventListener('click', (e) => {
+  const jump = (e) => {
     const a = e.target.closest('a[data-sec]');
     if (!a) return;
     e.preventDefault();
     const el = document.getElementById(a.dataset.sec);
     if (el) el.scrollIntoView();
-  });
+  };
+  $('toc').addEventListener('click', jump);
+  $('main').addEventListener('click', jump);
 
   /* ---------- pronunciation (speech synthesis) ---------- */
   let voice = null;
@@ -473,7 +606,7 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
 
   fetch('lessons.json')
     .then((r) => r.json())
-    .then((data) => { lessons = data.lessons || []; renderNav(); route(); })
+    .then((d) => { data = Object.assign({ intro: null, parts: [] }, d); renderNav(); route(); })
     .catch(() => { $('main').innerHTML = '<p class="status">Не удалось загрузить список уроков. Обновите страницу.</p>'; });
 })();
 </script>

@@ -1,17 +1,272 @@
 {
-  "lessons": [
+  "course": {
+    "title": "Passos 1",
+    "publisher": "Octaedro",
+    "level": "Bàsic 1–3 · A2"
+  },
+  "intro": {
+    "id": "intro",
+    "title": "Introducció al català",
+    "subtitle": "Фонетика, орфография, грамматика, глаголы и исключения",
+    "file": "content/01-introduccio.html",
+    "date": "2026-10-03"
+  },
+  "parts": [
     {
-      "id": "l01",
-      "num": 1,
-      "title": "Introducció al català",
-      "subtitle": "Фонетика, орфография, грамматика, глаголы и исключения",
-      "file": "content/01-introduccio.html",
-      "date": "2026-10-03"
+      "id": "b1",
+      "title": "Bàsic 1",
+      "period": "октябрь — декабрь",
+      "focus": "Настоящее время, базовая лексика быта, числа, время, покупки",
+      "units": [
+        {
+          "id": "b1-01", "unit": 1, "title": "Hola, soc la Maria",
+          "topic": "Знакомство: представиться, сказать откуда ты, произнести имя по буквам",
+          "grammar": ["ser, dir-se: em dic…", "личные местоимения", "род национальностей: rus / russa", "числа 0–20"],
+          "vocab": "Приветствия и прощания, страны, языки",
+          "extra": "Алфавит и спеллинг: «ela geminada», «ce trencada», «essa doble»",
+          "mission": "Представьтесь по-каталански знакомому каталанцу и попросите его продиктовать вам по буквам его фамилию"
+        },
+        {
+          "id": "b1-02", "unit": 2, "title": "Aquesta és la meva família",
+          "topic": "Семья, возраст, рассказ о близких",
+          "grammar": ["притяжательные с артиклем: el meu, la meva", "указательные aquest / aquell", "tenir: tinc 30 anys", "род и число существительных"],
+          "vocab": "Члены семьи, семейное положение",
+          "extra": "Числа до 100, особенности: vint-i-u, trenta-dos",
+          "mission": "Нарисуйте своё семейное дерево и подпишите каждого по-каталански"
+        },
+        {
+          "id": "b1-03", "unit": 3, "title": "Visc a Viladepau",
+          "topic": "Где я живу: адрес, город, район",
+          "grammar": ["настоящее время правильных глаголов", "viure: visc", "hi ha / és / està", "предлоги места: a prop de, davant de"],
+          "vocab": "Город, улица, магазины и учреждения",
+          "extra": "Как читать барселонские адреса: c/, pl., 3r 2a",
+          "mission": "Опишите в пяти фразах свой район в Барселоне"
+        },
+        {
+          "id": "b1-04", "unit": 4, "title": "A l'hivern sopo a les nou",
+          "topic": "Распорядок дня, еда, времена года",
+          "grammar": ["возвратные глаголы: llevar-se, dutxar-se", "время: quarts — un quart de deu", "предлоги времени"],
+          "vocab": "Àpats: esmorzar, dinar, berenar, sopar; времена года",
+          "extra": "Каталанская система «quarts», которой нет в испанском",
+          "mission": "Договоритесь о встрече, назвав время через quarts: «a dos quarts de vuit»"
+        },
+        {
+          "id": "b1-05", "unit": 5, "title": "Estudio català els dimarts i els dijous",
+          "topic": "Учёба, расписание, как часто я что-то делаю",
+          "grammar": ["дни недели с артиклем: el dilluns / els dilluns", "наречия частоты: sempre, sovint, mai", "anar / venir"],
+          "vocab": "Дни недели, месяцы, учебные занятия",
+          "extra": "anar и venir распределены не как ir и venir в испанском",
+          "mission": "Расскажите по-каталански своё расписание на неделю"
+        },
+        {
+          "id": "b1-06", "unit": 6, "title": "Treballo d'ajudant de cuina",
+          "topic": "Работа и профессии",
+          "grammar": ["treballar de, fer de", "женский род профессий: metge / metgessa", "fer: faig, fas, fa"],
+          "vocab": "Профессии, рабочие места, обязанности",
+          "extra": "Суффиксы -essa, -ina, -a в профессиях",
+          "mission": "Объясните по-каталански, чем вы занимаетесь на работе"
+        },
+        {
+          "id": "b1-07", "unit": 7, "title": "Compro la fruita al mercat",
+          "topic": "Покупки: рынок, количество, цены",
+          "grammar": ["en с количеством: en vull dos", "quant / quanta / quants / quantes", "un quilo de, mig quilo, una dotzena"],
+          "vocab": "Фрукты, овощи, продукты, торговые фразы",
+          "extra": "Рынки Барселоны и разговор «qui és l'últim?»",
+          "mission": "Сделайте покупку на рынке полностью по-каталански"
+        },
+        {
+          "id": "b1-08", "unit": 8, "title": "Soc jove i optimista",
+          "topic": "Внешность и характер",
+          "grammar": ["согласование прилагательных: -a, -ssa, неизменяемые", "ser и estar для качеств", "molt, bastant, una mica"],
+          "vocab": "Внешность, черты характера",
+          "extra": "Прилагательные-ловушки: content, trist, prim",
+          "mission": "Опишите внешность и характер друга так, чтобы его можно было узнать"
+        },
+        {
+          "id": "b1-09", "unit": 9, "title": "Porto les claus a la butxaca",
+          "topic": "Одежда и вещи: что где лежит",
+          "grammar": ["portar / dur", "предлоги: sobre, sota, dins de", "множественное число: clau → claus, butxaca → butxaques"],
+          "vocab": "Одежда, цвета, повседневные предметы",
+          "extra": "Орфография множественного числа: -ca → -ques, -ja → -ges",
+          "mission": "Перечислите по-каталански всё, что у вас в рюкзаке"
+        },
+        {
+          "id": "b1-10", "unit": 10, "title": "Participo a la festa de final de curs",
+          "topic": "Повторение модуля: приглашения, вкусы, планы",
+          "grammar": ["agradar: m'agrada / m'agraden", "voler + инфинитив", "обзор модуля"],
+          "vocab": "Праздники, еда, приглашения",
+          "extra": "Зимние праздники: Castanyada, Nadal, Tió, Sant Esteve",
+          "mission": "Пригласите кого-нибудь на праздник письменным сообщением по-каталански"
+        }
+      ]
     },
-    { "id": "l02", "num": 2, "title": "Els pronoms febles", "subtitle": "em, et, es, en, hi, ho" },
-    { "id": "l03", "num": 3, "title": "El passat", "subtitle": "vaig fer, he fet, feia: когда что" },
-    { "id": "l04", "num": 4, "title": "El subjuntiu", "subtitle": "Сослагательное наклонение" },
-    { "id": "l05", "num": 5, "title": "Vocabulari quotidià", "subtitle": "Магазин, бар, транспорт, работа" },
-    { "id": "l06", "num": 6, "title": "Fonètica 2", "subtitle": "Дифтонги, ассимиляция, интонация" }
+    {
+      "id": "b2",
+      "title": "Bàsic 2",
+      "period": "январь — март",
+      "focus": "Прошедшие времена, будущее, местоимения, жильё и досуг",
+      "units": [
+        {
+          "id": "b2-01", "unit": 1, "title": "Amb qui vivies de petit?",
+          "topic": "Детство, воспоминания",
+          "grammar": ["имперфект: parlava, vivia, era", "de petit, quan era jove"],
+          "vocab": "Детство, школа, игры",
+          "extra": "Имперфект ser / estar / fer / veure",
+          "mission": "Напишите абзац о том, где и с кем вы жили в детстве"
+        },
+        {
+          "id": "b2-02", "unit": 2, "title": "Tens feina?",
+          "topic": "Поиск работы, условия работы",
+          "grammar": ["haver de + инфинитив вместо «tenir que»", "перфект: he treballat"],
+          "vocab": "Резюме, собеседование, договор, зарплата",
+          "extra": "Ложные друзья в рабочей лексике",
+          "mission": "Прочитайте каталанское объявление о работе и перескажите его"
+        },
+        {
+          "id": "b2-03", "unit": 3, "title": "Què fas durant el dia?",
+          "topic": "Повседневные дела подробно",
+          "grammar": ["estar + герундий", "возвратные глаголы: место местоимения", "abans de / després de + инфинитив"],
+          "vocab": "Домашние дела, распорядок",
+          "extra": "Pronoms febles: em, et, es перед глаголом и после него",
+          "mission": "Расскажите свой вчерашний день в настоящем времени, как будто репортаж"
+        },
+        {
+          "id": "b2-04", "unit": 4, "title": "Tens el carnet de la biblioteca?",
+          "topic": "Городские службы, формальное общение",
+          "grammar": ["vostè / vostès", "вежливое условное: voldria, podria", "poder + инфинитив"],
+          "vocab": "Библиотека, ajuntament, документы, формуляры",
+          "extra": "Сеть Biblioteques de Barcelona, бесплатный читательский билет",
+          "mission": "Оформите читательский билет в библиотеке на каталанском"
+        },
+        {
+          "id": "b2-05", "unit": 5, "title": "Què li regalaràs, a en Daniel?",
+          "topic": "Подарки, дни рождения, планы",
+          "grammar": ["будущее время: regalaré", "косвенное дополнение: li, els", "удвоение: li… a en Daniel"],
+          "vocab": "Подарки, праздники, поздравления",
+          "extra": "Личный артикль en / na / l'",
+          "mission": "Подберите подарок другу и объясните выбор по-каталански"
+        },
+        {
+          "id": "b2-06", "unit": 6, "title": "Com és casa teva?",
+          "topic": "Жильё: комнаты, мебель, аренда",
+          "grammar": ["сравнение: més… que, tan… com, millor, pitjor", "hi ha / no hi ha cap"],
+          "vocab": "Дом, мебель, lloguer, pis, àtic",
+          "extra": "Объявления об аренде: сокращения и термины",
+          "mission": "Опишите свою квартиру так, будто сдаёте её"
+        },
+        {
+          "id": "b2-07", "unit": 7, "title": "Recordes quan vas arribar a Catalunya?",
+          "topic": "Биография, переезд, даты",
+          "grammar": ["перифрастическое прошедшее: vaig arribar", "даты и годы", "fa + время: fa tres anys"],
+          "vocab": "Переезд, документы, первые впечатления",
+          "extra": "Как называть годы: dos mil vint-i-sis",
+          "mission": "Расскажите каталанскому знакомому, как вы переехали в Барселону"
+        },
+        {
+          "id": "b2-08", "unit": 8, "title": "Vols sortir el cap de setmana?",
+          "topic": "Досуг, приглашения, договорённости",
+          "grammar": ["предложить, согласиться, отказаться", "quedar: hem quedat a les vuit", "местоимения ho и hi"],
+          "vocab": "Кино, концерты, спорт, выезды за город",
+          "extra": "Agenda: guia del Lleure, Fira, Festa Major",
+          "mission": "Договоритесь о встрече на выходных полностью по-каталански"
+        },
+        {
+          "id": "b2-09", "unit": 9, "title": "Com eres abans?",
+          "topic": "Как я изменился: раньше и теперь",
+          "grammar": ["имперфект и настоящее в сравнении", "soler + инфинитив", "ja no, encara"],
+          "vocab": "Привычки, внешность, характер в прошлом",
+          "extra": "Перифрастическое прошедшее и имперфект: когда что",
+          "mission": "Сравните себя пять лет назад и сейчас"
+        },
+        {
+          "id": "b2-10", "unit": 10, "title": "Visitem la professora: s'ha trencat una cama",
+          "topic": "Повторение модуля, первые темы о здоровье",
+          "grammar": ["перфект: s'ha trencat", "обзор прошедших времён"],
+          "vocab": "Части тела, травмы, пожелания",
+          "extra": "Весенние праздники: Carnestoltes, Sant Jordi",
+          "mission": "Напишите сообщение больному другу с пожеланием выздоровления"
+        }
+      ]
+    },
+    {
+      "id": "b3",
+      "title": "Bàsic 3",
+      "period": "апрель — июнь",
+      "focus": "Местоимения, повелительное наклонение, здоровье, планы на будущее",
+      "units": [
+        {
+          "id": "b3-01", "unit": 1, "title": "La Sandra parla en català amb la seva veïna",
+          "topic": "Соседи, язык в быту, общение в доме",
+          "grammar": ["pronoms febles: систематизация", "tu и vostè"],
+          "vocab": "Дом, соседи, просьбы и одолжения",
+          "extra": "Как не переходить на испанский: фразы для разговора",
+          "mission": "Неделю говорите с соседями и продавцами только по-каталански"
+        },
+        {
+          "id": "b3-02", "unit": 2, "title": "El Jesús és amant de la bona cuina",
+          "topic": "Кухня и рецепты",
+          "grammar": ["повелительное наклонение: talla, afegeix, poseu", "en и количество"],
+          "vocab": "Продукты, способы готовки, посуда",
+          "extra": "Каталанская кухня: pa amb tomàquet, escalivada, crema catalana",
+          "mission": "Запишите свой любимый рецепт по-каталански"
+        },
+        {
+          "id": "b3-03", "unit": 3, "title": "La Lídia ha tingut un mal dia",
+          "topic": "Неприятности, эмоции, жалобы",
+          "grammar": ["перфект и перифрастическое прошедшее", "неправильные причастия"],
+          "vocab": "Чувства, бытовые неудачи",
+          "extra": "Восклицания: Quin desastre! Quina sort!",
+          "mission": "Расскажите о своём неудачном дне"
+        },
+        {
+          "id": "b3-04", "unit": 4, "title": "En Rachid vol anar un dia al Camp Nou",
+          "topic": "Спорт, транспорт, как добраться",
+          "grammar": ["повелительное наклонение для маршрута", "местоимение hi: hi vaig en metro"],
+          "vocab": "Спорт, транспорт, маршрут",
+          "extra": "Барселонский транспорт: T-usual, rodalies, «la parada»",
+          "mission": "Объясните туристу дорогу по-каталански"
+        },
+        {
+          "id": "b3-05", "unit": 5, "title": "Demà plourà",
+          "topic": "Погода и планы",
+          "grammar": ["будущее время: неправильные формы", "условие: si + настоящее, будущее"],
+          "vocab": "Погода, климат, прогноз",
+          "extra": "Народные приметы и поговорки о погоде",
+          "mission": "Прочитайте прогноз погоды на 3Cat и перескажите его"
+        },
+        {
+          "id": "b3-06", "unit": 6, "title": "Ens comprem un cotxe",
+          "topic": "Крупные покупки, сравнение, мнение",
+          "grammar": ["выражение мнения: crec que, em sembla que", "сравнение, превосходная степень: el més…"],
+          "vocab": "Машины, техника, характеристики",
+          "extra": "Возвратное ens: ens comprem",
+          "mission": "Сравните две вещи, которые вы выбираете, и аргументируйте выбор"
+        },
+        {
+          "id": "b3-07", "unit": 7, "title": "La Julieta vol continuar estudiant",
+          "topic": "Образование, планы на будущее, желания",
+          "grammar": ["continuar + герундий", "pensar / tenir ganes de + инфинитив", "m'agradaria"],
+          "vocab": "Образование, курсы, профессиональные планы",
+          "extra": "Что дальше после A2: Elemental, Intermedi, сертификаты CPNL",
+          "mission": "Расскажите о своих планах изучения каталанского"
+        },
+        {
+          "id": "b3-08", "unit": 8, "title": "La Pilar té mal de coll",
+          "topic": "Здоровье, визит к врачу",
+          "grammar": ["tenir mal de", "советы: hauries de, cal que", "местоимения при глаголах здоровья"],
+          "vocab": "Симптомы, лекарства, CAP, farmàcia",
+          "extra": "Система здравоохранения: CAP, targeta sanitària",
+          "mission": "Подготовьте фразы для визита к врачу на каталанском"
+        },
+        {
+          "id": "b3-09", "unit": 9, "title": "S'acaba el curs",
+          "topic": "Повторение курса, итоги",
+          "grammar": ["обзор времён", "обзор pronoms febles"],
+          "vocab": "Повторение лексики курса",
+          "extra": "Летние праздники: Sant Joan, revetlla, coca",
+          "mission": "Напишите письмо преподавателю об итогах курса"
+        }
+      ]
+    }
   ]
 }
