@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createT } from '../src/lib/i18n.ts';
-import type { LocalesIndex } from '../src/lib/types.ts';
+import { createT } from '../src/services/i18n.ts';
+import type { LocalesIndex } from '../src/types/index.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const portal = join(root, 'content');

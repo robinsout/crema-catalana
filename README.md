@@ -39,12 +39,13 @@ npm run audio                          # записать озвучку нов�
 
 ```
 index.html                    страница (точка входа Vite)
-src/
-  main.ts, App.vue, router.ts   приложение и маршруты (/:lang/plan, /:lang/lesson/:id)
-  views/, components/           экраны и компоненты Vue
-  stores/                       Pinia: progress, catalog, toc
-  composables/                  useI18n, useSay, useLessonLink
-  lib/                          чистая логика без Vue: types, storage, model, i18n, say
+src/                          слои: api → services → stores → интерфейс
+  api/                          только ввод-вывод: fetch, localStorage
+  services/                     бизнес-логика без Vue: каталог, прогресс, загрузка, переводы, озвучка
+  stores/                       Pinia: catalog, progress, lessons, audio, toc
+  views/, components/, composables/   интерфейс на Vue
+  types/                        общие контракты данных
+  main.ts, App.vue, router.ts   сборка приложения и маршруты
   styles/main.css               стили
 content/                      данные курса, копируются на сайт как есть
   course.json                   структура курса: id, юниты, связи (без текстов)

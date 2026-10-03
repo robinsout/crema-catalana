@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import { setActivePinia, createPinia } from 'pinia';
 import { useProgressStore } from '../src/stores/progress.ts';
 import { useCatalogStore } from '../src/stores/catalog.ts';
-import { STORAGE_KEY } from '../src/lib/storage.ts';
+import { useLessonsStore } from '../src/stores/lessons.ts';
+import { useAudioStore } from '../src/stores/audio.ts';
+import { STORAGE_KEY } from '../src/services/progress.ts';
 import { stubSite, saveProgress } from './helpers.ts';
 
 beforeEach(() => {
@@ -84,4 +86,44 @@ test('catalog store reports an error when the course cannot be loaded', async ()
   const c = useCatalogStore();
   await assert.rejects(c.load('ru'));
   assert.equal(c.error, true);
+});
+
+test('lessons store loads a lesson once and keeps it', async () => {
+  const requested = stubSite();
+  const lessons = useLessonsStore();
+  const lesson = { id: 'b1-01', file: 'locales/ru/lessons/b1-01.html' };
+  assert.equal(lessons.content(lesson).state, 'loading');
+  await lessons.load(lesson);
+  await lessons.load(lesson);
+  const c = lessons.content(lesson);
+  assert.equal(c.state, 'ready');
+  assert.match(c.state === 'ready' ? c.html : '', /Раздел b1-01/);
+  assert.equal(requested.filter((u) => u === lesson.file).length, 1);
+});
+
+test('lessons store reports a lesson that cannot be loaded', async () => {
+  stubSite();
+  vi.stubGlobal('fetch', vi.fn(async () => new Response('', { status: 404 })));
+  const lessons = useLessonsStore();
+  const lesson = { id: 'x', file: 'locales/ru/lessons/x.html' };
+  await lessons.load(lesson);
+  assert.equal(lessons.content(lesson).state, 'error');
+});
+
+test('audio store finds the clip of a phrase', async () => {
+  stubSite();
+  const audio = useAudioStore();
+  assert.equal(audio.available, false);
+  await audio.load();
+  assert.equal(audio.available, true);
+  assert.equal(audio.clip(' Bon  dia '), 'audio/clips/abc.mp3');
+  assert.equal(audio.clip('Adéu'), null);
+});
+
+test('audio store: no audio index means no audio, not an error', async () => {
+  stubSite({ 'audio/index.json': undefined });
+  vi.stubGlobal('fetch', vi.fn(async () => new Response('', { status: 404 })));
+  const audio = useAudioStore();
+  await audio.load();
+  assert.equal(audio.available, false);
 });

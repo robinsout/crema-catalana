@@ -5,8 +5,7 @@ import { useCatalogStore } from '../stores/catalog.ts';
 import { useProgressStore } from '../stores/progress.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import { useLessonLink } from '../composables/useLessonLink.ts';
-import { allLessons, progress as summarize } from '../lib/model.ts';
-import type { Lesson } from '../lib/types.ts';
+import type { Lesson } from '../types/index.ts';
 import LessonBadge from './LessonBadge.vue';
 
 const catalog = useCatalogStore();
@@ -18,10 +17,7 @@ const route = useRoute();
 const open = ref(false);
 watch(() => route.fullPath, () => { open.value = false; });
 
-const lessons = computed(() => allLessons(catalog.catalog));
-const extras = computed(() => lessons.value.filter((l) => l.track === 'extra'));
-const unitsOf = (partId: string): Lesson[] => lessons.value.filter((l) => l.track === 'unit' && l.part.id === partId);
-const summary = computed(() => summarize(catalog.catalog, progress.done));
+const summary = computed(() => progress.summary);
 const isPlan = computed(() => route.name === 'plan');
 const isCurrent = (l: Lesson): boolean => route.name === 'lesson' && route.params.id === l.id;
 const width = computed(() => (summary.value.ready ? `${(summary.value.done / summary.value.ready) * 100}%` : '0'));
@@ -47,9 +43,9 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
             <span><span class="t">{{ t('nav.plan') }}</span><span class="s">{{ t('nav.planSub', { course: catalog.catalog.course.title ?? '' }) }}</span></span>
           </RouterLink>
         </li>
-        <template v-if="extras.length">
+        <template v-if="catalog.extras.length">
           <li class="part-h">{{ t('nav.extras') }}</li>
-          <li v-for="l in extras" :key="l.id">
+          <li v-for="l in catalog.extras" :key="l.id">
             <RouterLink :to="linkTo(l)" :class="{ soon: !l.file, done: progress.isDone(l.id) }" :aria-current="isCurrent(l) ? 'page' : undefined" active-class="" exact-active-class="">
               <LessonBadge :lesson="l" />
               <span><span class="t" lang="ca">{{ l.title }}</span><span v-if="l.subtitle" class="s">{{ l.subtitle }}</span></span>
@@ -58,7 +54,7 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
         </template>
         <template v-for="p in catalog.catalog.parts" :key="p.id">
           <li class="part-h"><span lang="ca">{{ p.title }}</span> · {{ p.period }}</li>
-          <li v-for="l in unitsOf(p.id)" :key="l.id">
+          <li v-for="l in catalog.unitsOf(p.id)" :key="l.id">
             <RouterLink :to="linkTo(l)" :class="{ soon: !l.file, done: progress.isDone(l.id) }" :aria-current="isCurrent(l) ? 'page' : undefined" active-class="" exact-active-class="">
               <LessonBadge :lesson="l" />
               <span><span class="t" lang="ca">{{ l.title }}</span></span>

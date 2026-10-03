@@ -1,7 +1,7 @@
 // Routes: /:lang/plan/:focus? and /:lang/lesson/:id (hash history: GitHub Pages has no server rewrites).
 // Old links of the form #<id> and #pla, and the saved last view, are resolved by resolveRoute.
 import { createRouter, createWebHashHistory, type RouteLocationRaw, type RouterHistory } from 'vue-router';
-import { PLAN_ID, resolveRoute, type Route } from './lib/model.ts';
+import { PLAN_ID, resolveRoute, type Route } from './services/catalog.ts';
 import { useCatalogStore } from './stores/catalog.ts';
 import { useProgressStore } from './stores/progress.ts';
 

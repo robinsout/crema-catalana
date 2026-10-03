@@ -1,22 +1,20 @@
-// Reading progress of this browser. A thin reactive layer over lib/storage.ts, which owns the
+// Reading progress of this browser: reactive state over services/progress.ts, which owns the
 // saved format and its compatibility contract (no persistence plugins: they would change it).
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import { PLAN_ID } from '../lib/model.ts';
-import { loadProgress, markDone, saveProgress, type StorageBackend } from '../lib/storage.ts';
-
-function browserStorage(): StorageBackend | null {
-  try { return globalThis.localStorage ?? null; } catch { return null; }
-}
+import { PLAN_ID, progress as summarize } from '../services/catalog.ts';
+import { markDone, readSavedProgress, writeSavedProgress } from '../services/progress.ts';
+import { useCatalogStore } from './catalog.ts';
 
 export const useProgressStore = defineStore('progress', () => {
-  const backend = browserStorage();
-  const data = ref(loadProgress(backend));
-  const save = () => saveProgress(backend, data.value);
+  const data = ref(readSavedProgress());
+  const save = () => writeSavedProgress(data.value);
 
   const done = computed(() => data.value.done);
   const last = computed(() => data.value.last);
   const isDone = (id: string): boolean => data.value.done[id] === true;
+  // lessons done / written / planned in the current language
+  const summary = computed(() => summarize(useCatalogStore().catalog, data.value.done));
 
   function toggleDone(id: string): boolean {
     const value = markDone(data.value, id, !isDone(id), Date.now());
@@ -30,5 +28,5 @@ export const useProgressStore = defineStore('progress', () => {
     save();
   }
 
-  return { data, done, last, isDone, toggleDone, setLast };
+  return { data, done, last, summary, isDone, toggleDone, setLast };
 });

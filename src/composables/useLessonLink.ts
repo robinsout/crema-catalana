@@ -1,6 +1,6 @@
 import type { RouteLocationRaw } from 'vue-router';
 import { useCatalogStore } from '../stores/catalog.ts';
-import type { Lesson } from '../lib/types.ts';
+import type { Lesson } from '../types/index.ts';
 
 // Where a lesson link leads: the lesson when it is written, otherwise its place in the study plan.
 export function useLessonLink() {

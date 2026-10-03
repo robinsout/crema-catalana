@@ -1,7 +1,7 @@
 // Test helpers: a fake site (fetch over in-memory course data) and saved progress.
 import { vi } from 'vitest';
-import type { Course, LocaleCatalog, LocalesIndex, UiStrings } from '../src/lib/types.ts';
-import { STORAGE_KEY } from '../src/lib/storage.ts';
+import type { Course, LocaleCatalog, LocalesIndex, UiStrings } from '../src/types/index.ts';
+import { STORAGE_KEY } from '../src/services/progress.ts';
 
 export const course: Course = {
   course: { title: 'Passos 1', publisher: 'Octaedro', level: 'Bàsic 1–3 · A2' },

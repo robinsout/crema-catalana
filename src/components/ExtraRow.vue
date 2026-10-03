@@ -4,8 +4,7 @@ import { RouterLink } from 'vue-router';
 import { useCatalogStore } from '../stores/catalog.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import { useLessonLink } from '../composables/useLessonLink.ts';
-import { lessonLabel } from '../lib/model.ts';
-import type { Lesson } from '../lib/types.ts';
+import type { Lesson } from '../types/index.ts';
 import StatusPill from './StatusPill.vue';
 import LessonBadge from './LessonBadge.vue';
 
@@ -22,7 +21,7 @@ const partOf = (u: Lesson): string => (u.track === 'unit' ? u.part.title : '');
     <LessonBadge :lesson="lesson" tag="div" cls="unit-n" />
     <div class="unit-body">
       <div class="unit-top"><h3 lang="ca">{{ lesson.title }}</h3><StatusPill :lesson="lesson" /></div>
-      <p class="unit-topic">{{ lessonLabel(lesson, t) }}<template v-if="lesson.subtitle"> · {{ lesson.subtitle }}</template></p>
+      <p class="unit-topic">{{ catalog.label(lesson) }}<template v-if="lesson.subtitle"> · {{ lesson.subtitle }}</template></p>
       <dl v-if="units.length" class="unit-dl">
         <dt>{{ t('plan.forUnits') }}</dt>
         <dd><template v-for="(u, i) in units" :key="u.id">{{ i ? ', ' : '' }}<RouterLink :to="linkTo(u)">{{ partOf(u) }} · {{ u.unit }}</RouterLink></template></dd>

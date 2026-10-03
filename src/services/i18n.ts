@@ -1,6 +1,6 @@
 // Interface strings. Each language has locales/<lang>/ui.json: { "key": "text with {placeholders}" }.
 // Keys starting with "_" are settings (e.g. "_dateLocale"), not strings.
-import type { Translate, UiStrings } from './types.ts';
+import type { Translate, UiStrings } from '../types/index.ts';
 
 export function createT(strings: UiStrings | null | undefined): Translate {
   const dict = strings || {};

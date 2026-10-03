@@ -5,8 +5,8 @@
 // Data lives in two layers: course.json (structure: ids, units, links, Catalan titles — the same
 // for every language) and locales/<lang>/catalog.json (texts in the reader's language and which
 // lessons are written in it). buildCatalog merges them.
-import { canonicalId } from './storage.ts';
-import type { Catalog, Course, Lesson, LessonData, LocaleCatalog, Part, Translate } from './types.ts';
+import { canonicalId } from './progress.ts';
+import type { Catalog, Course, Lesson, LessonData, LocaleCatalog, Part, Translate } from '../types/index.ts';
 
 export const PLAN_ID = 'pla';
 const ID_RE = /^[a-z0-9][a-z0-9-]*$/;

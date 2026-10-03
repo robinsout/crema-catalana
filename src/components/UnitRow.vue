@@ -4,15 +4,14 @@ import { RouterLink } from 'vue-router';
 import { useCatalogStore } from '../stores/catalog.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import { useLessonLink } from '../composables/useLessonLink.ts';
-import { relatedExtras } from '../lib/model.ts';
-import type { Lesson } from '../lib/types.ts';
+import type { Lesson } from '../types/index.ts';
 import StatusPill from './StatusPill.vue';
 
 const props = defineProps<{ lesson: Lesson; focused: boolean }>();
 const catalog = useCatalogStore();
 const { t } = useI18n();
 const linkTo = useLessonLink();
-const related = computed(() => relatedExtras(catalog.catalog, props.lesson.id));
+const related = computed(() => catalog.relatedTo(props.lesson.id));
 </script>
 
 <template>

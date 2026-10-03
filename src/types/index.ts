@@ -92,3 +92,13 @@ export type Lesson = ExtraLesson | UnitLesson;
 // Interface strings: content/locales/<lang>/ui.json
 export type UiStrings = Record<string, string>;
 export type Translate = (key: string, vars?: object) => string;
+
+// content/audio/index.json — shared pronunciation clips
+export interface AudioIndex {
+  voice?: string;
+  rate?: string;
+  clips: Record<string, string>; // normalized Catalan phrase → clips/<hash>.mp3
+}
+
+// Where progress is persisted (localStorage in the browser, a fake in tests)
+export type StorageBackend = Pick<Storage, 'getItem' | 'setItem'>;

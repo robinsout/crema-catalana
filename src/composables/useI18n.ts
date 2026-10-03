@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 import { useCatalogStore } from '../stores/catalog.ts';
-import type { Translate } from '../lib/types.ts';
+import type { Translate } from '../types/index.ts';
 
 // Interface strings of the current language (reactive inside templates).
 export function useI18n() {

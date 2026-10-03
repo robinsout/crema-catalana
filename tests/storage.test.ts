@@ -1,6 +1,6 @@
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { STORAGE_KEY, ID_ALIASES, parseProgress, serializeProgress, createStore, mergeProgress } from '../src/lib/storage.ts';
+import { STORAGE_KEY, ID_ALIASES, parseProgress, serializeProgress, createStore, mergeProgress } from '../src/services/progress.ts';
 
 // Real payloads written by earlier versions of the portal. They must keep loading forever.
 const SAVED = {

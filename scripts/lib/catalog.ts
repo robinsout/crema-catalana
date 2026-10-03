@@ -1,8 +1,8 @@
 // Loads course data from content/ on disk, for tests and scripts.
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { buildCatalog, normalizeCatalog, lessonPath } from '../../src/lib/model.ts';
-import type { Catalog, Course, LocaleCatalog, LocalesIndex } from '../../src/lib/types.ts';
+import { buildCatalog, normalizeCatalog, lessonPath } from '../../src/services/catalog.ts';
+import type { Catalog, Course, LocaleCatalog, LocalesIndex } from '../../src/types/index.ts';
 
 export { lessonPath };
 

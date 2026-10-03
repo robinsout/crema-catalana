@@ -13,15 +13,14 @@
 
 ## Структура
 Стек: Vue 3 + vue-router (режим hash) + Pinia, TypeScript strict, Vite, Vitest.
-- `index.html` — точка входа Vite; `src/main.ts` переписывает старые ссылки `#<id>` в `#/<id>` и монтирует приложение.
-- `src/lib/` — **чистая логика без Vue** (её же используют скрипты и будущий сервер синхронизации):
-  - `types.ts` — контракты данных (курс, каталог языка, прогресс, …);
-  - `storage.ts` — прогресс в localStorage: контракт совместимости, `markDone`, `mergeProgress`;
-  - `model.ts` — каталог (`buildCatalog` склеивает структуру и тексты языка), `resolveRoute`, прогресс, валидация;
-  - `i18n.ts` — `createT`; `say.ts` — поиск аудиоклипа по фразе.
-- `src/stores/` — Pinia: `progress` (тонкая обёртка над `storage.ts`, **без плагинов автосохранения**), `catalog` (курс + язык), `toc` (оглавление страницы).
-- `src/router.ts` — маршруты `/:lang/plan/:focus?`, `/:lang/lesson/:id`; всё остальное (старые ссылки, сохранённый последний экран) разрешается через `resolveRoute`.
-- `src/views/` (`PlanView`, `LessonView`), `src/components/`, `src/composables/` (`useI18n`, `useSay`, `useLessonLink`), `src/styles/main.css`.
+
+**Слои** (импорты только вниз; проверяет `tests/architecture.test.ts` — расширять его, а не обходить):
+1. `src/api/` — только ввод-вывод: `http.ts` (`getJson`, `getText`), `content.ts` (файлы курса), `storage.ts` (localStorage). **`fetch` и localStorage — только здесь.**
+2. `src/services/` — бизнес-логика без Vue: `catalog.ts` (каталог, `buildCatalog`, `resolveRoute`, валидация), `progress.ts` (формат сохранений, контракт совместимости, `markDone`, `mergeProgress`), `content.ts` (что загружать для курса, языка, урока, озвучки), `i18n.ts`, `audio.ts`. Скрипты и будущий сервер синхронизации используют этот слой.
+3. `src/stores/` — Pinia, работают только через сервисы: `catalog` (курс + язык, геттеры для интерфейса), `progress` (без плагинов автосохранения), `lessons` (содержимое уроков с кешем), `audio` (индекс озвучки), `toc`.
+4. Интерфейс — `src/views/`, `src/components/`, `src/composables/` (`useI18n`, `useSay`, `useLessonLink`), `App.vue`: только сторы и composables, никакой логики данных.
+- `src/types/` — общие контракты данных, доступны всем слоям.
+- `src/router.ts`, `src/main.ts` — сборка приложения (могут использовать сервисы и сторы). Роутер: `/:lang/plan/:focus?`, `/:lang/lesson/:id`; старые ссылки и сохранённый последний экран — через `resolveRoute`.
 - `content/` — данные, копируются на сайт как есть (Vite `publicDir`):
   - `course.json` — **структура курса**, одинаковая для всех языков: id, юниты, модули, связи `related`, `kind`, каталанские названия (`title`);
   - `locales/index.json` — `base` (язык-исходник, сейчас `ru`), `default`, `available`;

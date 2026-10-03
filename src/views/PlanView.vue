@@ -4,8 +4,6 @@ import { useRoute } from 'vue-router';
 import { useCatalogStore } from '../stores/catalog.ts';
 import { useTocStore } from '../stores/toc.ts';
 import { useI18n } from '../composables/useI18n.ts';
-import { allLessons } from '../lib/model.ts';
-import type { Lesson } from '../lib/types.ts';
 import UnitRow from '../components/UnitRow.vue';
 import ExtraRow from '../components/ExtraRow.vue';
 
@@ -16,10 +14,8 @@ const route = useRoute();
 const article = ref<HTMLElement | null>(null);
 
 const course = computed(() => catalog.catalog.course);
-const extras = computed(() => allLessons(catalog.catalog).filter((l) => l.track === 'extra'));
+const extras = computed(() => catalog.extras);
 const focus = computed(() => (typeof route.params.focus === 'string' ? route.params.focus : ''));
-const unitsOf = (partId: string): Lesson[] =>
-  allLessons(catalog.catalog).filter((l) => l.track === 'unit' && l.part.id === partId);
 
 const jump = (id: string): void => document.getElementById(id)?.scrollIntoView();
 
@@ -85,7 +81,7 @@ onBeforeUnmount(() => release?.());
     <section v-for="p in catalog.catalog.parts" :id="p.id" :key="p.id">
       <h2><span lang="ca">{{ p.title }}</span> <span class="h-period">{{ p.period }}</span></h2>
       <p>{{ p.focus }}.</p>
-      <UnitRow v-for="u in unitsOf(p.id)" :key="u.id" :lesson="u" :focused="u.id === focus" />
+      <UnitRow v-for="u in catalog.unitsOf(p.id)" :key="u.id" :lesson="u" :focused="u.id === focus" />
     </section>
   </article>
 </template>

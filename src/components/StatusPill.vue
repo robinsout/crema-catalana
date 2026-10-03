@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router';
 import { useProgressStore } from '../stores/progress.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import { useLessonLink } from '../composables/useLessonLink.ts';
-import type { Lesson } from '../lib/types.ts';
+import type { Lesson } from '../types/index.ts';
 
 defineProps<{ lesson: Lesson }>();
 const progress = useProgressStore();

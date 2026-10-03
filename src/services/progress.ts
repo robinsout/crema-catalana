@@ -8,6 +8,9 @@
 //   v1, v2  { done, last }
 //   v3      + doneAt: { id: ms timestamp of the last change of done[id] } — used to merge devices
 
+import { browserStorage } from '../api/storage.ts';
+import type { StorageBackend } from '../types/index.ts';
+
 export const STORAGE_KEY = 'quadern-catala';
 
 export const ID_ALIASES: Record<string, string> = {
@@ -21,7 +24,7 @@ export interface Progress {
   [field: string]: unknown; // fields written by future versions are kept
 }
 
-export type StorageBackend = Pick<Storage, 'getItem' | 'setItem'>;
+export type { StorageBackend };
 
 export const canonicalId = (id: string): string => ID_ALIASES[id] ?? id;
 
@@ -95,7 +98,11 @@ export function mergeProgress(local: Partial<Progress>, remote: Partial<Progress
   return { last: null, ...local, done, doneAt };
 }
 
-// Plain (non-reactive) store, used by tests and scripts; the page uses the Pinia store.
+// Progress of this browser (the Pinia store keeps it reactive)
+export const readSavedProgress = (): Progress => loadProgress(browserStorage());
+export const writeSavedProgress = (state: Progress): void => saveProgress(browserStorage(), state);
+
+// Plain (non-reactive) store with an injected backend, used by tests and scripts.
 export function createStore(backend: StorageBackend | null | undefined, { now = () => Date.now() } = {}) {
   const state = loadProgress(backend);
   return {

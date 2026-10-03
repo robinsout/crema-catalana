@@ -1,6 +1,6 @@
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { normalizeSayText, ttsText, clipFor } from '../src/lib/say.ts';
+import { normalizeSayText, ttsText, clipFor } from '../src/services/audio.ts';
 import { extractSayTexts } from '../scripts/lib/say-texts.ts';
 
 test('normalizeSayText collapses whitespace and trims', () => {

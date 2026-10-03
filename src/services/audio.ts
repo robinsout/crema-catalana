@@ -2,11 +2,9 @@
 //   { voice, rate, clips: { "<normalized Catalan text>": "clips/<hash>.mp3" } }
 // The page looks a clicked phrase up by its normalized text.
 
-export interface AudioIndex {
-  voice?: string;
-  rate?: string;
-  clips: Record<string, string>;
-}
+import type { AudioIndex } from '../types/index.ts';
+
+export type { AudioIndex };
 
 export const normalizeSayText = (text: unknown): string => String(text ?? '').replace(/\s+/g, ' ').trim();
 

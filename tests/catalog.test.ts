@@ -4,11 +4,11 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join, dirname } from 'node:path';
-import { normalizeCatalog, allLessons, validateCatalog } from '../src/lib/model.ts';
+import { normalizeCatalog, allLessons, validateCatalog } from '../src/services/catalog.ts';
 import { loadCatalog, lessonPath } from '../scripts/lib/catalog.ts';
-import { clipFor } from '../src/lib/say.ts';
-import type { AudioIndex } from '../src/lib/say.ts';
-import type { Course, LocaleCatalog, LocalesIndex } from '../src/lib/types.ts';
+import { clipFor } from '../src/services/audio.ts';
+import type { AudioIndex } from '../src/services/audio.ts';
+import type { Course, LocaleCatalog, LocalesIndex } from '../src/types/index.ts';
 import { extractSayTexts } from '../scripts/lib/say-texts.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');

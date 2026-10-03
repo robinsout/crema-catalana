@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import {
   normalizeCatalog, buildCatalog, allLessons, readyLessons, findLesson, resolveRoute,
   progress, neighbours, lessonLabel, relatedExtras,
-} from '../src/lib/model.ts';
-import { createT } from '../src/lib/i18n.ts';
-import type { Catalog, Course, Lesson, LocaleCatalog } from '../src/lib/types.ts';
+} from '../src/services/catalog.ts';
+import { createT } from '../src/services/i18n.ts';
+import type { Catalog, Course, Lesson, LocaleCatalog } from '../src/types/index.ts';
 
 // findLesson for tests: the lesson must exist
 function get(c: Catalog, id: string): Lesson {

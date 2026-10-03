@@ -11,9 +11,9 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
-import { allLessons } from '../src/lib/model.ts';
-import { normalizeSayText, ttsText } from '../src/lib/say.ts';
-import type { AudioIndex } from '../src/lib/say.ts';
+import { allLessons } from '../src/services/catalog.ts';
+import { normalizeSayText, ttsText } from '../src/services/audio.ts';
+import type { AudioIndex } from '../src/services/audio.ts';
 import { extractSayTexts } from './lib/say-texts.ts';
 import { loadCatalog, loadLocales } from './lib/catalog.ts';
 

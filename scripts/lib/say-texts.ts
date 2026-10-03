@@ -1,6 +1,6 @@
 // Finds the Catalan phrases a reader can click in a lesson fragment.
 // Mirrors the page: an element with lang="ca" is one phrase; in a table with lang="ca" every <td> is.
-import { normalizeSayText } from '../../src/lib/say.ts';
+import { normalizeSayText } from '../../src/services/audio.ts';
 
 const ENTITIES: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
 
