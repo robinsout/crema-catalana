@@ -1,10 +1,37 @@
 // Lesson catalog: two tracks.
 //   units  — one lesson per unit of the course book (parts → units)
 //   extras — topic and overview lessons requested on top of the course
+//
+// Data lives in two layers: course.json (structure: ids, units, links, Catalan titles — the same
+// for every language) and locales/<lang>/catalog.json (texts in the reader's language and which
+// lessons are written in it). buildCatalog merges them.
 import { canonicalId } from './storage.js';
 
 export const PLAN_ID = 'pla';
 const ID_RE = /^[a-z0-9][a-z0-9-]*$/;
+
+export const lessonPath = (lang, id) => `locales/${lang}/lessons/${id}.html`;
+
+// Structure wins over texts: a language can add texts but never change ids, units or links.
+export function buildCatalog(course, locale, lang) {
+  const loc = locale || {};
+  const texts = loc.lessons || {};
+  const lesson = (l) => {
+    const own = texts[l.id] || {};
+    const merged = { ...own, ...l };
+    if (own.date) merged.file = lessonPath(lang, l.id);
+    return merged;
+  };
+  return {
+    course: { ...(course.course || {}), ...(loc.course || {}) },
+    extras: (course.extras || []).map(lesson),
+    parts: (course.parts || []).map((p) => ({
+      ...((loc.parts || {})[p.id] || {}),
+      ...p,
+      units: (p.units || []).map(lesson),
+    })),
+  };
+}
 
 export function normalizeCatalog(json) {
   const src = json && typeof json === 'object' ? json : {};
@@ -56,9 +83,9 @@ export function neighbours(catalog, id) {
   return { prev: i > 0 ? list[i - 1] : null, next: i >= 0 && i < list.length - 1 ? list[i + 1] : null };
 }
 
-export function lessonLabel(lesson) {
-  if (lesson.track === 'unit') return `${lesson.part.title} · Unitat ${lesson.unit}`;
-  return lesson.kind === 'overview' ? 'Обзорный урок' : 'Тематический урок';
+export function lessonLabel(lesson, t) {
+  if (lesson.track === 'unit') return t('label.unit', { part: lesson.part.title, unit: lesson.unit });
+  return lesson.kind === 'overview' ? t('label.overview') : t('label.topic');
 }
 
 export const relatedExtras = (catalog, unitId) =>

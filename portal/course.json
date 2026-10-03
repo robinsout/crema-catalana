@@ -1,0 +1,206 @@
+{
+  "course": {
+    "title": "Passos 1",
+    "publisher": "Octaedro",
+    "level": "Bàsic 1–3 · A2"
+  },
+  "extras": [
+    {
+      "id": "intro",
+      "kind": "overview",
+      "title": "Introducció al català"
+    },
+    {
+      "id": "x-temps-verbals",
+      "kind": "overview",
+      "title": "Els temps verbals",
+      "related": [
+        "b2-01",
+        "b2-05",
+        "b2-07",
+        "b2-09",
+        "b2-10",
+        "b3-03",
+        "b3-05"
+      ]
+    },
+    {
+      "id": "x-nombres-calendari",
+      "kind": "topic",
+      "title": "Els nombres i el calendari",
+      "related": [
+        "b1-01",
+        "b1-02",
+        "b1-03",
+        "b1-04",
+        "b1-05",
+        "b2-07"
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "b1",
+      "title": "Bàsic 1",
+      "units": [
+        {
+          "id": "b1-01",
+          "unit": 1,
+          "title": "Hola, soc la Maria"
+        },
+        {
+          "id": "b1-02",
+          "unit": 2,
+          "title": "Aquesta és la meva família"
+        },
+        {
+          "id": "b1-03",
+          "unit": 3,
+          "title": "Visc a Viladepau"
+        },
+        {
+          "id": "b1-04",
+          "unit": 4,
+          "title": "A l'hivern sopo a les nou"
+        },
+        {
+          "id": "b1-05",
+          "unit": 5,
+          "title": "Estudio català els dimarts i els dijous"
+        },
+        {
+          "id": "b1-06",
+          "unit": 6,
+          "title": "Treballo d'ajudant de cuina"
+        },
+        {
+          "id": "b1-07",
+          "unit": 7,
+          "title": "Compro la fruita al mercat"
+        },
+        {
+          "id": "b1-08",
+          "unit": 8,
+          "title": "Soc jove i optimista"
+        },
+        {
+          "id": "b1-09",
+          "unit": 9,
+          "title": "Porto les claus a la butxaca"
+        },
+        {
+          "id": "b1-10",
+          "unit": 10,
+          "title": "Participo a la festa de final de curs"
+        }
+      ]
+    },
+    {
+      "id": "b2",
+      "title": "Bàsic 2",
+      "units": [
+        {
+          "id": "b2-01",
+          "unit": 1,
+          "title": "Amb qui vivies de petit?"
+        },
+        {
+          "id": "b2-02",
+          "unit": 2,
+          "title": "Tens feina?"
+        },
+        {
+          "id": "b2-03",
+          "unit": 3,
+          "title": "Què fas durant el dia?"
+        },
+        {
+          "id": "b2-04",
+          "unit": 4,
+          "title": "Tens el carnet de la biblioteca?"
+        },
+        {
+          "id": "b2-05",
+          "unit": 5,
+          "title": "Què li regalaràs, a en Daniel?"
+        },
+        {
+          "id": "b2-06",
+          "unit": 6,
+          "title": "Com és casa teva?"
+        },
+        {
+          "id": "b2-07",
+          "unit": 7,
+          "title": "Recordes quan vas arribar a Catalunya?"
+        },
+        {
+          "id": "b2-08",
+          "unit": 8,
+          "title": "Vols sortir el cap de setmana?"
+        },
+        {
+          "id": "b2-09",
+          "unit": 9,
+          "title": "Com eres abans?"
+        },
+        {
+          "id": "b2-10",
+          "unit": 10,
+          "title": "Visitem la professora: s'ha trencat una cama"
+        }
+      ]
+    },
+    {
+      "id": "b3",
+      "title": "Bàsic 3",
+      "units": [
+        {
+          "id": "b3-01",
+          "unit": 1,
+          "title": "La Sandra parla en català amb la seva veïna"
+        },
+        {
+          "id": "b3-02",
+          "unit": 2,
+          "title": "El Jesús és amant de la bona cuina"
+        },
+        {
+          "id": "b3-03",
+          "unit": 3,
+          "title": "La Lídia ha tingut un mal dia"
+        },
+        {
+          "id": "b3-04",
+          "unit": 4,
+          "title": "En Rachid vol anar un dia al Camp Nou"
+        },
+        {
+          "id": "b3-05",
+          "unit": 5,
+          "title": "Demà plourà"
+        },
+        {
+          "id": "b3-06",
+          "unit": 6,
+          "title": "Ens comprem un cotxe"
+        },
+        {
+          "id": "b3-07",
+          "unit": 7,
+          "title": "La Julieta vol continuar estudiant"
+        },
+        {
+          "id": "b3-08",
+          "unit": 8,
+          "title": "La Pilar té mal de coll"
+        },
+        {
+          "id": "b3-09",
+          "unit": 9,
+          "title": "S'acaba el curs"
+        }
+      ]
+    }
+  ]
+}

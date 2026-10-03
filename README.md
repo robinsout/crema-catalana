@@ -38,13 +38,13 @@ npm run audio                          # записать озвучку нов�
 
 ```
 portal/
-  index.html          разметка и стили
-  js/                 storage.js · model.js · say.js · app.js
-  lessons.json        курс, учебный план, список уроков
-  content/<id>.html   уроки (HTML-фрагменты)
-  audio/              озвучка: index.json и clips/<hash>.mp3 (одна запись на фразу)
-scripts/              сборка сайта и генератор озвучки
-tests/                тесты логики, данных и сборки
+  index.html                  разметка и стили
+  js/                         storage · model · i18n · say · app
+  course.json                 структура курса: id, юниты, связи (без текстов)
+  locales/<lang>/             язык ученика: ui.json, catalog.json, lessons/<id>.html
+  audio/                      озвучка: index.json и clips/<hash>.mp3 (одна запись на фразу)
+scripts/                      сборка сайта, генератор озвучки
+tests/                        тесты логики, данных, переводов и сборки
 ```
 
 Как добавить урок, описано в [CLAUDE.md](CLAUDE.md). Планы развития — в [BACKLOG.md](BACKLOG.md).

@@ -1,9 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  normalizeCatalog, allLessons, readyLessons, findLesson, resolveRoute,
+  normalizeCatalog, buildCatalog, allLessons, readyLessons, findLesson, resolveRoute,
   progress, neighbours, lessonLabel, relatedExtras,
 } from '../portal/js/model.js';
+import { createT } from '../portal/js/i18n.js';
 
 const catalog = normalizeCatalog({
   course: { title: 'Passos 1' },
@@ -94,10 +95,64 @@ test('neighbours stay inside the same track', () => {
   assert.deepEqual(ids(neighbours(catalog, 'x-pronoms')), { prev: 'intro', next: null });
 });
 
-test('labels name the track', () => {
-  assert.equal(lessonLabel(findLesson(catalog, 'b1-03')), 'Bàsic 1 · Unitat 3');
-  assert.equal(lessonLabel(findLesson(catalog, 'intro')), 'Обзорный урок');
-  assert.equal(lessonLabel(findLesson(catalog, 'x-pronoms')), 'Тематический урок');
+test('labels name the track in the reader\'s language', () => {
+  const t = createT({ 'label.unit': '{part} · Unitat {unit}', 'label.overview': 'Overview', 'label.topic': 'Topic' });
+  assert.equal(lessonLabel(findLesson(catalog, 'b1-03'), t), 'Bàsic 1 · Unitat 3');
+  assert.equal(lessonLabel(findLesson(catalog, 'intro'), t), 'Overview');
+  assert.equal(lessonLabel(findLesson(catalog, 'x-pronoms'), t), 'Topic');
+});
+
+// course.json holds the structure; locales/<lang>/catalog.json the texts and which lessons are written
+const course = {
+  course: { title: 'Passos 1' },
+  extras: [
+    { id: 'intro', kind: 'overview', title: 'Introducció' },
+    { id: 'x-later', kind: 'topic', title: 'Later', related: ['b1-01'] },
+  ],
+  parts: [{ id: 'b1', title: 'Bàsic 1', units: [
+    { id: 'b1-01', unit: 1, title: 'Hola' },
+    { id: 'b1-02', unit: 2, title: 'Família' },
+  ] }],
+};
+const ru = {
+  parts: { b1: { period: 'октябрь — декабрь', focus: 'Настоящее время' } },
+  lessons: {
+    intro: { subtitle: 'Обзор', date: '2026-10-03' },
+    'b1-01': { topic: 'Знакомство', grammar: ['ser'], date: '2026-10-10' },
+    'b1-02': { topic: 'Семья' },
+  },
+};
+
+test('buildCatalog merges structure with the texts of one language', () => {
+  const c = normalizeCatalog(buildCatalog(course, ru, 'ru'));
+  assert.equal(c.parts[0].period, 'октябрь — декабрь');
+  const intro = findLesson(c, 'intro');
+  assert.equal(intro.title, 'Introducció');
+  assert.equal(intro.subtitle, 'Обзор');
+  assert.equal(intro.kind, 'overview');
+  assert.deepEqual(findLesson(c, 'b1-01').grammar, ['ser']);
+  assert.deepEqual(findLesson(c, 'x-later').related, ['b1-01']);
+});
+
+test('buildCatalog: a lesson is ready in a language when it has a date there', () => {
+  const c = normalizeCatalog(buildCatalog(course, ru, 'ru'));
+  assert.equal(findLesson(c, 'intro').file, 'locales/ru/lessons/intro.html');
+  assert.equal(findLesson(c, 'b1-01').file, 'locales/ru/lessons/b1-01.html');
+  assert.equal(findLesson(c, 'b1-02').file, undefined);
+  assert.equal(findLesson(c, 'x-later').file, undefined);
+});
+
+test('buildCatalog: structure wins over texts, so a language cannot change ids or units', () => {
+  const evil = { lessons: { 'b1-01': { id: 'zzz', unit: 9, title: 'Changed' } } };
+  const l = findLesson(normalizeCatalog(buildCatalog(course, evil, 'ru')), 'b1-01');
+  assert.equal(l.unit, 1);
+  assert.equal(l.title, 'Hola');
+});
+
+test('buildCatalog works with an empty language (nothing translated yet)', () => {
+  const c = normalizeCatalog(buildCatalog(course, {}, 'en'));
+  assert.equal(allLessons(c).length, 4);
+  assert.equal(readyLessons(c).length, 0);
 });
 
 test('relatedExtras finds topic lessons linked to a unit', () => {

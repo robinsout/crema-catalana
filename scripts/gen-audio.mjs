@@ -11,9 +11,10 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
-import { normalizeCatalog, allLessons } from '../portal/js/model.js';
+import { allLessons } from '../portal/js/model.js';
 import { normalizeSayText, ttsText } from '../portal/js/say.js';
 import { extractSayTexts } from './lib/say-texts.mjs';
+import { loadCatalog, loadLocales } from './lib/catalog.mjs';
 
 const run = promisify(execFile);
 const VOICE = 'ca-ES-JoanaNeural';
@@ -25,11 +26,14 @@ const audioDir = join(portal, 'audio');
 const clipsDir = join(audioDir, 'clips');
 const indexPath = join(audioDir, 'index.json');
 
-const catalog = normalizeCatalog(JSON.parse(readFileSync(join(portal, 'lessons.json'), 'utf8')));
-const texts = [...new Set([
-  ...allLessons(catalog).filter((l) => l.file).flatMap((l) => extractSayTexts(readFileSync(join(portal, l.file), 'utf8'))),
-  ...allLessons(catalog).map((l) => normalizeSayText(l.title)),
-])];
+// Catalan phrases from the lessons of every language, plus the (Catalan) lesson titles
+const texts = [...new Set(loadLocales(portal).available.flatMap((lang) => {
+  const catalog = loadCatalog(portal, lang);
+  return [
+    ...allLessons(catalog).filter((l) => l.file).flatMap((l) => extractSayTexts(readFileSync(join(portal, l.file), 'utf8'))),
+    ...allLessons(catalog).map((l) => normalizeSayText(l.title)),
+  ];
+}))];
 
 const old = existsSync(indexPath) ? JSON.parse(readFileSync(indexPath, 'utf8')) : { clips: {} };
 const sameVoice = old.voice === undefined || (old.voice === VOICE && old.rate === RATE);

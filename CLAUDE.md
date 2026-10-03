@@ -13,21 +13,27 @@
 
 ## Структура
 - `portal/index.html` — разметка и стили; логика в `portal/js/`:
-  - `storage.js` — прогресс в localStorage (контракт совместимости, см. ниже);
-  - `model.js` — каталог уроков, маршрутизация, прогресс, валидация;
+  - `storage.js` — прогресс в localStorage (контракт совместимости, см. ниже), `mergeProgress` для синхронизации;
+  - `model.js` — каталог уроков (`buildCatalog` склеивает структуру и тексты языка), маршрутизация, прогресс, валидация;
+  - `i18n.js` — строки интерфейса (`t('key', vars)`);
   - `say.js` — поиск аудиоклипа по фразе;
   - `app.js` — отрисовка страницы.
-- `portal/lessons.json` — курс, `extras`, `parts`. Страница «Учебный план» (`#pla`) строится из него. Урок без `file` показывается как «урок появится».
-- `portal/content/<id>.html` — урок в виде HTML-фрагмента (без `<html>`/`<head>`/`<body>`).
-- `portal/audio/index.json` + `portal/audio/clips/<hash>.mp3` — общее хранилище озвучки: одна запись на фразу для всех уроков и названий на странице плана.
+- `portal/course.json` — **структура курса**, одинаковая для всех языков: id, юниты, модули, связи `related`, `kind`, каталанские названия (`title`). Тексты на языке ученика сюда не пишем.
+- `portal/locales/index.json` — `base` (язык-исходник, сейчас `ru`), `default`, `available`.
+- `portal/locales/<lang>/`:
+  - `ui.json` — строки интерфейса (ключи `_…` — настройки, например `_dateLocale`);
+  - `catalog.json` — тексты плана: `parts.<id>` (`period`, `focus`) и `lessons.<id>` (`subtitle` или `topic`, `grammar`, `vocab`, `extra`, `mission`, `date`). **Урок готов на языке, когда у него есть `date`**;
+  - `lessons/<id>.html` — урок в виде HTML-фрагмента (без `<html>`/`<head>`/`<body>`). Файл существует ⇔ в `catalog.json` есть `date` (проверяется тестом).
+- `portal/audio/index.json` + `portal/audio/clips/<hash>.mp3` — общее хранилище озвучки: одна запись на фразу для всех уроков, языков и названий.
 
 ## Как добавить урок
-1. Создать `portal/content/<id>.html`. Каждый раздел — `<section id="...">` с `<h2>`, из них строится оглавление.
-2. Разметка, которую понимают стили: `.tw > table`, `table.conj`, `aside.tip|warn|ru` с `<p class="label">`, `.ex`, `.ipa`, `.wrong`, `blockquote.reading`, `<details><summary>`.
-3. Каталанский текст помечается `lang="ca"` (span, td, li, blockquote; если `lang="ca"` стоит на `<table>`, озвучивается каждая ячейка `td`). Русские пояснения держать вне `lang="ca"`.
-4. В `lessons.json` добавить уроку `file` и `date`; id урока добавить в `tests/published-ids.json`.
-5. `npm run audio` — записать озвучку (нужен edge-tts: `pip install edge-tts` или `EDGE_TTS=/путь/к/edge-tts`). Голос ca-ES-JoanaNeural.
-6. `npm run check`, коммит, пуш. Целостность урока (файл, разделы, озвучка всех фраз) проверяет `tests/catalog.test.js`.
+1. Новый id: добавить в `course.json` (в `extras` или юнит в `parts`) и в `tests/published-ids.json`. Id вечные.
+2. Создать `portal/locales/ru/lessons/<id>.html`. Каждый раздел — `<section id="...">` с `<h2>`, из них строится оглавление.
+3. Разметка, которую понимают стили: `.tw > table`, `table.conj`, `aside.tip|warn|ru` с `<p class="label">`, `.ex`, `.ipa`, `.wrong`, `blockquote.reading`, `<details><summary>`, а также схемы `.tmap`, `ol.story`, `.quarts`, `.daybar`, `.year`.
+4. Каталанский текст помечается `lang="ca"` (span, td, li, p, blockquote; если `lang="ca"` стоит на `<table>`, озвучивается каждая ячейка `td`). Русские пояснения держать вне `lang="ca"`, вложенные `lang="ca"` не делать.
+5. В `locales/ru/catalog.json` → `lessons.<id>`: тексты и `date`.
+6. `npm run audio` — записать озвучку (нужен edge-tts: `pip install edge-tts` или `EDGE_TTS=/путь/к/edge-tts`). Голос ca-ES-JoanaNeural.
+7. `npm run check`, коммит, пуш. Целостность урока (файл, разделы, озвучка всех фраз, тексты) проверяют тесты.
 
 ## Разработка
 - **TDD**: сначала тест в `tests/` (node:test, без зависимостей), убедиться, что он падает, потом код.
