@@ -1,0 +1,8 @@
+#!/bin/sh
+# Type check before every commit (fast); the full pipeline runs before push.
+# Enable once per clone: git config core.hooksPath .githooks
+for f in "${NVM_DIR:-$HOME/.nvm}/nvm.sh" /usr/local/opt/nvm/nvm.sh /opt/homebrew/opt/nvm/nvm.sh; do
+  if [ -s "$f" ]; then . "$f" && nvm use --silent >/dev/null 2>&1; break; fi
+done
+echo "pre-commit: type check (Node $(node --version))"
+npm run typecheck --silent || { echo "pre-commit: type errors, commit aborted"; exit 1; }

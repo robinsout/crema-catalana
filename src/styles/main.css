@@ -1,8 +1,8 @@
-<title>Quadern de català</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=JetBrains+Mono:wght@400&display=swap">
-<style>
+/* Base reset (the Artifact host used to add it) */
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+
 /* Layout: notebook — lesson index on the left, reading column in the middle, section contents on the right (wide screens). Panot-tile strip as the one ornament. */
 :root {
   --bg: #F3F5F2;
@@ -458,28 +458,3 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
 .toc a { display: block; padding: 4px 0 4px 12px; border-left: 2px solid var(--line); color: var(--muted); text-decoration: none; line-height: 1.35; }
 .toc a:hover { color: var(--ink); }
 .toc a.active { border-left-color: var(--accent); color: var(--ink); }
-</style>
-
-<div class="app">
-  <div class="side">
-    <div class="brand">
-      <h1>Quadern de català<span data-i18n="brand.subtitle"></span></h1>
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" data-i18n="nav.toggle"></button>
-    </div>
-    <div class="panot" aria-hidden="true"></div>
-    <nav class="nav" id="nav" data-i18n-aria="nav.label">
-      <p class="progress" id="progressText"></p>
-      <div class="progress-bar"><i id="progressBar"></i></div>
-      <ul class="lesson-list" id="lessonList"></ul>
-      <p class="say-hint" id="sayHint" data-i18n="say.hint"></p>
-    </nav>
-  </div>
-
-  <main id="main">
-    <p class="status" data-i18n="status.loading">…</p>
-  </main>
-
-  <aside class="toc" id="toc" data-i18n-aria="toc.label"></aside>
-</div>
-
-<script type="module" src="js/app.js"></script>

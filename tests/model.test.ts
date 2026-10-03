@@ -1,10 +1,18 @@
-import { test } from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import {
   normalizeCatalog, buildCatalog, allLessons, readyLessons, findLesson, resolveRoute,
   progress, neighbours, lessonLabel, relatedExtras,
-} from '../portal/js/model.js';
-import { createT } from '../portal/js/i18n.js';
+} from '../src/lib/model.ts';
+import { createT } from '../src/lib/i18n.ts';
+import type { Catalog, Course, Lesson, LocaleCatalog } from '../src/lib/types.ts';
+
+// findLesson for tests: the lesson must exist
+function get(c: Catalog, id: string): Lesson {
+  const l = findLesson(c, id);
+  if (!l) throw new Error(`lesson ${id} not found`);
+  return l;
+}
 
 const catalog = normalizeCatalog({
   course: { title: 'Passos 1' },
@@ -28,8 +36,8 @@ const catalog = normalizeCatalog({
 test('legacy catalog with a separate intro is turned into the first extra', () => {
   const c = normalizeCatalog({ intro: { id: 'intro', title: 'Intro', file: 'a.html' }, parts: [] });
   assert.equal(c.extras.length, 1);
-  assert.equal(c.extras[0].id, 'intro');
-  assert.equal(c.extras[0].kind, 'overview');
+  assert.equal(c.extras[0]?.id, 'intro');
+  assert.equal(c.extras[0]?.kind, 'overview');
 });
 
 test('missing sections default to empty lists', () => {
@@ -41,9 +49,9 @@ test('missing sections default to empty lists', () => {
 test('allLessons lists extras first, then units in course order, with track info', () => {
   const ids = allLessons(catalog).map((l) => l.id);
   assert.deepEqual(ids, ['intro', 'x-pronoms', 'x-later', 'b1-01', 'b1-02', 'b1-03', 'b2-01']);
-  assert.equal(findLesson(catalog, 'b1-03').track, 'unit');
-  assert.equal(findLesson(catalog, 'b1-03').part.id, 'b1');
-  assert.equal(findLesson(catalog, 'x-pronoms').track, 'extra');
+  assert.equal(get(catalog, 'b1-03').track, 'unit');
+  assert.equal(get(catalog, 'b1-03').part?.id, 'b1');
+  assert.equal(get(catalog, 'x-pronoms').track, 'extra');
 });
 
 test('readyLessons keeps only lessons with a file', () => {
@@ -52,7 +60,7 @@ test('readyLessons keeps only lessons with a file', () => {
 
 test('findLesson also accepts an old aliased id', () => {
   const c = normalizeCatalog({ extras: [{ id: 'intro', title: 'I', file: 'i.html' }] });
-  assert.equal(findLesson(c, 'l01').id, 'intro');
+  assert.equal(get(c, 'l01').id, 'intro');
 });
 
 test('route: hash with a ready lesson opens it', () => {
@@ -97,13 +105,13 @@ test('neighbours stay inside the same track', () => {
 
 test('labels name the track in the reader\'s language', () => {
   const t = createT({ 'label.unit': '{part} · Unitat {unit}', 'label.overview': 'Overview', 'label.topic': 'Topic' });
-  assert.equal(lessonLabel(findLesson(catalog, 'b1-03'), t), 'Bàsic 1 · Unitat 3');
-  assert.equal(lessonLabel(findLesson(catalog, 'intro'), t), 'Overview');
-  assert.equal(lessonLabel(findLesson(catalog, 'x-pronoms'), t), 'Topic');
+  assert.equal(lessonLabel(get(catalog, 'b1-03'), t), 'Bàsic 1 · Unitat 3');
+  assert.equal(lessonLabel(get(catalog, 'intro'), t), 'Overview');
+  assert.equal(lessonLabel(get(catalog, 'x-pronoms'), t), 'Topic');
 });
 
 // course.json holds the structure; locales/<lang>/catalog.json the texts and which lessons are written
-const course = {
+const course: Course = {
   course: { title: 'Passos 1' },
   extras: [
     { id: 'intro', kind: 'overview', title: 'Introducció' },
@@ -114,7 +122,7 @@ const course = {
     { id: 'b1-02', unit: 2, title: 'Família' },
   ] }],
 };
-const ru = {
+const ru: LocaleCatalog = {
   parts: { b1: { period: 'октябрь — декабрь', focus: 'Настоящее время' } },
   lessons: {
     intro: { subtitle: 'Обзор', date: '2026-10-03' },
@@ -125,26 +133,26 @@ const ru = {
 
 test('buildCatalog merges structure with the texts of one language', () => {
   const c = normalizeCatalog(buildCatalog(course, ru, 'ru'));
-  assert.equal(c.parts[0].period, 'октябрь — декабрь');
-  const intro = findLesson(c, 'intro');
+  assert.equal(c.parts[0]?.period, 'октябрь — декабрь');
+  const intro = get(c, 'intro');
   assert.equal(intro.title, 'Introducció');
   assert.equal(intro.subtitle, 'Обзор');
   assert.equal(intro.kind, 'overview');
-  assert.deepEqual(findLesson(c, 'b1-01').grammar, ['ser']);
-  assert.deepEqual(findLesson(c, 'x-later').related, ['b1-01']);
+  assert.deepEqual(get(c, 'b1-01').grammar, ['ser']);
+  assert.deepEqual(get(c, 'x-later').related, ['b1-01']);
 });
 
 test('buildCatalog: a lesson is ready in a language when it has a date there', () => {
   const c = normalizeCatalog(buildCatalog(course, ru, 'ru'));
-  assert.equal(findLesson(c, 'intro').file, 'locales/ru/lessons/intro.html');
-  assert.equal(findLesson(c, 'b1-01').file, 'locales/ru/lessons/b1-01.html');
-  assert.equal(findLesson(c, 'b1-02').file, undefined);
-  assert.equal(findLesson(c, 'x-later').file, undefined);
+  assert.equal(get(c, 'intro').file, 'locales/ru/lessons/intro.html');
+  assert.equal(get(c, 'b1-01').file, 'locales/ru/lessons/b1-01.html');
+  assert.equal(get(c, 'b1-02').file, undefined);
+  assert.equal(get(c, 'x-later').file, undefined);
 });
 
 test('buildCatalog: structure wins over texts, so a language cannot change ids or units', () => {
-  const evil = { lessons: { 'b1-01': { id: 'zzz', unit: 9, title: 'Changed' } } };
-  const l = findLesson(normalizeCatalog(buildCatalog(course, evil, 'ru')), 'b1-01');
+  const evil = { lessons: { 'b1-01': { id: 'zzz', unit: 9, title: 'Changed' } } } as unknown as LocaleCatalog;
+  const l = get(normalizeCatalog(buildCatalog(course, evil, 'ru')), 'b1-01');
   assert.equal(l.unit, 1);
   assert.equal(l.title, 'Hola');
 });
@@ -160,6 +168,6 @@ test('relatedExtras finds topic lessons linked to a unit', () => {
   assert.deepEqual(relatedExtras(catalog, 'b1-01'), []);
 });
 
-function ids({ prev, next }) {
+function ids({ prev, next }: { prev: Lesson | null; next: Lesson | null }) {
   return { prev: prev ? prev.id : null, next: next ? next.id : null };
 }

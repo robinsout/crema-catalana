@@ -1,13 +1,22 @@
-import { test } from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createT } from '../portal/js/i18n.js';
+import { createT } from '../src/lib/i18n.ts';
+import type { LocalesIndex } from '../src/lib/types.ts';
 
-const portal = join(dirname(fileURLToPath(import.meta.url)), '..', 'portal');
-const locales = JSON.parse(readFileSync(join(portal, 'locales', 'index.json'), 'utf8'));
-const ui = (lang) => JSON.parse(readFileSync(join(portal, 'locales', lang, 'ui.json'), 'utf8'));
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const portal = join(root, 'content');
+// all page sources: index.html and everything under src/
+const sources = (): string[] => [
+  join(root, 'index.html'),
+  ...readdirSync(join(root, 'src'), { recursive: true, encoding: 'utf8' })
+    .filter((f) => /\.(ts|js|vue)$/.test(f))
+    .map((f) => join(root, 'src', f)),
+];
+const locales: LocalesIndex = JSON.parse(readFileSync(join(portal, 'locales', 'index.json'), 'utf8'));
+const ui = (lang: string): Record<string, string> => JSON.parse(readFileSync(join(portal, 'locales', lang, 'ui.json'), 'utf8'));
 
 test('t returns the string and fills {placeholders}', () => {
   const t = createT({ hello: 'Hola, {name}!', plain: 'Adéu' });
@@ -30,10 +39,10 @@ test('locales/index.json lists the default and available languages', () => {
 });
 
 test('every string the page uses exists in the base language, and none is unused', () => {
-  const src = ['js/app.js', 'js/model.js', 'index.html'].map((f) => readFileSync(join(portal, f), 'utf8')).join('\n');
+  const src = sources().map((f) => readFileSync(f, 'utf8')).join('\n');
   const used = new Set([
-    ...[...src.matchAll(/\bt\('([a-zA-Z0-9_.]+)'/g)].map((m) => m[1]),
-    ...[...src.matchAll(/data-i18n(?:-[a-z]+)?="([a-zA-Z0-9_.]+)"/g)].map((m) => m[1]),
+    ...[...src.matchAll(/\bt\('([a-zA-Z0-9_.]+)'/g)].map((m) => m[1] ?? ''),
+    ...[...src.matchAll(/data-i18n(?:-[a-z]+)?="([a-zA-Z0-9_.]+)"/g)].map((m) => m[1] ?? ''),
   ]);
   const base = ui(locales.base);
   const keys = Object.keys(base).filter((k) => !k.startsWith('_'));

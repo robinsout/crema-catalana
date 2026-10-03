@@ -1,7 +1,7 @@
-import { test } from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { normalizeSayText, ttsText, clipFor } from '../portal/js/say.js';
-import { extractSayTexts } from '../scripts/lib/say-texts.mjs';
+import { normalizeSayText, ttsText, clipFor } from '../src/lib/say.ts';
+import { extractSayTexts } from '../scripts/lib/say-texts.ts';
 
 test('normalizeSayText collapses whitespace and trims', () => {
   assert.equal(normalizeSayText('  Bon\n   dia! '), 'Bon dia!');

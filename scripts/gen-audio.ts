@@ -11,36 +11,37 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
-import { allLessons } from '../portal/js/model.js';
-import { normalizeSayText, ttsText } from '../portal/js/say.js';
-import { extractSayTexts } from './lib/say-texts.mjs';
-import { loadCatalog, loadLocales } from './lib/catalog.mjs';
+import { allLessons } from '../src/lib/model.ts';
+import { normalizeSayText, ttsText } from '../src/lib/say.ts';
+import type { AudioIndex } from '../src/lib/say.ts';
+import { extractSayTexts } from './lib/say-texts.ts';
+import { loadCatalog, loadLocales } from './lib/catalog.ts';
 
 const run = promisify(execFile);
 const VOICE = 'ca-ES-JoanaNeural';
 const RATE = '-10%';
 const EDGE_TTS = process.env.EDGE_TTS || 'edge-tts';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const portal = join(root, 'portal');
-const audioDir = join(portal, 'audio');
+const contentDir = join(root, 'content');
+const audioDir = join(contentDir, 'audio');
 const clipsDir = join(audioDir, 'clips');
 const indexPath = join(audioDir, 'index.json');
 
 // Catalan phrases from the lessons of every language, plus the (Catalan) lesson titles
-const texts = [...new Set(loadLocales(portal).available.flatMap((lang) => {
-  const catalog = loadCatalog(portal, lang);
+const texts = [...new Set(loadLocales(contentDir).available.flatMap((lang) => {
+  const catalog = loadCatalog(contentDir, lang);
   return [
-    ...allLessons(catalog).filter((l) => l.file).flatMap((l) => extractSayTexts(readFileSync(join(portal, l.file), 'utf8'))),
+    ...allLessons(catalog).filter((l) => l.file).flatMap((l) => extractSayTexts(readFileSync(join(contentDir, l.file ?? ''), 'utf8'))),
     ...allLessons(catalog).map((l) => normalizeSayText(l.title)),
   ];
 }))];
 
-const old = existsSync(indexPath) ? JSON.parse(readFileSync(indexPath, 'utf8')) : { clips: {} };
+const old: Partial<AudioIndex> = existsSync(indexPath) ? JSON.parse(readFileSync(indexPath, 'utf8')) : { clips: {} };
 const sameVoice = old.voice === undefined || (old.voice === VOICE && old.rate === RATE);
 mkdirSync(clipsDir, { recursive: true });
 
-const clips = {};
-const todo = [];
+const clips: Record<string, string> = {};
+const todo: string[] = [];
 for (const t of texts) {
   const file = clipName(t);
   if (sameVoice && existsSync(join(audioDir, file))) clips[t] = file;
@@ -48,7 +49,7 @@ for (const t of texts) {
 }
 
 let done = 0;
-const failed = [];
+const failed: string[] = [];
 await pool(todo, 2, async (t) => {
   const file = clipName(t);
   try {
@@ -67,7 +68,7 @@ for (const f of readdirSync(clipsDir)) {
   if (!keep.has(`clips/${f}`)) rmSync(join(clipsDir, f), { force: true });
 }
 
-const sorted = Object.fromEntries(Object.keys(clips).sort().map((t) => [t, clips[t]]));
+const sorted = Object.fromEntries(Object.keys(clips).sort().map((t) => [t, clips[t] as string]));
 writeFileSync(indexPath, JSON.stringify({ voice: VOICE, rate: RATE, clips: sorted }, null, 1) + '\n');
 console.log(`audio: ${texts.length} phrases, ${todo.length - failed.length} recorded, ${keep.size} clips`);
 if (failed.length) {
@@ -75,11 +76,11 @@ if (failed.length) {
   process.exitCode = 1;
 }
 
-function clipName(text) {
+function clipName(text: string): string {
   return `clips/${createHash('sha1').update(text).digest('hex').slice(0, 12)}.mp3`;
 }
 
-async function say(text, out) {
+async function say(text: string, out: string): Promise<void> {
   // the service sometimes answers "no audio" when called too often: back off and retry
   const delays = [2000, 5000, 10000, 20000];
   for (let attempt = 0; ; attempt++) {
@@ -94,9 +95,9 @@ async function say(text, out) {
   }
 }
 
-async function pool(items, size, fn) {
+async function pool<T>(items: T[], size: number, fn: (item: T) => Promise<void>): Promise<void> {
   const queue = items.slice();
   await Promise.all(Array.from({ length: Math.min(size, queue.length) }, async () => {
-    while (queue.length) await fn(queue.shift());
+    for (let item = queue.shift(); item !== undefined; item = queue.shift()) await fn(item);
   }));
 }

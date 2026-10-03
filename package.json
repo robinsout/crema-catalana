@@ -7,10 +7,27 @@
     "node": ">=24"
   },
   "scripts": {
-    "test": "node --test",
-    "build": "node scripts/build.mjs",
-    "check": "npm test && npm run build",
-    "serve": "npm run build && python3 -m http.server 8000 -d _site",
-    "audio": "node scripts/gen-audio.mjs"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm test && npm run build",
+    "audio": "node scripts/gen-audio.ts"
+  },
+  "dependencies": {
+    "pinia": "^4.0.3",
+    "vue": "^3.5.43",
+    "vue-router": "^5.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "@vitejs/plugin-vue": "^6.0.9",
+    "@vue/test-utils": "^2.5.1",
+    "happy-dom": "^20.14.5",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.2",
+    "vitest": "^5.0.3",
+    "vue-tsc": "^3.3.12"
   }
 }

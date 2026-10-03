@@ -1,20 +1,22 @@
 // Checks the real lesson catalog and content files.
-import { test } from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join, dirname } from 'node:path';
-import { normalizeCatalog, allLessons, validateCatalog } from '../portal/js/model.js';
-import { loadCatalog, lessonPath } from '../scripts/lib/catalog.mjs';
-import { clipFor } from '../portal/js/say.js';
-import { extractSayTexts } from '../scripts/lib/say-texts.mjs';
+import { normalizeCatalog, allLessons, validateCatalog } from '../src/lib/model.ts';
+import { loadCatalog, lessonPath } from '../scripts/lib/catalog.ts';
+import { clipFor } from '../src/lib/say.ts';
+import type { AudioIndex } from '../src/lib/say.ts';
+import type { Course, LocaleCatalog, LocalesIndex } from '../src/lib/types.ts';
+import { extractSayTexts } from '../scripts/lib/say-texts.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const portal = join(root, 'portal');
-const locales = JSON.parse(readFileSync(join(portal, 'locales', 'index.json'), 'utf8'));
+const portal = join(root, 'content');
+const locales: LocalesIndex = JSON.parse(readFileSync(join(portal, 'locales', 'index.json'), 'utf8'));
 const catalog = loadCatalog(portal, locales.base);
 // Every id that was ever published. Saved progress refers to these ids, so they may never disappear.
-const published = JSON.parse(readFileSync(join(root, 'tests', 'published-ids.json'), 'utf8'));
+const published: string[] = JSON.parse(readFileSync(join(root, 'tests', 'published-ids.json'), 'utf8'));
 
 test('validateCatalog reports broken entries', () => {
   const errors = validateCatalog(normalizeCatalog({
@@ -40,7 +42,7 @@ test('a lesson file exists exactly when the language marks the lesson as written
     for (const f of files) {
       const id = f.replace(/\.html$/, '');
       assert.ok(ids.has(id), `${lang}: lessons/${f} is not in course.json`);
-      assert.ok(allLessons(c).find((l) => l.id === id).file, `${lang}: lessons/${f} exists but has no date in catalog.json`);
+      assert.ok(allLessons(c).find((l) => l.id === id)?.file, `${lang}: lessons/${f} exists but has no date in catalog.json`);
     }
     for (const l of allLessons(c).filter((x) => x.file)) {
       assert.ok(existsSync(join(portal, lessonPath(lang, l.id))), `${lang}: ${l.id} has a date but no lessons/${l.id}.html`);
@@ -49,11 +51,11 @@ test('a lesson file exists exactly when the language marks the lesson as written
 });
 
 test('language texts mention only lessons and parts that exist in course.json', () => {
-  const course = JSON.parse(readFileSync(join(portal, 'course.json'), 'utf8'));
+  const course: Course = JSON.parse(readFileSync(join(portal, 'course.json'), 'utf8'));
   const ids = new Set([...course.extras.map((x) => x.id), ...course.parts.flatMap((p) => p.units.map((u) => u.id))]);
   const parts = new Set(course.parts.map((p) => p.id));
   for (const lang of locales.available) {
-    const loc = JSON.parse(readFileSync(join(portal, 'locales', lang, 'catalog.json'), 'utf8'));
+    const loc: LocaleCatalog = JSON.parse(readFileSync(join(portal, 'locales', lang, 'catalog.json'), 'utf8'));
     for (const id of Object.keys(loc.lessons || {})) assert.ok(ids.has(id), `${lang}: unknown lesson "${id}"`);
     for (const id of Object.keys(loc.parts || {})) assert.ok(parts.has(id), `${lang}: unknown part "${id}"`);
   }
@@ -61,7 +63,7 @@ test('language texts mention only lessons and parts that exist in course.json', 
 
 test('every lesson file exists and is a fragment with sections', () => {
   for (const l of allLessons(catalog).filter((x) => x.file)) {
-    const path = join(portal, l.file);
+    const path = join(portal, l.file ?? '');
     assert.ok(existsSync(path), `${l.id}: ${l.file} not found`);
     const html = readFileSync(path, 'utf8');
     assert.doesNotMatch(html, /<html|<head|<body/i, `${l.file} must be a fragment`);
@@ -71,7 +73,7 @@ test('every lesson file exists and is a fragment with sections', () => {
 
 // Shared audio store: audio/index.json maps a phrase to clips/<hash>.mp3, one file per phrase.
 const audioDir = join(portal, 'audio');
-const audioIndex = existsSync(join(audioDir, 'index.json')) ? JSON.parse(readFileSync(join(audioDir, 'index.json'), 'utf8')) : null;
+const audioIndex: AudioIndex | null = existsSync(join(audioDir, 'index.json')) ? JSON.parse(readFileSync(join(audioDir, 'index.json'), 'utf8')) : null;
 
 test('audio index exists (run: npm run audio)', () => {
   assert.ok(audioIndex, 'audio/index.json missing — run npm run audio');
@@ -79,7 +81,7 @@ test('audio index exists (run: npm run audio)', () => {
 
 test('every Catalan phrase in a lesson has a recorded clip (run: npm run audio)', () => {
   for (const l of allLessons(catalog).filter((x) => x.file)) {
-    const missing = extractSayTexts(readFileSync(join(portal, l.file), 'utf8')).filter((t) => !clipFor(audioIndex, t));
+    const missing = extractSayTexts(readFileSync(join(portal, l.file ?? ''), 'utf8')).filter((t) => !clipFor(audioIndex, t));
     assert.deepEqual(missing, [], `${l.id}: phrases without audio — run npm run audio`);
   }
 });
@@ -90,7 +92,7 @@ test('every lesson title on the study plan has a recorded clip (run: npm run aud
 });
 
 test('audio store holds each phrase once: every clip file exists and nothing is orphaned', () => {
-  const files = Object.values(audioIndex.clips);
+  const files = Object.values(audioIndex?.clips ?? {});
   assert.equal(new Set(files).size, files.length, 'two phrases share one clip file');
   for (const f of files) assert.ok(existsSync(join(audioDir, f)), `audio/${f} missing`);
   const onDisk = readdirSync(join(audioDir, 'clips')).filter((f) => f.endsWith('.mp3')).map((f) => `clips/${f}`);

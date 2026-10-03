@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quadern de català</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=JetBrains+Mono:wght@400&display=swap">
+</head>
+<body>
+<div class="app">
+  <div class="side">
+    <div class="brand">
+      <h1>Quadern de català<span data-i18n="brand.subtitle"></span></h1>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" data-i18n="nav.toggle"></button>
+    </div>
+    <div class="panot" aria-hidden="true"></div>
+    <nav class="nav" id="nav" data-i18n-aria="nav.label">
+      <p class="progress" id="progressText"></p>
+      <div class="progress-bar"><i id="progressBar"></i></div>
+      <ul class="lesson-list" id="lessonList"></ul>
+      <p class="say-hint" id="sayHint" data-i18n="say.hint"></p>
+    </nav>
+  </div>
+
+  <main id="main">
+    <p class="status" data-i18n="status.loading">…</p>
+  </main>
+
+  <aside class="toc" id="toc" data-i18n-aria="toc.label"></aside>
+</div>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

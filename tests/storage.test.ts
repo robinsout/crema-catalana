@@ -1,6 +1,6 @@
-import { test } from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { STORAGE_KEY, ID_ALIASES, parseProgress, serializeProgress, createStore, mergeProgress } from '../portal/js/storage.js';
+import { STORAGE_KEY, ID_ALIASES, parseProgress, serializeProgress, createStore, mergeProgress } from '../src/lib/storage.ts';
 
 // Real payloads written by earlier versions of the portal. They must keep loading forever.
 const SAVED = {
@@ -10,11 +10,11 @@ const SAVED = {
   v2: '{"done":{"intro":true,"b1-01":false},"last":"pla"}',
 };
 
-function memoryBackend(initial = {}) {
-  const data = { ...initial };
+function memoryBackend(initial: Record<string, string> = {}) {
+  const data: Record<string, string> = { ...initial };
   return {
-    getItem: (k) => (k in data ? data[k] : null),
-    setItem: (k, v) => { data[k] = String(v); },
+    getItem: (k: string) => data[k] ?? null,
+    setItem: (k: string, v: string) => { data[k] = String(v); },
     data,
   };
 }
@@ -84,7 +84,7 @@ test('store loads, updates and saves through the backend', () => {
   assert.equal(store.state.done.intro, true);
   store.setDone('b1-01', true);
   store.setLast('b1-01');
-  const saved = JSON.parse(backend.data[STORAGE_KEY]);
+  const saved = JSON.parse(backend.data[STORAGE_KEY] ?? 'null');
   assert.deepEqual(saved, { done: { intro: true, 'b1-01': true }, doneAt: { 'b1-01': 42 }, last: 'b1-01' });
 });
 

@@ -1,11 +1,11 @@
 // Page layer: renders navigation, the study plan and lessons. Logic lives in model.js and storage.js.
-import { createStore } from './storage.js';
-import { clipFor } from './say.js';
-import { createT } from './i18n.js';
+import { createStore } from './storage.ts';
+import { clipFor } from './say.ts';
+import { createT } from './i18n.ts';
 import {
   PLAN_ID, normalizeCatalog, buildCatalog, allLessons, findLesson, resolveRoute,
   progress, neighbours, lessonLabel, relatedExtras,
-} from './model.js';
+} from './model.ts';
 
 let backend = null;
 try { backend = window.localStorage; } catch (e) { backend = null; }
