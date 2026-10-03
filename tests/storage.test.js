@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { STORAGE_KEY, ID_ALIASES, parseProgress, serializeProgress, createStore } from '../portal/js/storage.js';
+import { STORAGE_KEY, ID_ALIASES, parseProgress, serializeProgress, createStore, mergeProgress } from '../portal/js/storage.js';
 
 // Real payloads written by earlier versions of the portal. They must keep loading forever.
 const SAVED = {
@@ -62,25 +62,72 @@ test('unknown fields written by future versions are preserved on save', () => {
   assert.deepEqual(back.notes, { 'b1-01': 'hola' });
 });
 
-test('serialize keeps the v1/v2 shape: done map and last', () => {
+test('serialize keeps the v1/v2 fields: done map and last', () => {
   const back = JSON.parse(serializeProgress({ done: { intro: true }, last: 'b1-04' }));
   assert.deepEqual(back, { done: { intro: true }, last: 'b1-04' });
 });
 
+test('v3: doneAt timestamps load; data without them gets an empty map', () => {
+  assert.deepEqual(parseProgress(SAVED.v2).doneAt, {});
+  const p = parseProgress('{"done":{"intro":true},"doneAt":{"intro":1700000000000,"bad":"x"},"last":null}');
+  assert.deepEqual(p.doneAt, { intro: 1700000000000 });
+});
+
+test('v3: doneAt keys of old ids are migrated like done', () => {
+  const p = parseProgress('{"done":{"l01":true},"doneAt":{"l01":5},"last":null}');
+  assert.deepEqual(p.doneAt, { intro: 5 });
+});
+
 test('store loads, updates and saves through the backend', () => {
   const backend = memoryBackend({ [STORAGE_KEY]: SAVED.v1 });
-  const store = createStore(backend);
+  const store = createStore(backend, { now: () => 42 });
   assert.equal(store.state.done.intro, true);
   store.setDone('b1-01', true);
   store.setLast('b1-01');
   const saved = JSON.parse(backend.data[STORAGE_KEY]);
-  assert.deepEqual(saved, { done: { intro: true, 'b1-01': true }, last: 'b1-01' });
+  assert.deepEqual(saved, { done: { intro: true, 'b1-01': true }, doneAt: { 'b1-01': 42 }, last: 'b1-01' });
 });
 
-test('store toggles a done mark', () => {
-  const store = createStore(memoryBackend());
+test('store toggles a done mark and stamps the time of every change', () => {
+  let t = 100;
+  const store = createStore(memoryBackend(), { now: () => t });
   assert.equal(store.toggleDone('intro'), true);
+  assert.equal(store.state.doneAt.intro, 100);
+  t = 200;
   assert.equal(store.toggleDone('intro'), false);
+  assert.equal(store.state.doneAt.intro, 200);
+});
+
+test('merge: per lesson the later change wins, in both directions', () => {
+  const local = { done: { a: true, b: false }, doneAt: { a: 10, b: 30 }, last: 'a' };
+  const remote = { done: { a: false, b: true, c: true }, doneAt: { a: 20, b: 5, c: 7 }, last: 'zzz' };
+  const m = mergeProgress(local, remote);
+  assert.deepEqual(m.done, { a: false, b: false, c: true });
+  assert.deepEqual(m.doneAt, { a: 20, b: 30, c: 7 });
+});
+
+test('merge: marks without a timestamp (saved before v3) lose to stamped ones; done wins a tie', () => {
+  const old = parseProgress('{"done":{"intro":true,"x":true},"last":null}');
+  const stamped = { done: { intro: false }, doneAt: { intro: 1 } };
+  const m = mergeProgress(old, stamped);
+  assert.equal(m.done.intro, false);
+  assert.equal(m.done.x, true);
+  assert.equal(mergeProgress({ done: { y: false } }, { done: { y: true } }).done.y, true);
+});
+
+test('merge keeps the local last view and unknown local fields', () => {
+  const m = mergeProgress({ done: {}, doneAt: {}, last: 'b1-01', notes: 1 }, { done: {}, doneAt: {}, last: 'x' });
+  assert.equal(m.last, 'b1-01');
+  assert.equal(m.notes, 1);
+});
+
+test('merge is order-independent for done and doneAt', () => {
+  const a = { done: { p: true, q: false }, doneAt: { p: 3, q: 9 } };
+  const b = { done: { p: false, r: true }, doneAt: { p: 4, r: 1 } };
+  const ab = mergeProgress(a, b);
+  const ba = mergeProgress(b, a);
+  assert.deepEqual(ab.done, ba.done);
+  assert.deepEqual(ab.doneAt, ba.doneAt);
 });
 
 test('store survives a backend that throws (private mode, blocked storage)', () => {
