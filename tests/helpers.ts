@@ -9,7 +9,7 @@ import { RateLimiter } from '../server/ratelimit.ts';
 // The real sync server handler with an in-memory database; share one between "devices" in a test.
 export const SYNC_URL = 'https://188.245.182.47';
 export function syncServer() {
-  return createHandler({ store: new SqliteBlobStore(':memory:'), allowedOrigins: [], limiter: new RateLimiter({ perMinute: 10_000 }) });
+  return createHandler({ store: new SqliteBlobStore(':memory:'), allowedOrigins: [], limiter: new RateLimiter({ limit: 10_000, windowMs: 60_000 }) });
 }
 let currentSync: ReturnType<typeof syncServer> | null = null;
 export function useSyncServer(server: ReturnType<typeof syncServer>): void { currentSync = server; }

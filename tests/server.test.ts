@@ -16,7 +16,7 @@ beforeEach(() => {
   handle = createHandler({
     store: new SqliteBlobStore(':memory:'),
     allowedOrigins: [SITE],
-    limiter: new RateLimiter({ perMinute: 1000, now: () => now }),
+    limiter: new RateLimiter({ limit: 1000, windowMs: 60_000, now: () => now }),
     maxBlobChars: 100,
   });
 });
@@ -94,7 +94,7 @@ test('too many requests from one address are throttled', async () => {
   handle = createHandler({
     store: new SqliteBlobStore(':memory:'),
     allowedOrigins: [SITE],
-    limiter: new RateLimiter({ perMinute: 5, now: () => now }),
+    limiter: new RateLimiter({ limit: 5, windowMs: 60_000, now: () => now }),
   });
   for (let i = 0; i < 5; i++) assert.equal((await req('GET', '/v1/health')).status, 200);
   const limited = await req('GET', '/v1/health');
@@ -123,7 +123,7 @@ test('the store keeps data between instances on disk', async () => {
 
 test('the Node HTTP server serves the handler, takes the client address from the proxy and limits bodies', async () => {
   const { startServer } = await import('../server/main.ts');
-  const server = await startServer({ port: 0, host: '127.0.0.1', dbPath: ':memory:', allowedOrigins: [SITE], perMinute: 2, maxBodyBytes: 1000 });
+  const server = await startServer({ port: 0, host: '127.0.0.1', dbPath: ':memory:', allowedOrigins: [SITE], perMinute: 2, maxBodyBytes: 1000, newBlobsPerHour: 20, maxTotalChars: 1e6, keepDays: 730 });
   try {
     const health = await fetch(`${server.url}/v1/health`, { headers: { origin: SITE } });
     assert.equal(health.status, 200);
@@ -140,5 +140,87 @@ test('the Node HTTP server serves the handler, takes the client address from the
     assert.equal(big.status, 413);
   } finally {
     await server.close();
+  }
+});
+
+// ---------- protection against filling the disk (audit M2) ----------
+
+const ID2 = 'b'.repeat(32);
+const ID3 = 'c'.repeat(32);
+const ID4 = 'd'.repeat(32);
+
+function guarded(o: { newBlobs?: number; maxTotalChars?: number; maxBlobChars?: number } = {}) {
+  return createHandler({
+    store: new SqliteBlobStore(':memory:'),
+    allowedOrigins: [SITE],
+    limiter: new RateLimiter({ limit: 1000, windowMs: 60_000, now: () => now }),
+    creationLimiter: new RateLimiter({ limit: o.newBlobs ?? 1000, windowMs: 3_600_000, now: () => now }),
+    maxTotalChars: o.maxTotalChars ?? 1e9,
+    ...(o.maxBlobChars ? { maxBlobChars: o.maxBlobChars } : {}),
+  });
+}
+
+test('by default a blob may be at most 16 KB: real progress is a few hundred bytes', async () => {
+  handle = guarded();
+  assert.equal((await req('PUT', `/v1/blob/${ID}`, { data: 'x'.repeat(16 * 1024), version: null })).status, 200);
+  assert.equal((await req('PUT', `/v1/blob/${ID2}`, { data: 'x'.repeat(16 * 1024 + 1), version: null })).status, 413);
+});
+
+test('one address may create only a few new blobs per hour; updates do not count', async () => {
+  handle = guarded({ newBlobs: 2 });
+  assert.equal((await req('PUT', `/v1/blob/${ID}`, { data: 'a', version: null })).status, 200);
+  assert.equal((await req('PUT', `/v1/blob/${ID2}`, { data: 'b', version: null })).status, 200);
+  for (let v = 1; v <= 3; v++) assert.equal((await req('PUT', `/v1/blob/${ID}`, { data: `a${v}`, version: v })).status, 200);
+  const third = await req('PUT', `/v1/blob/${ID3}`, { data: 'c', version: null });
+  assert.equal(third.status, 429);
+  assert.ok(Number(third.headers.get('retry-after')) > 0);
+  now += 3_600_000;
+  assert.equal((await req('PUT', `/v1/blob/${ID3}`, { data: 'c', version: null })).status, 200);
+});
+
+test('when the database is full new blobs are refused, existing ones can still change', async () => {
+  handle = guarded({ maxTotalChars: 10 });
+  assert.equal((await req('PUT', `/v1/blob/${ID}`, { data: '123456', version: null })).status, 200);
+  assert.equal((await req('PUT', `/v1/blob/${ID2}`, { data: '1234', version: null })).status, 200);
+  const full = await req('PUT', `/v1/blob/${ID3}`, { data: '1', version: null });
+  assert.equal(full.status, 507);
+  assert.equal((await req('PUT', `/v1/blob/${ID}`, { data: '654321', version: 1 })).status, 200);
+  assert.equal((await req('PUT', `/v1/blob/${ID}`, { data: '6543210', version: 2 })).status, 507, 'an update may not grow a full database');
+  assert.equal((await req('DELETE', `/v1/blob/${ID2}`)).status, 204);
+  assert.equal((await req('PUT', `/v1/blob/${ID4}`, { data: '1234', version: null })).status, 200, 'deleting frees space');
+});
+
+test('the store knows its size and forgets blobs untouched for too long', () => {
+  let clock = 0;
+  const store = new SqliteBlobStore(':memory:', { now: () => clock });
+  store.put(ID, 'old', null);
+  clock = 1000;
+  store.put(ID2, 'newer', null);
+  assert.equal(store.totalChars(), 8);
+  assert.equal(store.purgeOlderThan(500), 1);
+  assert.equal(store.get(ID), null);
+  assert.deepEqual(store.get(ID2), { data: 'newer', version: 1 });
+  assert.equal(store.totalChars(), 5);
+  store.close();
+});
+
+test('the server purges old blobs when it starts', async () => {
+  const { mkdtempSync, rmSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const { startServer } = await import('../server/main.ts');
+  const dir = mkdtempSync(join(tmpdir(), 'sync-'));
+  try {
+    const old = new SqliteBlobStore(join(dir, 'sync.db'), { now: () => Date.now() - 800 * 86_400_000 });
+    old.put(ID, 'from long ago', null);
+    old.close();
+    const server = await startServer({
+      port: 0, host: '127.0.0.1', dbPath: join(dir, 'sync.db'), allowedOrigins: [SITE],
+      perMinute: 100, maxBodyBytes: 32_768, newBlobsPerHour: 20, maxTotalChars: 1e6, keepDays: 730,
+    });
+    assert.equal((await fetch(`${server.url}/v1/blob/${ID}`)).status, 404);
+    await server.close();
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
   }
 });

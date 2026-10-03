@@ -7,12 +7,16 @@ export interface BlobStore {
   get(id: string): { data: string; version: number } | null;
   put(id: string, data: string, expected: number | null): PutResult;
   delete(id: string): void;
+  totalChars(): number;
 }
 
 export class SqliteBlobStore implements BlobStore {
   readonly #db: DatabaseSync;
+  readonly #now: () => number;
+  #total: number; // characters of all blobs, kept in memory
 
-  constructor(path: string) {
+  constructor(path: string, { now = () => Date.now() }: { now?: () => number } = {}) {
+    this.#now = now;
     this.#db = new DatabaseSync(path);
     this.#db.exec(`
       PRAGMA journal_mode = WAL;
@@ -22,7 +26,9 @@ export class SqliteBlobStore implements BlobStore {
         version INTEGER NOT NULL,
         updated_at INTEGER NOT NULL
       ) STRICT;
+      CREATE INDEX IF NOT EXISTS blobs_updated_at ON blobs (updated_at);
     `);
+    this.#total = Number((this.#db.prepare('SELECT COALESCE(SUM(LENGTH(data)), 0) AS n FROM blobs').get() as { n: number }).n);
   }
 
   get(id: string): { data: string; version: number } | null {
@@ -36,7 +42,7 @@ export class SqliteBlobStore implements BlobStore {
     const current = this.get(id);
     if ((current?.version ?? null) !== expected) return { ok: false, version: current?.version ?? null };
     const version = (expected ?? 0) + 1;
-    const now = Date.now();
+    const now = this.#now();
     if (expected === null) {
       this.#db.prepare('INSERT INTO blobs (id, data, version, updated_at) VALUES (?, ?, ?, ?)').run(id, data, version, now);
     } else {
@@ -44,11 +50,27 @@ export class SqliteBlobStore implements BlobStore {
         .run(data, version, now, id, expected);
       if (r.changes !== 1) return { ok: false, version: this.get(id)?.version ?? null };
     }
+    this.#total += data.length - (current?.data.length ?? 0);
     return { ok: true, version };
   }
 
   delete(id: string): void {
+    const current = this.get(id);
     this.#db.prepare('DELETE FROM blobs WHERE id = ?').run(id);
+    if (current) this.#total -= current.data.length;
+  }
+
+  totalChars(): number {
+    return this.#total;
+  }
+
+  // deletes blobs not written for `ms`; returns how many
+  purgeOlderThan(ms: number): number {
+    const before = this.#now() - ms;
+    const freed = this.#db.prepare('SELECT COALESCE(SUM(LENGTH(data)), 0) AS n FROM blobs WHERE updated_at < ?').get(before) as { n: number };
+    const r = this.#db.prepare('DELETE FROM blobs WHERE updated_at < ?').run(before);
+    this.#total -= Number(freed.n);
+    return Number(r.changes);
   }
 
   close(): void {

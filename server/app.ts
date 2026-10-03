@@ -7,13 +7,20 @@ import type { RateLimiter } from './ratelimit.ts';
 export interface HandlerOptions {
   store: BlobStore;
   allowedOrigins: string[];
-  limiter: RateLimiter;
-  maxBlobChars?: number; // base64 characters
+  limiter: RateLimiter; // all requests per address
+  creationLimiter?: RateLimiter; // new blobs per address
+  maxBlobChars?: number; // base64 characters of one blob
+  maxTotalChars?: number; // all blobs together: protects the disk
 }
 
 const BASE_HEADERS = { 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' };
 
-export function createHandler({ store, allowedOrigins, limiter, maxBlobChars = 64 * 1024 }: HandlerOptions) {
+// A real progress blob is a few hundred characters; 16 KB leaves room for years of lessons.
+export const DEFAULT_MAX_BLOB_CHARS = 16 * 1024;
+
+export function createHandler({
+  store, allowedOrigins, limiter, creationLimiter, maxBlobChars = DEFAULT_MAX_BLOB_CHARS, maxTotalChars = Infinity,
+}: HandlerOptions) {
   return async function handle(request: Request, client: string): Promise<Response> {
     const origin = request.headers.get('origin');
     const cors: Record<string, string> = origin && allowedOrigins.includes(origin)
@@ -62,6 +69,13 @@ export function createHandler({ store, allowedOrigins, limiter, maxBlobChars = 6
           return json(400, { error: 'expected { data: string, version: number | null }' });
         }
         if (data.length > maxBlobChars) return json(413, { error: 'too large' });
+        const current = store.get(id);
+        const grows = data.length - (current?.data.length ?? 0);
+        if (grows > 0 && store.totalChars() + grows > maxTotalChars) return json(507, { error: 'storage full' });
+        if (!current && version === null && creationLimiter) {
+          const wait = creationLimiter.check(client);
+          if (wait > 0) return json(429, { error: 'too many new blobs' }, { 'retry-after': String(wait) });
+        }
         const r = store.put(id, data, version ?? null);
         return r.ok ? json(200, { version: r.version }) : json(409, { version: r.version });
       }

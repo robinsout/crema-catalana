@@ -8,7 +8,9 @@ Wants=network-online.target
 Type=simple
 # Node 24 copied out of root's nvm by deploy/install.sh (the service has no access to /root)
 ExecStart=/opt/node/sync-current/bin/node /opt/quadern-sync/server/main.ts
-Environment=PORT=8787 HOST=127.0.0.1 ALLOWED_ORIGINS=https://robinsout.github.io RATE_PER_MINUTE=120 NODE_ENV=production
+Environment=PORT=8787 HOST=127.0.0.1 ALLOWED_ORIGINS=https://robinsout.github.io NODE_ENV=production
+# limits against filling the disk: requests and new blobs per address, body size, total size, age
+Environment=RATE_PER_MINUTE=120 NEW_BLOBS_PER_HOUR=20 MAX_BODY_BYTES=32768 MAX_TOTAL_MB=1024 KEEP_DAYS=730
 # the database lives in /var/lib/quadern-sync (STATE_DIRECTORY)
 StateDirectory=quadern-sync
 StateDirectoryMode=0700

@@ -64,7 +64,8 @@
 - Клиент: `src/services/sync.ts` (код, HKDF, AES-GCM, цикл слияния), `src/api/sync.ts` (адрес из `VITE_SYNC_URL`, по умолчанию `https://188.245.182.47`), стор `sync`, экран `#/<lang>/sync/:code?`. **Синхронизация только по кнопкам** (включить, подключить, «Синхронизировать сейчас») — так решил пользователь: никаких фоновых и автоматических запросов (тесты считают запросы к серверу). Код хранится отдельно от прогресса (localStorage `quadern-sync`) и сам не синхронизируется. На сервер уходят только `done`, `doneAt`, `exercises` — зашифрованными.
 - Сервер: `server/` (портативный обработчик `Request → Response` + `node:sqlite` + `node:http`), контракт — `shared/sync-api.ts` (слой «типы», общий с сайтом). Тесты сервера — в окружении `node` (`// @vitest-environment node`).
 - e2e поднимают локальный сервер синхронизации (`playwright.config.ts`, порт 8787) и собирают сайт с `VITE_SYNC_URL=http://localhost:8787`.
-- Эксплуатация, безопасность, деплой (`npm run deploy:sync`) — `deploy/README.md`. Мониторинг — `.github/workflows/monitor.yml`.
+- Эксплуатация, безопасность, лимиты, обновления, деплой (`npm run deploy:sync`) — `deploy/README.md`. Мониторинг — `.github/workflows/monitor.yml`.
+- Все Pages-сайты аккаунта делят origin `robinsout.github.io` (а значит, localStorage с кодом синхронизации): к ним нельзя подключать сторонние скрипты. Оставшиеся пункты аудита — `BACKLOG.md`, S-1.
 
 ## Деплой
 - Репозиторий: git@github.com:robinsout/crema-catalana.git (ветка `master`). Пушить с личным SSH-ключом `~/.ssh/mygithub`, он прописан в `core.sshCommand` этого репозитория.

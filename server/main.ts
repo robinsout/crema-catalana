@@ -1,7 +1,7 @@
 // Sync server process: node:http in front of the portable handler (server/app.ts).
 // Configuration from the environment (see deploy/quadern-sync.service):
 //   PORT (8787), HOST (127.0.0.1), DB_PATH ($STATE_DIRECTORY/sync.db), ALLOWED_ORIGINS (comma separated),
-//   RATE_PER_MINUTE (120), MAX_BODY_BYTES (131072)
+//   RATE_PER_MINUTE (120), MAX_BODY_BYTES (32768), NEW_BLOBS_PER_HOUR (20), MAX_TOTAL_MB (1024), KEEP_DAYS (730)
 import { createServer, type IncomingMessage } from 'node:http';
 import { join } from 'node:path';
 import { createHandler } from './app.ts';
@@ -15,7 +15,12 @@ export interface ServerOptions {
   allowedOrigins: string[];
   perMinute: number;
   maxBodyBytes: number;
+  newBlobsPerHour: number;
+  maxTotalChars: number;
+  keepDays: number; // blobs not written for this long are deleted
 }
+
+const DAY = 86_400_000;
 
 // The proxy (Caddy) runs on this machine: trust X-Forwarded-For only from loopback.
 function clientAddress(req: IncomingMessage): string {
@@ -39,7 +44,22 @@ async function readBody(req: IncomingMessage, limit: number): Promise<Buffer | '
 
 export async function startServer(o: ServerOptions): Promise<{ url: string; close: () => Promise<void> }> {
   const store = new SqliteBlobStore(o.dbPath);
-  const handle = createHandler({ store, allowedOrigins: o.allowedOrigins, limiter: new RateLimiter({ perMinute: o.perMinute }) });
+  const handle = createHandler({
+    store,
+    allowedOrigins: o.allowedOrigins,
+    limiter: new RateLimiter({ limit: o.perMinute, windowMs: 60_000 }),
+    creationLimiter: new RateLimiter({ limit: o.newBlobsPerHour, windowMs: 3_600_000 }),
+    maxTotalChars: o.maxTotalChars,
+  });
+
+  // forget blobs nobody has synced for a long time: now and once a day
+  const purge = () => {
+    const n = store.purgeOlderThan(o.keepDays * DAY);
+    if (n) console.log(`purged ${n} blobs untouched for ${o.keepDays} days`);
+  };
+  purge();
+  const daily = setInterval(purge, DAY);
+  daily.unref();
 
   const server = createServer(async (req, res) => {
     try {
@@ -68,7 +88,7 @@ export async function startServer(o: ServerOptions): Promise<{ url: string; clos
   const port = typeof address === 'object' && address ? address.port : o.port;
   return {
     url: `http://${o.host}:${port}`,
-    close: () => new Promise((resolve) => server.close(() => { store.close(); resolve(); })),
+    close: () => new Promise((resolve) => server.close(() => { clearInterval(daily); store.close(); resolve(); })),
   };
 }
 
@@ -81,7 +101,10 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     dbPath: env.DB_PATH ?? join(env.STATE_DIRECTORY ?? '.', 'sync.db'),
     allowedOrigins: (env.ALLOWED_ORIGINS ?? 'https://robinsout.github.io').split(',').map((s) => s.trim()).filter(Boolean),
     perMinute: Number(env.RATE_PER_MINUTE ?? 120),
-    maxBodyBytes: Number(env.MAX_BODY_BYTES ?? 131072),
+    maxBodyBytes: Number(env.MAX_BODY_BYTES ?? 32768),
+    newBlobsPerHour: Number(env.NEW_BLOBS_PER_HOUR ?? 20),
+    maxTotalChars: Number(env.MAX_TOTAL_MB ?? 1024) * 1024 * 1024,
+    keepDays: Number(env.KEEP_DAYS ?? 730),
   });
   console.log(`quadern sync listening on ${server.url}`);
   const stop = () => { server.close().then(() => process.exit(0)); };

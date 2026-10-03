@@ -1,0 +1,8 @@
+[Unit]
+Description=Quadern sync: install the latest Node 24 patch and restart if it changed
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/quadern-sync/deploy/install.sh --node-only

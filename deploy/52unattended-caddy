@@ -1,0 +1,5 @@
+// Security updates of Caddy, the HTTPS front of the Quadern sync server, come from Caddy's own
+// repository; let unattended-upgrades install them too (Ubuntu origins stay as they are).
+Unattended-Upgrade::Origins-Pattern {
+	"origin=cloudsmith/caddy/stable";
+};

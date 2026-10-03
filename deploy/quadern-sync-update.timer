@@ -1,0 +1,11 @@
+[Unit]
+Description=Weekly Node update of the Quadern sync server
+
+[Timer]
+# Sunday night, before the nightly reboot window of unattended-upgrades (04:30)
+OnCalendar=Sun *-*-* 03:15
+RandomizedDelaySec=20m
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -14,5 +14,9 @@
 		-Server
 		Strict-Transport-Security "max-age=31536000"
 	}
+	# progress blobs are a few hundred bytes; the server refuses more than 16 KB anyway
+	request_body {
+		max_size 64KB
+	}
 	reverse_proxy 127.0.0.1:8787
 }
