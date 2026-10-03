@@ -16,7 +16,10 @@ test('vite builds a standalone site with all course data', { timeout: 60_000 }, 
     assert.match(index, /^<!doctype html>/i);
     assert.match(index, /<title>Quadern de català<\/title>/);
     assert.match(index, /<script type="module"[^>]*src="\.\/assets\/[^"]+\.js"/, 'relative asset paths for GitHub Pages');
-    for (const f of ['course.json', 'locales/index.json', 'locales/ru/ui.json', 'locales/ru/catalog.json', 'locales/ru/lessons/intro.html', 'audio/index.json']) {
+    assert.match(index, /<link rel="icon" type="image\/svg\+xml" href="favicon\.svg">/);
+    assert.match(index, /<link rel="icon" type="image\/png" sizes="32x32" href="favicon-32\.png">/);
+    assert.match(index, /<link rel="apple-touch-icon" href="apple-touch-icon\.png">/);
+    for (const f of ['favicon.svg', 'favicon-32.png', 'apple-touch-icon.png', 'course.json', 'locales/index.json', 'locales/ru/ui.json', 'locales/ru/catalog.json', 'locales/ru/lessons/intro.html', 'audio/index.json']) {
       assert.ok(existsSync(join(out, f)), `${f} missing in build`);
     }
   } finally {

@@ -129,3 +129,13 @@ test('a choice exercise shows the right option after a pick', async ({ page }) =
   await expect(first.getByRole('button', { name: 'Perfet', exact: true })).toHaveClass(/right/);
   await expect(first).toContainText('период ещё не закончился');
 });
+
+test('the site has an icon', async ({ page, request }) => {
+  await page.goto('./');
+  for (const sel of ['link[rel="icon"][type="image/svg+xml"]', 'link[rel="icon"][type="image/png"]', 'link[rel="apple-touch-icon"]']) {
+    const href = await page.locator(sel).getAttribute('href');
+    expect(href, sel).toBeTruthy();
+    const res = await request.get(new URL(href ?? '', page.url()).href);
+    expect(res.ok(), `${sel} → ${href}`).toBe(true);
+  }
+});

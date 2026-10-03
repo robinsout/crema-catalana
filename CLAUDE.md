@@ -30,7 +30,7 @@
   - `vocab/<id>.json` и `locales/<lang>/vocab/<id>.json` — словарь урока: каталанские слова (общие) и перевод;
   - `locales/<lang>/exercises/<id>.json` — интерактивные упражнения урока;
   - `audio/index.json` + `audio/clips/<hash>.mp3` — общее хранилище озвучки: одна запись на фразу.
-- `scripts/gen-audio.ts`, `scripts/lib/` — TypeScript, запускается `node` напрямую (Node 24 убирает типы сам).
+- `scripts/gen-audio.ts`, `scripts/gen-icons.ts` (`npm run icons`: PNG-иконки из `content/favicon.svg`), `scripts/lib/` — TypeScript, запускается `node` напрямую (Node 24 убирает типы сам).
 
 ## Как добавить урок
 1. Новый id: добавить в `content/course.json` (в `extras` или юнит в `parts`) и в `tests/published-ids.json`. Id вечные.
