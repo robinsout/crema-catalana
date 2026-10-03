@@ -12,6 +12,23 @@
       "subtitle": "Фонетика, орфография, грамматика, глаголы и исключения",
       "file": "content/01-introduccio.html",
       "date": "2026-10-03"
+    },
+    {
+      "id": "x-temps-verbals",
+      "kind": "overview",
+      "title": "Els temps verbals",
+      "subtitle": "Все времена на одной оси: когда что использовать, формы и отличия от испанского",
+      "file": "content/x-temps-verbals.html",
+      "date": "2026-10-03",
+      "related": [
+        "b2-01",
+        "b2-05",
+        "b2-07",
+        "b2-09",
+        "b2-10",
+        "b3-03",
+        "b3-05"
+      ]
     }
   ],
   "parts": [

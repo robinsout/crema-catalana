@@ -319,6 +319,70 @@ details[open] summary::before { content: "▾ "; }
 summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
 
+/* tense map: tenses placed on a time axis (horizontal; vertical on phones) */
+.tmap { margin: 8px 0 12px; }
+.tmap-axis { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; position: relative; padding-top: 30px; }
+.tmap-axis::before {
+  content: ""; position: absolute; left: 0; right: 14px; top: 13px; height: 2px;
+  background: linear-gradient(90deg, var(--line), var(--muted) 62%, var(--accent));
+}
+.tmap-axis::after {
+  content: ""; position: absolute; right: 0; top: 8px;
+  border-left: 14px solid var(--accent); border-top: 6px solid transparent; border-bottom: 6px solid transparent;
+}
+.tmap-col { position: relative; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.tmap-col::before {
+  content: ""; position: absolute; top: -23px; left: 50%; width: 10px; height: 10px; margin-left: -5px;
+  border-radius: 50%; background: var(--bg); border: 2px solid var(--muted);
+}
+.tmap-col.now::before { width: 16px; height: 16px; margin-left: -8px; top: -26px; background: var(--accent); border-color: var(--accent); }
+.tmap-col.future::before { border-color: var(--accent); }
+.lesson .tmap-zone {
+  margin: 0; min-height: 3.6em;
+  font: 500 0.62rem/1.35 var(--font-display); letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted); text-align: center;
+}
+.tmap-col.now .tmap-zone { color: var(--accent); }
+.tense { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 9px; overflow-wrap: break-word; hyphens: manual; }
+.tmap-col.now .tense { border-color: var(--accent); }
+.lesson .tense p { margin: 0; max-width: none; line-height: 1.3; }
+.lesson .tense-name { font: 500 0.6rem var(--font-display); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px !important; }
+.lesson .tense-form { font-weight: 600; color: var(--accent); font-size: 0.98rem; }
+.lesson .tense-es { font-size: 0.8rem; color: var(--muted); font-style: italic; margin-top: 2px !important; }
+.lesson .tense-mark { font-size: 0.78rem; margin-top: 6px !important; padding-top: 5px; border-top: 1px dashed var(--line); }
+.tmap-aside {
+  margin-top: 14px; padding: 10px 12px; border: 1.5px dashed var(--line); border-radius: 10px;
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch;
+}
+.lesson .tmap-aside > .tmap-zone { min-height: 0; align-self: center; text-align: left; flex: 0 0 9em; }
+.tmap-aside > .tense { flex: 1 1 180px; }
+@media (max-width: 640px) {
+  .tmap-axis { grid-template-columns: 1fr; padding-top: 0; padding-left: 30px; gap: 18px; }
+  .tmap-axis::before { left: 11px; right: auto; top: 0; bottom: 14px; width: 2px; height: auto;
+    background: linear-gradient(180deg, var(--line), var(--muted) 62%, var(--accent)); }
+  .tmap-axis::after { right: auto; left: 5px; top: auto; bottom: 0;
+    border-top: 14px solid var(--accent); border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 0; }
+  .tmap-col::before { top: 2px; left: -24px; margin-left: 0; }
+  .tmap-col.now::before { top: -1px; left: -27px; margin-left: 0; }
+  .lesson .tmap-zone { min-height: 0; text-align: left; }
+  .lesson .tmap-aside > .tmap-zone { flex-basis: 100%; }
+}
+
+/* story: events of one life on a vertical time line */
+.lesson ol.story { list-style: none; padding: 0 0 0 28px; margin: 8px 0 20px; position: relative; max-width: 66ch; }
+.lesson ol.story::before { content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
+.lesson ol.story > li { position: relative; margin: 0 0 16px; }
+.lesson ol.story > li::before {
+  content: ""; position: absolute; left: -25px; top: 6px; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--muted);
+}
+.lesson ol.story > li.now::before { background: var(--accent); border-color: var(--accent); }
+.lesson ol.story > li.future::before { border-color: var(--accent); }
+.lesson .story-when { margin: 0; font: 500 0.64rem var(--font-display); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.lesson .story-ca { margin: 2px 0 0; font-size: var(--step-1); line-height: 1.45; }
+.lesson .story-ru { margin: 0; color: var(--muted); font-size: 0.92rem; }
+.story-tag { font: 500 0.6rem var(--font-display); letter-spacing: .05em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); border-radius: 4px; padding: 2px 6px; margin-left: 6px; white-space: nowrap; vertical-align: 2px; }
+
 /* pronunciation */
 .can-say .lesson span[lang="ca"], .can-say .lesson td[lang="ca"], .can-say .lesson li[lang="ca"],
 .can-say .lesson table[lang="ca"] td, .can-say .lesson blockquote[lang="ca"] {

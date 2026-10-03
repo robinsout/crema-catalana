@@ -46,10 +46,15 @@ async function record({ id, texts }) {
   }
   mkdirSync(join(audioDir, id), { recursive: true });
   let done = 0;
-  await pool(todo, 4, async (t) => {
+  const failed = [];
+  await pool(todo, 2, async (t) => {
     const file = clipName(id, t);
-    await say(ttsText(t), join(audioDir, file));
-    clips[t] = file;
+    try {
+      await say(ttsText(t), join(audioDir, file));
+      clips[t] = file;
+    } catch (e) {
+      failed.push(t);
+    }
     process.stdout.write(`\r${id}: ${++done}/${todo.length} new clips`);
   });
   if (todo.length) process.stdout.write('\n');
@@ -60,7 +65,11 @@ async function record({ id, texts }) {
   }
   const sorted = Object.fromEntries(texts.filter((t) => clips[t]).map((t) => [t, clips[t]]));
   writeFileSync(manifestPath, JSON.stringify({ voice: VOICE, rate: RATE, clips: sorted }, null, 1) + '\n');
-  console.log(`${id}: ${texts.length} phrases, ${todo.length} recorded`);
+  console.log(`${id}: ${texts.length} phrases, ${todo.length - failed.length} recorded`);
+  if (failed.length) {
+    console.error(`${id}: ${failed.length} not recorded, run npm run audio again:\n  ${failed.join('\n  ')}`);
+    process.exitCode = 1;
+  }
 }
 
 function clipName(id, text) {
@@ -68,12 +77,16 @@ function clipName(id, text) {
 }
 
 async function say(text, out) {
-  for (let attempt = 1; ; attempt++) {
+  // the service sometimes answers "no audio" when called too often: back off and retry
+  const delays = [2000, 5000, 10000, 20000];
+  for (let attempt = 0; ; attempt++) {
     try {
       await run(EDGE_TTS, ['--voice', VOICE, `--rate=${RATE}`, `--text=${text}`, '--write-media', out]);
       return;
     } catch (e) {
-      if (attempt >= 3) throw new Error(`edge-tts failed for "${text}": ${e.message}`);
+      rmSync(out, { force: true });
+      if (attempt >= delays.length) throw new Error(`edge-tts failed for "${text}"`);
+      await new Promise((r) => setTimeout(r, delays[attempt]));
     }
   }
 }
