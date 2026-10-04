@@ -25,9 +25,10 @@ export async function loadLanguagePack(lang: string): Promise<LanguagePack> {
   return { ui, catalog };
 }
 
-// The language to show: the requested one when it exists, otherwise `fallback` (the default by default)
+// The language to show: the requested one when it exists (a draft only by such a direct link),
+// otherwise `fallback` (the default by default)
 export const pickLanguage = (locales: LocalesIndex, requested: string, fallback = locales.default): string =>
-  (locales.available.includes(requested) ? requested : fallback);
+  (locales.available.includes(requested) || locales.drafts?.includes(requested) ? requested : fallback);
 
 export interface LanguageHints {
   saved: string | null | undefined; // the language of the last page opened on this device

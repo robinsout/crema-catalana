@@ -33,10 +33,12 @@ export const useCatalogStore = defineStore('catalog', () => {
   const neighboursOf = (id: string) => neighbours(catalog.value, id);
   const label = (lesson: Lesson): string => lessonLabel(lesson, t.value);
 
-  // languages of the site, each by its own name
+  // languages of the switcher, each by its own name: the published ones, and a draft while it is open
   const languages = computed(() => {
     const locales = base.value?.locales;
-    return (locales?.available ?? []).map((code) => ({ code, name: locales?.names?.[code] ?? code }));
+    const codes = [...(locales?.available ?? [])];
+    if (lang.value && !codes.includes(lang.value)) codes.push(lang.value);
+    return codes.map((code) => ({ code, name: locales?.names?.[code] ?? code }));
   });
   const languageName = (code: string): string => languages.value.find((l) => l.code === code)?.name ?? code;
 

@@ -5,7 +5,7 @@ import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join, dirname } from 'node:path';
 import { normalizeCatalog, allLessons, validateCatalog } from '../src/services/catalog.ts';
-import { loadCatalog, lessonPath } from '../scripts/lib/catalog.ts';
+import { contentLanguages, loadCatalog, lessonPath } from '../scripts/lib/catalog.ts';
 import { loadVocabSource, loadLocaleVocab, vocabTexts } from '../scripts/lib/vocab.ts';
 import { validateVocab } from '../src/services/vocab.ts';
 import { validateExercises } from '../src/services/exercises.ts';
@@ -20,6 +20,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const portal = join(root, 'content');
 const locales: LocalesIndex = JSON.parse(readFileSync(join(portal, 'locales', 'index.json'), 'utf8'));
 const catalog = loadCatalog(portal, locales.base);
+// published languages and drafts: both are checked
+const languages = contentLanguages(locales);
 // lessons written in each language, with their HTML
 const written = (lang: string) => allLessons(loadCatalog(portal, lang)).filter((l) => l.file)
   .map((l) => ({ id: l.id, html: readFileSync(join(portal, l.file ?? ''), 'utf8') }));
@@ -38,11 +40,11 @@ test('validateCatalog reports broken entries', () => {
 });
 
 test('course.json with every language is valid', () => {
-  for (const lang of locales.available) assert.deepEqual(validateCatalog(loadCatalog(portal, lang)), [], lang);
+  for (const lang of languages) assert.deepEqual(validateCatalog(loadCatalog(portal, lang)), [], lang);
 });
 
 test('a lesson file exists exactly when the language marks the lesson as written (date)', () => {
-  for (const lang of locales.available) {
+  for (const lang of languages) {
     const c = loadCatalog(portal, lang);
     const ids = new Set(allLessons(c).map((l) => l.id));
     const dir = join(portal, 'locales', lang, 'lessons');
@@ -62,7 +64,7 @@ test('language texts mention only lessons and parts that exist in course.json', 
   const course: Course = JSON.parse(readFileSync(join(portal, 'course.json'), 'utf8'));
   const ids = new Set([...course.extras.map((x) => x.id), ...course.parts.flatMap((p) => p.units.map((u) => u.id))]);
   const parts = new Set(course.parts.map((p) => p.id));
-  for (const lang of locales.available) {
+  for (const lang of languages) {
     const loc: LocaleCatalog = JSON.parse(readFileSync(join(portal, 'locales', lang, 'catalog.json'), 'utf8'));
     for (const id of Object.keys(loc.lessons || {})) assert.ok(ids.has(id), `${lang}: unknown lesson "${id}"`);
     for (const id of Object.keys(loc.parts || {})) assert.ok(parts.has(id), `${lang}: unknown part "${id}"`);
@@ -88,7 +90,7 @@ test('audio index exists (run: npm run audio)', () => {
 });
 
 test('every Catalan phrase in a lesson has a recorded clip, in every language (run: npm run audio)', () => {
-  for (const lang of locales.available) {
+  for (const lang of languages) {
     for (const l of written(lang)) {
       const missing = extractSayTexts(l.html).filter((t) => !clipFor(audioIndex, t));
       assert.deepEqual(missing, [], `${lang}/${l.id}: phrases without audio — run npm run audio`);
@@ -97,14 +99,14 @@ test('every Catalan phrase in a lesson has a recorded clip, in every language (r
 });
 
 test('lesson markup: Catalan phrases hold no explanations and are not nested, chapters have ids and headings', () => {
-  for (const lang of locales.available) {
+  for (const lang of languages) {
     for (const l of written(lang)) assert.deepEqual(lintLesson(l.html), [], `${lang}/${l.id}`);
   }
 });
 
 test('an adapted lesson keeps the chapters and exercises of the base language (progress is saved under their ids)', () => {
   const source = new Map(written(locales.base).map((l) => [l.id, lessonOutline(l.html)]));
-  for (const lang of locales.available.filter((x) => x !== locales.base)) {
+  for (const lang of languages.filter((x) => x !== locales.base)) {
     for (const l of written(lang)) {
       const base = source.get(l.id);
       if (base) assert.deepEqual(compareOutlines(base, lessonOutline(l.html)), [], `${lang}/${l.id}`);
@@ -132,7 +134,7 @@ test('vocabularies: a lesson has one exactly when course.json says so, and it is
   const files = existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => f.replace(/\.json$/, '')) : [];
   const flagged = allLessons(catalog).filter((l) => l.hasVocab).map((l) => l.id);
   assert.deepEqual([...files].sort(), [...flagged].sort(), 'content/vocab/*.json must match lessons with "hasVocab": true');
-  for (const lang of locales.available) {
+  for (const lang of languages) {
     for (const l of allLessons(loadCatalog(portal, lang)).filter((x) => x.hasVocab && x.file)) {
       const loc = loadLocaleVocab(portal, lang, l.id);
       assert.ok(loc, `${lang}: vocab/${l.id}.json missing`);
@@ -149,7 +151,7 @@ test('every Catalan word of a vocabulary has a recorded clip (run: npm run audio
 });
 
 test('exercises: every placeholder in a lesson has data and every exercise is placed', () => {
-  for (const lang of locales.available) {
+  for (const lang of languages) {
     for (const l of allLessons(loadCatalog(portal, lang)).filter((x) => x.file)) {
       const html = readFileSync(join(portal, l.file ?? ''), 'utf8');
       assert.deepEqual(validateExercises(html, loadExercises(portal, lang, l.id)), [], `${lang}: exercises of ${l.id}`);
@@ -158,7 +160,7 @@ test('exercises: every placeholder in a lesson has data and every exercise is pl
 });
 
 test('Catalan prompts and solutions of exercises have recorded clips, in every language (run: npm run audio)', () => {
-  const missing = locales.available.flatMap((lang) => written(lang)
+  const missing = languages.flatMap((lang) => written(lang)
     .flatMap((l) => exerciseTexts(loadExercises(portal, lang, l.id))))
     .filter((t) => !clipFor(audioIndex, t));
   assert.deepEqual(missing, [], 'exercise texts without audio — run npm run audio');

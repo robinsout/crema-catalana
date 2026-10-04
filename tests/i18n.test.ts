@@ -5,6 +5,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createT } from '../src/services/i18n.ts';
 import type { LocalesIndex } from '../src/types/index.ts';
+import { contentLanguages } from '../scripts/lib/catalog.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const portal = join(root, 'content');
@@ -33,13 +34,15 @@ test('t leaves unknown placeholders visible', () => {
   assert.equal(createT({ a: '{x} and {y}' })('a', { x: 1 }), '1 and {y}');
 });
 
-test('locales/index.json lists the default and available languages', () => {
+test('locales/index.json lists the default and available languages, and drafts apart from them', () => {
   assert.ok(locales.available.includes(locales.default));
-  for (const lang of locales.available) assert.match(lang, /^[a-z]{2}$/);
+  assert.ok(locales.available.includes(locales.base));
+  for (const lang of contentLanguages(locales)) assert.match(lang, /^[a-z]{2}$/);
+  for (const lang of locales.drafts ?? []) assert.ok(!locales.available.includes(lang), `${lang} is both published and a draft`);
 });
 
-test('every available language has its own name for the language switcher', () => {
-  for (const lang of locales.available) assert.ok(locales.names?.[lang]?.trim(), `names.${lang}`);
+test('every language has its own name for the language switcher', () => {
+  for (const lang of contentLanguages(locales)) assert.ok(locales.names?.[lang]?.trim(), `names.${lang}`);
 });
 
 test('every string the page uses exists in the base language, and none is unused', () => {
@@ -54,14 +57,14 @@ test('every string the page uses exists in the base language, and none is unused
   assert.deepEqual(keys.filter((k) => !used.has(k)).sort(), [], `unused keys in ${locales.base}/ui.json`);
 });
 
-test('every available language has exactly the keys of the base language', () => {
+test('every language (drafts too) has exactly the keys of the base language', () => {
   const baseKeys = Object.keys(ui(locales.base)).sort();
-  for (const lang of locales.available) {
+  for (const lang of contentLanguages(locales)) {
     assert.deepEqual(Object.keys(ui(lang)).sort(), baseKeys, `${lang}/ui.json keys differ from ${locales.base}`);
   }
 });
 
-test('every language folder is listed as available', () => {
+test('every language folder is listed as available or as a draft', () => {
   const dirs = readdirSync(join(portal, 'locales'), { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
-  assert.deepEqual(dirs.sort(), [...locales.available].sort());
+  assert.deepEqual(dirs.sort(), contentLanguages(locales).sort());
 });

@@ -15,7 +15,7 @@ import { allLessons } from '../src/services/catalog.ts';
 import { normalizeSayText, ttsText } from '../src/services/audio.ts';
 import type { AudioIndex } from '../src/services/audio.ts';
 import { extractSayTexts } from './lib/say-texts.ts';
-import { loadCatalog, loadLocales } from './lib/catalog.ts';
+import { contentLanguages, loadCatalog, loadLocales } from './lib/catalog.ts';
 import { loadVocabSource, vocabTexts } from './lib/vocab.ts';
 import { loadExercises, exerciseTexts } from './lib/exercises.ts';
 
@@ -30,7 +30,7 @@ const clipsDir = join(audioDir, 'clips');
 const indexPath = join(audioDir, 'index.json');
 
 // Catalan phrases from the lessons of every language, plus the (Catalan) lesson titles
-const texts = [...new Set(loadLocales(contentDir).available.flatMap((lang) => {
+const texts = [...new Set(contentLanguages(loadLocales(contentDir)).flatMap((lang) => {
   const catalog = loadCatalog(contentDir, lang);
   return [
     ...allLessons(catalog).filter((l) => l.file).flatMap((l) => extractSayTexts(readFileSync(join(contentDir, l.file ?? ''), 'utf8'))),

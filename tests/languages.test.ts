@@ -152,3 +152,35 @@ test('the other languages are fetched only for a lesson missing in the current o
   await openApp('/en/lesson/intro');
   assert.equal(requested.includes('locales/ru/catalog.json'), false);
 });
+
+// ---------- a language being written (draft) ----------
+
+const withDraft = {
+  ...enSite,
+  'locales/index.json': { ...twoLanguages, available: ['ru'], default: 'ru', drafts: ['en'] },
+};
+
+test('a draft language opens by a direct link and shows itself in the switcher there', async () => {
+  stubSite(withDraft);
+  const { router, w } = await openApp('/en/lesson/intro');
+  assert.equal(router.currentRoute.value.fullPath, '/en/lesson/intro');
+  const options = w.findAll('#nav select.lang-select option');
+  assert.deepEqual(options.map((o) => o.attributes('value')), ['ru', 'en']);
+});
+
+test('a draft language is not offered: no switcher entry elsewhere, never picked from the browser', async () => {
+  stubSite(withDraft);
+  browser = ['en-US'];
+  const { router, w } = await openApp('/');
+  assert.equal(router.currentRoute.value.params.lang, 'ru');
+  assert.equal(w.find('#nav select.lang-select').exists(), false);
+});
+
+test('a lesson page does not send readers to a draft language', async () => {
+  stubSite({ ...withDraft, 'locales/index.json': { base: 'ru', default: 'ru', available: ['ru', 'es'], names: { ru: 'Русский', es: 'Español' }, drafts: ['en'] },
+    'locales/es/ui.json': ruUi, 'locales/es/catalog.json': {} });
+  const { router } = await openApp('/es/lesson/intro');
+  // intro is written in ru and in the draft en: only ru is offered
+  assert.equal(router.currentRoute.value.fullPath, '/es/lesson/intro');
+  assert.deepEqual(wrapper!.findAll('.lesson-missing a').map((a) => a.attributes('lang')), ['ru']);
+});
