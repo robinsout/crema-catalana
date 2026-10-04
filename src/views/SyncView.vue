@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
 import { renderSVG } from 'uqr';
 import { useCatalogStore } from '../stores/catalog.ts';
 import { useSyncStore } from '../stores/sync.ts';
@@ -12,11 +11,9 @@ const catalog = useCatalogStore();
 const sync = useSyncStore();
 const toc = useTocStore();
 const { t } = useI18n();
-const route = useRoute();
-const router = useRouter();
 
-// a code in the address comes from a QR code or a shared link
-const incoming = computed(() => (typeof route.params.code === 'string' ? route.params.code : ''));
+// a code from a QR code or a shared link (the router takes it out of the address)
+const incoming = computed(() => sync.incoming ?? '');
 const typing = ref(false);
 const typed = ref('');
 const badCode = ref(false);
@@ -31,7 +28,6 @@ const qr = computed(() => (sync.code ? renderSVG(joinLink.value, { border: 2 }) 
 
 async function join(input: string): Promise<void> {
   badCode.value = !(await sync.link(input));
-  if (!badCode.value) await router.replace({ name: 'sync', params: { lang: catalog.lang } }); // the code leaves the address bar
 }
 
 async function copyLink(): Promise<void> {
@@ -57,8 +53,11 @@ onMounted(() => toc.collect(null, 'plan'));
     <p class="sub">{{ t('sync.sub') }}</p>
   </header>
   <article class="lesson sync">
+    <!-- shown inside a frame of another page: no actions (clickjacking) -->
+    <p v-if="sync.framed" class="sync-framed">{{ t('sync.framed') }}</p>
+
     <!-- opened from a QR code or a link -->
-    <section v-if="incoming && incoming !== sync.code" class="sync-card">
+    <section v-else-if="incoming && incoming !== sync.code" class="sync-card">
       <h3>{{ t('sync.joinTitle') }}</h3>
       <p>{{ sync.enabled ? t('sync.switchText') : t('sync.joinText') }}</p>
       <p class="sync-code">{{ incoming.match(/.{1,4}/g)?.join('-') }}</p>

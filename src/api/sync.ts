@@ -1,7 +1,7 @@
 // The sync server (see server/). Its address is set at build time: VITE_SYNC_URL.
-import type { BlobResponse, PutBlobRequest, VersionResponse } from '../../shared/sync-api.ts';
+import { DEFAULT_SYNC_URL, type BlobResponse, type PutBlobRequest, type VersionResponse } from '../../shared/sync-api.ts';
 
-export const SYNC_URL: string = (import.meta.env.VITE_SYNC_URL as string | undefined) ?? 'https://188.245.182.47';
+export const SYNC_URL: string = (import.meta.env.VITE_SYNC_URL as string | undefined) ?? DEFAULT_SYNC_URL;
 
 export class SyncHttpError extends Error {
   readonly status: number;

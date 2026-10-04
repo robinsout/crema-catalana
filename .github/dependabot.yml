@@ -1,0 +1,19 @@
+# Weekly update PRs; CI checks each one like any other change.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      # minor and patch updates come together in one PR
+      minor-and-patch:
+        update-types: [minor, patch]
+    ignore:
+      # vue-tsc does not support TypeScript 7 yet (see CLAUDE.md)
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

@@ -28,7 +28,15 @@ export interface Progress {
 
 export type { StorageBackend };
 
-export const canonicalId = (id: string): string => ID_ALIASES[id] ?? id;
+export const canonicalId = (id: string): string => (Object.hasOwn(ID_ALIASES, id) ? ID_ALIASES[id]! : id);
+
+// Lesson and exercise ids: lowercase latin letters, digits and dashes. Saved and synced progress
+// is untrusted, so keys of any other shape (__proto__, constructor, …) are dropped when it is read.
+export const isLessonId = (id: string): boolean => /^[a-z0-9][a-z0-9-]*$/.test(id) && !(id in Object.prototype);
+const isExerciseKey = (key: string): boolean => {
+  const [lesson, exercise, ...rest] = key.split('/');
+  return rest.length === 0 && exercise !== undefined && isLessonId(lesson!) && isLessonId(exercise);
+};
 
 type Loose = Record<string, unknown>;
 const isObject = (v: unknown): v is Loose => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -38,8 +46,10 @@ const isObject = (v: unknown): v is Loose => v !== null && typeof v === 'object'
 function readIdMap<T>(map: unknown, accept: (v: unknown) => T | undefined): Record<string, T> {
   const out: Record<string, T> = {};
   if (!isObject(map)) return out;
-  const entries = Object.entries(map).sort(([a], [b]) => Number(b in ID_ALIASES) - Number(a in ID_ALIASES));
+  const isAlias = (id: string) => Number(Object.hasOwn(ID_ALIASES, id));
+  const entries = Object.entries(map).sort(([a], [b]) => isAlias(b) - isAlias(a));
   for (const [id, value] of entries) {
+    if (!isLessonId(id)) continue;
     const v = accept(value);
     if (v !== undefined) out[canonicalId(id)] = v;
   }
@@ -56,12 +66,12 @@ export function parseProgress(raw: string | null | undefined): Progress {
   const exercises: Record<string, ExerciseResult> = {};
   if (isObject(src.exercises)) {
     for (const [key, r] of Object.entries(src.exercises)) {
-      if (isObject(r) && [r.score, r.total, r.at].every((n) => typeof n === 'number' && Number.isFinite(n))) {
+      if (isExerciseKey(key) && isObject(r) && [r.score, r.total, r.at].every((n) => typeof n === 'number' && Number.isFinite(n))) {
         exercises[key] = { score: r.score as number, total: r.total as number, at: r.at as number };
       }
     }
   }
-  const last = typeof src.last === 'string' && src.last ? canonicalId(src.last) : null;
+  const last = typeof src.last === 'string' && isLessonId(src.last) ? canonicalId(src.last) : null;
   return { ...src, done, doneAt, exercises, last };
 }
 
@@ -102,8 +112,8 @@ export function mergeProgress(local: Partial<Progress>, remote: Partial<Progress
   const done: Record<string, boolean> = {};
   const doneAt: Record<string, number> = {};
   for (const id of new Set([...Object.keys(ld), ...Object.keys(rd)])) {
-    const a = { done: ld[id] === true, at: lt[id] ?? -1, has: id in ld };
-    const b = { done: rd[id] === true, at: rt[id] ?? -1, has: id in rd };
+    const a = { done: ld[id] === true, at: Object.hasOwn(lt, id) ? lt[id]! : -1, has: Object.hasOwn(ld, id) };
+    const b = { done: rd[id] === true, at: Object.hasOwn(rt, id) ? rt[id]! : -1, has: Object.hasOwn(rd, id) };
     const win = !b.has ? a : !a.has ? b
       : a.at > b.at ? a : b.at > a.at ? b
       : (a.done ? a : b);

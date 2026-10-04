@@ -144,6 +144,8 @@ export async function syncOnce(api: SyncApi, keys: SyncKeys, local: Progress, at
 // (the loop above takes the API as a parameter; these use the real server and browser storage)
 
 export { SYNC_URL } from '../api/sync.ts';
+// inside a frame of another page sync stays off (clickjacking)
+export { isFramed } from '../api/frame.ts';
 
 // the saved sync of this device, when its code is still valid
 export function savedSync(): { code: string; lastSyncAt: number | null } | null {

@@ -4,6 +4,7 @@ import { createRouter, createWebHashHistory, type RouteLocationRaw, type RouterH
 import { PLAN_ID, resolveRoute, type Route } from './services/catalog.ts';
 import { useCatalogStore } from './stores/catalog.ts';
 import { useProgressStore } from './stores/progress.ts';
+import { useSyncStore } from './stores/sync.ts';
 
 // "#b1-04" (links before the router) → "/b1-04", resolved by the catch-all route
 export function legacyHashToPath(hash: string): string | null {
@@ -60,8 +61,11 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     if (to.name === 'plan' && lang !== requested) {
       return target({ view: 'plan', focus: param(to.params.focus) || null }, lang);
     }
-    if (to.name === 'sync' && lang !== requested) {
-      return { name: 'sync', params: { lang, ...(param(to.params.code) ? { code: param(to.params.code) } : {}) } };
+    if (to.name === 'sync') {
+      // a code from a QR link moves into memory at once, so it does not stay in the browser history
+      const code = param(to.params.code);
+      if (code) useSyncStore().offer(code);
+      if (code || lang !== requested) return { name: 'sync', params: { lang }, replace: true };
     }
     return true;
   });

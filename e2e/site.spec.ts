@@ -139,3 +139,27 @@ test('the site has an icon', async ({ page, request }) => {
     expect(res.ok(), `${sel} → ${href}`).toBe(true);
   }
 });
+
+test('no page breaks the Content-Security-Policy', async ({ page }) => {
+  await page.addInitScript(() => {
+    (window as unknown as { cspViolations: string[] }).cspViolations = [];
+    document.addEventListener('securitypolicyviolation', (e) => {
+      (window as unknown as { cspViolations: string[] }).cspViolations.push(`${e.violatedDirective} ${e.blockedURI}`);
+    });
+  });
+  const violations = () => page.evaluate(() => (window as unknown as { cspViolations: string[] }).cspViolations);
+  await page.goto('./');
+  await expect(page.locator('meta[http-equiv="Content-Security-Policy"]')).toHaveCount(1);
+  await expect(page.locator('.lesson-head h2')).toContainText('Passos 1');
+  await page.goto('./#/ru/lesson/x-nombres-calendari');
+  await expect(page.locator('.lesson-head h2')).toBeVisible();
+  await expect(page.locator('html')).toHaveClass(/can-say/);
+  const clip = page.waitForRequest(/\/audio\/clips\/[0-9a-f]+\.mp3$/);
+  await page.locator('article.lesson span[lang="ca"]').first().click();
+  await clip;
+  await page.goto('./#/ru/sync');
+  await page.getByRole('button', { name: 'Включить синхронизацию' }).click();
+  await expect(page.locator('.lesson .sync-status')).toHaveClass(/ok/);
+  await page.evaluate(() => document.fonts.ready);
+  expect(await violations()).toEqual([]);
+});

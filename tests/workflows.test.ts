@@ -23,3 +23,21 @@ test('every workflow parses and has jobs with steps', () => {
     }
   }
 });
+
+// A tag can be moved to other code; a commit hash cannot. The comment keeps the version readable for Dependabot.
+test('every action is pinned to a commit hash', () => {
+  for (const f of readdirSync(dir).filter((f) => /\.ya?ml$/.test(f))) {
+    for (const line of readFileSync(join(dir, f), 'utf8').split('\n')) {
+      const uses = line.match(/^\s*(?:-\s*)?uses:\s*(\S+)(.*)$/);
+      if (!uses) continue;
+      assert.match(uses[1]!, /^[\w.-]+\/[\w./-]+@[0-9a-f]{40}$/, `${f}: ${line.trim()}`);
+      assert.match(uses[2]!, /^\s+# v\d/, `${f}: ${line.trim()} needs a "# vX" comment`);
+    }
+  }
+});
+
+test('Dependabot watches npm packages and actions', () => {
+  const cfg = parseDocument(readFileSync(join(dir, '..', 'dependabot.yml'), 'utf8')).toJS() as { version: number; updates: { 'package-ecosystem': string }[] };
+  assert.equal(cfg.version, 2);
+  assert.deepEqual(cfg.updates.map((u) => u['package-ecosystem']).sort(), ['github-actions', 'npm']);
+});

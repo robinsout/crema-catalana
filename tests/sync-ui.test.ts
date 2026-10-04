@@ -141,3 +141,25 @@ test('sync runs only when asked: no requests after changes, over time or on star
   await settle();
   assert.equal(syncRequests(), afterButton, 'no follow-up requests after a sync');
 });
+
+test('a code from a QR link leaves the address at once, before the reader decides', async () => {
+  const code = 'ABCDEFGHJKMNPQRSTVWXYZ01234'.slice(0, 27);
+  const { w, router } = await device(`/ru/sync/${code}`);
+  assert.equal(router.currentRoute.value.fullPath, '/ru/sync');
+  assert.match(w.find('.sync-code').text(), /^ABCD-EFGH/);
+  assert.ok(w.find('button.sync-join').exists(), 'the offer to join stays on screen');
+  assert.equal(syncRequests(), 0);
+});
+
+test('inside a frame of another page sync does nothing (clickjacking)', async () => {
+  vi.stubGlobal('top', {});
+  const { w } = await device('/ru/sync');
+  assert.ok(w.find('.sync-framed').exists());
+  assert.equal(w.find('button.sync-enable').exists(), false);
+  assert.equal(w.find('button.sync-join').exists(), false);
+  const { useSyncStore } = await import('../src/stores/sync.ts');
+  await useSyncStore().enable();
+  await settle();
+  assert.equal(syncRequests(), 0);
+  assert.equal(localStorage.getItem('quadern-sync'), null);
+});

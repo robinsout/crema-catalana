@@ -1,6 +1,7 @@
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { STORAGE_KEY, ID_ALIASES, parseProgress, serializeProgress, createStore, mergeProgress } from '../src/services/progress.ts';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { STORAGE_KEY, ID_ALIASES, parseProgress, serializeProgress, createStore, mergeProgress, canonicalId, isLessonId } from '../src/services/progress.ts';
 
 // Real payloads written by earlier versions of the portal. They must keep loading forever.
 const SAVED = {
@@ -156,4 +157,48 @@ test('merge: per exercise the later result wins', () => {
   assert.deepEqual(mergeProgress(local, remote).exercises, {
     a: { score: 3, total: 3, at: 20 }, b: { score: 3, total: 3, at: 50 }, c: { score: 0, total: 2, at: 1 },
   });
+});
+
+// Saved and synced progress is untrusted input: only lesson ids and "<lesson>/<exercise>" keys are kept.
+test('progress ignores ids that are not lesson ids (__proto__, constructor, odd strings)', () => {
+  const p = parseProgress(JSON.stringify({
+    done: { ['__proto__']: true, constructor: true, toString: true, 'b1-01': true, 'Bad Id': true, '': true },
+    doneAt: { ['__proto__']: 5, constructor: 6, 'b1-01': 7 },
+    exercises: {
+      ['__proto__']: { score: 1, total: 1, at: 1 },
+      'b1-01/__proto__': { score: 1, total: 1, at: 1 },
+      'x-temps-verbals/tenses': { score: 2, total: 3, at: 5 },
+    },
+    last: '__proto__',
+  }));
+  assert.deepEqual(Object.keys(p.done), ['b1-01']);
+  assert.deepEqual(Object.keys(p.doneAt), ['b1-01']);
+  assert.deepEqual(Object.keys(p.exercises), ['x-temps-verbals/tenses']);
+  assert.equal(Object.getPrototypeOf(p.done), Object.prototype);
+  assert.equal(Object.getPrototypeOf(p.exercises), Object.prototype);
+  assert.equal(p.last, null);
+});
+
+test('canonicalId does not read inherited properties', () => {
+  for (const id of ['__proto__', 'constructor', 'toString', 'hasOwnProperty']) assert.equal(canonicalId(id), id);
+});
+
+test('merge does not mistake inherited properties for marks', () => {
+  const m = mergeProgress({ done: {}, doneAt: {} }, { done: { constructor: true }, doneAt: { constructor: 5 } });
+  assert.deepEqual(m.done, { constructor: true });
+  assert.deepEqual(m.doneAt, { constructor: 5 });
+});
+
+test('every published lesson id and exercise id has the accepted format', () => {
+  const ids: string[] = JSON.parse(readFileSync('tests/published-ids.json', 'utf8'));
+  for (const id of ids) assert.ok(isLessonId(id), id);
+  for (const lang of readdirSync('content/locales')) {
+    const dir = `content/locales/${lang}/exercises`;
+    if (!existsSync(dir)) continue;
+    for (const file of readdirSync(dir)) {
+      for (const ex of Object.keys(JSON.parse(readFileSync(`${dir}/${file}`, 'utf8')))) {
+        assert.ok(isLessonId(ex), `${file}: ${ex}`);
+      }
+    }
+  }
 });

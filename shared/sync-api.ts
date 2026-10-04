@@ -3,6 +3,9 @@
 
 export const SYNC_ID_RE = /^[0-9a-f]{32}$/;
 
+// The production server; a build can point elsewhere with VITE_SYNC_URL.
+export const DEFAULT_SYNC_URL = 'https://188.245.182.47';
+
 // GET /v1/blob/:id → 200
 export interface BlobResponse {
   data: string; // base64 of iv + AES-GCM ciphertext
