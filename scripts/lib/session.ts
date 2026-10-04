@@ -45,3 +45,31 @@ export function summarize(results: { level: Level }[]): { exitCode: number; line
   if (fails) return { exitCode: 1, line: `Не готово: ошибок ${fails}, предупреждений ${warns}` };
   return { exitCode: 0, line: warns ? `Готово к закрытию, есть предупреждения: ${warns}` : 'Всё в порядке' };
 }
+
+// Which checks a set of changed files needs. Shared by the session check and the pre-push hook
+// (scripts/plan-checks.ts), so documentation edits do not run the test suites.
+export interface CheckPlan {
+  tests: boolean;  // npm run check + e2e
+  visual: boolean; // screenshot tests: the look may have changed
+  audio: boolean;  // new phrases may need recordings (npm run audio)
+  server: boolean; // the sync server is deployed by hand: npm run deploy:sync
+}
+
+const DOCS = [/\.md$/, /^\.claude\//, /^LICENSE$/];
+const VISUAL = [/^src\/(styles|components|views)\//, /^src\/App\.vue$/, /^index\.html$/, /^package-lock\.json$/,
+  /^content\/locales\/[^/]+\/(lessons\/|catalog\.json$|ui\.json$)/, /^content\/favicon/];
+const AUDIO = [/^content\/locales\/[^/]+\/(lessons|vocab|exercises)\//, /^content\/vocab\//];
+const SERVER = [/^server\//, /^shared\//, /^deploy\/(?!README\.md$)/];
+
+const matches = (file: string, patterns: RegExp[]) => patterns.some((p) => p.test(file));
+export const isDocsOnly = (files: string[]): boolean => files.every((f) => matches(f, DOCS));
+
+export function planChecks(files: string[]): CheckPlan {
+  const code = files.filter((f) => !matches(f, DOCS));
+  return {
+    tests: code.length > 0,
+    visual: code.some((f) => matches(f, VISUAL)),
+    audio: code.some((f) => matches(f, AUDIO)),
+    server: code.some((f) => matches(f, SERVER)),
+  };
+}

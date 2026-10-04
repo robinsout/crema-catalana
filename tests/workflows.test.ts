@@ -6,6 +6,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseDocument } from 'yaml';
+import { isDocsOnly } from '../scripts/lib/session.ts';
 
 const dir = join(dirname(fileURLToPath(import.meta.url)), '..', '.github', 'workflows');
 
@@ -40,4 +41,12 @@ test('Dependabot watches npm packages and actions', () => {
   const cfg = parseDocument(readFileSync(join(dir, '..', 'dependabot.yml'), 'utf8')).toJS() as { version: number; updates: { 'package-ecosystem': string }[] };
   assert.equal(cfg.version, 2);
   assert.deepEqual(cfg.updates.map((u) => u['package-ecosystem']).sort(), ['github-actions', 'npm']);
+});
+
+test('CI skips exactly the files the pre-push hook treats as documentation', () => {
+  const wf = parseDocument(readFileSync(join(dir, 'pages.yml'), 'utf8')).toJS() as { on: Record<string, { 'paths-ignore'?: string[] }> };
+  const ignored = ['**.md', '.claude/**', 'LICENSE'];
+  assert.deepEqual(wf.on.push?.['paths-ignore'], ignored);
+  assert.deepEqual(wf.on.pull_request?.['paths-ignore'], ignored);
+  assert.ok(isDocsOnly(['README.md', 'deploy/README.md', '.claude/skills/x/SKILL.md', 'LICENSE']));
 });

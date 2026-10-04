@@ -14,6 +14,12 @@ if [ "$have" != "$want" ]; then
   exit 1
 fi
 
+# Only documentation (*.md, .claude/) is being pushed: nothing for the checks to verify
+if [ "$(node scripts/plan-checks.ts 2>/dev/null)" = skip ]; then
+  echo "pre-push: only documentation changed, checks skipped"
+  exit 0
+fi
+
 echo "pre-push: npm run check (Node $(node --version))"
 npm run check --silent || { echo "pre-push: checks failed, push aborted"; exit 1; }
 echo "pre-push: npm run e2e (browser tests)"

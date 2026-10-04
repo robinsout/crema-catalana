@@ -1,11 +1,15 @@
 // End-of-session check: is everything committed, tested, pushed, deployed and alive?
-// Read-only: it changes nothing, only reports. The /close-session ritual runs it twice
-// (before the commit and after the push); it can also be run by hand.
+// Read-only: it changes nothing, only reports. Used by the /close-session ritual; can be run by hand.
 //
-//   npm run session                  full check
-//   npm run session -- --no-build    skip npm run check (types, tests, build)
-//   npm run session -- --e2e         also browser tests (they run on every push anyway)
-//   npm run session -- --visual      also screenshot tests (local only)
+// It runs only the checks the changes need (planChecks): the changes are uncommitted files plus
+// commits not yet pushed. Nothing changed or only documentation → no tests; the look may have
+// changed → screenshot tests too. Pushed code was already verified by the pre-push hook and CI.
+//
+//   npm run session                  checks the changes need
+//   npm run session -- --full        all checks, browser and screenshot tests included
+//   npm run session -- --no-build    no tests at all
+//   npm run session -- --e2e         also browser tests (the pre-push hook runs them anyway)
+//   npm run session -- --visual      also screenshot tests
 //   npm run session -- --offline     no GitHub, site, sync server or SSH
 //
 // Exit code 1 when something must be fixed before closing the session.
@@ -14,7 +18,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { connect } from 'node:tls';
 import {
-  backlogInProgress, builtEntry, daysUntil, memoryDirFor, memoryIndexProblems, summarize, type Level,
+  backlogInProgress, builtEntry, daysUntil, memoryDirFor, memoryIndexProblems, planChecks, summarize, type Level,
 } from './lib/session.ts';
 
 const REPO = 'robinsout/crema-catalana';
@@ -85,19 +89,36 @@ if (behind !== '0') report('warn', 'На GitHub есть коммиты, кот�
 const stashes = git('stash', 'list').split('\n').filter(Boolean);
 if (stashes.length) report('warn', 'Отложенные изменения (git stash)', String(stashes.length));
 
+// ---------------------------------------------------------------- what changed → what to check
+const changed = [...new Set([
+  ...git('diff', '--name-only', 'HEAD').split('\n'),
+  ...git('ls-files', '--others', '--exclude-standard').split('\n'),
+  ...git('diff', '--name-only', '@{upstream}', 'HEAD').split('\n'),
+].filter(Boolean))];
+const full = args.has('--full');
+const plan = planChecks(changed);
+const runTests = !args.has('--no-build') && (full || plan.tests);
+const runE2e = full || args.has('--e2e');
+const runVisual = full || args.has('--visual') || (plan.visual && !args.has('--no-build'));
+console.log('\n## Что изменилось');
+report('ok', 'Изменённые файлы', changed.length ? `${changed.length}: ${changed.slice(0, 12).join(', ')}${changed.length > 12 ? ', …' : ''}` : 'нет — код уже проверен при пуше и в CI');
+if (changed.length && !plan.tests) report('ok', 'Только документация', 'тесты не нужны');
+if (plan.audio) report('warn', 'Тексты уроков', 'новые фразы нужно озвучить: npm run audio (тесты проверят полноту)');
+if (plan.server) report('warn', 'Код сервера синхронизации', 'после пуша выложить на сервер: npm run deploy:sync');
+
 // ---------------------------------------------------------------- quality
 console.log('\n## Проверки');
-if (args.has('--no-build')) report('skip', 'npm run check', 'пропущено (--no-build)');
+if (!runTests) report('skip', 'Типы, тесты, сборка', args.has('--no-build') ? '--no-build' : 'не нужны: код не менялся');
 else {
   const check = run('npm', ['run', 'check', '--silent']);
   const tests = (check.out + check.err).match(/Tests\s+(.*)/)?.[1]?.trim() ?? '';
   report(check.ok ? 'ok' : 'fail', 'Типы, тесты, сборка', check.ok ? tests : `упало\n${(check.out + check.err).split('\n').slice(-25).join('\n')}`);
 }
-if (args.has('--e2e')) {
+if (runE2e) {
   const e2e = run('npm', ['run', 'e2e', '--silent']);
   report(e2e.ok ? 'ok' : 'fail', 'Тесты в браузере', (e2e.out.match(/\d+ (passed|failed).*/g) ?? []).join(', '));
 }
-if (args.has('--visual')) {
+if (runVisual) {
   const visual = run('npm', ['run', 'e2e:visual', '--silent']);
   report(visual.ok ? 'ok' : 'fail', 'Скриншоты', visual.ok ? 'совпадают с эталонами' : 'есть отличия: посмотреть test-results/, при намеренном изменении — npm run e2e:visual:update');
 }
@@ -113,7 +134,8 @@ console.log('\n## GitHub и сайт');
 if (!online) report('skip', 'GitHub, сайт, сервер', '--offline');
 else {
   type Run = { name: string; status: string; conclusion: string | null; html_url: string };
-  const head = git('rev-parse', '@{upstream}');
+  // CI skips documentation-only commits (paths-ignore): look at the last pushed commit it runs for
+  const head = git('log', '-1', '--format=%H', '@{upstream}', '--', '.', ':(exclude)*.md', ':(exclude).claude', ':(exclude)LICENSE');
   const runs = await getJson<{ workflow_runs: Run[] }>(`https://api.github.com/repos/${REPO}/actions/runs?head_sha=${head}&event=push`);
   const ci = runs?.workflow_runs[0];
   if (!runs) report('skip', 'CI', 'GitHub API не ответил (лимит 60 запросов в час без входа)');
@@ -128,7 +150,7 @@ else {
   const local = existsSync('dist/index.html') ? builtEntry(readFileSync('dist/index.html', 'utf8')) : null;
   const deployed = live ? builtEntry(live.text) : null;
   if (!live || live.status !== 200) report('fail', 'Сайт', `не отвечает (${live?.status ?? 'нет связи'})`);
-  else if (!local || args.has('--no-build')) report('ok', 'Сайт', `отвечает, ${deployed}`);
+  else if (!local || !runTests) report('ok', 'Сайт', `отвечает, ${deployed}`);
   else report(local === deployed ? 'ok' : 'warn', 'Сайт', local === deployed ? 'отвечает и совпадает с локальной сборкой' : `на сайте ${deployed}, локально ${local}: деплой ещё не прошёл или есть незапушенные изменения`);
 
   // ------------------------------------------------------------ sync server

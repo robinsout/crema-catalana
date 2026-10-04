@@ -1,9 +1,12 @@
 name: CI and Pages
 
 on:
+  # documentation does not reach the site: no checks, no deploy (same list as isDocsOnly in scripts/lib/session.ts)
   push:
     branches: [master]
+    paths-ignore: ['**.md', '.claude/**', 'LICENSE']
   pull_request:
+    paths-ignore: ['**.md', '.claude/**', 'LICENSE']
   workflow_dispatch:
 
 permissions:
