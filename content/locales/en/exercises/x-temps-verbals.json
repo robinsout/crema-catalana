@@ -1,0 +1,106 @@
+{
+ "tenses": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Ahir ___ (anar) al mercat.</span>",
+    "answers": [
+     "vaig anar"
+    ],
+    "hint": "“yesterday”"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Avui ___ (treballar) fins a les set.</span>",
+    "answers": [
+     "he treballat"
+    ],
+    "hint": "“today”"
+   },
+   {
+    "prompt": "<span lang=\"ca\">De petit, ___ (viure) a Londres.</span>",
+    "answers": [
+     "vivia"
+    ],
+    "hint": "background, childhood"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Demà ___ (fer) sol.</span>",
+    "answers": [
+     "farà"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Quan vaig arribar, la classe ja ___ (començar).</span>",
+    "answers": [
+     "havia començat"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Si tingués temps, ___ (viatjar) més.</span>",
+    "answers": [
+     "viatjaria"
+    ]
+   }
+  ]
+ },
+ "which-tense": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Aquest matí he esmorzat a casa.</span>",
+    "options": [
+     "Perfet",
+     "Passat perifràstic",
+     "Imperfet",
+     "Present"
+    ],
+    "answer": 0,
+    "explain": "“This morning” — the period isn’t over yet."
+   },
+   {
+    "prompt": "<span lang=\"ca\">L'escriptor nasqué a Girona.</span>",
+    "options": [
+     "Passat perifràstic",
+     "Passat simple",
+     "Imperfet",
+     "Futur"
+    ],
+    "answer": 1,
+    "explain": "The written form; in speech it would be va néixer."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Ara estic cuinant.</span>",
+    "options": [
+     "Present",
+     "Estar + gerundi",
+     "Futur",
+     "Perfet"
+    ],
+    "answer": 1,
+    "explain": "Happening right now."
+   },
+   {
+    "prompt": "<span lang=\"ca\">A les deu ja hauré sortit.</span>",
+    "options": [
+     "Futur",
+     "Condicional",
+     "Futur perfet",
+     "Plusquamperfet"
+    ],
+    "answer": 2,
+    "explain": "By ten o’clock it will already be over."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Cada estiu anàvem a la platja.</span>",
+    "options": [
+     "Passat perifràstic",
+     "Imperfet",
+     "Perfet",
+     "Present"
+    ],
+    "answer": 1,
+    "explain": "A habit in the past — English “we used to go” / “we would go”."
+   }
+  ]
+ }
+}

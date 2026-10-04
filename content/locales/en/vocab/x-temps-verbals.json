@@ -1,0 +1,93 @@
+{
+ "groups": {
+  "passat": "The past",
+  "recent": "Today, already, never",
+  "ara": "Now",
+  "futur": "The future"
+ },
+ "words": {
+  "ahir": {
+   "tr": "yesterday",
+   "note": "→ vaig fer"
+  },
+  "abans": {
+   "tr": "before, in the past",
+   "note": "→ feia"
+  },
+  "de-petit": {
+   "tr": "as a child",
+   "note": "→ feia"
+  },
+  "any-passat": {
+   "tr": "last year",
+   "note": "→ vaig fer"
+  },
+  "setmana-passada": {
+   "tr": "last week",
+   "note": "→ vaig fer"
+  },
+  "fa": {
+   "tr": "two years ago",
+   "note": "→ vaig fer"
+  },
+  "mentre": {
+   "tr": "while",
+   "note": "background → feia"
+  },
+  "avui": {
+   "tr": "today",
+   "note": "→ he fet"
+  },
+  "aquest-mati": {
+   "tr": "this morning",
+   "note": "→ he fet"
+  },
+  "aquest-any": {
+   "tr": "this year",
+   "note": "→ he fet"
+  },
+  "ja": {
+   "tr": "already"
+  },
+  "encara": {
+   "tr": "still, yet"
+  },
+  "mai": {
+   "tr": "never"
+  },
+  "sempre": {
+   "tr": "always"
+  },
+  "sovint": {
+   "tr": "often"
+  },
+  "ara": {
+   "tr": "now",
+   "note": "→ faig"
+  },
+  "ara-mateix": {
+   "tr": "right now",
+   "note": "→ estic fent"
+  },
+  "cada-dia": {
+   "tr": "every day",
+   "note": "→ faig"
+  },
+  "dema": {
+   "tr": "tomorrow",
+   "note": "→ faré"
+  },
+  "dema-passat": {
+   "tr": "the day after tomorrow",
+   "note": "→ faré"
+  },
+  "any-que-ve": {
+   "tr": "next year",
+   "note": "→ faré"
+  },
+  "quan": {
+   "tr": "when",
+   "note": "quan + subj. about the future: quan arribis"
+  }
+ }
+}
