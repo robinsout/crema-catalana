@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import { useCatalogStore } from '../stores/catalog.ts';
 import { useProgressStore } from '../stores/progress.ts';
@@ -9,6 +9,7 @@ import { useLessonLink } from '../composables/useLessonLink.ts';
 import type { Lesson } from '../types/index.ts';
 import LessonBadge from './LessonBadge.vue';
 import SyncStatusLine from './SyncStatusLine.vue';
+import TableOfContents from './TableOfContents.vue';
 
 const catalog = useCatalogStore();
 const progress = useProgressStore();
@@ -27,6 +28,12 @@ const onKey = (e: KeyboardEvent): void => { if (e.key === 'Escape') { open.value
 onMounted(() => window.addEventListener('keydown', onKey));
 onBeforeUnmount(() => window.removeEventListener('keydown', onKey));
 const hasChapters = computed(() => route.name === 'lesson' && toc.kind === 'lesson' && toc.sections.length > 0);
+// a chapter from the phone menu: the open menu pushes the page down, so it closes before the jump
+async function jumpFromMenu(id: string): Promise<void> {
+  open.value = false;
+  await nextTick();
+  toc.jump(id);
+}
 
 const summary = computed(() => progress.summary);
 const isPlan = computed(() => route.name === 'plan');
@@ -40,11 +47,12 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
       <h1>Quadern de català<span>{{ t('brand.subtitle') }}</span></h1>
       <div class="brand-actions">
         <button v-if="hasChapters" class="nav-toggle toc-toggle" type="button" aria-controls="toc-panel" :aria-expanded="toc.panelOpen" @click="toc.panelOpen = !toc.panelOpen">{{ t('toc.toggle') }}</button>
-        <button class="nav-toggle" type="button" aria-controls="nav" :aria-expanded="open" @click="open = !open">{{ t('nav.toggle') }}</button>
+        <button class="nav-toggle menu-toggle" type="button" aria-controls="nav" :aria-expanded="open" :aria-label="t('nav.toggle')" @click="open = !open"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path v-if="open" d="M4 4l10 10M14 4L4 14" /><path v-else d="M2 4h14M2 9h14M2 14h14" /></svg></button>
       </div>
     </div>
     <div class="panot" aria-hidden="true"></div>
     <nav id="nav" class="nav" :class="{ open }" :aria-label="t('nav.label')">
+      <TableOfContents v-if="hasChapters" menu @jump="jumpFromMenu" />
       <p class="progress">
         <span>{{ t('progress.done', summary) }}</span>
         <span>{{ t('progress.ready', summary) }}</span>

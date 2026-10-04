@@ -149,6 +149,27 @@ test('the chapters button is only on lesson pages', async () => {
   assert.equal(w.find('.toc-toggle').exists(), false);
 });
 
+test('phones: the menu of a lesson starts with its chapters; a jump closes the menu', async () => {
+  const { w } = await openApp('/ru/lesson/intro');
+  const menu = w.find('button[aria-controls="nav"]');
+  assert.equal(menu.attributes('aria-label'), 'nav.toggle');
+  await menu.trigger('click');
+  const nav = w.find('#nav');
+  const chapters = nav.find('.nav-chapters');
+  assert.ok(chapters.exists());
+  assert.ok(nav.element.firstElementChild === chapters.element, 'the chapters come first');
+  assert.equal(chapters.findAll('li').length, 3);
+  await chapters.findAll('a')[2]?.trigger('click');
+  await flushPromises();
+  assert.ok(scrolled.includes('s3'));
+  assert.equal(menu.attributes('aria-expanded'), 'false');
+});
+
+test('phones: the menu of the plan has no chapters', async () => {
+  const { w } = await openApp('/ru/plan');
+  assert.equal(w.find('#nav .nav-chapters').exists(), false);
+});
+
 test('a lesson tells that Catalan phrases can be heard', async () => {
   const { w } = await openApp('/ru/lesson/intro');
   assert.ok(w.find('.lesson-head .say-tip').exists());

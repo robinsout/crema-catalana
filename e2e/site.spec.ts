@@ -38,14 +38,16 @@ test('an old link to an unwritten unit shows that unit at the top of the plan', 
   await expect.poll(async () => (await unit.boundingBox())?.y ?? 9999, { timeout: 5000 }).toBeLessThan(header + 80);
 });
 
-test('narrow screens: the header stays on top and opens the chapters of a lesson', async ({ page }, info) => {
-  test.skip(info.project.name !== 'phone', 'the chapters panel is for narrow screens');
+test('phones: the header stays on top, its menu starts with the chapters of the lesson', async ({ page }, info) => {
+  test.skip(info.project.name !== 'phone', 'the menu is for narrow screens');
   await page.goto('./#/ru/lesson/x-temps-verbals');
   await page.evaluate(() => window.scrollTo(0, 3000));
-  await expect(page.locator('.toc-toggle')).toBeInViewport();
-  await page.locator('.toc-toggle').click();
-  await page.locator('.toc-panel a', { hasText: 'Практика' }).click();
-  await expect(page.locator('.toc-panel')).toHaveCount(0);
+  const menu = page.locator('button[aria-controls="nav"]');
+  await expect(menu).toBeInViewport();
+  await expect(page.locator('.toc-toggle')).toBeHidden();
+  await menu.click();
+  await page.locator('.nav-chapters a', { hasText: 'Практика' }).click();
+  await expect(page.locator('#nav')).toBeHidden();
   const header = await page.locator('.side').evaluate((el) => el.getBoundingClientRect().bottom);
   await expect.poll(async () => (await page.locator('#practica h2').boundingBox())?.y ?? -1).toBeGreaterThanOrEqual(header - 2);
 });

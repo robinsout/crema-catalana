@@ -63,14 +63,14 @@ for (const scheme of ['light', 'dark'] as const) {
 }
 
 for (const scheme of ['light', 'dark'] as const) {
-  test(`chapters panel and a studied chapter, ${scheme} theme @visual`, async ({ page }, info) => {
-    test.skip(info.project.name !== 'phone', 'the chapters panel is for narrow screens');
+  test(`phone menu with chapters and a studied chapter, ${scheme} theme @visual`, async ({ page }, info) => {
+    test.skip(info.project.name !== 'phone', 'the menu is for narrow screens');
     await page.emulateMedia({ colorScheme: scheme });
     await page.goto('./#/ru/lesson/x-temps-verbals');
     await page.locator('#mapa .section-end button').click();
     await page.evaluate(() => window.scrollTo(0, 0));
-    await page.locator('.toc-toggle').click();
+    await page.locator('button[aria-controls="nav"]').click();
     await page.evaluate(() => document.fonts.ready);
-    await expect(page).toHaveScreenshot(`chapters-panel-${scheme}.png`);
+    await expect(page).toHaveScreenshot(`menu-chapters-${scheme}.png`);
   });
 }
