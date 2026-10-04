@@ -109,10 +109,10 @@ test('no page scrolls sideways', async ({ page }) => {
 
 test('the menu leads from the plan to a lesson and back', async ({ page, isMobile }) => {
   await page.goto('./#/ru/plan');
-  if (isMobile) await page.locator('.nav-toggle').click();
+  if (isMobile) await page.locator('button[aria-controls="nav"]').click();
   await page.locator('.lesson-list a', { hasText: 'Els temps verbals' }).click();
   await expect(page).toHaveURL(/#\/ru\/lesson\/x-temps-verbals$/);
-  if (isMobile) await page.locator('.nav-toggle').click();
+  if (isMobile) await page.locator('button[aria-controls="nav"]').click();
   await page.locator('.lesson-list a.plan-link').click();
   await expect(page).toHaveURL(/#\/ru\/plan$/);
 });
