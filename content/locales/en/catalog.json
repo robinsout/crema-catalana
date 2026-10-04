@@ -36,7 +36,8 @@
       ],
       "vocab": "Greetings and goodbyes, countries, languages",
       "extra": "The alphabet and spelling out loud: «ela geminada», «ce trencada», «essa doble»",
-      "mission": "Introduce yourself in Catalan to a Catalan speaker and ask them to spell their surname for you"
+      "mission": "Introduce yourself in Catalan to a Catalan speaker and ask them to spell their surname for you",
+      "date": "2026-10-04"
     },
     "b1-02": {
       "topic": "Family, age, talking about the people close to you",

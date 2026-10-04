@@ -1,0 +1,134 @@
+{
+ "ser": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Jo ___ de Londres.</span>",
+    "answers": [
+     "soc"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Maria ___ de Girona.</span>",
+    "answers": [
+     "és"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Tu ___ la nova companya?</span>",
+    "answers": [
+     "ets"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Nosaltres ___ estudiants de català.</span>",
+    "answers": [
+     "som"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Vosaltres ___ anglesos?</span>",
+    "answers": [
+     "sou"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Elles ___ italianes.</span>",
+    "answers": [
+     "són"
+    ],
+    "hint": "with an accent mark"
+   }
+  ]
+ },
+ "nacionalitats": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">La Fiona és ___.</span> (escocès)",
+    "answers": [
+     "escocesa"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Laura és ___.</span> (anglès)",
+    "answers": [
+     "anglesa"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Siobhan és ___.</span> (irlandès)",
+    "answers": [
+     "irlandesa"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Hanna és ___.</span> (alemany)",
+    "answers": [
+     "alemanya"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Giulia és ___.</span> (italià)",
+    "answers": [
+     "italiana"
+    ]
+   }
+  ]
+ },
+ "situacions": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "5:30 pm, you walk into a shop. How do you greet them?",
+    "options": [
+     "Bon dia!",
+     "Bona tarda!",
+     "Bona nit!"
+    ],
+    "answer": 1,
+    "explain": "After lunch and while it’s light — bona tarda."
+   },
+   {
+    "prompt": "You say goodbye to a classmate you’ll see in class tomorrow.",
+    "options": [
+     "Fins demà!",
+     "Bon vespre!",
+     "Encantat!"
+    ],
+    "answer": 0,
+    "explain": "Fins demà — see you tomorrow."
+   },
+   {
+    "prompt": "How do you ask an older lady at the town hall counter for her name?",
+    "options": [
+     "Com et dius?",
+     "Com es diu?",
+     "Qui ets?"
+    ],
+    "answer": 1,
+    "explain": "With vostè the verb is in the he/she form: Com es diu (vostè)?"
+   },
+   {
+    "prompt": "You are a woman and you’ve just been introduced. What do you say?",
+    "options": [
+     "Encantat!",
+     "Encantada!",
+     "Igualment!"
+    ],
+    "answer": 1,
+    "explain": "Encantat/encantada agrees with the person speaking."
+   },
+   {
+    "prompt": "How do you introduce your friend Joan?",
+    "options": [
+     "Et presento Joan.",
+     "Et presento en Joan.",
+     "Et presento el Joan."
+    ],
+    "answer": 1,
+    "explain": "Before a man’s name — the personal article en."
+   }
+  ]
+ }
+}

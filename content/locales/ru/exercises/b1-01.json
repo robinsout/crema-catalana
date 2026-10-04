@@ -1,0 +1,134 @@
+{
+ "ser": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Jo ___ de Moscou.</span>",
+    "answers": [
+     "soc"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Maria ___ de Girona.</span>",
+    "answers": [
+     "és"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Tu ___ la nova companya?</span>",
+    "answers": [
+     "ets"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Nosaltres ___ estudiants de català.</span>",
+    "answers": [
+     "som"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Vosaltres ___ russos?</span>",
+    "answers": [
+     "sou"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Elles ___ italianes.</span>",
+    "answers": [
+     "són"
+    ],
+    "hint": "со знаком ударения"
+   }
+  ]
+ },
+ "nacionalitats": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">La Irina és ___.</span> (rus)",
+    "answers": [
+     "russa"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Laura és ___.</span> (anglès)",
+    "answers": [
+     "anglesa"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Giulia és ___.</span> (italià)",
+    "answers": [
+     "italiana"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Hanna és ___.</span> (alemany)",
+    "answers": [
+     "alemanya"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">L'Olena és ___.</span> (ucraïnès)",
+    "answers": [
+     "ucraïnesa"
+    ]
+   }
+  ]
+ },
+ "situacions": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "17:30, вы заходите в магазин. Как поздороваться?",
+    "options": [
+     "Bon dia!",
+     "Bona tarda!",
+     "Bona nit!"
+    ],
+    "answer": 1,
+    "explain": "После обеда и пока светло — bona tarda."
+   },
+   {
+    "prompt": "Вы прощаетесь с однокурсником, увидитесь завтра на занятии.",
+    "options": [
+     "Fins demà!",
+     "Bon vespre!",
+     "Encantat!"
+    ],
+    "answer": 0,
+    "explain": "Fins demà — до завтра."
+   },
+   {
+    "prompt": "Как спросить имя у пожилой дамы в окошке ajuntament?",
+    "options": [
+     "Com et dius?",
+     "Com es diu?",
+     "Qui ets?"
+    ],
+    "answer": 1,
+    "explain": "С vostè глагол в 3-м лице: Com es diu (vostè)?"
+   },
+   {
+    "prompt": "Вы — женщина, вас только что познакомили. Что сказать?",
+    "options": [
+     "Encantat!",
+     "Encantada!",
+     "Igualment!"
+    ],
+    "answer": 1,
+    "explain": "Encantat/encantada согласуется с тем, кто говорит."
+   },
+   {
+    "prompt": "Как представить друга Жоана?",
+    "options": [
+     "Et presento Joan.",
+     "Et presento en Joan.",
+     "Et presento el Joan."
+    ],
+    "answer": 1,
+    "explain": "Перед мужским именем — личный артикль en."
+   }
+  ]
+ }
+}

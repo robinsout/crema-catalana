@@ -1,0 +1,225 @@
+{
+ "groups": [
+  {
+   "id": "salutacions",
+   "words": [
+    {
+     "id": "hola",
+     "ca": "hola"
+    },
+    {
+     "id": "bon-dia",
+     "ca": "bon dia"
+    },
+    {
+     "id": "bona-tarda",
+     "ca": "bona tarda"
+    },
+    {
+     "id": "bon-vespre",
+     "ca": "bon vespre"
+    },
+    {
+     "id": "bona-nit",
+     "ca": "bona nit"
+    },
+    {
+     "id": "adeu",
+     "ca": "adéu"
+    },
+    {
+     "id": "a-reveure",
+     "ca": "a reveure"
+    },
+    {
+     "id": "fins-dema",
+     "ca": "fins demà"
+    },
+    {
+     "id": "gracies",
+     "ca": "gràcies"
+    },
+    {
+     "id": "encantat",
+     "ca": "encantat",
+     "gender": "mf"
+    },
+    {
+     "id": "molt-de-gust",
+     "ca": "molt de gust"
+    }
+   ]
+  },
+  {
+   "id": "persones",
+   "words": [
+    {
+     "id": "jo",
+     "ca": "jo"
+    },
+    {
+     "id": "tu",
+     "ca": "tu"
+    },
+    {
+     "id": "ell",
+     "ca": "ell",
+     "gender": "m"
+    },
+    {
+     "id": "ella",
+     "ca": "ella",
+     "gender": "f"
+    },
+    {
+     "id": "voste",
+     "ca": "vostè",
+     "gender": "mf"
+    },
+    {
+     "id": "nosaltres",
+     "ca": "nosaltres"
+    },
+    {
+     "id": "vosaltres",
+     "ca": "vosaltres"
+    },
+    {
+     "id": "ells",
+     "ca": "ells",
+     "gender": "m"
+    },
+    {
+     "id": "elles",
+     "ca": "elles",
+     "gender": "f"
+    },
+    {
+     "id": "nom",
+     "ca": "el nom",
+     "gender": "m",
+     "plural": "noms"
+    },
+    {
+     "id": "cognom",
+     "ca": "el cognom",
+     "gender": "m",
+     "plural": "cognoms"
+    }
+   ]
+  },
+  {
+   "id": "paisos",
+   "words": [
+    {
+     "id": "espanya",
+     "ca": "Espanya"
+    },
+    {
+     "id": "russia",
+     "ca": "Rússia"
+    },
+    {
+     "id": "ucraina",
+     "ca": "Ucraïna"
+    },
+    {
+     "id": "anglaterra",
+     "ca": "Anglaterra"
+    },
+    {
+     "id": "franca",
+     "ca": "França"
+    },
+    {
+     "id": "italia",
+     "ca": "Itàlia"
+    },
+    {
+     "id": "alemanya-p",
+     "ca": "Alemanya"
+    },
+    {
+     "id": "catalunya",
+     "ca": "Catalunya"
+    }
+   ]
+  },
+  {
+   "id": "nacionalitats",
+   "words": [
+    {
+     "id": "rus",
+     "ca": "rus, russa",
+     "gender": "mf"
+    },
+    {
+     "id": "espanyol",
+     "ca": "espanyol, espanyola",
+     "gender": "mf"
+    },
+    {
+     "id": "angles",
+     "ca": "anglès, anglesa",
+     "gender": "mf"
+    },
+    {
+     "id": "frances",
+     "ca": "francès, francesa",
+     "gender": "mf"
+    },
+    {
+     "id": "italia-n",
+     "ca": "italià, italiana",
+     "gender": "mf"
+    },
+    {
+     "id": "alemany",
+     "ca": "alemany, alemanya",
+     "gender": "mf"
+    },
+    {
+     "id": "ucraines",
+     "ca": "ucraïnès, ucraïnesa",
+     "gender": "mf"
+    },
+    {
+     "id": "catala",
+     "ca": "català, catalana",
+     "gender": "mf"
+    }
+   ]
+  },
+  {
+   "id": "llengues",
+   "words": [
+    {
+     "id": "llengua",
+     "ca": "la llengua",
+     "gender": "f",
+     "plural": "llengües"
+    },
+    {
+     "id": "castella",
+     "ca": "el castellà",
+     "gender": "m"
+    },
+    {
+     "id": "catala-l",
+     "ca": "el català",
+     "gender": "m"
+    },
+    {
+     "id": "rus-l",
+     "ca": "el rus",
+     "gender": "m"
+    },
+    {
+     "id": "angles-l",
+     "ca": "l'anglès",
+     "gender": "m"
+    }
+   ]
+  }
+ ]
+}

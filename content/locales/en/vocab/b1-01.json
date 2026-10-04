@@ -1,0 +1,148 @@
+{
+ "groups": {
+  "salutacions": "Greetings and goodbyes",
+  "persones": "Subject pronouns, names",
+  "paisos": "Countries",
+  "nacionalitats": "Nationalities",
+  "llengues": "Languages"
+ },
+ "words": {
+  "hola": {
+   "tr": "hello, hi"
+  },
+  "bon-dia": {
+   "tr": "good morning; hello",
+   "note": "until lunch, ≈ 2 pm"
+  },
+  "bona-tarda": {
+   "tr": "good afternoon; good evening",
+   "note": "while it’s light"
+  },
+  "bon-vespre": {
+   "tr": "good evening"
+  },
+  "bona-nit": {
+   "tr": "good evening; good night"
+  },
+  "adeu": {
+   "tr": "bye; goodbye"
+  },
+  "a-reveure": {
+   "tr": "goodbye"
+  },
+  "fins-dema": {
+   "tr": "see you tomorrow"
+  },
+  "gracies": {
+   "tr": "thank you"
+  },
+  "encantat": {
+   "tr": "nice to meet you",
+   "note": "encantada if a woman is speaking"
+  },
+  "molt-de-gust": {
+   "tr": "nice to meet you",
+   "note": "the same for everyone"
+  },
+  "jo": {
+   "tr": "I"
+  },
+  "tu": {
+   "tr": "you (one person)"
+  },
+  "ell": {
+   "tr": "he"
+  },
+  "ella": {
+   "tr": "she"
+  },
+  "voste": {
+   "tr": "you (polite)",
+   "note": "verb in the he/she form"
+  },
+  "nosaltres": {
+   "tr": "we",
+   "note": "no feminine form"
+  },
+  "vosaltres": {
+   "tr": "you (plural)"
+  },
+  "ells": {
+   "tr": "they (men, mixed)"
+  },
+  "elles": {
+   "tr": "they (women)"
+  },
+  "nom": {
+   "tr": "first name"
+  },
+  "cognom": {
+   "tr": "surname"
+  },
+  "espanya": {
+   "tr": "Spain"
+  },
+  "russia": {
+   "tr": "Russia"
+  },
+  "ucraina": {
+   "tr": "Ukraine"
+  },
+  "anglaterra": {
+   "tr": "England"
+  },
+  "franca": {
+   "tr": "France"
+  },
+  "italia": {
+   "tr": "Italy"
+  },
+  "alemanya-p": {
+   "tr": "Germany"
+  },
+  "catalunya": {
+   "tr": "Catalonia"
+  },
+  "rus": {
+   "tr": "Russian",
+   "note": "written with a small letter"
+  },
+  "espanyol": {
+   "tr": "Spanish (nationality)"
+  },
+  "angles": {
+   "tr": "English (nationality)"
+  },
+  "frances": {
+   "tr": "French"
+  },
+  "italia-n": {
+   "tr": "Italian"
+  },
+  "alemany": {
+   "tr": "German"
+  },
+  "ucraines": {
+   "tr": "Ukrainian"
+  },
+  "catala": {
+   "tr": "Catalan"
+  },
+  "llengua": {
+   "tr": "language"
+  },
+  "castella": {
+   "tr": "Spanish (the language)",
+   "note": "what Spanish is usually called in Catalonia"
+  },
+  "catala-l": {
+   "tr": "Catalan (the language)"
+  },
+  "rus-l": {
+   "tr": "Russian (the language)"
+  },
+  "angles-l": {
+   "tr": "English (the language)"
+  }
+ }
+}

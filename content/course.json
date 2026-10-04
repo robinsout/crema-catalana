@@ -48,7 +48,8 @@
         {
           "id": "b1-01",
           "unit": 1,
-          "title": "Hola, soc la Maria"
+          "title": "Hola, soc la Maria",
+          "hasVocab": true
         },
         {
           "id": "b1-02",
