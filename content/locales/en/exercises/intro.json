@@ -1,0 +1,36 @@
+{
+ "castellanisms": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\" class=\"wrong\">Soc cansat.</span>",
+    "answers": [
+     "Estic cansat.",
+     "Estic cansada."
+    ],
+    "hint": "how you are right now"
+   },
+   {
+    "prompt": "<span lang=\"ca\" class=\"wrong\">Soc trenta anys.</span>",
+    "answers": [
+     "Tinc trenta anys."
+    ],
+    "hint": "age is something you have"
+   },
+   {
+    "prompt": "<span lang=\"ca\" class=\"wrong\">Meva casa és gran.</span>",
+    "answers": [
+     "La meva casa és gran."
+    ],
+    "hint": "“the my house”"
+   },
+   {
+    "prompt": "<span lang=\"ca\" class=\"wrong\">No vull alguna cosa.</span>",
+    "answers": [
+     "No vull res."
+    ],
+    "hint": "“not anything” is one word"
+   }
+  ]
+ }
+}
