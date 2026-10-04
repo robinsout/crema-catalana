@@ -1,4 +1,4 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect, type Page } from './fixtures.ts';
 
 const KEY = 'quadern-catala';
 
@@ -87,6 +87,8 @@ test('a click on a Catalan phrase plays its recording', async ({ page }) => {
   const clip = page.waitForRequest(/\/audio\/clips\/[0-9a-f]+\.mp3$/);
   await phrase.click();
   await clip;
+  // the tests are silent: recordings play muted (e2e/fixtures.ts)
+  expect(await page.evaluate(() => { const a = new Audio(); void a.play().catch(() => {}); return a.muted; })).toBe(true);
 });
 
 test('fonts are served with the site', async ({ page }) => {

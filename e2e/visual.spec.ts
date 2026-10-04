@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.ts';
 
 // Screenshot comparisons: local only (npm run e2e:visual), see playwright.config.ts.
 const pages = {

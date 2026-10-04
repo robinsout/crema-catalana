@@ -18,7 +18,7 @@ export default defineConfig({
     toHaveScreenshot: { maxDiffPixelRatio: 0.001, animations: 'disabled' },
   },
   projects: [
-    { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 900 } } },
+    { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 900 }, launchOptions: { args: ['--mute-audio'] } } },
     { name: 'phone', use: { ...devices['iPhone 13'] } },
   ],
   webServer: [

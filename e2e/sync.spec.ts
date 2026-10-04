@@ -1,4 +1,4 @@
-import { test, expect, type Browser } from '@playwright/test';
+import { test, expect, type Browser } from './fixtures.ts';
 
 // Two devices = two browser contexts with separate storage, one local sync server.
 async function device(browser: Browser, path: string) {
