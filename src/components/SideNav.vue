@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { RouterLink, useRoute } from 'vue-router';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { useCatalogStore } from '../stores/catalog.ts';
 import { useProgressStore } from '../stores/progress.ts';
 import { useTocStore } from '../stores/toc.ts';
@@ -17,6 +17,13 @@ const toc = useTocStore();
 const { t } = useI18n();
 const linkTo = useLessonLink();
 const route = useRoute();
+const router = useRouter();
+
+// the same page in another language (the router remembers it as the language of this device)
+function switchLanguage(e: Event): void {
+  const lang = (e.target as HTMLSelectElement).value;
+  if (route.name && lang !== catalog.lang) void router.push({ name: route.name, params: { ...route.params, lang } });
+}
 
 const open = ref(false);
 watch(() => route.fullPath, () => { open.value = false; toc.panelOpen = false; });
@@ -61,6 +68,12 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
       <RouterLink class="sync-link" :to="{ name: 'sync', params: { lang: catalog.lang } }">
         <span class="sync-icon" aria-hidden="true">⇅</span><SyncStatusLine />
       </RouterLink>
+      <label v-if="catalog.languages.length > 1" class="lang-pick">
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.3" /><path d="M1.7 8h12.6M8 1.7c2 2 2 10.6 0 12.6M8 1.7c-2 2-2 10.6 0 12.6" /></svg>
+        <select class="lang-select" :aria-label="t('nav.language')" :value="catalog.lang" @change="switchLanguage">
+          <option v-for="l in catalog.languages" :key="l.code" :value="l.code" :lang="l.code">{{ l.name }}</option>
+        </select>
+      </label>
       <ul class="lesson-list">
         <li>
           <RouterLink class="plan-link" :to="{ name: 'plan', params: { lang: catalog.lang } }" :aria-current="isPlan ? 'page' : undefined" active-class="" exact-active-class="">

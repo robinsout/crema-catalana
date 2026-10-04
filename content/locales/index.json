@@ -3,5 +3,8 @@
   "default": "ru",
   "available": [
     "ru"
-  ]
+  ],
+  "names": {
+    "ru": "Русский"
+  }
 }

@@ -11,6 +11,7 @@
 //   v5      + sections: { "<lesson>/<section>": { done, at } } — chapters marked as studied
 //           + reading: { "<lesson>": { section, at } } — the furthest chapter the reader got to
 //           + lastLesson: id — the last lesson opened (`last` may be the plan); stays on the device
+//   v6      + locale: language code of the last page opened; stays on the device
 
 import { browserStorage } from '../api/storage.ts';
 import type { ExerciseResult, ReadingPoint, SectionMark, StorageBackend } from '../types/index.ts';
@@ -29,6 +30,7 @@ export interface Progress {
   reading: Record<string, ReadingPoint>;
   last: string | null;
   lastLesson?: string;
+  locale?: string;
   [field: string]: unknown; // fields written by future versions are kept
 }
 
@@ -39,6 +41,8 @@ export const canonicalId = (id: string): string => (Object.hasOwn(ID_ALIASES, id
 // Lesson and exercise ids: lowercase latin letters, digits and dashes. Saved and synced progress
 // is untrusted, so keys of any other shape (__proto__, constructor, …) are dropped when it is read.
 export const isLessonId = (id: string): boolean => /^[a-z0-9][a-z0-9-]*$/.test(id) && !(id in Object.prototype);
+// "ru", "en", "pt-br"
+export const isLanguageCode = (code: string): boolean => /^[a-z]{2,3}(-[a-z0-9]{2,8})?$/.test(code);
 // "<lesson>/<exercise>" and "<lesson>/<section>"
 const isLessonPartKey = (key: string): boolean => {
   const [lesson, exercise, ...rest] = key.split('/');
@@ -91,6 +95,8 @@ export function parseProgress(raw: string | null | undefined): Progress {
   const out: Progress = { ...src, done, doneAt, exercises, sections, reading, last };
   delete out.lastLesson;
   if (typeof src.lastLesson === 'string' && isLessonId(src.lastLesson)) out.lastLesson = canonicalId(src.lastLesson);
+  delete out.locale;
+  if (typeof src.locale === 'string' && isLanguageCode(src.locale)) out.locale = src.locale;
   return out;
 }
 
@@ -140,7 +146,7 @@ export function markDone(state: Progress, id: string, value: boolean, at: number
 
 // Merges progress from another device into the local one. For each lesson the later change
 // wins; a mark without a timestamp (saved before v3) counts as the oldest; on a tie "done" wins.
-// `last`, `lastLesson` and any other fields stay local: they describe this device.
+// `last`, `lastLesson`, `locale` and any other fields stay local: they describe this device.
 export function mergeProgress(local: Partial<Progress>, remote: Partial<Progress>): Progress {
   const ld = local.done ?? {};
   const rd = remote.done ?? {};

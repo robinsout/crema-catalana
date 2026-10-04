@@ -2,6 +2,7 @@
 // Old links of the form #<id> and #pla, and the saved last view, are resolved by resolveRoute.
 import { createRouter, createWebHashHistory, type RouteLocationRaw, type RouterHistory } from 'vue-router';
 import { PLAN_ID, resolveRoute, type Route } from './services/catalog.ts';
+import { preferredLanguage, readerLanguages } from './services/content.ts';
 import { useCatalogStore } from './stores/catalog.ts';
 import { useProgressStore } from './stores/progress.ts';
 import { useSyncStore } from './stores/sync.ts';
@@ -44,7 +45,8 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     const catalog = useCatalogStore();
     const progress = useProgressStore();
     const requested = param(to.params.lang);
-    await catalog.load(requested);
+    await catalog.load(requested, (locales) =>
+      preferredLanguage(locales, { saved: progress.data.locale, hasHistory: progress.hasHistory(), browser: readerLanguages() }));
     const lang = catalog.lang;
 
     if (to.name === 'other') {
@@ -56,6 +58,9 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     if (to.name === 'lesson') {
       const id = param(to.params.id);
       const r = resolveRoute(catalog.catalog, id, null);
+      // a lesson not written in this language, but written in another: its page says where to read it
+      const elsewhere = r.view === 'plan' && r.focus === id && (await catalog.findWrittenIn(id)).length > 0;
+      if (elsewhere) return lang === requested ? true : { name: 'lesson', params: { lang, id } };
       if (lang !== requested || r.view !== 'lesson' || r.id !== id) return target(r, lang);
     }
     if (to.name === 'plan' && lang !== requested) {
@@ -71,6 +76,8 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
   });
 
   router.afterEach((to) => {
+    const lang = param(to.params.lang);
+    if (lang) useProgressStore().setLocale(lang);
     if (to.name === 'lesson') useProgressStore().setLast(param(to.params.id));
     else if (to.name === 'plan') useProgressStore().setLast(PLAN_ID);
   });

@@ -38,6 +38,10 @@ test('locales/index.json lists the default and available languages', () => {
   for (const lang of locales.available) assert.match(lang, /^[a-z]{2}$/);
 });
 
+test('every available language has its own name for the language switcher', () => {
+  for (const lang of locales.available) assert.ok(locales.names?.[lang]?.trim(), `names.${lang}`);
+});
+
 test('every string the page uses exists in the base language, and none is unused', () => {
   const src = sources().map((f) => readFileSync(f, 'utf8')).join('\n');
   const used = new Set([

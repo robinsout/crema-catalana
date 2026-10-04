@@ -504,7 +504,7 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
 
 .status { color: var(--muted); padding: 40px 0; }
 .related { margin: 0 0 24px; font-size: 0.95rem; }
-.related a, .unit-dl a { color: var(--accent); }
+.related a, .unit-dl a, .lesson-missing a { color: var(--accent); }
 
 /* ---------- right TOC ---------- */
 .toc { display: none; }
@@ -599,6 +599,20 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
 .sync-privacy { margin-top: 18px; }
 .lesson ol.sync-steps { margin-bottom: 18px; }
 .sync-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+/* language of explanations: under the sync line; a native select (the system picker on phones) */
+.lang-pick { display: flex; gap: 8px; align-items: center; margin: -8px 0 18px; font-size: var(--step--1); color: var(--muted); }
+.lang-pick svg { color: var(--accent); flex-shrink: 0; }
+.lang-select {
+  font: inherit; color: var(--ink);
+  background: transparent; border: 1px solid var(--line); border-radius: 6px;
+  padding: 4px 8px; min-height: 32px; cursor: pointer;
+}
+.lang-select:hover { border-color: var(--accent); }
+.lang-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* a lesson not yet written in this language */
+.lesson-missing { max-width: 60ch; }
 
 /* under the sticky header of narrow screens, a jump lands below it (last: overrides the margins above) */
 @media (max-width: 899px) {

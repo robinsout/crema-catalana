@@ -63,6 +63,7 @@ export interface LocalesIndex {
   base: string;
   default: string;
   available: string[];
+  names?: Record<string, string>; // each language by its own name: "Русский", "English"
 }
 
 // Merged catalog of one language

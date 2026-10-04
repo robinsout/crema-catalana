@@ -1,5 +1,6 @@
 // Loading course data: what to fetch for the course, a language, a lesson and the audio.
 import { contentApi } from '../api/content.ts';
+import { browserLanguages } from '../api/browser.ts';
 import { buildVocab } from './vocab.ts';
 import { exerciseIds } from './exercises.ts';
 import type { AudioIndex, Course, ExerciseSet, Lesson, LocaleCatalog, LocalesIndex, UiStrings, VocabGroup } from '../types/index.ts';
@@ -24,9 +25,33 @@ export async function loadLanguagePack(lang: string): Promise<LanguagePack> {
   return { ui, catalog };
 }
 
-// The language to show: the requested one when it exists, otherwise the default
-export const pickLanguage = (locales: LocalesIndex, requested: string): string =>
-  (locales.available.includes(requested) ? requested : locales.default);
+// The language to show: the requested one when it exists, otherwise `fallback` (the default by default)
+export const pickLanguage = (locales: LocalesIndex, requested: string, fallback = locales.default): string =>
+  (locales.available.includes(requested) ? requested : fallback);
+
+export interface LanguageHints {
+  saved: string | null | undefined; // the language of the last page opened on this device
+  hasHistory: boolean; // progress saved before languages existed: it was read in the base language
+  browser: readonly string[]; // navigator.languages
+}
+
+// The language of a visit without one in the link: the saved one, the base one for readers from
+// before the languages, the browser's first supported language, otherwise the default.
+export function preferredLanguage(locales: LocalesIndex, hints: LanguageHints): string {
+  const ok = (code: string | null | undefined): code is string => !!code && locales.available.includes(code);
+  if (ok(hints.saved)) return hints.saved;
+  if (hints.hasHistory && ok(locales.base)) return locales.base;
+  const fromBrowser = hints.browser.map((tag) => tag.split('-')[0]?.toLowerCase()).find(ok);
+  return fromBrowser ?? locales.default;
+}
+
+export const readerLanguages = browserLanguages;
+
+// Languages (of `candidates`) in which a lesson is written: their catalogs give it a date
+export async function languagesWithLesson(candidates: string[], id: string): Promise<string[]> {
+  const catalogs = await Promise.all(candidates.map((lang) => contentApi.catalog(lang).catch(() => null)));
+  return candidates.filter((_, i) => !!catalogs[i]?.lessons?.[id]?.date);
+}
 
 export function loadLessonHtml(lesson: Pick<Lesson, 'id' | 'file'>): Promise<string> {
   if (!lesson.file) return Promise.reject(new Error(`lesson ${lesson.id} is not written in this language`));

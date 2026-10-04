@@ -33,7 +33,10 @@ const related = computed(() =>
 const done = computed(() => (lesson.value ? progress.isDone(lesson.value.id) : false));
 const plan = computed(() => ({ name: 'plan', params: { lang: catalog.lang } }));
 
-watch(lesson, (l) => { if (l) lessons.load(l, catalog.lang); }, { immediate: true });
+watch(lesson, (l) => { if (l?.file) lessons.load(l, catalog.lang); }, { immediate: true });
+// a lesson not yet written in this language: the languages it can be read in (found by the router)
+const writtenIn = computed(() => (lesson.value && !lesson.value.file ? catalog.writtenIn[lesson.value.id] ?? [] : []));
+const inLanguage = (code: string) => ({ name: 'lesson', params: { lang: code, id: lesson.value?.id ?? '' } });
 
 // Chapters of the rendered lesson: the table of contents, and a placeholder at the end of each
 // chapter for its "studied" button.
@@ -76,7 +79,18 @@ const resumeAt = computed(() => {
 </script>
 
 <template>
-  <template v-if="lesson">
+  <template v-if="lesson && !lesson.file">
+    <header class="lesson-head">
+      <p class="eyebrow">{{ catalog.label(lesson) }}</p>
+      <h2 lang="ca">{{ lesson.title }}</h2>
+    </header>
+    <p class="lesson-missing">
+      {{ t('lesson.missing') }}
+      <template v-for="(code, i) in writtenIn" :key="code">{{ i ? ', ' : ' ' }}<RouterLink :to="inLanguage(code)" :lang="code">{{ catalog.languageName(code) }}</RouterLink></template>
+    </p>
+    <nav class="pager" :aria-label="t('pager.label')"><RouterLink :to="plan">{{ t('pager.planNext') }}</RouterLink></nav>
+  </template>
+  <template v-else-if="lesson">
     <p v-if="content.state === 'loading'" class="status">{{ t('status.loading') }}</p>
     <p v-else-if="content.state === 'error'" class="status">{{ t('status.lessonError', { title: lesson.title }) }}</p>
     <template v-else>

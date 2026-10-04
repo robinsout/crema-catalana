@@ -65,6 +65,14 @@ export const useProgressStore = defineStore('progress', () => {
     save();
   }
 
-  return { data, done, last, lastLesson, summary, isDone, toggleDone, setLast, result, saveResult, applySynced,
+  // the language of the last page opened here: a visit without a language in the link gets it
+  function setLocale(code: string): void {
+    if (data.value.locale === code) return;
+    data.value.locale = code;
+    save();
+  }
+  const hasHistory = (): boolean => data.value.last !== null || Object.keys(data.value.done).length > 0;
+
+  return { data, done, last, setLocale, hasHistory, lastLesson, summary, isDone, toggleDone, setLast, result, saveResult, applySynced,
     isSectionDone, toggleSection, readingPoint, reachSection };
 });
