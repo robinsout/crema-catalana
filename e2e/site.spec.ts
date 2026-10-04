@@ -33,7 +33,8 @@ test('an old link to an unwritten unit shows that unit at the top of the plan', 
   await expect(unit).toHaveClass(/focus/);
   await page.evaluate(() => document.fonts.ready);
   // on narrow screens the header stays on top: the unit lands right below it, not under it
-  const header = await page.locator('.side').evaluate((el) => (getComputedStyle(el).position === 'sticky' ? el.getBoundingClientRect().bottom : 0));
+  // (on wide screens .side is the sticky sidebar column, not a header)
+  const header = await page.locator('.side').evaluate((el) => (matchMedia('(max-width: 899px)').matches ? el.getBoundingClientRect().bottom : 0));
   await expect.poll(async () => (await unit.boundingBox())?.y ?? -1, { timeout: 5000 }).toBeGreaterThanOrEqual(header - 2);
   await expect.poll(async () => (await unit.boundingBox())?.y ?? 9999, { timeout: 5000 }).toBeLessThan(header + 80);
 });
