@@ -18,7 +18,8 @@
     "e2e:visual": "playwright test --grep @visual",
     "e2e:visual:update": "playwright test --grep @visual --update-snapshots=all",
     "icons": "node scripts/gen-icons.ts",
-    "deploy:sync": "bash scripts/deploy-sync.sh"
+    "deploy:sync": "bash scripts/deploy-sync.sh",
+    "session": "node scripts/session-check.ts"
   },
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.3.0",
