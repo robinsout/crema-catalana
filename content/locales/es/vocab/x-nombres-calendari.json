@@ -1,0 +1,268 @@
+{
+ "groups": {
+  "nombres": "Números",
+  "ordinals": "Ordinales",
+  "hora": "La hora",
+  "dia": "Partes del día",
+  "setmana": "La semana",
+  "mesos": "Meses",
+  "estacions": "Estaciones, mes, año"
+ },
+ "words": {
+  "zero": {
+   "tr": "cero"
+  },
+  "u": {
+   "tr": "uno, una",
+   "note": "u al contar, un / una delante del sustantivo"
+  },
+  "dos": {
+   "tr": "dos",
+   "note": "dues delante de un sustantivo femenino"
+  },
+  "tres": {
+   "tr": "tres"
+  },
+  "quatre": {
+   "tr": "cuatro"
+  },
+  "cinc": {
+   "tr": "cinco"
+  },
+  "sis": {
+   "tr": "seis"
+  },
+  "set": {
+   "tr": "siete"
+  },
+  "vuit": {
+   "tr": "ocho"
+  },
+  "nou": {
+   "tr": "nueve"
+  },
+  "deu": {
+   "tr": "diez"
+  },
+  "onze": {
+   "tr": "once"
+  },
+  "dotze": {
+   "tr": "doce"
+  },
+  "tretze": {
+   "tr": "trece"
+  },
+  "catorze": {
+   "tr": "catorce"
+  },
+  "quinze": {
+   "tr": "quince"
+  },
+  "setze": {
+   "tr": "dieciséis"
+  },
+  "disset": {
+   "tr": "diecisiete"
+  },
+  "divuit": {
+   "tr": "dieciocho"
+  },
+  "dinou": {
+   "tr": "diecinueve"
+  },
+  "vint": {
+   "tr": "veinte",
+   "note": "21–29: vint-i-u, vint-i-dos…"
+  },
+  "trenta": {
+   "tr": "treinta"
+  },
+  "quaranta": {
+   "tr": "cuarenta"
+  },
+  "cinquanta": {
+   "tr": "cincuenta"
+  },
+  "seixanta": {
+   "tr": "sesenta"
+  },
+  "setanta": {
+   "tr": "setenta"
+  },
+  "vuitanta": {
+   "tr": "ochenta"
+  },
+  "noranta": {
+   "tr": "noventa"
+  },
+  "cent": {
+   "tr": "cien"
+  },
+  "mil": {
+   "tr": "mil"
+  },
+  "milio": {
+   "tr": "millón",
+   "note": "pl. milions"
+  },
+  "primer": {
+   "tr": "primero"
+  },
+  "segon": {
+   "tr": "segundo"
+  },
+  "tercer": {
+   "tr": "tercero"
+  },
+  "quart-o": {
+   "tr": "cuarto"
+  },
+  "cinque": {
+   "tr": "quinto"
+  },
+  "sise": {
+   "tr": "sexto"
+  },
+  "sete": {
+   "tr": "séptimo"
+  },
+  "vuite": {
+   "tr": "octavo"
+  },
+  "nove": {
+   "tr": "noveno"
+  },
+  "dese": {
+   "tr": "décimo"
+  },
+  "hora": {
+   "tr": "hora",
+   "note": "Quina hora és? — ¿Qué hora es?"
+  },
+  "minut": {
+   "tr": "minuto"
+  },
+  "quart": {
+   "tr": "cuarto (de hora)",
+   "note": "un quart de tres — las dos y cuarto (¡no «un cuarto para las tres»!)"
+  },
+  "mitja": {
+   "tr": "y media",
+   "note": "les dues i mitja — las dos y media"
+  },
+  "menys": {
+   "tr": "menos (en la hora)",
+   "note": "les tres menys cinc — las tres menos cinco, cinco para las tres"
+  },
+  "migdia": {
+   "tr": "mediodía; hora del almuerzo"
+  },
+  "mitjanit": {
+   "tr": "medianoche"
+  },
+  "mati": {
+   "tr": "mañana (parte del día)",
+   "note": "al matí — en la mañana, por la mañana"
+  },
+  "tarda": {
+   "tr": "tarde",
+   "note": "mientras hay luz; a la tarda — en la tarde"
+  },
+  "vespre": {
+   "tr": "anochecer, primeras horas de la noche",
+   "note": "no hay una palabra exacta en castellano"
+  },
+  "nit": {
+   "tr": "noche"
+  },
+  "matinada": {
+   "tr": "madrugada"
+  },
+  "dia": {
+   "tr": "día"
+  },
+  "dilluns": {
+   "tr": "lunes"
+  },
+  "dimarts": {
+   "tr": "martes"
+  },
+  "dimecres": {
+   "tr": "miércoles"
+  },
+  "dijous": {
+   "tr": "jueves"
+  },
+  "divendres": {
+   "tr": "viernes"
+  },
+  "dissabte": {
+   "tr": "sábado"
+  },
+  "diumenge": {
+   "tr": "domingo"
+  },
+  "setmana": {
+   "tr": "semana"
+  },
+  "cap-de-setmana": {
+   "tr": "fin de semana"
+  },
+  "gener": {
+   "tr": "enero"
+  },
+  "febrer": {
+   "tr": "febrero"
+  },
+  "marc": {
+   "tr": "marzo"
+  },
+  "abril": {
+   "tr": "abril"
+  },
+  "maig": {
+   "tr": "mayo"
+  },
+  "juny": {
+   "tr": "junio"
+  },
+  "juliol": {
+   "tr": "julio"
+  },
+  "agost": {
+   "tr": "agosto"
+  },
+  "setembre": {
+   "tr": "septiembre"
+  },
+  "octubre": {
+   "tr": "octubre"
+  },
+  "novembre": {
+   "tr": "noviembre"
+  },
+  "desembre": {
+   "tr": "diciembre"
+  },
+  "primavera": {
+   "tr": "primavera"
+  },
+  "estiu": {
+   "tr": "verano"
+  },
+  "tardor": {
+   "tr": "otoño",
+   "note": "no se parece a otoño: apréndela aparte"
+  },
+  "hivern": {
+   "tr": "invierno"
+  },
+  "mes": {
+   "tr": "mes"
+  },
+  "any": {
+   "tr": "año"
+  }
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "castellanisms": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\" class=\"wrong\">Tinc que estudiar.</span>",
+    "answers": [
+     "He d'estudiar.",
+     "Haig d'estudiar."
+    ],
+    "hint": "«tener que» → haver de"
+   },
+   {
+    "prompt": "<span lang=\"ca\" class=\"wrong\">On està el metro?</span>",
+    "answers": [
+     "On és el metro?"
+    ],
+    "hint": "la ubicación va con ser"
+   },
+   {
+    "prompt": "<span lang=\"ca\" class=\"wrong\">Mi casa és gran.</span>",
+    "answers": [
+     "La meva casa és gran."
+    ],
+    "hint": "posesivo con artículo"
+   },
+   {
+    "prompt": "<span lang=\"ca\" class=\"wrong\">Vaig a menjar ara.</span>",
+    "answers": [
+     "Menjaré ara.",
+     "Ara menjo."
+    ],
+    "hint": "«voy a» + infinitivo no es pasado ni la norma"
+   },
+   {
+    "prompt": "<span lang=\"ca\" class=\"wrong\">Avui vaig dinar a casa.</span>",
+    "answers": [
+     "Avui he dinat a casa."
+    ],
+    "hint": "«hoy comí»: lo de hoy va en perfet"
+   }
+  ]
+ }
+}

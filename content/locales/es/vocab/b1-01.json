@@ -1,0 +1,150 @@
+{
+ "groups": {
+  "salutacions": "Saludos y despedidas",
+  "persones": "Pronombres personales, nombre",
+  "paisos": "Países",
+  "nacionalitats": "Nacionalidades",
+  "llengues": "Lenguas"
+ },
+ "words": {
+  "hola": {
+   "tr": "hola"
+  },
+  "bon-dia": {
+   "tr": "buenos días",
+   "note": "en singular; hasta la hora de comer"
+  },
+  "bona-tarda": {
+   "tr": "buenas tardes",
+   "note": "mientras hay luz"
+  },
+  "bon-vespre": {
+   "tr": "buenas noches (al anochecer)"
+  },
+  "bona-nit": {
+   "tr": "buenas noches"
+  },
+  "adeu": {
+   "tr": "adiós",
+   "note": "también al cruzarte con alguien"
+  },
+  "a-reveure": {
+   "tr": "hasta la vista"
+  },
+  "fins-dema": {
+   "tr": "hasta mañana"
+  },
+  "gracies": {
+   "tr": "gracias",
+   "note": "acento en la primera sílaba"
+  },
+  "encantat": {
+   "tr": "encantado",
+   "note": "encantada si habla una mujer"
+  },
+  "molt-de-gust": {
+   "tr": "mucho gusto",
+   "note": "no cambia de género"
+  },
+  "jo": {
+   "tr": "yo"
+  },
+  "tu": {
+   "tr": "tú"
+  },
+  "ell": {
+   "tr": "él"
+  },
+  "ella": {
+   "tr": "ella"
+  },
+  "voste": {
+   "tr": "usted",
+   "note": "verbo en 3.ª persona; no es «vos»"
+  },
+  "nosaltres": {
+   "tr": "nosotros, nosotras",
+   "note": "sin forma femenina"
+  },
+  "vosaltres": {
+   "tr": "ustedes (de confianza)",
+   "note": "en España: vosotros, vosotras"
+  },
+  "ells": {
+   "tr": "ellos"
+  },
+  "elles": {
+   "tr": "ellas"
+  },
+  "nom": {
+   "tr": "nombre"
+  },
+  "cognom": {
+   "tr": "apellido"
+  },
+  "espanya": {
+   "tr": "España"
+  },
+  "russia": {
+   "tr": "Rusia"
+  },
+  "ucraina": {
+   "tr": "Ucrania"
+  },
+  "anglaterra": {
+   "tr": "Inglaterra"
+  },
+  "franca": {
+   "tr": "Francia"
+  },
+  "italia": {
+   "tr": "Italia"
+  },
+  "alemanya-p": {
+   "tr": "Alemania"
+  },
+  "catalunya": {
+   "tr": "Cataluña"
+  },
+  "rus": {
+   "tr": "ruso, rusa"
+  },
+  "espanyol": {
+   "tr": "español, española"
+  },
+  "angles": {
+   "tr": "inglés, inglesa"
+  },
+  "frances": {
+   "tr": "francés, francesa"
+  },
+  "italia-n": {
+   "tr": "italiano, italiana"
+  },
+  "alemany": {
+   "tr": "alemán, alemana"
+  },
+  "ucraines": {
+   "tr": "ucraniano, ucraniana"
+  },
+  "catala": {
+   "tr": "catalán, catalana"
+  },
+  "llengua": {
+   "tr": "lengua, idioma"
+  },
+  "castella": {
+   "tr": "castellano",
+   "note": "así se llama el español en Cataluña"
+  },
+  "catala-l": {
+   "tr": "catalán (lengua)"
+  },
+  "rus-l": {
+   "tr": "ruso (lengua)"
+  },
+  "angles-l": {
+   "tr": "inglés (lengua)"
+  }
+ }
+}

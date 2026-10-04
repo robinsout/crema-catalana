@@ -1,0 +1,136 @@
+{
+ "ser": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Jo ___ de Bogotà.</span>",
+    "answers": [
+     "soc"
+    ],
+    "hint": "sin acento desde 2016"
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Maria ___ de Girona.</span>",
+    "answers": [
+     "és"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Tu ___ la nova companya?</span>",
+    "answers": [
+     "ets"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Nosaltres ___ estudiants de català.</span>",
+    "answers": [
+     "som"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Vosaltres ___ argentins?</span>",
+    "answers": [
+     "sou"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Elles ___ mexicanes.</span>",
+    "answers": [
+     "són"
+    ],
+    "hint": "con acento"
+   }
+  ]
+ },
+ "nacionalitats": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">La Lucía és ___.</span> (colombià)",
+    "answers": [
+     "colombiana"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Carmen és ___.</span> (espanyol)",
+    "answers": [
+     "espanyola"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Valentina és ___.</span> (argentí)",
+    "answers": [
+     "argentina"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Guadalupe és ___.</span> (mexicà)",
+    "answers": [
+     "mexicana"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Laura és ___.</span> (anglès)",
+    "answers": [
+     "anglesa"
+    ],
+    "hint": "el acento desaparece"
+   }
+  ]
+ },
+ "situacions": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "Son las 17:30 y entras en una tienda. ¿Cómo saludas?",
+    "options": [
+     "Bon dia!",
+     "Bona tarda!",
+     "Bona nit!"
+    ],
+    "answer": 1,
+    "explain": "Después de comer y mientras hay luz, bona tarda."
+   },
+   {
+    "prompt": "Te despides de un compañero al que verás mañana en clase.",
+    "options": [
+     "Fins demà!",
+     "Bon vespre!",
+     "Encantat!"
+    ],
+    "answer": 0,
+    "explain": "Fins demà: hasta mañana."
+   },
+   {
+    "prompt": "¿Cómo preguntas el nombre a una señora mayor en la ventanilla del ajuntament?",
+    "options": [
+     "Com et dius?",
+     "Com es diu?",
+     "Com se llama?"
+    ],
+    "answer": 1,
+    "explain": "Con vostè el verbo va en tercera persona: Com es diu (vostè)? «Llamar-se» es un castellanismo."
+   },
+   {
+    "prompt": "Te acaban de presentar a alguien y eres mujer. ¿Qué dices?",
+    "options": [
+     "Encantat!",
+     "Encantada!",
+     "Vale!"
+    ],
+    "answer": 1,
+    "explain": "Como en castellano, concuerda con quien habla. Vale (o dale) es un castellanismo."
+   },
+   {
+    "prompt": "¿Cómo presentas a tu amigo Joan?",
+    "options": [
+     "Et presento Joan.",
+     "Et presento en Joan.",
+     "Et presento a Joan."
+    ],
+    "answer": 1,
+    "explain": "Delante de un nombre de hombre va el artículo personal en; no hay «a» como en castellano."
+   }
+  ]
+ }
+}

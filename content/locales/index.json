@@ -3,10 +3,12 @@
   "default": "en",
   "available": [
     "ru",
-    "en"
+    "en",
+    "es"
   ],
   "names": {
     "ru": "Русский",
-    "en": "English"
+    "en": "English",
+    "es": "Español"
   }
 }

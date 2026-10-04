@@ -1,0 +1,97 @@
+{
+ "groups": {
+  "passat": "El pasado",
+  "recent": "Hoy, ya, nunca",
+  "ara": "Ahora",
+  "futur": "El futuro"
+ },
+ "words": {
+  "ahir": {
+   "tr": "ayer",
+   "note": "→ vaig fer"
+  },
+  "abans": {
+   "tr": "antes",
+   "note": "→ feia"
+  },
+  "de-petit": {
+   "tr": "de pequeño",
+   "note": "→ feia"
+  },
+  "any-passat": {
+   "tr": "el año pasado",
+   "note": "→ vaig fer"
+  },
+  "setmana-passada": {
+   "tr": "la semana pasada",
+   "note": "→ vaig fer"
+  },
+  "fa": {
+   "tr": "hace dos años",
+   "note": "→ vaig fer"
+  },
+  "mentre": {
+   "tr": "mientras",
+   "note": "fondo → feia"
+  },
+  "avui": {
+   "tr": "hoy",
+   "note": "→ he fet (aunque digas «hoy hice»)"
+  },
+  "aquest-mati": {
+   "tr": "esta mañana",
+   "note": "→ he fet"
+  },
+  "aquest-any": {
+   "tr": "este año",
+   "note": "→ he fet (este año hice)"
+  },
+  "ja": {
+   "tr": "ya",
+   "note": "ja he fet — ya hice"
+  },
+  "encara": {
+   "tr": "todavía, aún",
+   "note": "encara no ho he fet — todavía no lo hice"
+  },
+  "mai": {
+   "tr": "nunca",
+   "note": "no he fet mai — nunca hice"
+  },
+  "sempre": {
+   "tr": "siempre"
+  },
+  "sovint": {
+   "tr": "a menudo",
+   "note": "no se parece a nada en castellano"
+  },
+  "ara": {
+   "tr": "ahora",
+   "note": "→ faig"
+  },
+  "ara-mateix": {
+   "tr": "ahora mismo",
+   "note": "→ estic fent"
+  },
+  "cada-dia": {
+   "tr": "cada día",
+   "note": "→ faig"
+  },
+  "dema": {
+   "tr": "mañana",
+   "note": "→ faré"
+  },
+  "dema-passat": {
+   "tr": "pasado mañana",
+   "note": "→ faré"
+  },
+  "any-que-ve": {
+   "tr": "el año que viene",
+   "note": "→ faré"
+  },
+  "quan": {
+   "tr": "cuando",
+   "note": "quan + subj. en futuro: quan arribis, como «cuando llegues»"
+  }
+ }
+}

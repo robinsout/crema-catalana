@@ -1,0 +1,113 @@
+{
+ "tenses": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Ahir ___ (anar) al mercat.</span>",
+    "answers": [
+     "vaig anar"
+    ],
+    "hint": "«ayer»"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Avui ___ (treballar) fins a les set.</span>",
+    "answers": [
+     "he treballat"
+    ],
+    "hint": "«hoy»: aunque digas «hoy trabajé»"
+   },
+   {
+    "prompt": "<span lang=\"ca\">De petit, ___ (viure) a Bogotà.</span>",
+    "answers": [
+     "vivia"
+    ],
+    "hint": "fondo, infancia"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Demà ___ (fer) sol.</span>",
+    "answers": [
+     "farà"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Quan vaig arribar, la classe ja ___ (començar).</span>",
+    "answers": [
+     "havia començat"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Si tingués temps, ___ (viatjar) més.</span>",
+    "answers": [
+     "viatjaria"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Ja ___ (dinar)?</span> — ¿Ya almorzaste?",
+    "answers": [
+     "has dinat"
+    ],
+    "hint": "«ya» → perfet"
+   }
+  ]
+ },
+ "which-tense": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Aquest matí he esmorzat a casa.</span>",
+    "options": [
+     "Perfet",
+     "Passat perifràstic",
+     "Imperfet",
+     "Present"
+    ],
+    "answer": 0,
+    "explain": "«Esta mañana»: el periodo aún no ha terminado. Aunque digas «esta mañana desayuné», en catalán va el perfet."
+   },
+   {
+    "prompt": "<span lang=\"ca\">L'escriptor nasqué a Girona.</span>",
+    "options": [
+     "Passat perifràstic",
+     "Passat simple",
+     "Imperfet",
+     "Futur"
+    ],
+    "answer": 1,
+    "explain": "La forma escrita, como el indefinido; al hablar sería va néixer."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Ara estic cuinant.</span>",
+    "options": [
+     "Present",
+     "Estar + gerundi",
+     "Futur",
+     "Perfet"
+    ],
+    "answer": 1,
+    "explain": "Una acción en este mismo momento."
+   },
+   {
+    "prompt": "<span lang=\"ca\">A les deu ja hauré sortit.</span>",
+    "options": [
+     "Futur",
+     "Condicional",
+     "Futur perfet",
+     "Plusquamperfet"
+    ],
+    "answer": 2,
+    "explain": "A las diez ya habrá terminado, como «habré salido»."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Cada estiu anàvem a la platja.</span>",
+    "options": [
+     "Passat perifràstic",
+     "Imperfet",
+     "Perfet",
+     "Present"
+    ],
+    "answer": 1,
+    "explain": "Una costumbre del pasado, como «íbamos»."
+   }
+  ]
+ }
+}

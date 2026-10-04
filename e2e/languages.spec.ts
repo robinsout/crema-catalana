@@ -20,6 +20,16 @@ test.describe('an English browser', () => {
   });
 });
 
+test.describe('a Spanish browser (Latin America)', () => {
+  test.use({ locale: 'es-CO' });
+
+  test('a first visit opens the Spanish plan', async ({ page }) => {
+    await page.goto('./');
+    await expect(page).toHaveURL(/#\/es\/plan$/);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'es');
+  });
+});
+
 test('the switcher opens the same lesson in English and remembers the choice', async ({ page, isMobile }) => {
   await page.goto('./#/ru/lesson/intro');
   if (isMobile) await page.locator('button[aria-controls="nav"]').click();
