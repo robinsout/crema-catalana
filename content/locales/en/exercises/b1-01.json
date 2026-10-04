@@ -114,7 +114,7 @@
     "options": [
      "Encantat!",
      "Encantada!",
-     "Igualment!"
+     "Molt bé!"
     ],
     "answer": 1,
     "explain": "Encantat/encantada agrees with the person speaking."
@@ -127,7 +127,7 @@
      "Et presento el Joan."
     ],
     "answer": 1,
-    "explain": "Before a man’s name — the personal article en."
+    "explain": "Before a man’s name — the personal article en. That’s the standard form; in casual Barcelona speech you’ll also hear el Joan."
    }
   ]
  },

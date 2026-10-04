@@ -63,7 +63,7 @@
     ]
    },
    {
-    "prompt": "<span lang=\"ca\">La Hanna és ___.</span> (alemany)",
+    "prompt": "<span lang=\"ca\">La Greta és ___.</span> (alemany)",
     "answers": [
      "alemanya"
     ]
@@ -100,7 +100,7 @@
     "explain": "Fins demà — до завтра."
    },
    {
-    "prompt": "Как спросить имя у пожилой дамы в окошке ajuntament?",
+    "prompt": "Как спросить имя у пожилой дамы в окошке мэрии (<span lang=\"ca\">ajuntament</span>)?",
     "options": [
      "Com et dius?",
      "Com es diu?",
@@ -114,7 +114,7 @@
     "options": [
      "Encantat!",
      "Encantada!",
-     "Igualment!"
+     "Molt bé!"
     ],
     "answer": 1,
     "explain": "Encantat/encantada согласуется с тем, кто говорит."
@@ -127,7 +127,7 @@
      "Et presento el Joan."
     ],
     "answer": 1,
-    "explain": "Перед мужским именем — личный артикль en."
+    "explain": "Перед мужским именем — личный артикль en. Норма — en Joan; в разговоре в Барселоне часто слышно и el Joan."
    }
   ]
  },
