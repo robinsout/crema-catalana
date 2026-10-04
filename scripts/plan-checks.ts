@@ -1,5 +1,6 @@
-// For the pre-push hook: reads the refs git is pushing (stdin: "<local ref> <local sha> <remote ref> <remote sha>")
-// and prints "tests" when the pushed commits need the checks, "skip" when they change only documentation.
+// For the git hooks: prints "tests" when the changes need the checks, "skip" when they touch only documentation.
+//   pre-push:   node scripts/plan-checks.ts            (stdin: "<local ref> <local sha> <remote ref> <remote sha>")
+//   pre-commit: node scripts/plan-checks.ts --staged   (the files staged for the commit)
 import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { isDocsOnly } from './lib/session.ts';
@@ -7,7 +8,9 @@ import { isDocsOnly } from './lib/session.ts';
 const ZERO = /^0+$/;
 const files: string[] = [];
 let unknown = false;
-for (const line of readFileSync(0, 'utf8').split('\n').filter(Boolean)) {
+const staged = process.argv.includes('--staged');
+if (staged) files.push(...spawnSync('git', ['diff', '--cached', '--name-only'], { encoding: 'utf8' }).stdout.split('\n').filter(Boolean));
+for (const line of staged ? [] : readFileSync(0, 'utf8').split('\n').filter(Boolean)) {
   const [, local, , remote] = line.split(' ');
   if (!local || ZERO.test(local)) continue; // a deleted branch: nothing to check
   if (!remote || ZERO.test(remote)) { unknown = true; continue; } // a new branch: check everything
