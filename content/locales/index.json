@@ -1,14 +1,12 @@
 {
   "base": "ru",
-  "default": "ru",
+  "default": "en",
   "available": [
-    "ru"
+    "ru",
+    "en"
   ],
   "names": {
     "ru": "Русский",
     "en": "English"
-  },
-  "drafts": [
-    "en"
-  ]
+  }
 }

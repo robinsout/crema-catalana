@@ -13,6 +13,7 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:4173/',
     trace: 'retain-on-failure',
+    locale: 'ru-RU', // the main audience; tests of other languages set their own (test.use)
   },
   expect: {
     toHaveScreenshot: { maxDiffPixelRatio: 0.001, animations: 'disabled' },
