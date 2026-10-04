@@ -184,3 +184,18 @@ test('a lesson page does not send readers to a draft language', async () => {
   assert.equal(router.currentRoute.value.fullPath, '/es/lesson/intro');
   assert.deepEqual(wrapper!.findAll('.lesson-missing a').map((a) => a.attributes('lang')), ['ru']);
 });
+
+test('phones: the menu stays open after switching the language, so the reader sees what changed', async () => {
+  stubSite(enSite);
+  const { router, w } = await openApp('/ru/lesson/intro');
+  const menu = w.find('button[aria-controls="nav"]');
+  await menu.trigger('click');
+  await w.find<HTMLSelectElement>('#nav select.lang-select').setValue('en');
+  await flushPromises();
+  assert.equal(router.currentRoute.value.fullPath, '/en/lesson/intro');
+  assert.equal(menu.attributes('aria-expanded'), 'true');
+  // any other navigation still closes it
+  await router.push('/en/plan');
+  await flushPromises();
+  assert.equal(menu.attributes('aria-expanded'), 'false');
+});

@@ -26,6 +26,9 @@ test('the switcher opens the same lesson in English and remembers the choice', a
   await page.locator('select.lang-select').selectOption('en');
   await expect(page).toHaveURL(/#\/en\/lesson\/intro$/);
   await expect(page.locator('#fonetica h2')).toHaveText('1. Sounds');
+  // the menu stays where it was, now in English
+  await expect(page.locator('#nav .plan-link .t')).toBeVisible();
+  await expect(page.locator('#nav .plan-link .t')).toHaveText('Study plan');
   await page.goto('./');
   await expect(page).toHaveURL(/#\/en\/lesson\/intro$/);
 });
@@ -42,4 +45,16 @@ test('a tap that lands right after switching the language does not open another 
   await page.mouse.click(sync!.x + 20, sync!.y + sync!.height / 2);
   await page.waitForTimeout(800);
   await expect(page).toHaveURL(/#\/en\/lesson\/intro$/);
+});
+
+test('phones: the switcher stays under the finger while the lesson reloads in the other language', async ({ page }, info) => {
+  test.skip(info.project.name !== 'phone', 'the menu is for narrow screens');
+  await page.goto('./#/ru/lesson/x-temps-verbals');
+  await page.locator('button[aria-controls="nav"]').click();
+  const select = page.locator('select.lang-select');
+  await select.scrollIntoViewIfNeeded();
+  const before = (await select.boundingBox())!.y;
+  await select.selectOption('en');
+  await expect(page.locator('#nav .nav-chapters a').first()).toHaveText(/The map of tenses/);
+  expect(Math.abs((await select.boundingBox())!.y - before)).toBeLessThan(3);
 });

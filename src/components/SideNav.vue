@@ -26,9 +26,24 @@ const router = useRouter();
 const GHOST_CLICK_MS = 400;
 let switching = false;
 let switchedAt = 0;
+// The menu stays open after a switch; texts and chapters change length in the other language,
+// so the menu is scrolled to keep the switcher where it was on the screen.
+const side = ref<HTMLElement | null>(null);
+const nav = ref<HTMLElement | null>(null);
+const select = ref<HTMLSelectElement | null>(null);
+let anchor: { top: number; until: number } | null = null;
+function keepSwitcherInPlace(): void {
+  if (!anchor || !select.value || Date.now() > anchor.until) { anchor = null; return; }
+  const box = [nav.value, side.value].find((el) => el && el.scrollHeight > el.clientHeight);
+  const shift = select.value.getBoundingClientRect().top - anchor.top;
+  if (box && shift) box.scrollTop += shift;
+}
+watch(() => [toc.sections, catalog.lang], () => { void nextTick(keepSwitcherInPlace); }, { flush: 'post' });
+
 async function switchLanguage(e: Event): Promise<void> {
   const lang = (e.target as HTMLSelectElement).value;
   if (!route.name || lang === catalog.lang) return;
+  if (select.value) anchor = { top: select.value.getBoundingClientRect().top, until: Date.now() + 3000 };
   switching = true;
   try {
     await router.push({ name: route.name, params: { ...route.params, lang } });
@@ -42,7 +57,9 @@ const swallowGhostClick = (e: MouseEvent): void => {
 };
 
 const open = ref(false);
-watch(() => route.fullPath, () => { open.value = false; toc.panelOpen = false; });
+// a new page closes the menu and the chapters panel; switching the language keeps the menu open,
+// so the reader sees it change instead of being dropped onto the page
+watch(() => route.fullPath, () => { if (switching) return; open.value = false; toc.panelOpen = false; });
 // on narrow screens the lessons menu and the chapters panel take turns
 watch(open, (v) => { if (v) toc.panelOpen = false; });
 watch(() => toc.panelOpen, (v) => { if (v) open.value = false; });
@@ -65,7 +82,7 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
 </script>
 
 <template>
-  <div class="side" :class="{ 'menu-open': open }">
+  <div ref="side" class="side" :class="{ 'menu-open': open }">
     <div class="brand">
       <h1>Quadern de català<span>{{ t('brand.subtitle') }}</span></h1>
       <div class="brand-actions">
@@ -74,7 +91,7 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
       </div>
     </div>
     <div class="panot" aria-hidden="true"></div>
-    <nav id="nav" class="nav" :class="{ open }" :aria-label="t('nav.label')">
+    <nav id="nav" ref="nav" class="nav" :class="{ open }" :aria-label="t('nav.label')">
       <TableOfContents v-if="hasChapters" menu @jump="jumpFromMenu" />
       <p class="progress">
         <span>{{ t('progress.done', summary) }}</span>
@@ -86,7 +103,7 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
       </RouterLink>
       <label v-if="catalog.languages.length > 1" class="lang-pick">
         <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.3" /><path d="M1.7 8h12.6M8 1.7c2 2 2 10.6 0 12.6M8 1.7c-2 2-2 10.6 0 12.6" /></svg>
-        <select class="lang-select" :aria-label="t('nav.language')" :value="catalog.lang" @change="switchLanguage">
+        <select ref="select" class="lang-select" :aria-label="t('nav.language')" :value="catalog.lang" @change="switchLanguage">
           <option v-for="l in catalog.languages" :key="l.code" :value="l.code" :lang="l.code">{{ l.name }}</option>
         </select>
       </label>

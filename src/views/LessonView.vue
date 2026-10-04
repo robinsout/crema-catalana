@@ -42,6 +42,9 @@ const inLanguage = (code: string) => ({ name: 'lesson', params: { lang: code, id
 // chapter for its "studied" button.
 const chapters = ref<string[]>([]);
 watch(() => content.value.state, async (state) => {
+  // the same lesson loading in another language keeps its chapters (same ids in every language)
+  // until the new text is there: the menu and the contents do not collapse and jump meanwhile
+  if (state === 'loading' && toc.lesson === lesson.value?.id) return;
   chapters.value = [];
   await nextTick();
   const ready = state === 'ready' && root.value !== null;
