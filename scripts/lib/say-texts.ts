@@ -8,7 +8,7 @@ const decode = (s: string): string => s.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi,
   if (e[0] === '#') return String.fromCodePoint(e[1]?.toLowerCase() === 'x' ? parseInt(e.slice(2), 16) : parseInt(e.slice(1), 10));
   return ENTITIES[e.toLowerCase()] ?? m;
 });
-const text = (html: string): string => normalizeSayText(decode(html.replace(/<[^>]*>/g, '')));
+export const text = (html: string): string => normalizeSayText(decode(html.replace(/<[^>]*>/g, '')));
 
 export function extractSayTexts(html: string): string[] {
   const found: string[] = [];
@@ -31,7 +31,7 @@ export function extractSayTexts(html: string): string[] {
 }
 
 // index of the closing tag that matches an opening tag, allowing nested tags of the same name
-function findClose(html: string, name: string, from: number): number {
+export function findClose(html: string, name: string, from: number): number {
   const re = new RegExp(`<(/?)${name}\\b[^>]*>`, 'gi');
   re.lastIndex = from;
   let depth = 1;

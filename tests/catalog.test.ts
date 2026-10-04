@@ -14,11 +14,15 @@ import { clipFor } from '../src/services/audio.ts';
 import type { AudioIndex } from '../src/services/audio.ts';
 import type { Course, LocaleCatalog, LocalesIndex } from '../src/types/index.ts';
 import { extractSayTexts } from '../scripts/lib/say-texts.ts';
+import { compareOutlines, lessonOutline, lintLesson } from '../scripts/lib/lesson-check.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const portal = join(root, 'content');
 const locales: LocalesIndex = JSON.parse(readFileSync(join(portal, 'locales', 'index.json'), 'utf8'));
 const catalog = loadCatalog(portal, locales.base);
+// lessons written in each language, with their HTML
+const written = (lang: string) => allLessons(loadCatalog(portal, lang)).filter((l) => l.file)
+  .map((l) => ({ id: l.id, html: readFileSync(join(portal, l.file ?? ''), 'utf8') }));
 // Every id that was ever published. Saved progress refers to these ids, so they may never disappear.
 const published: string[] = JSON.parse(readFileSync(join(root, 'tests', 'published-ids.json'), 'utf8'));
 
@@ -83,10 +87,28 @@ test('audio index exists (run: npm run audio)', () => {
   assert.ok(audioIndex, 'audio/index.json missing — run npm run audio');
 });
 
-test('every Catalan phrase in a lesson has a recorded clip (run: npm run audio)', () => {
-  for (const l of allLessons(catalog).filter((x) => x.file)) {
-    const missing = extractSayTexts(readFileSync(join(portal, l.file ?? ''), 'utf8')).filter((t) => !clipFor(audioIndex, t));
-    assert.deepEqual(missing, [], `${l.id}: phrases without audio — run npm run audio`);
+test('every Catalan phrase in a lesson has a recorded clip, in every language (run: npm run audio)', () => {
+  for (const lang of locales.available) {
+    for (const l of written(lang)) {
+      const missing = extractSayTexts(l.html).filter((t) => !clipFor(audioIndex, t));
+      assert.deepEqual(missing, [], `${lang}/${l.id}: phrases without audio — run npm run audio`);
+    }
+  }
+});
+
+test('lesson markup: Catalan phrases hold no explanations and are not nested, chapters have ids and headings', () => {
+  for (const lang of locales.available) {
+    for (const l of written(lang)) assert.deepEqual(lintLesson(l.html), [], `${lang}/${l.id}`);
+  }
+});
+
+test('an adapted lesson keeps the chapters and exercises of the base language (progress is saved under their ids)', () => {
+  const source = new Map(written(locales.base).map((l) => [l.id, lessonOutline(l.html)]));
+  for (const lang of locales.available.filter((x) => x !== locales.base)) {
+    for (const l of written(lang)) {
+      const base = source.get(l.id);
+      if (base) assert.deepEqual(compareOutlines(base, lessonOutline(l.html)), [], `${lang}/${l.id}`);
+    }
   }
 });
 
@@ -135,9 +157,9 @@ test('exercises: every placeholder in a lesson has data and every exercise is pl
   }
 });
 
-test('Catalan prompts and solutions of exercises have recorded clips (run: npm run audio)', () => {
-  const missing = allLessons(catalog).filter((l) => l.file)
-    .flatMap((l) => exerciseTexts(loadExercises(portal, locales.base, l.id)))
+test('Catalan prompts and solutions of exercises have recorded clips, in every language (run: npm run audio)', () => {
+  const missing = locales.available.flatMap((lang) => written(lang)
+    .flatMap((l) => exerciseTexts(loadExercises(portal, lang, l.id))))
     .filter((t) => !clipFor(audioIndex, t));
   assert.deepEqual(missing, [], 'exercise texts without audio — run npm run audio');
 });
