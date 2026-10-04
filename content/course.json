@@ -11,6 +11,20 @@
       "title": "Introducció al català"
     },
     {
+      "id": "x-nombres-calendari",
+      "kind": "topic",
+      "title": "Els nombres i el calendari",
+      "related": [
+        "b1-01",
+        "b1-02",
+        "b1-03",
+        "b1-04",
+        "b1-05",
+        "b2-07"
+      ],
+      "hasVocab": true
+    },
+    {
       "id": "x-temps-verbals",
       "kind": "overview",
       "title": "Els temps verbals",
@@ -22,20 +36,6 @@
         "b2-10",
         "b3-03",
         "b3-05"
-      ],
-      "hasVocab": true
-    },
-    {
-      "id": "x-nombres-calendari",
-      "kind": "topic",
-      "title": "Els nombres i el calendari",
-      "related": [
-        "b1-01",
-        "b1-02",
-        "b1-03",
-        "b1-04",
-        "b1-05",
-        "b2-07"
       ],
       "hasVocab": true
     }
