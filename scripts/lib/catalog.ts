@@ -24,3 +24,6 @@ export function loadCatalog(contentDir: string, lang: string): Catalog {
 export function loadLocales(contentDir: string): LocalesIndex {
   return readJson<LocalesIndex>(join(contentDir, 'locales', 'index.json'));
 }
+
+// languages with content to check: published ones and drafts
+export const contentLanguages = (locales: LocalesIndex): string[] => [...new Set([...locales.available, ...(locales.drafts ?? [])])];
