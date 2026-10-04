@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { RouterLink } from 'vue-router';
 import { useCatalogStore } from '../stores/catalog.ts';
+import { useProgressStore } from '../stores/progress.ts';
+import { useLessonLink } from '../composables/useLessonLink.ts';
 import { useTocStore } from '../stores/toc.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import UnitRow from '../components/UnitRow.vue';
@@ -9,12 +12,23 @@ import ExtraRow from '../components/ExtraRow.vue';
 
 const catalog = useCatalogStore();
 const toc = useTocStore();
+const progress = useProgressStore();
+const linkTo = useLessonLink();
 const { t } = useI18n();
 const route = useRoute();
 const article = ref<HTMLElement | null>(null);
 
 const course = computed(() => catalog.catalog.course);
 const extras = computed(() => catalog.extras);
+// The lesson to go on with: the last one opened, unless it is finished; else the first ready one not done.
+const next = computed(() => {
+  const last = progress.lastLesson ? catalog.find(progress.lastLesson) : null;
+  if (last?.file && !progress.isDone(last.id)) return { lesson: last, label: t('plan.continue', { title: last.title }) };
+  const first = catalog.lessons.find((l) => l.file && !progress.isDone(l.id));
+  if (!first) return null;
+  return { lesson: first, label: last ? t('plan.next', { title: first.title }) : t('plan.start', { title: first.title }) };
+});
+
 const focus = computed(() => (typeof route.params.focus === 'string' ? route.params.focus : ''));
 
 const jump = (id: string): void => document.getElementById(id)?.scrollIntoView();
@@ -57,6 +71,9 @@ onBeforeUnmount(() => release?.());
     <p class="eyebrow">{{ t('plan.eyebrow') }}</p>
     <h2 lang="ca">{{ course.title }}<template v-if="course.level"> · {{ course.level }}</template></h2>
     <p class="sub">{{ t('plan.sub', { course: course.title ?? '', publisher: course.publisher ?? '' }) }}</p>
+    <p v-if="next" class="continue">
+      <RouterLink class="btn btn-solid" :to="linkTo(next.lesson)">{{ next.label }} →</RouterLink>
+    </p>
   </header>
   <article ref="article" class="lesson plan">
     <p v-html="t('plan.intro')"></p>

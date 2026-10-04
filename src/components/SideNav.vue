@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import { useCatalogStore } from '../stores/catalog.ts';
 import { useProgressStore } from '../stores/progress.ts';
+import { useTocStore } from '../stores/toc.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import { useLessonLink } from '../composables/useLessonLink.ts';
 import type { Lesson } from '../types/index.ts';
@@ -11,12 +12,21 @@ import SyncStatusLine from './SyncStatusLine.vue';
 
 const catalog = useCatalogStore();
 const progress = useProgressStore();
+const toc = useTocStore();
 const { t } = useI18n();
 const linkTo = useLessonLink();
 const route = useRoute();
 
 const open = ref(false);
-watch(() => route.fullPath, () => { open.value = false; });
+watch(() => route.fullPath, () => { open.value = false; toc.panelOpen = false; });
+// on narrow screens the lessons menu and the chapters panel take turns
+watch(open, (v) => { if (v) toc.panelOpen = false; });
+watch(() => toc.panelOpen, (v) => { if (v) open.value = false; });
+// Escape closes the menu and the chapters panel
+const onKey = (e: KeyboardEvent): void => { if (e.key === 'Escape') { open.value = false; toc.panelOpen = false; } };
+onMounted(() => window.addEventListener('keydown', onKey));
+onBeforeUnmount(() => window.removeEventListener('keydown', onKey));
+const hasChapters = computed(() => route.name === 'lesson' && toc.kind === 'lesson' && toc.sections.length > 0);
 
 const summary = computed(() => progress.summary);
 const isPlan = computed(() => route.name === 'plan');
@@ -28,7 +38,10 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
   <div class="side">
     <div class="brand">
       <h1>Quadern de català<span>{{ t('brand.subtitle') }}</span></h1>
-      <button class="nav-toggle" type="button" aria-controls="nav" :aria-expanded="open" @click="open = !open">{{ t('nav.toggle') }}</button>
+      <div class="brand-actions">
+        <button v-if="hasChapters" class="nav-toggle toc-toggle" type="button" aria-controls="toc-panel" :aria-expanded="toc.panelOpen" @click="toc.panelOpen = !toc.panelOpen">{{ t('toc.toggle') }}</button>
+        <button class="nav-toggle" type="button" aria-controls="nav" :aria-expanded="open" @click="open = !open">{{ t('nav.toggle') }}</button>
+      </div>
     </div>
     <div class="panot" aria-hidden="true"></div>
     <nav id="nav" class="nav" :class="{ open }" :aria-label="t('nav.label')">

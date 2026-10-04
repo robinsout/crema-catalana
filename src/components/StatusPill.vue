@@ -12,6 +12,6 @@ const linkTo = useLessonLink();
 </script>
 
 <template>
-  <RouterLink v-if="lesson.file" class="pill ok" :to="linkTo(lesson)">{{ progress.isDone(lesson.id) ? t('pill.done') : t('pill.open') }}</RouterLink>
+  <RouterLink v-if="lesson.file" class="pill ok" :class="{ done: progress.isDone(lesson.id) }" :to="linkTo(lesson)">{{ progress.isDone(lesson.id) ? t('pill.done') : t('pill.open') }}</RouterLink>
   <span v-else class="pill">{{ t('pill.soon') }}</span>
 </template>

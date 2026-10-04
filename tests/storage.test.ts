@@ -1,7 +1,7 @@
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
-import { STORAGE_KEY, ID_ALIASES, parseProgress, serializeProgress, createStore, mergeProgress, canonicalId, isLessonId } from '../src/services/progress.ts';
+import { STORAGE_KEY, ID_ALIASES, parseProgress, serializeProgress, createStore, mergeProgress, canonicalId, isLessonId, markSection, recordReading } from '../src/services/progress.ts';
 
 // Real payloads written by earlier versions of the portal. They must keep loading forever.
 const SAVED = {
@@ -86,7 +86,7 @@ test('store loads, updates and saves through the backend', () => {
   store.setDone('b1-01', true);
   store.setLast('b1-01');
   const saved = JSON.parse(backend.data[STORAGE_KEY] ?? 'null');
-  assert.deepEqual(saved, { done: { intro: true, 'b1-01': true }, doneAt: { 'b1-01': 42 }, exercises: {}, last: 'b1-01' });
+  assert.deepEqual(saved, { done: { intro: true, 'b1-01': true }, doneAt: { 'b1-01': 42 }, exercises: {}, sections: {}, reading: {}, last: 'b1-01' });
 });
 
 test('store toggles a done mark and stamps the time of every change', () => {
@@ -201,4 +201,98 @@ test('every published lesson id and exercise id has the accepted format', () => 
       }
     }
   }
+});
+
+test('v5: section marks and reading points load; invalid entries are dropped; older data has none', () => {
+  assert.deepEqual(parseProgress(SAVED.v2).sections, {});
+  assert.deepEqual(parseProgress(SAVED.v2).reading, {});
+  const p = parseProgress(JSON.stringify({
+    done: {},
+    sections: {
+      'x-temps-verbals/mapa': { done: true, at: 5 },
+      'x-temps-verbals/formes': { done: false, at: 6 },
+      'x-temps-verbals/__proto__': { done: true, at: 1 },
+      'x-temps-verbals': { done: true, at: 1 },
+      'intro/fonetica': { done: 'yes', at: 1 },
+    },
+    reading: {
+      'x-temps-verbals': { section: 'formes', at: 7 },
+      intro: { section: 'Bad Id', at: 1 },
+      __proto__: { section: 'mapa', at: 1 },
+      'b1-01': { section: 'x', at: 'later' },
+    },
+  }));
+  assert.deepEqual(p.sections, { 'x-temps-verbals/mapa': { done: true, at: 5 }, 'x-temps-verbals/formes': { done: false, at: 6 } });
+  assert.deepEqual(p.reading, { 'x-temps-verbals': { section: 'formes', at: 7 } });
+});
+
+test('v5: a section mark is set and stamped with the time of the change', () => {
+  const p = parseProgress(null);
+  assert.equal(markSection(p, 'intro/fonetica', true, 10), true);
+  assert.deepEqual(p.sections['intro/fonetica'], { done: true, at: 10 });
+  assert.equal(markSection(p, 'intro/fonetica', false, 20), false);
+  assert.deepEqual(p.sections['intro/fonetica'], { done: false, at: 20 });
+});
+
+test('v5: the reading point only moves forward through the sections of a lesson', () => {
+  const order = ['mapa', 'llegir', 'historia', 'formes'];
+  const p = parseProgress(null);
+  assert.equal(recordReading(p, 'x-temps', 'llegir', order, 10), true);
+  assert.equal(recordReading(p, 'x-temps', 'historia', order, 20), true);
+  assert.equal(recordReading(p, 'x-temps', 'mapa', order, 30), false); // went back to re-read: the point stays
+  assert.deepEqual(p.reading['x-temps'], { section: 'historia', at: 20 });
+  // a section that is no longer in the lesson is replaced by any current one
+  p.reading['x-temps'] = { section: 'renamed', at: 5 };
+  assert.equal(recordReading(p, 'x-temps', 'mapa', order, 40), true);
+  assert.deepEqual(p.reading['x-temps'], { section: 'mapa', at: 40 });
+});
+
+test('merge: per section mark and per lesson reading point the later change wins', () => {
+  const local = {
+    done: {},
+    sections: { 'a/s1': { done: true, at: 10 }, 'a/s2': { done: false, at: 50 } },
+    reading: { a: { section: 's2', at: 50 }, b: { section: 's1', at: 5 } },
+  };
+  const remote = {
+    done: {},
+    sections: { 'a/s1': { done: false, at: 20 }, 'a/s2': { done: true, at: 40 }, 'a/s3': { done: true, at: 1 } },
+    reading: { a: { section: 's3', at: 40 }, b: { section: 's4', at: 9 } },
+  };
+  const m = mergeProgress(local, remote);
+  assert.deepEqual(m.sections, { 'a/s1': { done: false, at: 20 }, 'a/s2': { done: false, at: 50 }, 'a/s3': { done: true, at: 1 } });
+  assert.deepEqual(m.reading, { a: { section: 's2', at: 50 }, b: { section: 's4', at: 9 } });
+  assert.deepEqual(mergeProgress({ done: {}, sections: { 'a/s': { done: false, at: 3 } } }, { done: {}, sections: { 'a/s': { done: true, at: 3 } } }).sections,
+    { 'a/s': { done: true, at: 3 } }, 'done wins a tie');
+});
+
+test('every section id of a lesson has the accepted format and is listed in tests/published-sections.json', () => {
+  const published: Record<string, string[]> = JSON.parse(readFileSync('tests/published-sections.json', 'utf8'));
+  for (const lang of readdirSync('content/locales')) {
+    const dir = `content/locales/${lang}/lessons`;
+    if (!existsSync(dir)) continue;
+    for (const file of readdirSync(dir)) {
+      const lesson = file.replace(/\.html$/, '');
+      const ids = [...readFileSync(`${dir}/${file}`, 'utf8').matchAll(/<section id="([^"]+)"/g)].map((m) => m[1]!);
+      for (const id of ids) {
+        assert.ok(isLessonId(id), `${lang}/${file}: ${id}`);
+        assert.ok(published[lesson]?.includes(id), `add "${id}" to "${lesson}" in tests/published-sections.json`);
+      }
+    }
+  }
+});
+
+// Section marks and reading points are saved under section ids: like lesson ids, they never disappear.
+test('published section ids stay in their lessons', () => {
+  const published: Record<string, string[]> = JSON.parse(readFileSync('tests/published-sections.json', 'utf8'));
+  for (const [lesson, ids] of Object.entries(published)) {
+    const html = readFileSync(`content/locales/ru/lessons/${lesson}.html`, 'utf8');
+    for (const id of ids) assert.ok(html.includes(`<section id="${id}"`), `${lesson}: section "${id}" was removed or renamed`);
+  }
+});
+
+test('v5: lastLesson loads when it is a lesson id', () => {
+  assert.equal(parseProgress('{"done":{},"lastLesson":"x-temps"}').lastLesson, 'x-temps');
+  assert.equal(parseProgress('{"done":{},"lastLesson":"__proto__"}').lastLesson, undefined);
+  assert.equal(parseProgress('{"done":{},"lastLesson":"l01"}').lastLesson, 'intro');
+  assert.equal('lastLesson' in parseProgress(SAVED.v2), false);
 });

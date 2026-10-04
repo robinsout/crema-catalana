@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, watch } from 'vue';
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import { useCatalogStore } from '../stores/catalog.ts';
 import { useLessonsStore } from '../stores/lessons.ts';
 import { useProgressStore } from '../stores/progress.ts';
 import { useTocStore } from '../stores/toc.ts';
+import { useAudioStore } from '../stores/audio.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import { useLessonLink } from '../composables/useLessonLink.ts';
 import VocabSection from '../components/VocabSection.vue';
@@ -15,6 +16,7 @@ const catalog = useCatalogStore();
 const lessons = useLessonsStore();
 const progress = useProgressStore();
 const toc = useTocStore();
+const audio = useAudioStore();
 const { t, formatDate } = useI18n();
 const linkTo = useLessonLink();
 const route = useRoute();
@@ -33,11 +35,44 @@ const plan = computed(() => ({ name: 'plan', params: { lang: catalog.lang } }));
 
 watch(lesson, (l) => { if (l) lessons.load(l, catalog.lang); }, { immediate: true });
 
-// the table of contents follows the rendered lesson
+// Chapters of the rendered lesson: the table of contents, and a placeholder at the end of each
+// chapter for its "studied" button.
+const chapters = ref<string[]>([]);
 watch(() => content.value.state, async (state) => {
+  chapters.value = [];
   await nextTick();
-  toc.collect(state === 'ready' ? root.value : null, 'lesson');
+  const ready = state === 'ready' && root.value !== null;
+  toc.collect(ready ? root.value : null, 'lesson', lesson.value?.id ?? null);
+  if (!ready) return;
+  const found = [...root.value!.querySelectorAll<HTMLElement>('article.lesson > section[id]')];
+  for (const s of found) {
+    if (s.querySelector(':scope > .section-end')) continue;
+    const end = document.createElement('div');
+    end.className = 'section-end';
+    end.dataset.sectionEnd = s.id;
+    s.append(end);
+  }
+  chapters.value = found.map((s) => s.id);
 }, { immediate: true });
+
+// A chapter on screen for a few seconds counts as read (scrolling past it does not).
+const READ_AFTER_MS = 3000;
+let reading: ReturnType<typeof setTimeout> | undefined;
+watch(() => toc.active, (id) => {
+  clearTimeout(reading);
+  const l = lesson.value;
+  if (!id || !l || toc.lesson !== l.id) return;
+  reading = setTimeout(() => progress.reachSection(l.id, id, toc.ids), READ_AFTER_MS);
+});
+onBeforeUnmount(() => clearTimeout(reading));
+
+// where the reader stopped last time, unless it is the start or the lesson is finished
+const resumeAt = computed(() => {
+  const l = lesson.value;
+  if (!l || done.value || toc.lesson !== l.id) return null;
+  const id = progress.readingPoint(l.id);
+  return id && toc.ids.indexOf(id) > 0 ? { id, title: toc.titleOf(id) } : null;
+});
 </script>
 
 <template>
@@ -55,6 +90,11 @@ watch(() => content.value.state, async (state) => {
           </button>
           <span v-if="lesson.date" class="meta">{{ formatDate(lesson.date) }}</span>
         </div>
+        <p v-if="audio.available" class="say-tip">{{ t('say.tip') }}</p>
+        <p v-if="resumeAt" class="resume">
+          <span>{{ t('resume.text', { title: resumeAt.title }) }}</span>
+          <button class="btn" type="button" @click="toc.jump(resumeAt.id)">{{ t('resume.go') }}</button>
+        </p>
       </header>
       <div ref="root">
         <article class="lesson" v-html="content.html"></article>
@@ -63,9 +103,20 @@ watch(() => content.value.state, async (state) => {
           <FillExercise v-if="ex.type === 'fill'" :id="`${lesson.id}/${id}`" :items="ex.items" />
           <ChoiceExercise v-else :id="`${lesson.id}/${id}`" :items="ex.items" />
         </Teleport>
+        <Teleport v-for="id in chapters" :key="`${lesson.id}#${id}`" :to="`[data-section-end='${id}']`" defer>
+          <button class="btn section-btn" :class="{ 'is-done': progress.isSectionDone(lesson.id, id) }" type="button"
+            :aria-pressed="progress.isSectionDone(lesson.id, id)" @click="progress.toggleSection(lesson.id, id)">
+            {{ progress.isSectionDone(lesson.id, id) ? t('section.studied') : t('section.markStudied') }}
+          </button>
+        </Teleport>
         <div v-if="vocab?.length" class="lesson">
           <VocabSection :groups="vocab" />
         </div>
+      </div>
+      <div class="lesson-end">
+        <button class="btn" :class="{ 'is-done': done }" type="button" @click="progress.toggleDone(lesson.id)">
+          {{ done ? t('lesson.isDone') : t('lesson.markDone') }}
+        </button>
       </div>
       <p v-if="related.length" class="related">
         {{ t('lesson.related') }}

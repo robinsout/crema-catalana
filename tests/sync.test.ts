@@ -6,6 +6,7 @@ import {
   generateCode, parseCode, formatCode, deriveKeys, encryptJson, decryptJson, syncOnce, type SyncApi,
 } from '../src/services/sync.ts';
 import type { Progress } from '../src/services/progress.ts';
+import { DEFAULT_MAX_BLOB_CHARS } from '../server/app.ts';
 
 test('a new code is 27 characters (26 + check) in groups, and parses back', () => {
   const code = generateCode();
@@ -52,6 +53,39 @@ test('encryption round trip; another key cannot read the data; every encryption 
   await assert.rejects(decryptJson(key, `${c1.slice(0, -4)}AAAA`), 'tampering is detected');
 });
 
+// Blobs written before compression: base64(IV + AES-GCM(JSON)). They must keep loading.
+async function encryptUncompressed(key: CryptoKey, value: unknown): Promise<string> {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(JSON.stringify(value))));
+  return Buffer.concat([iv, ct]).toString('base64');
+}
+
+test('progress saved on the server before compression still loads', async () => {
+  const { key } = await deriveKeys(generateCode());
+  const data = { done: { intro: true }, doneAt: { intro: 5 }, exercises: {} };
+  assert.deepEqual(await decryptJson(key, await encryptUncompressed(key, data)), data);
+});
+
+// The server takes blobs up to DEFAULT_MAX_BLOB_CHARS: the progress of the whole course must fit,
+// with every lesson done, every exercise tried and every chapter marked.
+test('the progress of a whole course fits into one blob on the server', async () => {
+  const { key } = await deriveKeys(generateCode());
+  const at = 1_791_104_305_838;
+  const p: Pick<Progress, 'done' | 'doneAt' | 'exercises' | 'sections' | 'reading'> =
+    { done: {}, doneAt: {}, exercises: {}, sections: {}, reading: {} };
+  for (let i = 0; i < 40; i++) {
+    const id = `b${1 + (i % 3)}-${String(i).padStart(2, '0')}`;
+    p.done[id] = true;
+    p.doneAt[id] = at + i * 997;
+    for (let e = 0; e < 4; e++) p.exercises[`${id}/exercise-${e}`] = { score: e, total: 6, at: at + i * 991 + e };
+    for (let s = 0; s < 10; s++) p.sections[`${id}/section-${s}`] = { done: s % 4 !== 0, at: at + i * 983 + s * 37 };
+    p.reading[id] = { section: 'section-9', at: at + i * 977 };
+  }
+  const blob = await encryptJson(key, p);
+  assert.ok(blob.length < DEFAULT_MAX_BLOB_CHARS / 2, `${blob.length} characters`);
+  assert.deepEqual(await decryptJson(key, blob), p);
+});
+
 // an in-memory server with the API contract
 function fakeServer() {
   const blobs = new Map<string, { data: string; version: number }>();
@@ -70,7 +104,7 @@ function fakeServer() {
   return { api, blobs, failNextPut: () => { conflictOnce = true; } };
 }
 
-const progress = (p: Partial<Progress>): Progress => ({ done: {}, doneAt: {}, exercises: {}, last: null, ...p });
+const progress = (p: Partial<Progress>): Progress => ({ done: {}, doneAt: {}, exercises: {}, sections: {}, reading: {}, last: null, ...p });
 
 test('first sync uploads local progress; only progress data leaves the device', async () => {
   const server = fakeServer();
@@ -80,7 +114,7 @@ test('first sync uploads local progress; only progress data leaves the device', 
   assert.deepEqual(merged.done, { intro: true });
   const stored = server.blobs.get(keys.id);
   assert.ok(stored);
-  assert.deepEqual(await decryptJson(keys.key, stored.data), { done: { intro: true }, doneAt: { intro: 5 }, exercises: {} });
+  assert.deepEqual(await decryptJson(keys.key, stored.data), { done: { intro: true }, doneAt: { intro: 5 }, exercises: {}, sections: {}, reading: {} });
 });
 
 test('two devices end up with the same progress', async () => {
@@ -93,6 +127,7 @@ test('two devices end up with the same progress', async () => {
   assert.deepEqual(phoneAfter.done, { intro: false, 'x-temps': true }); // phone unmarked intro later
   assert.deepEqual(phoneAfter.exercises, { 'a/b': { score: 1, total: 2, at: 10 } });
   const laptopAfter = await syncOnce(server.api, keys, laptop);
+  assert.deepEqual(laptopAfter.sections, phoneAfter.sections);
   assert.deepEqual(laptopAfter.done, phoneAfter.done);
 });
 
@@ -120,4 +155,14 @@ test('data that cannot be decrypted is an error, not silently overwritten', asyn
   server.blobs.set(keys.id, { data: 'garbage', version: 1 });
   await assert.rejects(syncOnce(server.api, keys, progress({})));
   assert.equal(server.blobs.get(keys.id)?.data, 'garbage');
+});
+
+test('section marks and reading points travel between devices', async () => {
+  const server = fakeServer();
+  const keys = await deriveKeys(generateCode());
+  const phone = progress({ sections: { 'intro/fonetica': { done: true, at: 10 } }, reading: { intro: { section: 'gramatica', at: 10 } } });
+  await syncOnce(server.api, keys, phone);
+  const laptop = await syncOnce(server.api, keys, progress({}));
+  assert.deepEqual(laptop.sections, { 'intro/fonetica': { done: true, at: 10 } });
+  assert.deepEqual(laptop.reading, { intro: { section: 'gramatica', at: 10 } });
 });

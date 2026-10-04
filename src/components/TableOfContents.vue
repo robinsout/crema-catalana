@@ -1,38 +1,26 @@
 <script setup lang="ts">
-import { nextTick, onBeforeUnmount, ref, watch } from 'vue';
 import { useTocStore } from '../stores/toc.ts';
+import { useProgressStore } from '../stores/progress.ts';
 import { useI18n } from '../composables/useI18n.ts';
 
+// `panel`: the chapters panel of narrow screens, opened from the header
+defineProps<{ panel?: boolean }>();
 const toc = useTocStore();
+const progress = useProgressStore();
 const { t } = useI18n();
-const active = ref('');
-let spy: IntersectionObserver | null = null;
 
-function observe(): void {
-  spy?.disconnect();
-  if (typeof IntersectionObserver === 'undefined') return;
-  spy = new IntersectionObserver((entries) => {
-    for (const e of entries) if (e.isIntersecting) active.value = e.target.id;
-  }, { rootMargin: '-20% 0px -70% 0px' });
-  for (const s of toc.sections) {
-    const el = document.getElementById(s.id);
-    if (el) spy.observe(el);
-  }
-}
-
-watch(() => toc.sections, () => nextTick(observe));
-onBeforeUnmount(() => spy?.disconnect());
-
-const jump = (id: string): void => document.getElementById(id)?.scrollIntoView();
+const studied = (id: string): boolean => (toc.lesson ? progress.isSectionDone(toc.lesson, id) : false);
 </script>
 
 <template>
-  <aside class="toc" :aria-label="t('toc.label')">
+  <aside :id="panel ? 'toc-panel' : undefined" :class="panel ? 'toc-panel' : 'toc'" :aria-label="t('toc.label')">
     <template v-if="toc.sections.length">
       <p>{{ toc.kind === 'plan' ? t('toc.plan') : t('toc.lesson') }}</p>
       <ol>
-        <li v-for="s in toc.sections" :key="s.id">
-          <a href="#" :class="{ active: active === s.id }" @click.prevent="jump(s.id)">{{ s.title }}</a>
+        <li v-for="s in toc.sections" :key="s.id" :class="{ 'is-done': studied(s.id) }">
+          <a href="#" :class="{ active: toc.active === s.id }" :aria-current="toc.active === s.id ? 'location' : undefined" @click.prevent="toc.jump(s.id)">
+            {{ s.title }}<span v-if="studied(s.id)" class="toc-check" :title="t('section.studied')"> ✓</span>
+          </a>
         </li>
       </ol>
     </template>

@@ -33,9 +33,48 @@ test('progress store toggles a mark, stamps the time and saves in the same forma
   const p = useProgressStore();
   p.toggleDone('b1-01');
   assert.equal(p.isDone('b1-01'), true);
-  assert.deepEqual(stored(), { done: { intro: true, 'b1-01': true }, doneAt: { 'b1-01': 1000 }, exercises: {}, last: 'pla', notes: 'kept' });
+  assert.deepEqual(stored(), { done: { intro: true, 'b1-01': true }, doneAt: { 'b1-01': 1000 }, exercises: {}, sections: {}, reading: {}, last: 'pla', notes: 'kept' });
   p.toggleDone('b1-01');
   assert.equal(p.isDone('b1-01'), false);
+});
+
+test('progress store marks chapters and saves them', () => {
+  vi.useFakeTimers();
+  vi.setSystemTime(2000);
+  const p = useProgressStore();
+  assert.equal(p.isSectionDone('intro', 'fonetica'), false);
+  p.toggleSection('intro', 'fonetica');
+  assert.equal(p.isSectionDone('intro', 'fonetica'), true);
+  assert.deepEqual(stored().sections, { 'intro/fonetica': { done: true, at: 2000 } });
+  p.toggleSection('intro', 'fonetica');
+  assert.equal(p.isSectionDone('intro', 'fonetica'), false);
+});
+
+test('progress store keeps the furthest chapter read and saves it only when it moves', () => {
+  vi.useFakeTimers();
+  vi.setSystemTime(3000);
+  const p = useProgressStore();
+  const order = ['a', 'b', 'c'];
+  assert.equal(p.readingPoint('intro'), null);
+  p.reachSection('intro', 'b', order);
+  assert.equal(p.readingPoint('intro'), 'b');
+  const setItem = vi.spyOn(Storage.prototype, 'setItem');
+  p.reachSection('intro', 'a', order);
+  assert.equal(setItem.mock.calls.length, 0);
+  assert.deepEqual(stored().reading, { intro: { section: 'b', at: 3000 } });
+  vi.restoreAllMocks();
+});
+
+test('progress store remembers the last lesson apart from the last view', () => {
+  saveProgress('{"done":{},"last":"x-temps"}'); // saved before v5: the last view was a lesson
+  const p = useProgressStore();
+  assert.equal(p.lastLesson, 'x-temps');
+  p.setLast('pla');
+  assert.equal(p.lastLesson, 'x-temps');
+  p.setLast('intro');
+  assert.equal(p.lastLesson, 'intro');
+  assert.equal(stored().lastLesson, 'intro');
+  assert.equal(stored().last, 'intro');
 });
 
 test('progress store remembers the last view', () => {

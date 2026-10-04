@@ -93,10 +93,32 @@ const toBase64 = (bytes: Uint8Array): string => btoa(String.fromCharCode(...byte
 const fromBase64 = (text: string): Uint8Array<ArrayBuffer> =>
   Uint8Array.from(atob(text), (c) => c.charCodeAt(0)) as Uint8Array<ArrayBuffer>;
 
+// The plain text inside a blob: JSON (blobs written before 2026-10-04, starts with "{"), or the
+// DEFLATED marker byte followed by the deflated JSON: chapter marks made the progress of a whole
+// course larger than one blob on the server, and compressed it takes a few times less.
+const DEFLATED = 1;
+
+async function pipe(bytes: Uint8Array<ArrayBuffer>, stream: CompressionStream | DecompressionStream): Promise<Uint8Array<ArrayBuffer>> {
+  return new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(stream)).arrayBuffer());
+}
+
+async function pack(value: unknown): Promise<Uint8Array<ArrayBuffer>> {
+  const deflated = await pipe(utf8(JSON.stringify(value)), new CompressionStream('deflate-raw'));
+  const out = new Uint8Array(deflated.length + 1);
+  out[0] = DEFLATED;
+  out.set(deflated, 1);
+  return out;
+}
+
+async function unpack(plain: Uint8Array<ArrayBuffer>): Promise<unknown> {
+  const json = plain[0] === DEFLATED ? await pipe(plain.slice(1), new DecompressionStream('deflate-raw')) : plain;
+  return JSON.parse(new TextDecoder().decode(json)) as unknown;
+}
+
 // base64 of a random 12-byte IV followed by the AES-GCM ciphertext (which includes the auth tag)
 export async function encryptJson(key: CryptoKey, value: unknown): Promise<string> {
   const iv = crypto.getRandomValues(new Uint8Array(12));
-  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, utf8(JSON.stringify(value))));
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, await pack(value)));
   const out = new Uint8Array(iv.length + ct.length);
   out.set(iv);
   out.set(ct, iv.length);
@@ -106,7 +128,7 @@ export async function encryptJson(key: CryptoKey, value: unknown): Promise<strin
 export async function decryptJson(key: CryptoKey, data: string): Promise<unknown> {
   const bytes = fromBase64(data);
   const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes.slice(0, 12) }, key, bytes.slice(12));
-  return JSON.parse(new TextDecoder().decode(plain)) as unknown;
+  return unpack(new Uint8Array(plain));
 }
 
 // ---------- the sync loop ----------
@@ -116,8 +138,10 @@ export interface SyncApi {
   put(id: string, data: string, version: number | null): Promise<{ ok: boolean; version: number | null }>;
 }
 
-// what leaves the device: marks and exercise results; the last opened view stays local
-const syncable = (p: Pick<Progress, 'done' | 'doneAt' | 'exercises'>) => ({ done: p.done, doneAt: p.doneAt, exercises: p.exercises });
+// what leaves the device: marks, exercise results, chapter marks and reading points; the last opened view stays local
+export type SyncedProgress = Pick<Progress, 'done' | 'doneAt' | 'exercises' | 'sections' | 'reading'>;
+const syncable = (p: SyncedProgress): SyncedProgress =>
+  ({ done: p.done, doneAt: p.doneAt, exercises: p.exercises, sections: p.sections, reading: p.reading });
 
 // JSON with sorted keys, to compare progress regardless of key order
 const stable = (v: unknown): string => JSON.stringify(v, (_, x: unknown) =>

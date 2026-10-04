@@ -8,9 +8,12 @@
 //   v1, v2  { done, last }
 //   v3      + doneAt: { id: ms timestamp of the last change of done[id] } — used to merge devices
 //   v4      + exercises: { "<lesson>/<exercise>": { score, total, at } } — the latest result
+//   v5      + sections: { "<lesson>/<section>": { done, at } } — chapters marked as studied
+//           + reading: { "<lesson>": { section, at } } — the furthest chapter the reader got to
+//           + lastLesson: id — the last lesson opened (`last` may be the plan); stays on the device
 
 import { browserStorage } from '../api/storage.ts';
-import type { ExerciseResult, StorageBackend } from '../types/index.ts';
+import type { ExerciseResult, ReadingPoint, SectionMark, StorageBackend } from '../types/index.ts';
 
 export const STORAGE_KEY = 'quadern-catala';
 
@@ -22,7 +25,10 @@ export interface Progress {
   done: Record<string, boolean>;
   doneAt: Record<string, number>;
   exercises: Record<string, ExerciseResult>;
+  sections: Record<string, SectionMark>;
+  reading: Record<string, ReadingPoint>;
   last: string | null;
+  lastLesson?: string;
   [field: string]: unknown; // fields written by future versions are kept
 }
 
@@ -33,13 +39,15 @@ export const canonicalId = (id: string): string => (Object.hasOwn(ID_ALIASES, id
 // Lesson and exercise ids: lowercase latin letters, digits and dashes. Saved and synced progress
 // is untrusted, so keys of any other shape (__proto__, constructor, …) are dropped when it is read.
 export const isLessonId = (id: string): boolean => /^[a-z0-9][a-z0-9-]*$/.test(id) && !(id in Object.prototype);
-const isExerciseKey = (key: string): boolean => {
+// "<lesson>/<exercise>" and "<lesson>/<section>"
+const isLessonPartKey = (key: string): boolean => {
   const [lesson, exercise, ...rest] = key.split('/');
   return rest.length === 0 && exercise !== undefined && isLessonId(lesson!) && isLessonId(exercise);
 };
 
 type Loose = Record<string, unknown>;
 const isObject = (v: unknown): v is Loose => v !== null && typeof v === 'object' && !Array.isArray(v);
+const isTime = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 
 // Reads an { id: value } map, migrating old ids. Entries under old ids go first,
 // so a value stored under the current id wins.
@@ -66,13 +74,24 @@ export function parseProgress(raw: string | null | undefined): Progress {
   const exercises: Record<string, ExerciseResult> = {};
   if (isObject(src.exercises)) {
     for (const [key, r] of Object.entries(src.exercises)) {
-      if (isExerciseKey(key) && isObject(r) && [r.score, r.total, r.at].every((n) => typeof n === 'number' && Number.isFinite(n))) {
+      if (isLessonPartKey(key) && isObject(r) && [r.score, r.total, r.at].every((n) => typeof n === 'number' && Number.isFinite(n))) {
         exercises[key] = { score: r.score as number, total: r.total as number, at: r.at as number };
       }
     }
   }
+  const sections: Record<string, SectionMark> = {};
+  if (isObject(src.sections)) {
+    for (const [key, m] of Object.entries(src.sections)) {
+      if (isLessonPartKey(key) && isObject(m) && typeof m.done === 'boolean' && isTime(m.at)) sections[key] = { done: m.done, at: m.at };
+    }
+  }
+  const reading = readIdMap(src.reading, (r) =>
+    (isObject(r) && typeof r.section === 'string' && isLessonId(r.section) && isTime(r.at) ? { section: r.section, at: r.at } : undefined));
   const last = typeof src.last === 'string' && isLessonId(src.last) ? canonicalId(src.last) : null;
-  return { ...src, done, doneAt, exercises, last };
+  const out: Progress = { ...src, done, doneAt, exercises, sections, reading, last };
+  delete out.lastLesson;
+  if (typeof src.lastLesson === 'string' && isLessonId(src.lastLesson)) out.lastLesson = canonicalId(src.lastLesson);
+  return out;
 }
 
 export function serializeProgress(state: Partial<Progress>): string {
@@ -94,6 +113,24 @@ export function recordExercise(state: Progress, key: string, score: number, tota
   state.exercises[key] = { score, total, at };
 }
 
+// Marks a chapter ("<lesson>/<section>") as studied or not. Mutates `state`.
+export function markSection(state: Progress, key: string, value: boolean, at: number): boolean {
+  state.sections[key] = { done: value, at };
+  return value;
+}
+
+// Moves the reading point of a lesson to `section` when it is further in `order` (the chapters of
+// the lesson) than the saved one, so going back to re-read a chapter keeps the place. A saved
+// chapter that is no longer in the lesson is replaced. Mutates `state`; returns whether it moved.
+export function recordReading(state: Progress, lesson: string, section: string, order: string[], at: number): boolean {
+  const next = order.indexOf(section);
+  if (next < 0) return false;
+  const saved = state.reading[lesson];
+  if (saved && order.indexOf(saved.section) >= next) return false;
+  state.reading[lesson] = { section, at };
+  return true;
+}
+
 // Sets a done mark and stamps the time of the change. Mutates `state` (it may be a reactive store).
 export function markDone(state: Progress, id: string, value: boolean, at: number): boolean {
   state.done[id] = value === true;
@@ -103,7 +140,7 @@ export function markDone(state: Progress, id: string, value: boolean, at: number
 
 // Merges progress from another device into the local one. For each lesson the later change
 // wins; a mark without a timestamp (saved before v3) counts as the oldest; on a tie "done" wins.
-// `last` and any other fields stay local: they describe this device.
+// `last`, `lastLesson` and any other fields stay local: they describe this device.
 export function mergeProgress(local: Partial<Progress>, remote: Partial<Progress>): Progress {
   const ld = local.done ?? {};
   const rd = remote.done ?? {};
@@ -120,12 +157,21 @@ export function mergeProgress(local: Partial<Progress>, remote: Partial<Progress
     done[id] = win.done;
     if (win.at >= 0) doneAt[id] = win.at;
   }
-  const exercises: Record<string, ExerciseResult> = { ...(remote.exercises ?? {}) };
-  for (const [key, r] of Object.entries(local.exercises ?? {})) {
-    const other = exercises[key];
-    if (!other || r.at >= other.at) exercises[key] = r;
+  return { last: null, ...local, done, doneAt,
+    exercises: laterWins(local.exercises, remote.exercises, () => true),
+    sections: laterWins(local.sections, remote.sections, (a, b) => a.done || !b.done),
+    reading: laterWins(local.reading, remote.reading, () => true) };
+}
+
+// Per key the entry with the later `at` wins; on a tie `localWinsTie(local, remote)` decides.
+function laterWins<T extends { at: number }>(local: Record<string, T> = {}, remote: Record<string, T> = {},
+  localWinsTie: (a: T, b: T) => boolean): Record<string, T> {
+  const out: Record<string, T> = { ...remote };
+  for (const [key, a] of Object.entries(local)) {
+    const b = Object.hasOwn(out, key) ? out[key] : undefined;
+    if (!b || a.at > b.at || (a.at === b.at && localWinsTie(a, b))) out[key] = a;
   }
-  return { last: null, ...local, done, doneAt, exercises };
+  return out;
 }
 
 // Progress of this browser (the Pinia store keeps it reactive)

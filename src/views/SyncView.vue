@@ -69,6 +69,11 @@ onMounted(() => toc.collect(null, 'plan'));
 
     <template v-else-if="!sync.enabled">
       <p v-html="t('sync.intro')"></p>
+      <ol class="sync-steps">
+        <li>{{ t('sync.step1') }}</li>
+        <li>{{ t('sync.step2') }}</li>
+        <li>{{ t('sync.step3') }}</li>
+      </ol>
       <div class="sync-actions">
         <button class="btn sync-enable" type="button" @click="sync.enable()">{{ t('sync.enable') }}</button>
         <button class="btn sync-have-code" type="button" @click="typing = !typing">{{ t('sync.haveCode') }}</button>

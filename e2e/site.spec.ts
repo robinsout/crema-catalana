@@ -32,8 +32,35 @@ test('an old link to an unwritten unit shows that unit at the top of the plan', 
   const unit = page.locator('#u-b1-04');
   await expect(unit).toHaveClass(/focus/);
   await page.evaluate(() => document.fonts.ready);
-  await expect.poll(async () => (await unit.boundingBox())?.y ?? -1, { timeout: 5000 }).toBeGreaterThanOrEqual(-2);
-  await expect.poll(async () => (await unit.boundingBox())?.y ?? 9999, { timeout: 5000 }).toBeLessThan(80);
+  // on narrow screens the header stays on top: the unit lands right below it, not under it
+  const header = await page.locator('.side').evaluate((el) => (getComputedStyle(el).position === 'sticky' ? el.getBoundingClientRect().bottom : 0));
+  await expect.poll(async () => (await unit.boundingBox())?.y ?? -1, { timeout: 5000 }).toBeGreaterThanOrEqual(header - 2);
+  await expect.poll(async () => (await unit.boundingBox())?.y ?? 9999, { timeout: 5000 }).toBeLessThan(header + 80);
+});
+
+test('narrow screens: the header stays on top and opens the chapters of a lesson', async ({ page }, info) => {
+  test.skip(info.project.name !== 'phone', 'the chapters panel is for narrow screens');
+  await page.goto('./#/ru/lesson/x-temps-verbals');
+  await page.evaluate(() => window.scrollTo(0, 3000));
+  await expect(page.locator('.toc-toggle')).toBeInViewport();
+  await page.locator('.toc-toggle').click();
+  await page.locator('.toc-panel a', { hasText: 'Практика' }).click();
+  await expect(page.locator('.toc-panel')).toHaveCount(0);
+  const header = await page.locator('.side').evaluate((el) => el.getBoundingClientRect().bottom);
+  await expect.poll(async () => (await page.locator('#practica h2').boundingBox())?.y ?? -1).toBeGreaterThanOrEqual(header - 2);
+});
+
+test('a chapter mark and the reading point survive a reload', async ({ page }) => {
+  await page.goto('./#/ru/lesson/x-temps-verbals');
+  await page.locator('#mapa .section-end button').click();
+  await page.evaluate(() => document.getElementById('formes')?.scrollIntoView());
+  await page.waitForTimeout(5000); // smooth scrolling, then 3 s on screen: the chapter counts as read
+  await page.goto('./#/ru/plan');
+  await page.reload();
+  await page.locator('.continue a').click(); // the plan offers to continue this lesson
+  await expect(page).toHaveURL(/#\/ru\/lesson\/x-temps-verbals$/);
+  await expect(page.locator('#mapa .section-end button')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.resume')).toContainText('Формы на примере parlar');
 });
 
 test('progress saved by the first version of the site shows up', async ({ page }) => {

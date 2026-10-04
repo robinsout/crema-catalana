@@ -45,6 +45,10 @@ export const ruUi: UiStrings = {
   'label.topic': 'Тематический урок',
   'lesson.markDone': 'Отметить как пройденный',
   'lesson.isDone': '✓ Урок пройден',
+  'resume.text': 'Вы остановились на главе «{title}»',
+  'plan.continue': 'Продолжить: {title}',
+  'plan.start': 'Начать: {title}',
+  'plan.next': 'Дальше: {title}',
   'pill.soon': 'Урок появится',
   'pill.open': 'Открыть урок →',
   'pill.done': '✓ Пройден',
@@ -66,7 +70,8 @@ export const locales: LocalesIndex = { base: 'ru', default: 'ru', available: ['r
 export const lessonHtml = (id: string): string =>
   `<section id="s1"><h2>1. Раздел ${id}</h2><p><span lang="ca">Bon dia</span></p>` +
   (id === 'x-temps' ? '<div data-exercise="fill1"></div><div data-exercise="pick"></div>' : '') +
-  '</section>';
+  '</section>' +
+  (id === 'intro' ? '<section id="s2"><h2>2. Второй раздел</h2><p>Текст</p></section><section id="s3"><h2>3. Третий раздел</h2><p>Текст</p></section>' : '');
 
 export const exercises = {
   fill1: { type: 'fill', items: [

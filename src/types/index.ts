@@ -167,3 +167,15 @@ export interface ExerciseResult {
   total: number;
   at: number; // ms timestamp
 }
+
+// A chapter (<section id>) of a lesson marked as studied by hand, and when the mark last changed.
+export interface SectionMark {
+  done: boolean;
+  at: number; // ms timestamp
+}
+
+// The furthest chapter of a lesson the reader got to, and when.
+export interface ReadingPoint {
+  section: string;
+  at: number; // ms timestamp
+}
