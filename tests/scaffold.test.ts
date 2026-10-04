@@ -24,29 +24,29 @@ beforeEach(() => {
 afterEach(() => rmSync(root, { recursive: true, force: true }));
 
 test('a new language starts as a draft: interface and plan to translate, a profile to fill', () => {
-  newLanguage(root, 'en', 'English');
+  newLanguage(root, 'xx', 'Xish');
   const index = json('content/locales/index.json');
-  assert.deepEqual(index.drafts, ['en']);
-  assert.equal(index.names.en, 'English');
-  assert.ok(!index.available.includes('en'));
-  assert.deepEqual(Object.keys(json('content/locales/en/ui.json')), Object.keys(json('content/locales/ru/ui.json')));
-  const catalog = json('content/locales/en/catalog.json');
+  assert.deepEqual(index.drafts.filter((l: string) => l !== 'en'), ['xx']);
+  assert.equal(index.names.xx, 'Xish');
+  assert.ok(!index.available.includes('xx'));
+  assert.deepEqual(Object.keys(json('content/locales/xx/ui.json')), Object.keys(json('content/locales/ru/ui.json')));
+  const catalog = json('content/locales/xx/catalog.json');
   assert.ok(catalog.lessons['b1-01'].topic, 'plan texts are there to translate');
   assert.ok(Object.values(catalog.lessons).every((l: any) => !l.date), 'no lesson is written yet');
-  assert.match(read('authoring/profiles/en.md'), /English/);
-  assert.throws(() => newLanguage(root, 'en', 'English'), /exists/);
+  assert.match(read('authoring/profiles/xx.md'), /Xish/);
+  assert.throws(() => newLanguage(root, 'xx', 'Xish'), /exists/);
   assert.throws(() => newLanguage(root, 'EN!', 'x'), /code/);
 });
 
 test('publishing a draft moves it to the available languages', () => {
-  newLanguage(root, 'en', 'English');
+  newLanguage(root, 'xx', 'Xish');
   // translated: no Russian left in the interface and the plan
-  writeFileSync(join(root, 'content/locales/en/ui.json'), JSON.stringify(Object.fromEntries(Object.keys(json('content/locales/en/ui.json')).map((k) => [k, 'text']))));
-  writeFileSync(join(root, 'content/locales/en/catalog.json'), '{}');
-  publishLanguage(root, 'en');
+  writeFileSync(join(root, 'content/locales/xx/ui.json'), JSON.stringify(Object.fromEntries(Object.keys(json('content/locales/xx/ui.json')).map((k) => [k, 'text']))));
+  writeFileSync(join(root, 'content/locales/xx/catalog.json'), '{}');
+  publishLanguage(root, 'xx');
   const index = json('content/locales/index.json');
-  assert.ok(index.available.includes('en'));
-  assert.equal(index.drafts, undefined);
+  assert.ok(index.available.includes('xx'));
+  assert.ok(!index.drafts?.includes('xx'));
   assert.throws(() => publishLanguage(root, 'it'), /not a draft/);
 });
 
@@ -72,26 +72,26 @@ test('a lesson for a unit: the unit is already in the course, only the file and 
 });
 
 test('an adaptation: the source lesson with a stamp, exercises and vocabulary to translate, the date', () => {
-  newLanguage(root, 'en', 'English');
-  adaptLesson(root, { id: 'x-temps-verbals', lang: 'en', today: TODAY });
+  newLanguage(root, 'xx', 'Xish');
+  adaptLesson(root, { id: 'x-temps-verbals', lang: 'xx', today: TODAY });
   const source = read('content/locales/ru/lessons/x-temps-verbals.html');
-  const adapted = read('content/locales/en/lessons/x-temps-verbals.html');
+  const adapted = read('content/locales/xx/lessons/x-temps-verbals.html');
   assert.deepEqual(readStamp(adapted), { lang: 'ru', hash: fingerprint(source) });
-  assert.ok(existsSync(join(root, 'content/locales/en/exercises/x-temps-verbals.json')));
-  assert.ok(existsSync(join(root, 'content/locales/en/vocab/x-temps-verbals.json')));
-  const texts = json('content/locales/en/catalog.json').lessons['x-temps-verbals'];
+  assert.ok(existsSync(join(root, 'content/locales/xx/exercises/x-temps-verbals.json')));
+  assert.ok(existsSync(join(root, 'content/locales/xx/vocab/x-temps-verbals.json')));
+  const texts = json('content/locales/xx/catalog.json').lessons['x-temps-verbals'];
   assert.equal(texts.date, TODAY);
-  assert.throws(() => adaptLesson(root, { id: 'x-temps-verbals', lang: 'en', today: TODAY }), /exists/);
-  assert.throws(() => adaptLesson(root, { id: 'b1-02', lang: 'en', today: TODAY }), /not written/);
+  assert.throws(() => adaptLesson(root, { id: 'x-temps-verbals', lang: 'xx', today: TODAY }), /exists/);
+  assert.throws(() => adaptLesson(root, { id: 'b1-02', lang: 'xx', today: TODAY }), /not written/);
 });
 
 test('re-stamping an adaptation after review keeps its text', () => {
-  newLanguage(root, 'en', 'English');
-  adaptLesson(root, { id: 'intro', lang: 'en', today: TODAY });
-  const path = join(root, 'content/locales/en/lessons/intro.html');
-  writeFileSync(path, read('content/locales/en/lessons/intro.html').replace('<h2>', '<h2>EN '));
+  newLanguage(root, 'xx', 'Xish');
+  adaptLesson(root, { id: 'intro', lang: 'xx', today: TODAY });
+  const path = join(root, 'content/locales/xx/lessons/intro.html');
+  writeFileSync(path, read('content/locales/xx/lessons/intro.html').replace('<h2>', '<h2>EN '));
   writeFileSync(join(root, 'content/locales/ru/lessons/intro.html'), read('content/locales/ru/lessons/intro.html') + '\n<!-- changed -->\n');
-  adaptLesson(root, { id: 'intro', lang: 'en', today: TODAY, restamp: true });
+  adaptLesson(root, { id: 'intro', lang: 'xx', today: TODAY, restamp: true });
   const adapted = readFileSync(path, 'utf8');
   assert.ok(adapted.includes('<h2>EN '));
   assert.equal(readStamp(adapted)?.hash, fingerprint(read('content/locales/ru/lessons/intro.html')));
@@ -108,6 +108,6 @@ test('registering adds new lesson and chapter ids to the published lists and kee
 });
 
 test('a language with Russian text left in its interface or plan is not published', () => {
-  newLanguage(root, 'en', 'English');
-  assert.throws(() => publishLanguage(root, 'en'), /Russian text left/);
+  newLanguage(root, 'xx', 'Xish');
+  assert.throws(() => publishLanguage(root, 'xx'), /Russian text left/);
 });
