@@ -29,3 +29,17 @@ test('the switcher opens the same lesson in English and remembers the choice', a
   await page.goto('./');
   await expect(page).toHaveURL(/#\/en\/lesson\/intro$/);
 });
+
+// iOS opens a native menu for a <select>, often above it, right over the sync link; the tap that
+// picks an option can also reach the page underneath ("ghost click") and open the sync page.
+test('a tap that lands right after switching the language does not open another page', async ({ page, isMobile }) => {
+  // a phone network: the other language takes a moment to load, the menu stays open meanwhile
+  await page.route('**/locales/en/**', async (route) => { await new Promise((r) => setTimeout(r, 400)); await route.continue(); });
+  await page.goto('./#/ru/lesson/intro');
+  if (isMobile) await page.locator('button[aria-controls="nav"]').click();
+  const sync = await page.locator('.sync-link').boundingBox();
+  await page.locator('select.lang-select').selectOption('en');
+  await page.mouse.click(sync!.x + 20, sync!.y + sync!.height / 2);
+  await page.waitForTimeout(800);
+  await expect(page).toHaveURL(/#\/en\/lesson\/intro$/);
+});

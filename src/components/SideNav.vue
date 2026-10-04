@@ -20,10 +20,26 @@ const route = useRoute();
 const router = useRouter();
 
 // the same page in another language (the router remembers it as the language of this device)
-function switchLanguage(e: Event): void {
+// iOS shows the options of a <select> in a native menu, often right over the sync link, and the tap
+// that picks an option can reach the page too ("ghost click"). While the language switches (the
+// other language loads, the menu is still open) and a moment after, taps on the page are ignored.
+const GHOST_CLICK_MS = 400;
+let switching = false;
+let switchedAt = 0;
+async function switchLanguage(e: Event): Promise<void> {
   const lang = (e.target as HTMLSelectElement).value;
-  if (route.name && lang !== catalog.lang) void router.push({ name: route.name, params: { ...route.params, lang } });
+  if (!route.name || lang === catalog.lang) return;
+  switching = true;
+  try {
+    await router.push({ name: route.name, params: { ...route.params, lang } });
+  } finally {
+    switching = false;
+    switchedAt = Date.now();
+  }
 }
+const swallowGhostClick = (e: MouseEvent): void => {
+  if (switching || Date.now() - switchedAt < GHOST_CLICK_MS) { e.preventDefault(); e.stopPropagation(); }
+};
 
 const open = ref(false);
 watch(() => route.fullPath, () => { open.value = false; toc.panelOpen = false; });
@@ -32,8 +48,8 @@ watch(open, (v) => { if (v) toc.panelOpen = false; });
 watch(() => toc.panelOpen, (v) => { if (v) open.value = false; });
 // Escape closes the menu and the chapters panel
 const onKey = (e: KeyboardEvent): void => { if (e.key === 'Escape') { open.value = false; toc.panelOpen = false; } };
-onMounted(() => window.addEventListener('keydown', onKey));
-onBeforeUnmount(() => window.removeEventListener('keydown', onKey));
+onMounted(() => { window.addEventListener('keydown', onKey); document.addEventListener('click', swallowGhostClick, true); });
+onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.removeEventListener('click', swallowGhostClick, true); });
 const hasChapters = computed(() => route.name === 'lesson' && toc.kind === 'lesson' && toc.sections.length > 0);
 // a chapter from the phone menu: the open menu pushes the page down, so it closes before the jump
 async function jumpFromMenu(id: string): Promise<void> {
