@@ -1,0 +1,63 @@
+{
+ "numbers": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "22 cups (<span lang=\"ca\">tasses</span>, f.)",
+    "answers": [
+     "vint-i-dues tasses",
+     "vint-i-dues"
+    ]
+   },
+   {
+    "prompt": "48",
+    "answers": [
+     "quaranta-vuit"
+    ]
+   },
+   {
+    "prompt": "2026 (a year)",
+    "answers": [
+     "dos mil vint-i-sis"
+    ]
+   },
+   {
+    "prompt": "200 pages (<span lang=\"ca\">pàgines</span>, f.)",
+    "answers": [
+     "dues-centes pàgines",
+     "dues-centes"
+    ]
+   }
+  ]
+ },
+ "quarts": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "9:15",
+    "answers": [
+     "un quart de deu"
+    ]
+   },
+   {
+    "prompt": "6:30",
+    "answers": [
+     "dos quarts de set"
+    ]
+   },
+   {
+    "prompt": "12:45",
+    "answers": [
+     "tres quarts d'una"
+    ]
+   },
+   {
+    "prompt": "10:15",
+    "answers": [
+     "un quart d'onze"
+    ],
+    "hint": "before onze — d'"
+   }
+  ]
+ }
+}

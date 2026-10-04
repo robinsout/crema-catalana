@@ -1,0 +1,265 @@
+{
+ "groups": {
+  "nombres": "Numbers",
+  "ordinals": "Ordinals",
+  "hora": "Telling the time",
+  "dia": "Parts of the day",
+  "setmana": "The week",
+  "mesos": "Months",
+  "estacions": "Seasons, month, year"
+ },
+ "words": {
+  "zero": {
+   "tr": "zero"
+  },
+  "u": {
+   "tr": "one",
+   "note": "u when counting, un / una before a noun"
+  },
+  "dos": {
+   "tr": "two",
+   "note": "dues before a feminine noun"
+  },
+  "tres": {
+   "tr": "three"
+  },
+  "quatre": {
+   "tr": "four"
+  },
+  "cinc": {
+   "tr": "five"
+  },
+  "sis": {
+   "tr": "six"
+  },
+  "set": {
+   "tr": "seven"
+  },
+  "vuit": {
+   "tr": "eight"
+  },
+  "nou": {
+   "tr": "nine"
+  },
+  "deu": {
+   "tr": "ten"
+  },
+  "onze": {
+   "tr": "eleven"
+  },
+  "dotze": {
+   "tr": "twelve"
+  },
+  "tretze": {
+   "tr": "thirteen"
+  },
+  "catorze": {
+   "tr": "fourteen"
+  },
+  "quinze": {
+   "tr": "fifteen"
+  },
+  "setze": {
+   "tr": "sixteen"
+  },
+  "disset": {
+   "tr": "seventeen"
+  },
+  "divuit": {
+   "tr": "eighteen"
+  },
+  "dinou": {
+   "tr": "nineteen"
+  },
+  "vint": {
+   "tr": "twenty",
+   "note": "21–29: vint-i-u, vint-i-dos…"
+  },
+  "trenta": {
+   "tr": "thirty"
+  },
+  "quaranta": {
+   "tr": "forty"
+  },
+  "cinquanta": {
+   "tr": "fifty"
+  },
+  "seixanta": {
+   "tr": "sixty"
+  },
+  "setanta": {
+   "tr": "seventy"
+  },
+  "vuitanta": {
+   "tr": "eighty"
+  },
+  "noranta": {
+   "tr": "ninety"
+  },
+  "cent": {
+   "tr": "a hundred"
+  },
+  "mil": {
+   "tr": "a thousand"
+  },
+  "milio": {
+   "tr": "a million",
+   "note": "pl. milions"
+  },
+  "primer": {
+   "tr": "first"
+  },
+  "segon": {
+   "tr": "second"
+  },
+  "tercer": {
+   "tr": "third"
+  },
+  "quart-o": {
+   "tr": "fourth"
+  },
+  "cinque": {
+   "tr": "fifth"
+  },
+  "sise": {
+   "tr": "sixth"
+  },
+  "sete": {
+   "tr": "seventh"
+  },
+  "vuite": {
+   "tr": "eighth"
+  },
+  "nove": {
+   "tr": "ninth"
+  },
+  "dese": {
+   "tr": "tenth"
+  },
+  "hora": {
+   "tr": "hour; time",
+   "note": "Quina hora és? — What time is it?"
+  },
+  "minut": {
+   "tr": "minute"
+  },
+  "quart": {
+   "tr": "quarter (of an hour)",
+   "note": "un quart de tres — 2:15"
+  },
+  "mitja": {
+   "tr": "half (past)",
+   "note": "les dues i mitja — 2:30"
+  },
+  "menys": {
+   "tr": "to (of the time), minus",
+   "note": "les tres menys cinc — 2:55"
+  },
+  "migdia": {
+   "tr": "midday; lunchtime"
+  },
+  "mitjanit": {
+   "tr": "midnight"
+  },
+  "mati": {
+   "tr": "morning"
+  },
+  "tarda": {
+   "tr": "afternoon",
+   "note": "until it gets dark — often “evening” in English"
+  },
+  "vespre": {
+   "tr": "evening (after dark)"
+  },
+  "nit": {
+   "tr": "night"
+  },
+  "matinada": {
+   "tr": "the small hours, before dawn"
+  },
+  "dia": {
+   "tr": "day"
+  },
+  "dilluns": {
+   "tr": "Monday"
+  },
+  "dimarts": {
+   "tr": "Tuesday"
+  },
+  "dimecres": {
+   "tr": "Wednesday"
+  },
+  "dijous": {
+   "tr": "Thursday"
+  },
+  "divendres": {
+   "tr": "Friday"
+  },
+  "dissabte": {
+   "tr": "Saturday"
+  },
+  "diumenge": {
+   "tr": "Sunday"
+  },
+  "setmana": {
+   "tr": "week"
+  },
+  "cap-de-setmana": {
+   "tr": "weekend"
+  },
+  "gener": {
+   "tr": "January"
+  },
+  "febrer": {
+   "tr": "February"
+  },
+  "marc": {
+   "tr": "March"
+  },
+  "abril": {
+   "tr": "April"
+  },
+  "maig": {
+   "tr": "May"
+  },
+  "juny": {
+   "tr": "June"
+  },
+  "juliol": {
+   "tr": "July"
+  },
+  "agost": {
+   "tr": "August"
+  },
+  "setembre": {
+   "tr": "September"
+  },
+  "octubre": {
+   "tr": "October"
+  },
+  "novembre": {
+   "tr": "November"
+  },
+  "desembre": {
+   "tr": "December"
+  },
+  "primavera": {
+   "tr": "spring"
+  },
+  "estiu": {
+   "tr": "summer"
+  },
+  "tardor": {
+   "tr": "autumn"
+  },
+  "hivern": {
+   "tr": "winter"
+  },
+  "mes": {
+   "tr": "month"
+  },
+  "any": {
+   "tr": "year"
+  }
+ }
+}
