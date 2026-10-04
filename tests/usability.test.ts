@@ -165,6 +165,13 @@ test('phones: the menu of a lesson starts with its chapters; a jump closes the m
   assert.equal(menu.attributes('aria-expanded'), 'false');
 });
 
+test('phones: an open menu turns the header into its own layer (styled apart from the page)', async () => {
+  const { w } = await openApp('/ru/lesson/intro');
+  assert.equal(w.find('.side').classes('menu-open'), false);
+  await w.find('button[aria-controls="nav"]').trigger('click');
+  assert.equal(w.find('.side').classes('menu-open'), true);
+});
+
 test('phones: the menu of the plan has no chapters', async () => {
   const { w } = await openApp('/ru/plan');
   assert.equal(w.find('#nav .nav-chapters').exists(), false);

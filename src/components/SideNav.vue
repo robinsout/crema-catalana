@@ -49,7 +49,7 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
 </script>
 
 <template>
-  <div class="side">
+  <div class="side" :class="{ 'menu-open': open }">
     <div class="brand">
       <h1>Quadern de català<span>{{ t('brand.subtitle') }}</span></h1>
       <div class="brand-actions">
