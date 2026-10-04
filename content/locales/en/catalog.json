@@ -27,16 +27,17 @@
       "date": "2026-10-04"
     },
     "b1-01": {
-      "topic": "Meeting people: introduce yourself, say where you are from, spell your name",
+      "topic": "Meeting people: name and spelling your surname, where you’re from, your mother tongue, where you live, your phone number; introducing someone else",
       "grammar": [
-        "ser, dir-se: em dic…",
-        "subject pronouns (and why they are usually left out)",
-        "gender of nationalities: anglès / anglesa",
-        "numbers 0–20"
+        "ser, dir-se, viure: soc / em dic / visc — es diu, és de, viu a",
+        "the personal article: Soc la Maria, en Daniel",
+        "countries with an article: del Marroc, de l'Equador, del Perú",
+        "possessives with the article: el meu telèfon, la meva llengua, el teu, el seu",
+        "gender of nationalities: anglès / anglesa, marroquí / marroquina"
       ],
-      "vocab": "Greetings and goodbyes, countries, languages",
-      "extra": "The alphabet and spelling out loud: «ela geminada», «ce trencada», «essa doble»",
-      "mission": "Introduce yourself in Catalan to a Catalan speaker and ask them to spell their surname for you",
+      "vocab": "Countries, nationalities, languages; the alphabet; digits 0–9",
+      "extra": "Spelling out loud: «be alta», «ela geminada», «ce trencada», «essa doble»; phone numbers digit by digit",
+      "mission": "Introduce yourself to a Catalan speaker (name, where you’re from, mother tongue, where you live) and ask them to spell their surname for you",
       "date": "2026-10-04"
     },
     "b1-02": {

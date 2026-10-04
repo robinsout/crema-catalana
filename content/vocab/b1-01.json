@@ -105,6 +105,12 @@
      "ca": "el cognom",
      "gender": "m",
      "plural": "cognoms"
+    },
+    {
+     "id": "telefon",
+     "ca": "el telèfon",
+     "gender": "m",
+     "plural": "telèfons"
     }
    ]
   },
@@ -142,6 +148,22 @@
     {
      "id": "catalunya",
      "ca": "Catalunya"
+    },
+    {
+     "id": "marroc",
+     "ca": "el Marroc"
+    },
+    {
+     "id": "peru",
+     "ca": "el Perú"
+    },
+    {
+     "id": "equador",
+     "ca": "l'Equador"
+    },
+    {
+     "id": "argentina-p",
+     "ca": "l'Argentina"
     }
    ]
   },
@@ -187,6 +209,26 @@
      "id": "catala",
      "ca": "català, catalana",
      "gender": "mf"
+    },
+    {
+     "id": "marroqui",
+     "ca": "marroquí, marroquina",
+     "gender": "mf"
+    },
+    {
+     "id": "argenti",
+     "ca": "argentí, argentina",
+     "gender": "mf"
+    },
+    {
+     "id": "colombia-n",
+     "ca": "colombià, colombiana",
+     "gender": "mf"
+    },
+    {
+     "id": "equatoria",
+     "ca": "equatorià, equatoriana",
+     "gender": "mf"
     }
    ]
   },
@@ -217,6 +259,17 @@
     {
      "id": "angles-l",
      "ca": "l'anglès",
+     "gender": "m"
+    },
+    {
+     "id": "llengua-materna",
+     "ca": "la llengua materna",
+     "gender": "f",
+     "plural": "llengües maternes"
+    },
+    {
+     "id": "arab",
+     "ca": "l'àrab",
      "gender": "m"
     }
    ]

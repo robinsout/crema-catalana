@@ -130,5 +130,71 @@
     "explain": "Перед мужским именем — личный артикль en."
    }
   ]
+ },
+ "paisos": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (el Perú)",
+    "answers": [
+     "del Perú"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (Rússia)",
+    "answers": [
+     "de Rússia"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (l'Equador)",
+    "answers": [
+     "de l'Equador"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (el Marroc)",
+    "answers": [
+     "del Marroc"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (Ucraïna)",
+    "answers": [
+     "d'Ucraïna"
+    ],
+    "hint": "перед гласной"
+   }
+  ]
+ },
+ "possessius": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">___ telèfon és el sis, u, zero…</span> (мой)",
+    "answers": [
+     "El meu"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Quina és ___ llengua materna?</span> (твой)",
+    "answers": [
+     "la teva"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ cognom és Puig.</span> (её)",
+    "answers": [
+     "El seu"
+    ],
+    "hint": "cognom — мужского рода"
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ llengües maternes són el rus i l'ucraïnès.</span> (мой)",
+    "answers": [
+     "Les meves"
+    ]
+   }
+  ]
  }
 }

@@ -130,5 +130,71 @@
     "explain": "Before a man’s name — the personal article en."
    }
   ]
+ },
+ "paisos": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (el Perú)",
+    "answers": [
+     "del Perú"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (Anglaterra)",
+    "answers": [
+     "d'Anglaterra"
+    ],
+    "hint": "before a vowel"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (l'Equador)",
+    "answers": [
+     "de l'Equador"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (el Regne Unit)",
+    "answers": [
+     "del Regne Unit"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (els Estats Units)",
+    "answers": [
+     "dels Estats Units"
+    ]
+   }
+  ]
+ },
+ "possessius": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">___ telèfon és el sis, u, zero…</span> (my)",
+    "answers": [
+     "El meu"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Quina és ___ llengua materna?</span> (your)",
+    "answers": [
+     "la teva"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ cognom és Puig.</span> (her)",
+    "answers": [
+     "El seu"
+    ],
+    "hint": "cognom is masculine"
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ llengües maternes són l'anglès i el gal·lès.</span> (my)",
+    "answers": [
+     "Les meves"
+    ]
+   }
+  ]
  }
 }

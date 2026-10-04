@@ -142,6 +142,44 @@
   },
   "angles-l": {
    "tr": "английский язык"
+  },
+  "telefon": {
+   "tr": "телефон",
+   "note": "номер диктуют по цифре: el sis, u, zero…"
+  },
+  "marroqui": {
+   "tr": "марокканец, марокканка"
+  },
+  "argenti": {
+   "tr": "аргентинец, аргентинка"
+  },
+  "colombia-n": {
+   "tr": "колумбиец, колумбийка"
+  },
+  "equatoria": {
+   "tr": "эквадорец, эквадорка"
+  },
+  "marroc": {
+   "tr": "Марокко",
+   "note": "с артиклем: soc del Marroc"
+  },
+  "peru": {
+   "tr": "Перу",
+   "note": "с артиклем: soc del Perú"
+  },
+  "equador": {
+   "tr": "Эквадор",
+   "note": "с артиклем: soc de l'Equador"
+  },
+  "argentina-p": {
+   "tr": "Аргентина",
+   "note": "с артиклем: soc de l'Argentina"
+  },
+  "llengua-materna": {
+   "tr": "родной язык"
+  },
+  "arab": {
+   "tr": "арабский язык"
   }
  }
 }

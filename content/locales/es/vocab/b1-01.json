@@ -145,6 +145,44 @@
   },
   "angles-l": {
    "tr": "inglés (lengua)"
+  },
+  "telefon": {
+   "tr": "teléfono",
+   "note": "el número se dicta cifra a cifra: el sis, u, zero…"
+  },
+  "marroqui": {
+   "tr": "marroquí"
+  },
+  "argenti": {
+   "tr": "argentino, argentina"
+  },
+  "colombia-n": {
+   "tr": "colombiano, colombiana"
+  },
+  "equatoria": {
+   "tr": "ecuatoriano, ecuatoriana"
+  },
+  "marroc": {
+   "tr": "Marruecos",
+   "note": "con artículo: soc del Marroc"
+  },
+  "peru": {
+   "tr": "Perú",
+   "note": "con artículo: soc del Perú"
+  },
+  "equador": {
+   "tr": "Ecuador",
+   "note": "con artículo: soc de l'Equador"
+  },
+  "argentina-p": {
+   "tr": "Argentina",
+   "note": "con artículo: soc de l'Argentina"
+  },
+  "llengua-materna": {
+   "tr": "lengua materna"
+  },
+  "arab": {
+   "tr": "árabe (lengua)"
   }
  }
 }

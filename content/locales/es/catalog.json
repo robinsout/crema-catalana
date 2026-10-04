@@ -27,16 +27,17 @@
       "date": "2026-10-04"
     },
     "b1-01": {
-      "topic": "Presentarse: decir quién eres y de dónde, deletrear el nombre",
+      "topic": "Presentarse: nombre y apellido deletreados, de dónde eres, lengua materna, dónde vives, número de teléfono; presentar a otra persona",
       "grammar": [
-        "ser, dir-se: em dic…",
-        "pronombres personales",
-        "género de las nacionalidades: espanyol / espanyola",
-        "números 0–20"
+        "ser, dir-se, viure: soc / em dic / visc — es diu, és de, viu a",
+        "artículo personal: Soc la Maria, en Daniel",
+        "países con artículo: del Perú, de l'Equador, de l'Argentina",
+        "posesivos con artículo: el meu telèfon, la meva llengua, el teu, el seu",
+        "género de las nacionalidades: colombià / colombiana, argentí / argentina"
       ],
-      "vocab": "Saludos y despedidas, países, lenguas",
-      "extra": "El alfabeto y deletrear: «ela geminada», «ce trencada», «essa doble»",
-      "mission": "Preséntate en catalán a un conocido catalán y pídele que te deletree su apellido",
+      "vocab": "Países, nacionalidades, lenguas; el alfabeto; cifras 0–9",
+      "extra": "Deletrear: «be alta», «ela geminada», «ce trencada», «essa doble»; el teléfono cifra por cifra",
+      "mission": "Preséntate a un conocido catalán (nombre, de dónde eres, lengua materna, dónde vives) y pídele que te deletree su apellido",
       "date": "2026-10-04"
     },
     "b1-02": {

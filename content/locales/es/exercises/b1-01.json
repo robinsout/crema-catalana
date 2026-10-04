@@ -132,5 +132,71 @@
     "explain": "Delante de un nombre de hombre va el artículo personal en; no hay «a» como en castellano."
    }
   ]
+ },
+ "paisos": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (el Perú)",
+    "answers": [
+     "del Perú"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (Colòmbia)",
+    "answers": [
+     "de Colòmbia"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (l'Equador)",
+    "answers": [
+     "de l'Equador"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (l'Argentina)",
+    "answers": [
+     "de l'Argentina"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc ___.</span> (Mèxic)",
+    "answers": [
+     "de Mèxic"
+    ]
+   }
+  ]
+ },
+ "possessius": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">___ telèfon és el sis, u, zero…</span> (mi)",
+    "answers": [
+     "El meu"
+    ],
+    "hint": "con artículo, no «mi»"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Quina és ___ llengua materna?</span> (tu)",
+    "answers": [
+     "la teva"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ cognom és Puig.</span> (su, de ella)",
+    "answers": [
+     "El seu"
+    ],
+    "hint": "cognom es masculino"
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ llengües maternes són el castellà i el quítxua.</span> (mis)",
+    "answers": [
+     "Les meves"
+    ]
+   }
+  ]
  }
 }

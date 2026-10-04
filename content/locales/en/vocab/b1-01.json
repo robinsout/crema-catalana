@@ -143,6 +143,44 @@
   },
   "angles-l": {
    "tr": "English (the language)"
+  },
+  "telefon": {
+   "tr": "phone number; telephone",
+   "note": "given digit by digit: el sis, u, zero…"
+  },
+  "marroqui": {
+   "tr": "Moroccan"
+  },
+  "argenti": {
+   "tr": "Argentinian"
+  },
+  "colombia-n": {
+   "tr": "Colombian"
+  },
+  "equatoria": {
+   "tr": "Ecuadorian"
+  },
+  "marroc": {
+   "tr": "Morocco",
+   "note": "with the article: soc del Marroc"
+  },
+  "peru": {
+   "tr": "Peru",
+   "note": "with the article: soc del Perú"
+  },
+  "equador": {
+   "tr": "Ecuador",
+   "note": "with the article: soc de l'Equador"
+  },
+  "argentina-p": {
+   "tr": "Argentina",
+   "note": "with the article: soc de l'Argentina"
+  },
+  "llengua-materna": {
+   "tr": "mother tongue"
+  },
+  "arab": {
+   "tr": "Arabic"
   }
  }
 }
