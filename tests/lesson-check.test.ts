@@ -2,7 +2,7 @@
 // keeping the chapters and exercises of its source (progress is saved under their ids).
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { compareOutlines, lessonOutline, lintLesson } from '../scripts/lib/lesson-check.ts';
+import { compareOutlines, cyrillicLeftovers, lessonOutline, lintLesson } from '../scripts/lib/lesson-check.ts';
 
 const lesson = (body: string): string => `<section id="a"><h2>1. A</h2>${body}</section>`;
 
@@ -43,4 +43,11 @@ test('an adaptation keeps the chapters (same order) and the exercises of its sou
   const problems = compareOutlines(source, { sections: ['b', 'a', 'c'], exercises: ['x'] });
   assert.ok(problems.some((p) => p.includes('chapters')), problems.join('\n'));
   assert.ok(problems.some((p) => p.includes('exercises')), problems.join('\n'));
+});
+
+test('leftovers: Russian text left in a language without Cyrillic', () => {
+  assert.deepEqual(cyrillicLeftovers('<p>Hello <span lang="ca">hola</span></p>', 'en'), []);
+  assert.deepEqual(cyrillicLeftovers('<p>Hello, как дела</p>', 'en'), ['как дела']);
+  assert.deepEqual(cyrillicLeftovers('<p>Привет</p>', 'ru'), [], 'Russian is fine in Russian');
+  assert.deepEqual(cyrillicLeftovers({ a: { tr: 'день' } }, 'es'), ['день']);
 });

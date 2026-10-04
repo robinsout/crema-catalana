@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { createT } from '../src/services/i18n.ts';
 import type { LocalesIndex } from '../src/types/index.ts';
 import { contentLanguages } from '../scripts/lib/catalog.ts';
+import { cyrillicLeftovers } from '../scripts/lib/lesson-check.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const portal = join(root, 'content');
@@ -67,4 +68,13 @@ test('every language (drafts too) has exactly the keys of the base language', ()
 test('every language folder is listed as available or as a draft', () => {
   const dirs = readdirSync(join(portal, 'locales'), { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
   assert.deepEqual(dirs.sort(), contentLanguages(locales).sort());
+});
+
+test('a published language has no Russian text left in its interface and plan (a draft may)', () => {
+  for (const lang of locales.available) {
+    for (const file of ['ui.json', 'catalog.json']) {
+      const data = JSON.parse(readFileSync(join(root, 'content', 'locales', lang, file), 'utf8')) as object;
+      assert.deepEqual(cyrillicLeftovers(data, lang), [], `${lang}/${file}`);
+    }
+  }
 });

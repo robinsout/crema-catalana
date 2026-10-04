@@ -40,6 +40,9 @@ test('a new language starts as a draft: interface and plan to translate, a profi
 
 test('publishing a draft moves it to the available languages', () => {
   newLanguage(root, 'en', 'English');
+  // translated: no Russian left in the interface and the plan
+  writeFileSync(join(root, 'content/locales/en/ui.json'), JSON.stringify(Object.fromEntries(Object.keys(json('content/locales/en/ui.json')).map((k) => [k, 'text']))));
+  writeFileSync(join(root, 'content/locales/en/catalog.json'), '{}');
   publishLanguage(root, 'en');
   const index = json('content/locales/index.json');
   assert.ok(index.available.includes('en'));
@@ -102,4 +105,9 @@ test('registering adds new lesson and chapter ids to the published lists and kee
   assert.ok(json('tests/published-ids.json').includes('x-pronoms'));
   assert.deepEqual(json('tests/published-sections.json')['x-pronoms'], ['en-hi']);
   assert.deepEqual(registerPublished(root), [], 'nothing new the second time');
+});
+
+test('a language with Russian text left in its interface or plan is not published', () => {
+  newLanguage(root, 'en', 'English');
+  assert.throws(() => publishLanguage(root, 'en'), /Russian text left/);
 });

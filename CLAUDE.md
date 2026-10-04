@@ -33,6 +33,8 @@
 - `scripts/gen-audio.ts`, `scripts/gen-icons.ts` (`npm run icons`: PNG-иконки из `content/favicon.svg`), `scripts/lib/` — TypeScript, запускается `node` напрямую (Node 24 убирает типы сам).
 
 ## Как добавить урок
+Процесс целиком — скиллы **`/lesson`** (урок на базовом языке) и **`/adapt`** (адаптация на другой язык, новый язык). Механика — команды (`scripts/content.ts`): `npm run new-lesson -- <id> [--kind topic|overview --title "…" --related …]`, `npm run adapt -- <id> <язык> [--restamp]`, `npm run register` (новые id уроков и глав в `tests/published-*.json`), `npm run coverage` (урок × язык: ✅ / ⚠️ устарело / —), `npm run look -- '#/ru/lesson/<id>'` (скриншоты для проверки глазами в `test-results/look/`). Ниже — правила, которые проверяют тесты.
+
 1. Новый id: добавить в `content/course.json` (в `extras` или юнит в `parts`) и в `tests/published-ids.json`. Id вечные.
 2. Создать `content/locales/ru/lessons/<id>.html`. Каждый раздел (глава) — `<section id="...">` с `<h2>`, из них строится оглавление; кнопка «Глава пройдена» в конце главы появляется сама. Id глав — в `tests/published-sections.json`: на них хранится прогресс, они вечные (удалять и переименовывать нельзя, тест).
 3. Урок — обычный HTML (не Vue), чтобы его можно было адаптировать на другие языки без знания фреймворка. Разметка, которую понимают стили: `.tw > table`, `table.conj`, `aside.tip|warn|ru` с `<p class="label">`, `.ex`, `.ipa`, `.wrong`, `blockquote.reading`, `<details><summary>`, а также схемы `.tmap`, `ol.story`, `.quarts`, `.daybar`, `.year`.
@@ -42,6 +44,11 @@
 5b. Интерактивные упражнения (по желанию): в HTML урока на месте упражнения — `<div data-exercise="<id>"></div>`; данные — `content/locales/<lang>/exercises/<lesson id>.json`: `{ "<id>": { "type": "fill", "items": [{ "prompt": "<span lang=\"ca\">Ahir ___ (anar)…</span>", "answers": ["vaig anar"], "hint": "…" }] } }` или `"type": "choice"` с `options` и `answer` (индекс), `explain`. В `fill` первый ответ показывается как решение; варианты регистра, пробелов, апострофов и `l.l` принимаются сами, ошибка только в ударениях — «почти». Свободный перевод с множеством вариантов оставлять со спойлером `<details>`. Тесты сверяют блоки в уроке с данными и озвучку подсказок и ответов.
 6. `npm run audio` — записать озвучку (нужен edge-tts: `pip install edge-tts` или `EDGE_TTS=/путь/к/edge-tts`). Голос ca-ES-JoanaNeural.
 7. `npm run check`, коммит, пуш. Целостность урока (файл, разделы, озвучка всех фраз, тексты) проверяют тесты.
+
+## Языки
+- Базовый язык — `ru`: уроки пишутся на нём, остальные языки адаптируются (не переводятся) по профилю ученика `authoring/profiles/<код>.md` (каталог `authoring/` на сайт не попадает).
+- Новый язык: `npm run new-language -- <код> <Название>` — появляется черновиком (`drafts` в `locales/index.json`): тесты его проверяют, открывается по прямой ссылке, в переключателе и автоматическом выборе его нет. Выпуск — `npm run publish-language -- <код>` (откажет, если в интерфейсе или плане остался русский текст).
+- Адаптация начинается строкой `<!-- source: ru@<hash> -->`: по ней `npm run coverage` видит устаревшие. Id и порядок глав и id упражнений — как в исходнике (тест); русского текста в языке без кириллицы не остаётся (тест).
 
 ## Разработка
 - **TDD**: сначала тест в `tests/` (Vitest; утверждения через `node:assert/strict`), убедиться, что он падает, потом код. Тесты интерфейса монтируют `App` с роутером на `createMemoryHistory` и тестовым «сайтом» из `tests/helpers.ts` (подмена `fetch`).

@@ -25,7 +25,8 @@
     "publish-language": "node scripts/content.ts publish-language",
     "new-lesson": "node scripts/content.ts new-lesson",
     "adapt": "node scripts/content.ts adapt",
-    "register": "node scripts/content.ts register"
+    "register": "node scripts/content.ts register",
+    "look": "node scripts/look.ts"
   },
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.3.0",

@@ -14,7 +14,7 @@ import { clipFor } from '../src/services/audio.ts';
 import type { AudioIndex } from '../src/services/audio.ts';
 import type { Course, LocaleCatalog, LocalesIndex } from '../src/types/index.ts';
 import { extractSayTexts } from '../scripts/lib/say-texts.ts';
-import { compareOutlines, lessonOutline, lintLesson } from '../scripts/lib/lesson-check.ts';
+import { compareOutlines, cyrillicLeftovers, lessonOutline, lintLesson } from '../scripts/lib/lesson-check.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const portal = join(root, 'content');
@@ -101,6 +101,19 @@ test('every Catalan phrase in a lesson has a recorded clip, in every language (r
 test('lesson markup: Catalan phrases hold no explanations and are not nested, chapters have ids and headings', () => {
   for (const lang of languages) {
     for (const l of written(lang)) assert.deepEqual(lintLesson(l.html), [], `${lang}/${l.id}`);
+  }
+});
+
+test('an adapted lesson, its exercises and vocabulary have no Russian text left (languages without Cyrillic)', () => {
+  for (const lang of languages) {
+    for (const l of written(lang)) {
+      const left = [
+        ...cyrillicLeftovers(l.html, lang),
+        ...cyrillicLeftovers(loadExercises(portal, lang, l.id), lang),
+        ...cyrillicLeftovers(loadLocaleVocab(portal, lang, l.id) ?? {}, lang),
+      ];
+      assert.deepEqual(left, [], `${lang}/${l.id}: translate the rest`);
+    }
   }
 });
 

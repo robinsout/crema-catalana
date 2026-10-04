@@ -55,3 +55,13 @@ export function compareOutlines(source: LessonOutline, adapted: LessonOutline): 
   }
   return problems;
 }
+
+// Languages written in Cyrillic; in any other language Cyrillic text is a leftover of the Russian source.
+const CYRILLIC_LANGUAGES = ['ru', 'uk', 'be', 'bg', 'sr', 'mk'];
+
+// Russian text left untranslated in an adaptation: runs of Cyrillic words in HTML or in JSON values.
+export function cyrillicLeftovers(content: string | object, lang: string): string[] {
+  if (CYRILLIC_LANGUAGES.includes(lang)) return [];
+  const raw = typeof content === 'string' ? text(content) : JSON.stringify(content);
+  return [...raw.matchAll(/[Ѐ-ӿ][Ѐ-ӿ\s,.!?;:«»—-]*[Ѐ-ӿ]|[Ѐ-ӿ]/g)].map((m) => m[0].trim());
+}

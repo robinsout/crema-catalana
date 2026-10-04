@@ -3,7 +3,7 @@
 // `root` is the repository root (content/, tests/, authoring/).
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { lessonOutline } from './lesson-check.ts';
+import { cyrillicLeftovers, lessonOutline } from './lesson-check.ts';
 import { withStamp } from './coverage.ts';
 import type { Course, LessonKind, LocaleCatalog, LocalesIndex, UiStrings } from '../../src/types/index.ts';
 
@@ -59,6 +59,8 @@ export function publishLanguage(root: string, code: string): void {
   const p = paths(root);
   const index = readJson<LocalesIndex>(p.index);
   if (!index.drafts?.includes(code)) throw new Error(`"${code}" is not a draft language`);
+  const left = [p.ui(code), p.catalog(code)].flatMap((file) => cyrillicLeftovers(readJson<object>(file), code).map((t) => `${file}: ${t}`));
+  if (left.length) throw new Error(`Russian text left, translate it first:\n  ${left.slice(0, 20).join('\n  ')}${left.length > 20 ? `\n  … ${left.length - 20} more` : ''}`);
   const drafts = index.drafts.filter((l) => l !== code);
   const { drafts: _, ...rest } = index;
   writeJson(p.index, { ...rest, available: [...index.available, code], ...(drafts.length ? { drafts } : {}) });
