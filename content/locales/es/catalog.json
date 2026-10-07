@@ -2,15 +2,15 @@
   "parts": {
     "b1": {
       "period": "octubre — diciembre",
-      "focus": "Presente, vocabulario cotidiano, números, la hora, compras"
+      "focus": "Presente: presentarse, la familia, la ciudad, la rutina, el trabajo, las compras, el aspecto, los objetos"
     },
     "b2": {
       "period": "enero — marzo",
-      "focus": "Tiempos del pasado, futuro, pronombres, vivienda y ocio"
+      "focus": "Tiempos del pasado y futuro: la infancia, estudios y trabajo, la ciudad, fiestas, vivienda, viajes"
     },
     "b3": {
       "period": "abril — junio",
-      "focus": "Pronombres, imperativo, salud, planes de futuro"
+      "focus": "Las lenguas en la vida diaria, el restaurante, contratiempos, cultura y deporte, el tiempo, grandes compras, estudios, salud"
     }
   },
   "lessons": {
@@ -41,53 +41,57 @@
       "date": "2026-10-04"
     },
     "b1-02": {
-      "topic": "La familia, la edad, hablar de los tuyos",
+      "topic": "La familia: quién es quién por edad y parentesco, cómo se llaman, dónde viven y cuántos años tienen",
       "grammar": [
-        "posesivos con artículo: el meu, la meva (no «mi»)",
-        "demostrativos aquest / aquell (solo dos)",
-        "tenir: tinc 30 anys",
-        "género y número de los sustantivos"
+        "demostrativos: aquest, aquesta, aquests, aquestes — Aquesta és la meva filla (solo dos grados: aquest / aquell)",
+        "posesivos en plural y «nuestro, su (de ustedes)»: els meus avis, la nostra filla (con artículo, no «mi»)",
+        "de + artículo personal: el fill d'en Martí, la tia de la Marina",
+        "viure y tenir en todas las personas: On viu la teva mare? Té 46 anys",
+        "també / tampoc: Jo també. Jo tampoc."
       ],
-      "vocab": "Miembros de la familia, estado civil",
-      "extra": "Números hasta 100: vint-i-u, trenta-dos",
-      "mission": "Dibuja tu árbol genealógico y escribe el nombre de cada uno en catalán"
+      "vocab": "Edades (nadó, nen, noi, home, dona gran) y parentesco (pare, germà, avi, oncle, cosí, nebot, net, sogre, cunyat, marit, dona, parella)",
+      "extra": "Números hasta 99: vint-i-u, trenta-dos, quaranta-sis; nombres catalanes y los dos apellidos",
+      "mission": "Muéstrale a un compañero una foto de tu familia y háblale de tres parientes: quién es, cómo se llama, dónde vive y cuántos años tiene",
+      "date": "2026-10-07"
     },
     "b1-03": {
-      "topic": "Dónde vivo: dirección, ciudad, barrio",
+      "topic": "Dónde vivo: la dirección (ciudad, calle, número, piso), qué hay cerca de casa, servicios de la ciudad",
       "grammar": [
         "presente de los verbos regulares",
-        "viure: visc",
-        "hi ha / és / està: «on és?», no «on està?»",
-        "preposiciones de lugar: a prop de, davant de"
+        "hi ha / és / està: Hi ha una farmàcia. On és el mercat? (ubicación con ser, no «está»)",
+        "preposiciones de lugar: a prop de, davant de, al costat de",
+        "ordinales para piso y puerta: tercer segona"
       ],
       "vocab": "La ciudad, la calle, tiendas y servicios",
       "extra": "Cómo leer las direcciones de Barcelona: c/, pl., 3r 2a",
-      "mission": "Describe tu barrio de Barcelona en cinco frases"
+      "mission": "Dicta tu dirección en catalán y describe en cinco frases qué hay cerca de tu casa"
     },
     "b1-04": {
-      "topic": "La rutina diaria, las comidas, las estaciones",
+      "topic": "Días y horas: qué hacemos cada día, cuándo comemos, qué hora es, horarios, meses, estaciones y el tiempo",
       "grammar": [
+        "la hora con quarts: un quart de deu; A quina hora…?",
+        "días de la semana con artículo: el dilluns / els dilluns",
         "verbos reflexivos: llevar-se (¡levantarse!), dutxar-se",
-        "la hora con quarts: un quart de deu",
-        "preposiciones de tiempo"
+        "preposiciones de tiempo: a l'hivern, al matí, a la nit"
       ],
-      "vocab": "Àpats: esmorzar, dinar, berenar, sopar; las estaciones",
+      "vocab": "Àpats: esmorzar, dinar, berenar, sopar; días de la semana, meses, estaciones, el tiempo: fa fred, fa sol, plou",
       "extra": "El sistema catalán de «quarts», que no existe en castellano",
-      "mission": "Ponte de acuerdo con alguien para verse diciendo la hora con quarts: «a dos quarts de vuit»"
+      "mission": "Pregunta en catalán el horario de un museo o una biblioteca y queda con alguien diciendo la hora con quarts"
     },
     "b1-05": {
-      "topic": "Estudios, horarios, con qué frecuencia hago las cosas",
+      "topic": "Actividades diarias y tiempo libre: qué, con quién, qué días y a qué hora, con qué frecuencia",
       "grammar": [
-        "días de la semana con artículo: el dilluns / els dilluns",
-        "adverbios de frecuencia: sempre, sovint, mai",
+        "presente: -ar, -er/-re, -ir y -ir con -eix-",
+        "adverbios de frecuencia: sempre, sovint, de vegades, mai",
+        "amb qui?: amb el meu germà, sol / sola",
         "anar / venir"
       ],
-      "vocab": "Días de la semana, meses, clases y actividades",
+      "vocab": "Tiempo libre, estudios, tareas de casa, expresiones de frecuencia",
       "extra": "anar y venir no se reparten como ir y venir: «Ja vinc!» → «Ja vaig!»",
       "mission": "Cuenta en catalán tu horario de la semana"
     },
     "b1-06": {
-      "topic": "El trabajo y las profesiones",
+      "topic": "El trabajo: profesiones, dónde y de qué trabajo, qué hago en el trabajo, sector y tipo de empleo",
       "grammar": [
         "treballar de, fer de",
         "femenino de las profesiones: metge / metgessa",
@@ -98,40 +102,44 @@
       "mission": "Explica en catalán a qué te dedicas"
     },
     "b1-07": {
-      "topic": "De compras: el mercado, cantidades, precios",
+      "topic": "Comida y tiendas: carteles, cantidades y precios, tu y vostè en la tienda, gustos y platos catalanes",
       "grammar": [
         "en con cantidades: en vull dos (no existe en castellano)",
         "quant / quanta / quants / quantes",
-        "un quilo de, mig quilo, una dotzena"
+        "un quilo de, mig quilo, una dotzena",
+        "tu y vostè: Què vol? Alguna cosa més?",
+        "agradar: m'agrada / m'agraden (como gustar)"
       ],
-      "vocab": "Fruta, verdura, productos, frases para comprar",
-      "extra": "Los mercados de Barcelona y la pregunta «qui és l’últim?»",
+      "vocab": "Productos, tiendas (fleca, carnisseria, peixateria), frases para comprar",
+      "extra": "Los mercados de Barcelona y los platos catalanes: pa amb tomàquet, escudella, crema catalana",
       "mission": "Haz la compra en un mercado completamente en catalán"
     },
     "b1-08": {
-      "topic": "El aspecto y el carácter",
+      "topic": "Aspecto físico, carácter y ropa: describir a alguien y comparar a dos personas",
       "grammar": [
-        "concordancia de los adjetivos: -a, -ssa, invariables",
-        "ser y estar para las cualidades",
-        "molt, bastant, una mica"
+        "concordancia de adjetivos: -a, -ssa, invariables",
+        "comparación: més… que, menys… que, tan… com",
+        "ser y estar para cualidades (no siempre como en castellano)",
+        "portar: porta texans i jersei (portar = llevar puesto)"
       ],
-      "vocab": "Aspecto físico, rasgos de carácter",
+      "vocab": "Aspecto físico, rasgos de carácter, ropa según la estación y la ocasión",
       "extra": "Adjetivos trampa: content, trist, prim (delgado)",
       "mission": "Describe el aspecto y el carácter de un amigo para que se le pueda reconocer"
     },
     "b1-09": {
-      "topic": "La ropa y las cosas: dónde está cada cosa",
+      "topic": "Objetos: de quién es, cómo es (color, tamaño, forma, material) y para qué sirve; el dinero; objetos del aula",
       "grammar": [
-        "portar / dur",
-        "preposiciones: sobre, sota, dins de",
+        "De qui és? — És meu. És de la Maria.",
+        "concordancia de colores: vermell / vermella, blau / blava",
+        "servir per a + infinitivo",
         "plural: clau → claus, butxaca → butxaques"
       ],
-      "vocab": "Ropa, colores, objetos cotidianos",
+      "vocab": "Objetos cotidianos, colores, materiales, dinero (euros, cèntims), objetos del aula",
       "extra": "Ortografía del plural: -ca → -ques, -ja → -ges",
       "mission": "Enumera en catalán todo lo que llevas en la mochila"
     },
     "b1-10": {
-      "topic": "Repaso del módulo: invitaciones, gustos, planes",
+      "topic": "Repaso del módulo Bàsic 1",
       "grammar": [
         "agradar: m’agrada / m’agraden",
         "voler + infinitivo",
@@ -142,57 +150,60 @@
       "mission": "Invita a alguien a una fiesta con un mensaje escrito en catalán"
     },
     "b2-01": {
-      "topic": "La infancia, los recuerdos",
+      "topic": "Infancia y juventud: con quién vivía, cómo era antes y cómo soy ahora, a qué jugaba; las personas cercanas",
       "grammar": [
-        "imperfet: parlava, vivia, era",
-        "de petit, quan era jove"
+        "imperfet: parlava, vivia, era (como el imperfecto)",
+        "de petit, quan era jove",
+        "comparar: abans… ara"
       ],
-      "vocab": "Infancia, escuela, juegos",
+      "vocab": "Infancia, escuela, juegos, relaciones",
       "extra": "Imperfet de ser / estar / fer / veure",
       "mission": "Escribe un párrafo sobre dónde y con quién vivías de pequeño"
     },
     "b2-02": {
-      "topic": "Buscar trabajo, condiciones laborales",
+      "topic": "Estudios y trabajo: el sistema educativo, mi formación, condiciones laborales, tareas de casa, qué estás haciendo ahora",
       "grammar": [
-        "haver de + infinitivo, no «tenir que»",
-        "perfet: he treballat"
+        "estar + gerundio: Què estàs fent?",
+        "haver de + infinitivo (no «tenir que»)",
+        "pasado y presente: abans treballava de…, ara treballo de…"
       ],
-      "vocab": "Currículum, entrevista, contrato, sueldo",
-      "extra": "Falsos amigos en el vocabulario laboral",
+      "vocab": "Estudios (ESO, batxillerat, FP, universitat), condiciones de trabajo (horari, sou, contracte), tareas de casa",
+      "extra": "El sistema educativo de Cataluña; falsos amigos del vocabulario laboral",
       "mission": "Lee una oferta de trabajo en catalán y resúmela"
     },
     "b2-03": {
-      "topic": "Las tareas diarias en detalle",
+      "topic": "El día de niños, adultos y mayores; qué se hace en el trabajo; comprar en el mostrador: la fila, el producto, el precio",
       "grammar": [
-        "estar + gerundio",
         "verbos reflexivos: posición del pronombre",
-        "abans de / després de + infinitivo"
+        "abans de / després de + infinitivo",
+        "en en el mostrador: me'n posa mig quilo (no existe en castellano)"
       ],
-      "vocab": "Tareas domésticas, rutina",
-      "extra": "Pronoms febles: em, et, es antes y después del verbo",
-      "mission": "Cuenta tu día de ayer en presente, como una retransmisión"
+      "vocab": "Rutina diaria, trabajo, productos",
+      "extra": "«Qui és l'últim?» — cómo pedir la vez (el turno) y pedir en el mostrador",
+      "mission": "Describe un día típico de alguien de tu familia y compra en un mostrador pidiendo la vez en catalán"
     },
     "b2-04": {
-      "topic": "Servicios municipales, lenguaje formal",
+      "topic": "La ciudad antes y ahora: servicios cerca de casa, transporte, cómo llegar, trámites (el carnet de la biblioteca)",
       "grammar": [
-        "vostè / vostès",
-        "condicional de cortesía: voldria, podria",
-        "poder + infinitivo"
+        "imperfet y presente: abans hi havia…, ara hi ha…",
+        "indicaciones: agafa el metro, gira a la dreta",
+        "vostè / vostès y peticiones corteses: voldria, podria",
+        "el pronombre hi: hi vaig en bus (no existe en castellano)"
       ],
-      "vocab": "Biblioteca, ajuntament, documentos, formularios",
+      "vocab": "Barrio, transporte, biblioteca, ajuntament, documentos, formularios",
       "extra": "La red de Biblioteques de Barcelona y el carné gratuito",
       "mission": "Hazte el carné de la biblioteca en catalán"
     },
     "b2-05": {
-      "topic": "Regalos, cumpleaños, planes",
+      "topic": "Fiestas y regalos: elegir uno, dónde comprarlo, describir lo que buscas en la tienda; invitar y responder a una invitación",
       "grammar": [
-        "futuro: regalaré",
-        "complemento indirecto: li, els",
-        "duplicación: li… a en Daniel"
+        "futur: regalaré",
+        "complemento indirecto: li, els; duplicación: li… a en Daniel",
+        "rechazar con cortesía: Em sap greu, no podré venir"
       ],
-      "vocab": "Regalos, fiestas, felicitaciones",
+      "vocab": "Fiestas, regalos, tiendas, avisos por megafonía, felicitaciones",
       "extra": "El artículo personal en / na / l’",
-      "mission": "Elige un regalo para un amigo y explica tu elección en catalán"
+      "mission": "Invita a un amigo a una fiesta y rechaza con cortesía otra invitación, en catalán"
     },
     "b2-06": {
       "topic": "La vivienda: habitaciones, muebles, alquiler",
@@ -200,7 +211,7 @@
         "comparación: més… que, tan… com, millor, pitjor",
         "hi ha / no hi ha cap"
       ],
-      "vocab": "Casa, muebles, lloguer, pis, àtic",
+      "vocab": "La casa, muebles, electrodomésticos, lloguer, pis, àtic",
       "extra": "Anuncios de alquiler: abreviaturas y términos",
       "mission": "Describe tu departamento (piso) como si lo alquilaras"
     },
@@ -216,18 +227,18 @@
       "mission": "Cuéntale a un conocido catalán cómo te mudaste a Barcelona"
     },
     "b2-08": {
-      "topic": "Ocio, invitaciones, hacer planes",
+      "topic": "Viajes: contar un viaje, comparar lugares de vacaciones, parques naturales, alojamiento, máquinas de billetes",
       "grammar": [
-        "proponer, aceptar, rechazar",
-        "quedar (verse con alguien): hem quedat a les vuit",
-        "los pronombres ho y hi"
+        "passat perifràstic: vam anar, vam dormir (¡pasado, no «vamos a»!)",
+        "transporte y duración: en tren, trigar dues hores (tardar)",
+        "el pronombre hi: hi vam anar en cotxe"
       ],
-      "vocab": "Cine, conciertos, deporte, excursiones",
-      "extra": "Agenda: guia del Lleure, Fira, Festa Major",
-      "mission": "Organiza un plan para el fin de semana completamente en catalán"
+      "vocab": "Transporte, alojamiento (alberg, càmping, casa rural), naturaleza, billetes / boletos",
+      "extra": "Parques naturales de Cataluña: Montseny, Aigüestortes, Cap de Creus",
+      "mission": "Planea en catalán un viaje a un parque natural: transporte, cuántos días, dónde dormir, qué ver"
     },
     "b2-09": {
-      "topic": "Cómo he cambiado: antes y ahora",
+      "topic": "Cómo cambiamos: aspecto, carácter y costumbres antes y ahora; una persona importante en tu vida",
       "grammar": [
         "imperfet y presente comparados",
         "soler + infinitivo",
@@ -238,7 +249,7 @@
       "mission": "Compárate hace cinco años y ahora"
     },
     "b2-10": {
-      "topic": "Repaso del módulo, primeros temas de salud",
+      "topic": "Repaso del módulo Bàsic 2, primeros temas de salud",
       "grammar": [
         "perfet: s’ha trencat",
         "repaso de los tiempos del pasado"
@@ -248,44 +259,47 @@
       "mission": "Escribe un mensaje a un amigo enfermo deseándole que se mejore"
     },
     "b3-01": {
-      "topic": "Los vecinos, la lengua en el día a día, la vida en el edificio",
+      "topic": "Las lenguas en la vida diaria: quién habla qué lenguas, cómo se aprenden, cuánto uso el catalán",
       "grammar": [
-        "pronoms febles: el sistema completo",
+        "suposición: deu ser de…, deu parlar… (como «debe de ser»)",
+        "pronoms febles: sistematización",
         "tu y vostè"
       ],
-      "vocab": "Casa, vecinos, peticiones y favores",
+      "vocab": "Lenguas, aprendizaje de idiomas, vecinos y conversación",
       "extra": "Cómo no pasarse al castellano: frases para mantener la conversación en catalán",
       "mission": "Durante una semana, habla solo en catalán con tus vecinos y en las tiendas"
     },
     "b3-02": {
-      "topic": "La cocina y las recetas",
+      "topic": "Restaurante y cocina: elegir restaurante, la carta, reservar mesa, disculparse; recetas y platos catalanes",
       "grammar": [
         "imperativo: talla, afegeix, poseu",
+        "cortesía: Voldria reservar una taula. Perdoni.",
         "en y las cantidades"
       ],
-      "vocab": "Ingredientes, formas de cocinar, utensilios",
+      "vocab": "Restaurante, carta, productos, formas de cocinar",
       "extra": "La cocina catalana: pa amb tomàquet, escalivada, crema catalana",
       "mission": "Escribe tu receta favorita en catalán"
     },
     "b3-03": {
-      "topic": "Contratiempos, emociones, quejas",
+      "topic": "Contratiempos: qué ha pasado hace poco, pequeñas lesiones e incidentes, llamadas cortas, contestador, noticias",
       "grammar": [
         "perfet y passat perifràstic",
         "participios irregulares"
       ],
-      "vocab": "Sentimientos, contratiempos cotidianos",
+      "vocab": "Incidentes, lesiones, frases para el teléfono, noticias",
       "extra": "Exclamaciones: Quin desastre! Quina sort!",
-      "mission": "Cuenta un mal día que hayas tenido"
+      "mission": "Deja un mensaje de voz en catalán: qué ha pasado y por qué no puedes ir"
     },
     "b3-04": {
-      "topic": "Deporte, transporte, cómo llegar",
+      "topic": "Cultura y ocio: libros, noticias culturales, fiestas tradicionales, deporte; proponer y recomendar",
       "grammar": [
-        "imperativo para indicar el camino",
-        "el pronombre hi: hi vaig en metro"
+        "proponer: Per què no anem…? Què et sembla si…?",
+        "preferencias: prefereixo, m'estimo més (prefiero)",
+        "consejo: hauries de + infinitivo (deberías)"
       ],
-      "vocab": "Deporte, transporte, itinerarios",
-      "extra": "El transporte en Barcelona: T-usual, rodalies, «la parada»",
-      "mission": "Explícale el camino a un turista en catalán"
+      "vocab": "Libros, fiestas, deportes, ocio",
+      "extra": "Fiestas tradicionales: castells, correfocs, sardanes",
+      "mission": "Recomienda a un compañero un libro, una fiesta o un deporte y explica por qué"
     },
     "b3-05": {
       "topic": "El tiempo y los planes",
@@ -298,12 +312,12 @@
       "mission": "Lee la previsión del tiempo en 3Cat y resúmela"
     },
     "b3-06": {
-      "topic": "Compras importantes, comparar, opinar",
+      "topic": "Comprar un coche / carro: qué vehículo necesita cada uno, comparar modelos, el crédito, elegir el color",
       "grammar": [
         "dar la opinión: crec que, em sembla que",
         "comparativos y superlativos: el més…"
       ],
-      "vocab": "Carros (coches), aparatos, características",
+      "vocab": "Coches / carros y otros vehículos, características, colores, crédito",
       "extra": "El reflexivo ens: ens comprem",
       "mission": "Compara dos cosas entre las que dudas y justifica tu elección"
     },
@@ -319,13 +333,13 @@
       "mission": "Cuenta tus planes para seguir aprendiendo catalán"
     },
     "b3-08": {
-      "topic": "La salud, ir al médico",
+      "topic": "Salud y sentimientos: enfermedades y síntomas, medicamentos y remedios caseros, reproches por imprudencias, cómo te sientes",
       "grammar": [
-        "tenir mal de",
-        "consejos: hauries de, cal que",
-        "pronombres con los verbos de salud"
+        "tenir mal de (tener dolor de)",
+        "consejos y reproches: hauries de, no hauries de, cal que",
+        "pronombres con verbos de salud"
       ],
-      "vocab": "Síntomas, medicamentos, CAP, farmàcia",
+      "vocab": "Síntomas, medicamentos, CAP, farmàcia, sentimientos y estados de ánimo",
       "extra": "El sistema sanitario: CAP, targeta sanitària",
       "mission": "Prepara las frases para ir al médico en catalán"
     },
