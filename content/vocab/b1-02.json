@@ -1,0 +1,253 @@
+{
+ "groups": [
+  {
+   "id": "edats",
+   "words": [
+    {
+     "id": "nado",
+     "ca": "el nadó",
+     "gender": "m",
+     "plural": "nadons"
+    },
+    {
+     "id": "nen",
+     "ca": "el nen",
+     "gender": "m",
+     "plural": "nens"
+    },
+    {
+     "id": "nena",
+     "ca": "la nena",
+     "gender": "f",
+     "plural": "nenes"
+    },
+    {
+     "id": "noi",
+     "ca": "el noi",
+     "gender": "m",
+     "plural": "nois"
+    },
+    {
+     "id": "noia",
+     "ca": "la noia",
+     "gender": "f",
+     "plural": "noies"
+    },
+    {
+     "id": "home",
+     "ca": "l'home",
+     "gender": "m",
+     "plural": "homes"
+    },
+    {
+     "id": "dona",
+     "ca": "la dona",
+     "gender": "f",
+     "plural": "dones"
+    },
+    {
+     "id": "gran",
+     "ca": "gran",
+     "gender": "mf",
+     "plural": "grans"
+    }
+   ]
+  },
+  {
+   "id": "familia",
+   "words": [
+    {
+     "id": "pare",
+     "ca": "el pare",
+     "gender": "m",
+     "plural": "pares"
+    },
+    {
+     "id": "mare",
+     "ca": "la mare",
+     "gender": "f",
+     "plural": "mares"
+    },
+    {
+     "id": "fill",
+     "ca": "el fill",
+     "gender": "m",
+     "plural": "fills"
+    },
+    {
+     "id": "filla",
+     "ca": "la filla",
+     "gender": "f",
+     "plural": "filles"
+    },
+    {
+     "id": "germa",
+     "ca": "el germà",
+     "gender": "m",
+     "plural": "germans"
+    },
+    {
+     "id": "germana",
+     "ca": "la germana",
+     "gender": "f",
+     "plural": "germanes"
+    },
+    {
+     "id": "avi",
+     "ca": "l'avi",
+     "gender": "m",
+     "plural": "avis"
+    },
+    {
+     "id": "avia",
+     "ca": "l'àvia",
+     "gender": "f",
+     "plural": "àvies"
+    },
+    {
+     "id": "net",
+     "ca": "el net",
+     "gender": "m",
+     "plural": "nets"
+    },
+    {
+     "id": "neta",
+     "ca": "la neta",
+     "gender": "f",
+     "plural": "netes"
+    },
+    {
+     "id": "oncle",
+     "ca": "l'oncle",
+     "gender": "m",
+     "plural": "oncles"
+    },
+    {
+     "id": "tia",
+     "ca": "la tia",
+     "gender": "f",
+     "plural": "ties"
+    },
+    {
+     "id": "cosi",
+     "ca": "el cosí",
+     "gender": "m",
+     "plural": "cosins"
+    },
+    {
+     "id": "cosina",
+     "ca": "la cosina",
+     "gender": "f",
+     "plural": "cosines"
+    },
+    {
+     "id": "nebot",
+     "ca": "el nebot",
+     "gender": "m",
+     "plural": "nebots"
+    },
+    {
+     "id": "neboda",
+     "ca": "la neboda",
+     "gender": "f",
+     "plural": "nebodes"
+    },
+    {
+     "id": "sogre",
+     "ca": "el sogre",
+     "gender": "m",
+     "plural": "sogres"
+    },
+    {
+     "id": "sogra",
+     "ca": "la sogra",
+     "gender": "f",
+     "plural": "sogres"
+    },
+    {
+     "id": "cunyat",
+     "ca": "el cunyat",
+     "gender": "m",
+     "plural": "cunyats"
+    },
+    {
+     "id": "cunyada",
+     "ca": "la cunyada",
+     "gender": "f",
+     "plural": "cunyades"
+    },
+    {
+     "id": "gendre",
+     "ca": "el gendre",
+     "gender": "m",
+     "plural": "gendres"
+    },
+    {
+     "id": "nora",
+     "ca": "la nora",
+     "gender": "f",
+     "plural": "nores"
+    }
+   ]
+  },
+  {
+   "id": "parella",
+   "words": [
+    {
+     "id": "marit",
+     "ca": "el marit",
+     "gender": "m",
+     "plural": "marits"
+    },
+    {
+     "id": "parella",
+     "ca": "la parella",
+     "gender": "f",
+     "plural": "parelles"
+    },
+    {
+     "id": "xicot",
+     "ca": "el xicot",
+     "gender": "m",
+     "plural": "xicots"
+    },
+    {
+     "id": "xicota",
+     "ca": "la xicota",
+     "gender": "f",
+     "plural": "xicotes"
+    },
+    {
+     "id": "besso",
+     "ca": "el bessó",
+     "gender": "m",
+     "plural": "bessons"
+    },
+    {
+     "id": "casat",
+     "ca": "casat",
+     "gender": "m",
+     "plural": "casats"
+    },
+    {
+     "id": "solter",
+     "ca": "solter",
+     "gender": "m",
+     "plural": "solters"
+    },
+    {
+     "id": "separat",
+     "ca": "separat",
+     "gender": "m",
+     "plural": "separats"
+    },
+    {
+     "id": "divorciat",
+     "ca": "divorciat",
+     "gender": "m",
+     "plural": "divorciats"
+    }
+   ]
+  }
+ ]
+}

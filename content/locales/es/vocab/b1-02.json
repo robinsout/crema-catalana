@@ -1,0 +1,139 @@
+{
+ "groups": {
+  "edats": "La edad",
+  "familia": "El parentesco",
+  "parella": "La pareja y el estado civil"
+ },
+ "words": {
+  "nado": {
+   "tr": "bebé",
+   "note": "también para una niña"
+  },
+  "nen": {
+   "tr": "niño"
+  },
+  "nena": {
+   "tr": "niña"
+  },
+  "noi": {
+   "tr": "chico, muchacho"
+  },
+  "noia": {
+   "tr": "chica, muchacha"
+  },
+  "home": {
+   "tr": "hombre"
+  },
+  "dona": {
+   "tr": "mujer; esposa"
+  },
+  "gran": {
+   "tr": "mayor; grande"
+  },
+  "pare": {
+   "tr": "padre",
+   "note": "els pares — los padres"
+  },
+  "mare": {
+   "tr": "madre"
+  },
+  "fill": {
+   "tr": "hijo",
+   "note": "els fills — los hijos"
+  },
+  "filla": {
+   "tr": "hija"
+  },
+  "germa": {
+   "tr": "hermano",
+   "note": "els germans — los hermanos"
+  },
+  "germana": {
+   "tr": "hermana"
+  },
+  "avi": {
+   "tr": "abuelo",
+   "note": "els avis — los abuelos"
+  },
+  "avia": {
+   "tr": "abuela"
+  },
+  "net": {
+   "tr": "nieto",
+   "note": "no «neto»"
+  },
+  "neta": {
+   "tr": "nieta"
+  },
+  "oncle": {
+   "tr": "tío",
+   "note": "no «tio»"
+  },
+  "tia": {
+   "tr": "tía"
+  },
+  "cosi": {
+   "tr": "primo"
+  },
+  "cosina": {
+   "tr": "prima"
+  },
+  "nebot": {
+   "tr": "sobrino"
+  },
+  "neboda": {
+   "tr": "sobrina"
+  },
+  "sogre": {
+   "tr": "suegro"
+  },
+  "sogra": {
+   "tr": "suegra"
+  },
+  "cunyat": {
+   "tr": "cuñado"
+  },
+  "cunyada": {
+   "tr": "cuñada"
+  },
+  "gendre": {
+   "tr": "yerno"
+  },
+  "nora": {
+   "tr": "nuera"
+  },
+  "marit": {
+   "tr": "marido, esposo"
+  },
+  "parella": {
+   "tr": "pareja",
+   "note": "femenino también para un hombre"
+  },
+  "xicot": {
+   "tr": "novio",
+   "note": "no «chico»"
+  },
+  "xicota": {
+   "tr": "novia"
+  },
+  "besso": {
+   "tr": "gemelo, mellizo"
+  },
+  "casat": {
+   "tr": "casado",
+   "note": "fem. casada"
+  },
+  "solter": {
+   "tr": "soltero",
+   "note": "fem. soltera"
+  },
+  "separat": {
+   "tr": "separado (viven separados)",
+   "note": "fem. separada"
+  },
+  "divorciat": {
+   "tr": "divorciado",
+   "note": "fem. divorciada"
+  }
+ }
+}

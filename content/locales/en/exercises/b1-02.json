@@ -1,0 +1,353 @@
+{
+ "laia": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "Who is Pau?",
+    "options": [
+     "el marit de la Laia",
+     "el germà de la Laia",
+     "el fill de la Laia"
+    ],
+    "answer": 0,
+    "explain": "Aquest home és el meu marit, en Pau — Laia’s husband."
+   },
+   {
+    "prompt": "How old is Mar?",
+    "options": [
+     "quatre anys",
+     "set anys",
+     "disset anys"
+    ],
+    "answer": 1,
+    "explain": "La Mar té set anys; Biel is four."
+   },
+   {
+    "prompt": "Where do Laia’s parents live?",
+    "options": [
+     "a Sevilla",
+     "a Tarragona",
+     "a Girona"
+    ],
+    "answer": 2,
+    "explain": "La meva mare… viu a Girona amb el meu pare."
+   },
+   {
+    "prompt": "Who is Clara to Laia?",
+    "options": [
+     "la seva cosina",
+     "la seva neboda",
+     "la seva filla"
+    ],
+    "answer": 1,
+    "explain": "Clara is her brother Oriol’s daughter, so her niece: la neboda."
+   },
+   {
+    "prompt": "Who are Pau’s parents to Mar and Biel?",
+    "options": [
+     "els seus avis",
+     "els seus oncles",
+     "els seus sogres"
+    ],
+    "answer": 0,
+    "explain": "Their father’s parents are their grandparents: els avis. For Laia herself they are els sogres (parents-in-law)."
+   }
+  ]
+ },
+ "aquest": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">___ és la meva mare.</span>",
+    "answers": [
+     "Aquesta"
+    ],
+    "hint": "mother is feminine"
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ és el meu cosí Marc.</span>",
+    "answers": [
+     "Aquest"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ són els meus avis.</span>",
+    "answers": [
+     "Aquests"
+    ],
+    "hint": "plural, masculine (a mixed pair)"
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ són les meves germanes.</span>",
+    "answers": [
+     "Aquestes"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Mira aquesta foto: ___ soc jo!</span> (Laia is speaking)",
+    "answers": [
+     "aquesta"
+    ],
+    "hint": "the speaker is a woman"
+   }
+  ]
+ },
+ "familia": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">El pare de la meva mare és el meu ___.</span>",
+    "answers": [
+     "avi"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La germana del meu pare és la meva ___.</span>",
+    "answers": [
+     "tia"
+    ],
+    "hint": "uncle → aunt"
+   },
+   {
+    "prompt": "<span lang=\"ca\">El fill de la meva tia és el meu ___.</span>",
+    "answers": [
+     "cosí"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La filla del meu germà és la meva ___.</span>",
+    "answers": [
+     "neboda"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">El pare del meu marit és el meu ___.</span>",
+    "answers": [
+     "sogre"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">El germà de la meva dona és el meu ___.</span>",
+    "answers": [
+     "cunyat"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">El fill de la meva filla és el meu ___.</span>",
+    "answers": [
+     "net"
+    ]
+   }
+  ]
+ },
+ "possessius": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Tinc dos germans. ___ germans viuen a Manchester.</span> (my)",
+    "answers": [
+     "Els meus"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Tenim una filla. ___ filla es diu Mar.</span> (our)",
+    "answers": [
+     "La nostra"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Teniu fills? Com es diuen ___ fills?</span> (your, plural)",
+    "answers": [
+     "els vostres"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Els avis de la Núria són de Lleida. ___ avis tenen vuitanta anys.</span> (her)",
+    "answers": [
+     "Els seus"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Rosa i en Jaume tenen una neta. ___ neta té tres anys.</span> (their)",
+    "answers": [
+     "La seva"
+    ]
+   }
+  ]
+ },
+ "de": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">La Mar és la filla ___.</span> (en Pau)",
+    "answers": [
+     "d'en Pau"
+    ],
+    "hint": "before a man’s name"
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Biel és el fill ___.</span> (la Laia)",
+    "answers": [
+     "de la Laia"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Clara és la neboda ___.</span> (l'Oriol)",
+    "answers": [
+     "de l'Oriol"
+    ],
+    "hint": "the name starts with a vowel"
+   },
+   {
+    "prompt": "<span lang=\"ca\">L'Elvira és la mare ___.</span> (en Jordi)",
+    "answers": [
+     "d'en Jordi"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Marc és el germà ___.</span> (l'Anna)",
+    "answers": [
+     "de l'Anna"
+    ]
+   }
+  ]
+ },
+ "verbs": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">On ___ la teva mare?</span> (viure)",
+    "answers": [
+     "viu"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Jo ___ a Barcelona.</span> (viure)",
+    "answers": [
+     "visc"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Els meus avis ___ a Edimburg.</span> (viure)",
+    "answers": [
+     "viuen"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Nosaltres ___ a prop del mar.</span> (viure)",
+    "answers": [
+     "vivim"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Quants anys ___, Marc?</span> (tenir)",
+    "answers": [
+     "tens"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Jo ___ trenta-cinc anys.</span> (tenir)",
+    "answers": [
+     "tinc"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La meva àvia ___ noranta anys.</span> (tenir)",
+    "answers": [
+     "té"
+    ],
+    "hint": "with an accent"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Vosaltres ___ germans?</span> (tenir)",
+    "answers": [
+     "teniu"
+    ]
+   }
+  ]
+ },
+ "edat": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">La meva germana té ___ anys.</span> (22)",
+    "answers": [
+     "vint-i-dos"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">El meu pare té ___ anys.</span> (61)",
+    "answers": [
+     "seixanta-un"
+    ],
+    "hint": "before a noun: un"
+   },
+   {
+    "prompt": "<span lang=\"ca\">La meva àvia té ___ anys.</span> (87)",
+    "answers": [
+     "vuitanta-set"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">El meu cosí té ___ anys.</span> (35)",
+    "answers": [
+     "trenta-cinc"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">El meu sogre té ___ anys.</span> (74)",
+    "answers": [
+     "setanta-quatre"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Tinc ___ anys.</span> (21)",
+    "answers": [
+     "vint-i-un"
+    ],
+    "hint": "before a noun: un"
+   }
+  ]
+ },
+ "tambe": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Tinc una germana. — Jo ___.</span>",
+    "options": [
+     "també",
+     "tampoc"
+    ],
+    "answer": 0,
+    "explain": "Agreeing with a positive — també (me too)."
+   },
+   {
+    "prompt": "<span lang=\"ca\">No tinc fills. — Jo ___.</span>",
+    "options": [
+     "també",
+     "tampoc"
+    ],
+    "answer": 1,
+    "explain": "Agreeing with a negative — tampoc (me neither)."
+   },
+   {
+    "prompt": "<span lang=\"ca\">No visc sol. — Jo ___. Visc sol.</span>",
+    "options": [
+     "sí",
+     "no"
+    ],
+    "answer": 0,
+    "explain": "Disagreeing with a negative — jo sí (I do)."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Tinc tres cosins. — Jo ___. No en tinc cap.</span>",
+    "options": [
+     "també",
+     "no"
+    ],
+    "answer": 1,
+    "explain": "Disagreeing with a positive — jo no (I don’t)."
+   }
+  ]
+ }
+}

@@ -54,7 +54,8 @@
         {
           "id": "b1-02",
           "unit": 2,
-          "title": "Aquesta és la meva família"
+          "title": "Aquesta és la meva família",
+          "hasVocab": true
         },
         {
           "id": "b1-03",

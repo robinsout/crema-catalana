@@ -2,5 +2,6 @@
   "intro": ["fonetica", "ortografia", "gramatica", "verbs", "excepcions", "practica"],
   "x-nombres-calendari": ["nombres", "desenes", "ordinals", "hora", "dia", "setmana", "any", "practica"],
   "x-temps-verbals": ["mapa", "llegir", "historia", "formes", "irregulars", "passat-simple", "subjuntiu", "paranys", "practica"],
-  "b1-01": ["salutacions", "presentar-se", "ser", "nacionalitats", "lletres", "nombres", "practica", "possessius"]
+  "b1-01": ["salutacions", "presentar-se", "ser", "nacionalitats", "lletres", "nombres", "practica", "possessius"],
+  "b1-02": ["edats", "familia", "aquest", "possessius", "de", "viure", "anys", "noms", "practica"]
 }

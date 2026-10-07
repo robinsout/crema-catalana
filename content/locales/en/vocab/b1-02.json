@@ -1,0 +1,136 @@
+{
+ "groups": {
+  "edats": "Age",
+  "familia": "Relatives",
+  "parella": "Partners and marital status"
+ },
+ "words": {
+  "nado": {
+   "tr": "baby",
+   "note": "masculine, even for a girl"
+  },
+  "nen": {
+   "tr": "boy, child"
+  },
+  "nena": {
+   "tr": "girl (child)"
+  },
+  "noi": {
+   "tr": "boy, young man, guy"
+  },
+  "noia": {
+   "tr": "girl, young woman"
+  },
+  "home": {
+   "tr": "man"
+  },
+  "dona": {
+   "tr": "woman; wife"
+  },
+  "gran": {
+   "tr": "old, elderly; older; big"
+  },
+  "pare": {
+   "tr": "father",
+   "note": "els pares — parents"
+  },
+  "mare": {
+   "tr": "mother"
+  },
+  "fill": {
+   "tr": "son",
+   "note": "els fills — children"
+  },
+  "filla": {
+   "tr": "daughter"
+  },
+  "germa": {
+   "tr": "brother",
+   "note": "els germans — brothers and sisters"
+  },
+  "germana": {
+   "tr": "sister"
+  },
+  "avi": {
+   "tr": "grandfather",
+   "note": "els avis — grandparents"
+  },
+  "avia": {
+   "tr": "grandmother"
+  },
+  "net": {
+   "tr": "grandson"
+  },
+  "neta": {
+   "tr": "granddaughter"
+  },
+  "oncle": {
+   "tr": "uncle"
+  },
+  "tia": {
+   "tr": "aunt"
+  },
+  "cosi": {
+   "tr": "cousin (male)"
+  },
+  "cosina": {
+   "tr": "cousin (female)"
+  },
+  "nebot": {
+   "tr": "nephew"
+  },
+  "neboda": {
+   "tr": "niece"
+  },
+  "sogre": {
+   "tr": "father-in-law"
+  },
+  "sogra": {
+   "tr": "mother-in-law"
+  },
+  "cunyat": {
+   "tr": "brother-in-law"
+  },
+  "cunyada": {
+   "tr": "sister-in-law"
+  },
+  "gendre": {
+   "tr": "son-in-law"
+  },
+  "nora": {
+   "tr": "daughter-in-law"
+  },
+  "marit": {
+   "tr": "husband"
+  },
+  "parella": {
+   "tr": "partner; couple",
+   "note": "feminine, even for a man"
+  },
+  "xicot": {
+   "tr": "boyfriend"
+  },
+  "xicota": {
+   "tr": "girlfriend"
+  },
+  "besso": {
+   "tr": "twin"
+  },
+  "casat": {
+   "tr": "married",
+   "note": "fem. casada"
+  },
+  "solter": {
+   "tr": "single",
+   "note": "fem. soltera"
+  },
+  "separat": {
+   "tr": "separated, living apart",
+   "note": "fem. separada"
+  },
+  "divorciat": {
+   "tr": "divorced",
+   "note": "fem. divorciada"
+  }
+ }
+}

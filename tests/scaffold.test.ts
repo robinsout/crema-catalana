@@ -63,9 +63,9 @@ test('a new topic lesson: course entry, catalog texts and date, a file with a ch
 
 test('a lesson for a unit: the unit is already in the course, only the file and the date are added', () => {
   const before = read('content/course.json');
-  newLesson(root, { id: 'b1-02', today: TODAY });
+  newLesson(root, { id: 'b1-03', today: TODAY });
   assert.equal(read('content/course.json'), before);
-  const texts = json('content/locales/ru/catalog.json').lessons['b1-02'];
+  const texts = json('content/locales/ru/catalog.json').lessons['b1-03'];
   assert.equal(texts.date, TODAY);
   assert.ok(texts.topic, 'the unit plan stays');
   assert.throws(() => newLesson(root, { id: 'x-new', today: TODAY }), /kind and title/);
@@ -82,7 +82,7 @@ test('an adaptation: the source lesson with a stamp, exercises and vocabulary to
   const texts = json('content/locales/xx/catalog.json').lessons['x-temps-verbals'];
   assert.equal(texts.date, TODAY);
   assert.throws(() => adaptLesson(root, { id: 'x-temps-verbals', lang: 'xx', today: TODAY }), /exists/);
-  assert.throws(() => adaptLesson(root, { id: 'b1-02', lang: 'xx', today: TODAY }), /not written/);
+  assert.throws(() => adaptLesson(root, { id: 'b1-03', lang: 'xx', today: TODAY }), /not written/);
 });
 
 test('re-stamping an adaptation after review keeps its text', () => {
