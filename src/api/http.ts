@@ -9,7 +9,8 @@ export class HttpError extends Error {
 }
 
 async function get(url: string): Promise<Response> {
-  const res = await fetch(url);
+  // Revalidate on every load: Pages lets browsers cache for 10 min, which hides a fresh deploy.
+  const res = await fetch(url, { cache: 'no-cache' });
   if (!res.ok) throw new HttpError(url, res.status);
   return res;
 }
