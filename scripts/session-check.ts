@@ -135,7 +135,7 @@ if (!online) report('skip', 'GitHub, сайт, сервер', '--offline');
 else {
   type Run = { name: string; status: string; conclusion: string | null; html_url: string };
   // CI skips documentation-only commits (paths-ignore): look at the last pushed commit it runs for
-  const head = git('log', '-1', '--format=%H', '@{upstream}', '--', '.', ':(exclude)*.md', ':(exclude).claude', ':(exclude)LICENSE');
+  const head = git('log', '-1', '--format=%H', '@{upstream}', '--', '.', ':(exclude)*.md', ':(exclude).claude', ':(exclude)LICENSE', ':(exclude)LICENSE-CONTENT');
   const runs = await getJson<{ workflow_runs: Run[] }>(`https://api.github.com/repos/${REPO}/actions/runs?head_sha=${head}&event=push`);
   const ci = runs?.workflow_runs[0];
   if (!runs) report('skip', 'CI', 'GitHub API не ответил (лимит 60 запросов в час без входа)');

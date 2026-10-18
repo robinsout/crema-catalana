@@ -65,7 +65,7 @@ test('no changes need no checks', () => {
 });
 
 test('documentation and Claude settings need no tests', () => {
-  for (const f of ['BACKLOG.md', 'CLAUDE.md', 'deploy/README.md', '.claude/skills/close-session/SKILL.md', 'LICENSE']) {
+  for (const f of ['BACKLOG.md', 'CLAUDE.md', 'deploy/README.md', '.claude/skills/close-session/SKILL.md', 'LICENSE', 'LICENSE-CONTENT']) {
     assert.equal(planChecks([f]).tests, false, f);
     assert.equal(isDocsOnly([f]), true, f);
   }

@@ -55,7 +55,7 @@ export interface CheckPlan {
   server: boolean; // the sync server is deployed by hand: npm run deploy:sync
 }
 
-const DOCS = [/\.md$/, /^\.claude\//, /^LICENSE$/];
+const DOCS = [/\.md$/, /^\.claude\//, /^LICENSE(-CONTENT)?$/];
 const VISUAL = [/^src\/(styles|components|views)\//, /^src\/App\.vue$/, /^index\.html$/, /^package-lock\.json$/,
   /^content\/locales\/[^/]+\/(lessons\/|catalog\.json$|ui\.json$)/, /^content\/favicon/];
 const AUDIO = [/^content\/locales\/[^/]+\/(lessons|vocab|exercises)\//, /^content\/vocab\//];

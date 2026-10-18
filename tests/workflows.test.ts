@@ -45,8 +45,8 @@ test('Dependabot watches npm packages and actions', () => {
 
 test('CI skips exactly the files the pre-push hook treats as documentation', () => {
   const wf = parseDocument(readFileSync(join(dir, 'pages.yml'), 'utf8')).toJS() as { on: Record<string, { 'paths-ignore'?: string[] }> };
-  const ignored = ['**.md', '.claude/**', 'LICENSE'];
+  const ignored = ['**.md', '.claude/**', 'LICENSE', 'LICENSE-CONTENT'];
   assert.deepEqual(wf.on.push?.['paths-ignore'], ignored);
   assert.deepEqual(wf.on.pull_request?.['paths-ignore'], ignored);
-  assert.ok(isDocsOnly(['README.md', 'deploy/README.md', '.claude/skills/x/SKILL.md', 'LICENSE']));
+  assert.ok(isDocsOnly(['README.md', 'deploy/README.md', '.claude/skills/x/SKILL.md', 'LICENSE', 'LICENSE-CONTENT']));
 });

@@ -7,7 +7,7 @@
 [![TypeScript](https://img.shields.io/badge/typescript-strict-3178c6?logo=typescript&logoColor=white)](tsconfig.json)
 [![Sync server](https://github.com/robinsout/crema-catalana/actions/workflows/monitor.yml/badge.svg)](https://github.com/robinsout/crema-catalana/actions/workflows/monitor.yml)
 [![Last commit](https://img.shields.io/github/last-commit/robinsout/crema-catalana)](https://github.com/robinsout/crema-catalana/commits/master)
-[![License](https://img.shields.io/github/license/robinsout/crema-catalana)](LICENSE)
+[![License](https://img.shields.io/badge/license-noncommercial-blue)](LICENSE)
 
 Личный учебник каталанского языка: уроки к курсу **Passos 1** (Octaedro, уровни Bàsic 1–3, A2) для русскоязычного ученика, который знает испанский.
 
@@ -76,4 +76,4 @@ Workflow [`pages.yml`](.github/workflows/pages.yml) на каждый пуш и 
 
 ## Лицензия
 
-[MIT](LICENSE)
+Некоммерческое использование: код — [PolyForm Noncommercial 1.0.0](LICENSE), содержание курса (`content/`: уроки, словари, упражнения, озвучка) — [CC BY-NC-SA 4.0](LICENSE-CONTENT). Для коммерческого использования нужно отдельное разрешение автора.

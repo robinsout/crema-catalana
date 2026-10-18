@@ -4,9 +4,9 @@ on:
   # documentation does not reach the site: no checks, no deploy (same list as isDocsOnly in scripts/lib/session.ts)
   push:
     branches: [master]
-    paths-ignore: ['**.md', '.claude/**', 'LICENSE']
+    paths-ignore: ['**.md', '.claude/**', 'LICENSE', 'LICENSE-CONTENT']
   pull_request:
-    paths-ignore: ['**.md', '.claude/**', 'LICENSE']
+    paths-ignore: ['**.md', '.claude/**', 'LICENSE', 'LICENSE-CONTENT']
   workflow_dispatch:
 
 permissions:
