@@ -25,7 +25,8 @@ export default defineConfig({
   webServer: [
     {
       // the site, built against the local sync server below
-      command: 'VITE_SYNC_URL=http://localhost:8787 npm run build && npx vite preview --port 4173 --strictPort',
+      // no visit counting in e2e: an empty VITE_COUNTER_URL turns it off
+      command: 'VITE_SYNC_URL=http://localhost:8787 VITE_COUNTER_URL= npm run build && npx vite preview --port 4173 --strictPort',
       url: 'http://localhost:4173/',
       reuseExistingServer: !process.env.CI,
       timeout: 120_000,

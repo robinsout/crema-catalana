@@ -102,5 +102,8 @@
   "sync.errorServer": "El servidor de sincronización no está disponible: lo intentaremos más tarde",
   "sync.errorData": "No se han podido leer los datos de sincronización: revisa el código",
   "sync.statusIdle": "Sincronización activada",
-  "sync.manualNote": "La sincronización se hace con el botón «Sincronizar ahora»: tócalo en el dispositivo donde has estudiado y después en el que quieras continuar."
+  "sync.manualNote": "La sincronización se hace con el botón «Sincronizar ahora»: tócalo en el dispositivo donde has estudiado y después en el que quieras continuar.",
+  "visits.text": "Contamos las visitas con nuestro propio contador, sin cookies ni direcciones IP: qué lecciones se abren y en qué idioma, si se leen los capítulos hasta el final y si se hacen los ejercicios. Así sabemos qué escribir después.",
+  "visits.code": "El código del contador es abierto.",
+  "visits.off": "No contar mis visitas"
 }

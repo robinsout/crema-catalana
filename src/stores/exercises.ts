@@ -2,6 +2,7 @@
 import { defineStore } from 'pinia';
 import { checkAnswer, scoreOf } from '../services/exercises.ts';
 import { useProgressStore } from './progress.ts';
+import { useVisitsStore } from './visits.ts';
 import type { AnswerCheck, ChoiceItem, ExerciseResult, FillItem } from '../types/index.ts';
 
 export const useExercisesStore = defineStore('exercises', () => {
@@ -14,6 +15,7 @@ export const useExercisesStore = defineStore('exercises', () => {
     const checks = items.map((item, i) => checkAnswer(answers[i] ?? '', item.answers));
     const { score, total } = scoreOf(checks);
     progress.saveResult(key, score, total);
+    useVisitsStore().exercise(key, score, total);
     return { checks, score, total };
   }
 
@@ -23,6 +25,7 @@ export const useExercisesStore = defineStore('exercises', () => {
   function finishChoice(key: string, items: ChoiceItem[], picked: number[]): { score: number; total: number } {
     const score = picked.filter((p, i) => items[i] !== undefined && isRight(items[i], p)).length;
     progress.saveResult(key, score, items.length);
+    useVisitsStore().exercise(key, score, items.length);
     return { score, total: items.length };
   }
 

@@ -291,6 +291,12 @@ main { min-width: 0; padding-block: 8px 80px; }
 .section-btn.is-done { background: color-mix(in srgb, var(--ok) 10%, transparent); }
 .lesson-end { display: flex; justify-content: center; margin: 0 0 32px; }
 .meta { font-size: var(--step--1); color: var(--muted); font-variant-numeric: tabular-nums; }
+/* the note about visit counting at the end of the plan: small and quiet */
+.visits { max-width: 42rem; margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: var(--step--1); color: var(--muted); }
+.visits p { margin: 0 0 .5rem; }
+.visits a { color: var(--accent); }
+.visits label { display: inline-flex; gap: .5rem; align-items: center; cursor: pointer; }
+.visits input { accent-color: var(--accent); }
 
 /* lesson content */
 .lesson section { margin-bottom: 56px; scroll-margin-top: 20px; }

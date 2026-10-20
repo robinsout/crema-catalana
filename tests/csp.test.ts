@@ -3,6 +3,7 @@ import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import { contentSecurityPolicy } from '../scripts/lib/csp.ts';
 import { DEFAULT_SYNC_URL } from '../shared/sync-api.ts';
+import { DEFAULT_COUNTER_URL } from '../shared/counter-api.ts';
 
 const directives = (csp: string) =>
   Object.fromEntries(csp.split(';').map((d) => d.trim().split(/\s+/)).map(([name, ...values]) => [name, values]));
@@ -21,4 +22,11 @@ test('scripts, fonts and media come only from the site itself', () => {
 test('requests go only to the site and the sync server it was built for', () => {
   assert.deepEqual(directives(contentSecurityPolicy('https://188.245.182.47'))['connect-src'], ["'self'", 'https://188.245.182.47']);
   assert.deepEqual(directives(contentSecurityPolicy('http://localhost:8787/'))['connect-src'], ["'self'", 'http://localhost:8787']);
+});
+
+test('the visit counter is allowed when the site counts visits, once when it shares the host', () => {
+  const connect = (counter: string) => directives(contentSecurityPolicy('https://188.245.182.47', counter))['connect-src'];
+  assert.deepEqual(connect(DEFAULT_COUNTER_URL), ["'self'", 'https://188.245.182.47']);
+  assert.deepEqual(connect('https://stats.example/c/hit'), ["'self'", 'https://188.245.182.47', 'https://stats.example']);
+  assert.deepEqual(connect(''), ["'self'", 'https://188.245.182.47']);
 });

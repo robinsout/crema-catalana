@@ -7,6 +7,7 @@ import {
   syncFailure, syncProgress, type SyncFailure,
 } from '../services/sync.ts';
 import { useProgressStore } from './progress.ts';
+import { useVisitsStore } from './visits.ts';
 
 export type SyncStatus = 'off' | 'idle' | 'syncing' | 'ok' | 'error';
 
@@ -52,6 +53,7 @@ export const useSyncStore = defineStore('sync', () => {
     code.value = generateCode();
     lastSyncAt.value = null;
     saveSync(code.value, null);
+    useVisitsStore().syncOn();
     await syncNow();
   }
 
@@ -64,6 +66,7 @@ export const useSyncStore = defineStore('sync', () => {
     lastSyncAt.value = null;
     failure.value = null;
     saveSync(parsed, null);
+    useVisitsStore().syncOn();
     await syncNow();
     return true;
   }

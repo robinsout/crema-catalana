@@ -102,5 +102,8 @@
   "sync.errorServer": "The sync server is unavailable — try again later",
   "sync.errorData": "Could not read the sync data: check the code",
   "sync.statusIdle": "Sync is on",
-  "sync.manualNote": "Sync runs when you tap “Sync now”: tap it on the device where you studied, then on the one where you want to continue."
+  "sync.manualNote": "Sync runs when you tap “Sync now”: tap it on the device where you studied, then on the one where you want to continue.",
+  "visits.text": "We count visits with our own counter, without cookies or IP addresses: which lessons are opened and in which language, whether chapters are read to the end and exercises are done. It tells us what to write next.",
+  "visits.code": "The counter's code is open.",
+  "visits.off": "Don't count my visits"
 }

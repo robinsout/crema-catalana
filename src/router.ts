@@ -6,6 +6,7 @@ import { preferredLanguage, readerLanguages } from './services/content.ts';
 import { useCatalogStore } from './stores/catalog.ts';
 import { useProgressStore } from './stores/progress.ts';
 import { useSyncStore } from './stores/sync.ts';
+import { useVisitsStore } from './stores/visits.ts';
 
 // "#b1-04" (links before the router) → "/b1-04", resolved by the catch-all route
 export function legacyHashToPath(hash: string): string | null {
@@ -80,6 +81,9 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     if (lang) useProgressStore().setLocale(lang);
     if (to.name === 'lesson') useProgressStore().setLast(param(to.params.id));
     else if (to.name === 'plan') useProgressStore().setLast(PLAN_ID);
+    // fixed page names; the sync page is counted as "sync", never with its code
+    if (to.name === 'lesson') useVisitsStore().view(param(to.params.id));
+    else if (to.name === 'plan' || to.name === 'sync') useVisitsStore().view(to.name);
   });
 
   return router;

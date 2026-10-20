@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router';
 import { RouterLink } from 'vue-router';
 import { useCatalogStore } from '../stores/catalog.ts';
 import { useProgressStore } from '../stores/progress.ts';
+import { useVisitsStore } from '../stores/visits.ts';
 import { useLessonLink } from '../composables/useLessonLink.ts';
 import { useTocStore } from '../stores/toc.ts';
 import { useI18n } from '../composables/useI18n.ts';
@@ -13,6 +14,7 @@ import ExtraRow from '../components/ExtraRow.vue';
 const catalog = useCatalogStore();
 const toc = useTocStore();
 const progress = useProgressStore();
+const visits = useVisitsStore();
 const linkTo = useLessonLink();
 const { t } = useI18n();
 const route = useRoute();
@@ -100,4 +102,8 @@ onBeforeUnmount(() => release?.());
       <UnitRow v-for="u in catalog.unitsOf(p.id)" :key="u.id" :lesson="u" :focused="u.id === focus" />
     </section>
   </article>
+  <aside class="visits">
+    <p>{{ t('visits.text') }} <a href="https://github.com/robinsout/counter" target="_blank" rel="noopener">{{ t('visits.code') }}</a></p>
+    <label><input type="checkbox" :checked="visits.off" @change="visits.setOff(($event.target as HTMLInputElement).checked)"> {{ t('visits.off') }}</label>
+  </aside>
 </template>

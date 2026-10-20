@@ -1,9 +1,13 @@
 // Pronunciation: a click on a Catalan phrase in the content plays its recorded clip.
 import { onBeforeUnmount, onMounted, watchEffect, type Ref } from 'vue';
+import { useRoute } from 'vue-router';
 import { useAudioStore } from '../stores/audio.ts';
+import { useVisitsStore } from '../stores/visits.ts';
 
 export function useSay(root: Ref<HTMLElement | null>) {
   const audio = useAudioStore();
+  const visits = useVisitsStore();
+  const route = useRoute();
   const player = typeof Audio === 'undefined' ? null : new Audio();
 
   function onClick(e: MouseEvent): void {
@@ -21,6 +25,7 @@ export function useSay(root: Ref<HTMLElement | null>) {
     player.onerror = stop;
     player.src = clip;
     player.play().catch(stop);
+    if (route.name === 'lesson' && typeof route.params.id === 'string') visits.audio(route.params.id);
   }
 
   // phrases look clickable only when there is audio

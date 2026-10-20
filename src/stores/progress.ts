@@ -6,6 +6,7 @@ import { PLAN_ID, progress as summarize } from '../services/catalog.ts';
 import { markDone, markSection, readSavedProgress, recordExercise, recordReading, writeSavedProgress, type Progress } from '../services/progress.ts';
 import type { ExerciseResult } from '../types/index.ts';
 import { useCatalogStore } from './catalog.ts';
+import { useVisitsStore } from './visits.ts';
 
 export const useProgressStore = defineStore('progress', () => {
   const data = ref(readSavedProgress());
@@ -44,7 +45,9 @@ export const useProgressStore = defineStore('progress', () => {
   const readingPoint = (lesson: string): string | null => data.value.reading[lesson]?.section ?? null;
 
   function reachSection(lesson: string, section: string, order: string[]): void {
-    if (recordReading(data.value, lesson, section, order, Date.now())) save();
+    if (!recordReading(data.value, lesson, section, order, Date.now())) return;
+    save();
+    useVisitsStore().chapter(lesson, section);
   }
 
   // takes marks, exercise results, chapter marks and reading points merged with other devices; `last` stays local
