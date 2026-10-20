@@ -20,7 +20,6 @@
   "plan.eyebrow": "Plan de estudio",
   "plan.sub": "Lecciones para las unidades de {course} ({publisher}) y lecciones temáticas",
   "plan.intro": "Las lecciones avanzan por dos líneas paralelas. Las <strong>lecciones por unidades</strong> refuerzan lo que has visto en clase: después de clase, abre la lección con el mismo número. Profundiza en la gramática de la unidad, con las excepciones y las diferencias con el castellano, e incluye ejercicios y una <strong>misión</strong>, una pequeña tarea en catalán en la vida real. Las <strong>lecciones temáticas y de repaso</strong> se añaden a petición, cuando quieres profundizar en un tema o ver el panorama general.",
-  "plan.note": "Los temas gramaticales de las unidades están reconstruidos a partir de sus títulos y del programa habitual del nivel Bàsic. Cuando se comparen con el índice del libro, el plan se corregirá.",
   "plan.extrasCard": "Temas",
   "plan.onRequest": "a petición",
   "plan.extrasCount": "Lecciones temáticas y de repaso: {n}",

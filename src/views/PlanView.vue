@@ -77,7 +77,6 @@ onBeforeUnmount(() => release?.());
   </header>
   <article ref="article" class="lesson plan">
     <p v-html="t('plan.intro')"></p>
-    <p class="meta">{{ t('plan.note') }}</p>
     <ol class="parts">
       <li v-if="extras.length">
         <a href="#" @click.prevent="jump('extras')">

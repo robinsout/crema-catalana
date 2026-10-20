@@ -20,7 +20,6 @@
   "plan.eyebrow": "Study plan",
   "plan.sub": "Lessons for the units of {course} ({publisher}) and topic lessons",
   "plan.intro": "The lessons run along two parallel tracks. <strong>Unit lessons</strong> reinforce what you covered in class: after a class, open the lesson with the same number. It goes deeper into the unit’s grammar, with the exceptions and with comparisons to English, and has exercises and a <strong>mission</strong> — a small real-life task in Catalan. <strong>Topic and overview lessons</strong> are added on request, when you want to dig into a topic or see the big picture.",
-  "plan.note": "The grammar topics of the units are reconstructed from their titles and the usual Bàsic syllabus. Once they are checked against the textbook’s contents, the plan will be corrected.",
   "plan.extrasCard": "Topics",
   "plan.onRequest": "on request",
   "plan.extrasCount": "Topic and overview lessons: {n}",
