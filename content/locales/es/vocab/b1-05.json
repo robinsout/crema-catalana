@@ -1,0 +1,132 @@
+{
+ "groups": {
+  "rutina": "La rutina",
+  "lleure": "El tiempo libre",
+  "frequencia": "Con qué frecuencia",
+  "amb": "Con quién"
+ },
+ "words": {
+  "despertar-se": {
+   "tr": "despertarse"
+  },
+  "llevar-se": {
+   "tr": "levantarse",
+   "note": "no es «llevarse» (= endur-se)"
+  },
+  "dutxar-se": {
+   "tr": "ducharse"
+  },
+  "rentar-se": {
+   "tr": "lavarse los dientes",
+   "note": "rentar — lavar"
+  },
+  "vestir-se": {
+   "tr": "vestirse",
+   "note": "em vesteixo"
+  },
+  "esmorzar": {
+   "tr": "desayunar; el desayuno"
+  },
+  "dinar": {
+   "tr": "comer, almorzar; la comida",
+   "note": "nada que ver con «dinero»"
+  },
+  "berenar": {
+   "tr": "merendar; la merienda"
+  },
+  "sopar": {
+   "tr": "cenar; la cena",
+   "note": "no es «sopa»"
+  },
+  "feina": {
+   "tr": "el trabajo"
+  },
+  "plegar": {
+   "tr": "salir del trabajo",
+   "note": "aquí: salir del trabajo (también «doblar»)"
+  },
+  "tornar": {
+   "tr": "volver a casa"
+  },
+  "descansar": {
+   "tr": "descansar"
+  },
+  "anar-a-dormir": {
+   "tr": "irse a dormir"
+  },
+  "passejar": {
+   "tr": "pasear"
+  },
+  "fer-esport": {
+   "tr": "hacer deporte"
+  },
+  "jugar": {
+   "tr": "jugar a las cartas",
+   "note": "jugar a + juego"
+  },
+  "mirar-la-tele": {
+   "tr": "ver la tele"
+  },
+  "deures": {
+   "tr": "la tarea, los deberes",
+   "note": "fer els deures"
+  },
+  "quedar": {
+   "tr": "quedar con los amigos, juntarse"
+  },
+  "sopar-fora": {
+   "tr": "cenar fuera"
+  },
+  "videotrucada": {
+   "tr": "la videollamada"
+  },
+  "sempre": {
+   "tr": "siempre"
+  },
+  "cada-dia": {
+   "tr": "cada día, todos los días"
+  },
+  "sovint": {
+   "tr": "a menudo, seguido"
+  },
+  "de-vegades": {
+   "tr": "a veces",
+   "note": "también a vegades"
+  },
+  "de-tant-en-tant": {
+   "tr": "de vez en cuando"
+  },
+  "gairebe": {
+   "tr": "casi",
+   "note": "gairebé mai — casi nunca"
+  },
+  "mai": {
+   "tr": "nunca",
+   "note": "No … mai"
+  },
+  "cop": {
+   "tr": "vez",
+   "note": "un cop per setmana"
+  },
+  "vegada": {
+   "tr": "vez",
+   "note": "una vegada a la setmana"
+  },
+  "amb": {
+   "tr": "con",
+   "note": "amb mi, amb tu: sin «conmigo»"
+  },
+  "sol": {
+   "tr": "solo"
+  },
+  "sola": {
+   "tr": "sola"
+  },
+  "junts": {
+   "tr": "juntos"
+  },
+  "juntes": {
+   "tr": "juntas"
+  }
+ }
+}

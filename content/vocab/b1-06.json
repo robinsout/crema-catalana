@@ -1,0 +1,280 @@
+{
+ "groups": [
+  {
+   "id": "oficis",
+   "words": [
+    {
+     "id": "cambrer",
+     "ca": "cambrer, cambrera",
+     "gender": "mf",
+     "plural": "cambrers, cambreres"
+    },
+    {
+     "id": "cuiner",
+     "ca": "cuiner, cuinera",
+     "gender": "mf",
+     "plural": "cuiners, cuineres"
+    },
+    {
+     "id": "ajudant-cuina",
+     "ca": "ajudant de cuina",
+     "gender": "mf",
+     "plural": "ajudants de cuina"
+    },
+    {
+     "id": "infermer",
+     "ca": "infermer, infermera",
+     "gender": "mf",
+     "plural": "infermers, infermeres"
+    },
+    {
+     "id": "metge",
+     "ca": "metge, metgessa",
+     "gender": "mf",
+     "plural": "metges, metgesses"
+    },
+    {
+     "id": "perruquer",
+     "ca": "perruquer, perruquera",
+     "gender": "mf",
+     "plural": "perruquers, perruqueres"
+    },
+    {
+     "id": "dependent",
+     "ca": "dependent, dependenta",
+     "gender": "mf",
+     "plural": "dependents, dependentes"
+    },
+    {
+     "id": "administratiu",
+     "ca": "administratiu, administrativa",
+     "gender": "mf",
+     "plural": "administratius, administratives"
+    },
+    {
+     "id": "mecanic",
+     "ca": "mecànic, mecànica",
+     "gender": "mf",
+     "plural": "mecànics, mecàniques"
+    },
+    {
+     "id": "informatic",
+     "ca": "informàtic, informàtica",
+     "gender": "mf",
+     "plural": "informàtics, informàtiques"
+    },
+    {
+     "id": "fuster",
+     "ca": "fuster, fustera",
+     "gender": "mf",
+     "plural": "fusters, fusteres"
+    },
+    {
+     "id": "pintor",
+     "ca": "pintor, pintora",
+     "gender": "mf",
+     "plural": "pintors, pintores"
+    },
+    {
+     "id": "professor",
+     "ca": "professor, professora",
+     "gender": "mf",
+     "plural": "professors, professores"
+    },
+    {
+     "id": "mestre",
+     "ca": "mestre, mestra",
+     "gender": "mf",
+     "plural": "mestres, mestres"
+    },
+    {
+     "id": "lampista",
+     "ca": "lampista",
+     "gender": "mf",
+     "plural": "lampistes"
+    },
+    {
+     "id": "paleta",
+     "ca": "paleta",
+     "gender": "mf",
+     "plural": "paletes"
+    },
+    {
+     "id": "estudiant",
+     "ca": "estudiant",
+     "gender": "mf",
+     "plural": "estudiants"
+    },
+    {
+     "id": "dona-feines",
+     "ca": "la dona de fer feines",
+     "gender": "f",
+     "plural": "dones de fer feines"
+    },
+    {
+     "id": "mestressa",
+     "ca": "la mestressa de casa",
+     "gender": "f",
+     "plural": "mestresses de casa"
+    }
+   ]
+  },
+  {
+   "id": "llocs",
+   "words": [
+    {
+     "id": "oficina",
+     "ca": "l'oficina",
+     "gender": "f",
+     "plural": "oficines"
+    },
+    {
+     "id": "fabrica",
+     "ca": "la fàbrica",
+     "gender": "f",
+     "plural": "fàbriques"
+    },
+    {
+     "id": "taller",
+     "ca": "el taller",
+     "gender": "m",
+     "plural": "tallers"
+    },
+    {
+     "id": "botiga",
+     "ca": "la botiga",
+     "gender": "f",
+     "plural": "botigues"
+    },
+    {
+     "id": "fleca",
+     "ca": "la fleca",
+     "gender": "f",
+     "plural": "fleques"
+    },
+    {
+     "id": "papereria",
+     "ca": "la papereria",
+     "gender": "f",
+     "plural": "papereries"
+    },
+    {
+     "id": "escola",
+     "ca": "l'escola",
+     "gender": "f",
+     "plural": "escoles"
+    },
+    {
+     "id": "institut",
+     "ca": "l'institut",
+     "gender": "m",
+     "plural": "instituts"
+    },
+    {
+     "id": "escola-bressol",
+     "ca": "l'escola bressol",
+     "gender": "f",
+     "plural": "escoles bressol"
+    },
+    {
+     "id": "hospital",
+     "ca": "l'hospital",
+     "gender": "m",
+     "plural": "hospitals"
+    },
+    {
+     "id": "empresa",
+     "ca": "l'empresa",
+     "gender": "f",
+     "plural": "empreses"
+    }
+   ]
+  },
+  {
+   "id": "feina",
+   "words": [
+    {
+     "id": "feina",
+     "ca": "la feina",
+     "gender": "f"
+    },
+    {
+     "id": "treballar",
+     "ca": "treballar"
+    },
+    {
+     "id": "despatxar",
+     "ca": "despatxar"
+    },
+    {
+     "id": "netejar",
+     "ca": "netejar"
+    },
+    {
+     "id": "rentar",
+     "ca": "rentar"
+    },
+    {
+     "id": "tallar",
+     "ca": "tallar"
+    },
+    {
+     "id": "arreglar",
+     "ca": "arreglar"
+    },
+    {
+     "id": "portar",
+     "ca": "portar"
+    },
+    {
+     "id": "plegar",
+     "ca": "plegar"
+    },
+    {
+     "id": "horari",
+     "ca": "l'horari",
+     "gender": "m",
+     "plural": "horaris"
+    },
+    {
+     "id": "torn",
+     "ca": "el torn",
+     "gender": "m",
+     "plural": "torns"
+    },
+    {
+     "id": "fer-festa",
+     "ca": "fer festa"
+    },
+    {
+     "id": "cap",
+     "ca": "cap",
+     "gender": "mf",
+     "plural": "caps"
+    },
+    {
+     "id": "company",
+     "ca": "el company de feina",
+     "gender": "m",
+     "plural": "companys de feina"
+    },
+    {
+     "id": "sou",
+     "ca": "el sou",
+     "gender": "m",
+     "plural": "sous"
+    },
+    {
+     "id": "atur",
+     "ca": "estar a l'atur"
+    },
+    {
+     "id": "jubilat",
+     "ca": "jubilat, jubilada",
+     "gender": "mf",
+     "plural": "jubilats, jubilades"
+    }
+   ]
+  }
+ ]
+}

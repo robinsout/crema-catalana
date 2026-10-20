@@ -1,0 +1,183 @@
+{
+ "groups": [
+  {
+   "id": "rutina",
+   "words": [
+    {
+     "id": "despertar-se",
+     "ca": "despertar-se"
+    },
+    {
+     "id": "llevar-se",
+     "ca": "llevar-se"
+    },
+    {
+     "id": "dutxar-se",
+     "ca": "dutxar-se"
+    },
+    {
+     "id": "rentar-se",
+     "ca": "rentar-se les dents"
+    },
+    {
+     "id": "vestir-se",
+     "ca": "vestir-se"
+    },
+    {
+     "id": "esmorzar",
+     "ca": "esmorzar"
+    },
+    {
+     "id": "dinar",
+     "ca": "dinar"
+    },
+    {
+     "id": "berenar",
+     "ca": "berenar"
+    },
+    {
+     "id": "sopar",
+     "ca": "sopar"
+    },
+    {
+     "id": "feina",
+     "ca": "la feina",
+     "gender": "f",
+     "plural": "feines"
+    },
+    {
+     "id": "plegar",
+     "ca": "plegar"
+    },
+    {
+     "id": "tornar",
+     "ca": "tornar a casa"
+    },
+    {
+     "id": "descansar",
+     "ca": "descansar"
+    },
+    {
+     "id": "anar-a-dormir",
+     "ca": "anar a dormir"
+    }
+   ]
+  },
+  {
+   "id": "lleure",
+   "words": [
+    {
+     "id": "passejar",
+     "ca": "passejar"
+    },
+    {
+     "id": "fer-esport",
+     "ca": "fer esport"
+    },
+    {
+     "id": "jugar",
+     "ca": "jugar a cartes"
+    },
+    {
+     "id": "mirar-la-tele",
+     "ca": "mirar la tele"
+    },
+    {
+     "id": "deures",
+     "ca": "els deures",
+     "gender": "m"
+    },
+    {
+     "id": "quedar",
+     "ca": "quedar amb els amics"
+    },
+    {
+     "id": "sopar-fora",
+     "ca": "sopar fora"
+    },
+    {
+     "id": "videotrucada",
+     "ca": "la videotrucada",
+     "gender": "f",
+     "plural": "videotrucades"
+    }
+   ]
+  },
+  {
+   "id": "frequencia",
+   "words": [
+    {
+     "id": "sempre",
+     "ca": "sempre"
+    },
+    {
+     "id": "cada-dia",
+     "ca": "cada dia"
+    },
+    {
+     "id": "sovint",
+     "ca": "sovint"
+    },
+    {
+     "id": "de-vegades",
+     "ca": "de vegades"
+    },
+    {
+     "id": "de-tant-en-tant",
+     "ca": "de tant en tant"
+    },
+    {
+     "id": "gairebe",
+     "ca": "gairebé"
+    },
+    {
+     "id": "mai",
+     "ca": "mai"
+    },
+    {
+     "id": "cop",
+     "ca": "el cop",
+     "gender": "m",
+     "plural": "cops"
+    },
+    {
+     "id": "vegada",
+     "ca": "la vegada",
+     "gender": "f",
+     "plural": "vegades"
+    }
+   ]
+  },
+  {
+   "id": "amb",
+   "words": [
+    {
+     "id": "amb",
+     "ca": "amb"
+    },
+    {
+     "id": "sol",
+     "ca": "sol",
+     "gender": "m",
+     "plural": "sols"
+    },
+    {
+     "id": "sola",
+     "ca": "sola",
+     "gender": "f",
+     "plural": "soles"
+    },
+    {
+     "id": "junts",
+     "ca": "junts",
+     "gender": "m"
+    },
+    {
+     "id": "juntes",
+     "ca": "juntes",
+     "gender": "f"
+    }
+   ]
+  }
+ ]
+}

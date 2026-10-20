@@ -1,0 +1,129 @@
+{
+ "groups": {
+  "rutina": "Распорядок дня",
+  "lleure": "Свободное время",
+  "frequencia": "Как часто",
+  "amb": "С кем"
+ },
+ "words": {
+  "despertar-se": {
+   "tr": "просыпаться"
+  },
+  "llevar-se": {
+   "tr": "вставать с постели",
+   "note": "не испанское llevarse"
+  },
+  "dutxar-se": {
+   "tr": "принимать душ"
+  },
+  "rentar-se": {
+   "tr": "чистить зубы",
+   "note": "rentar — мыть"
+  },
+  "vestir-se": {
+   "tr": "одеваться",
+   "note": "em vesteixo"
+  },
+  "esmorzar": {
+   "tr": "завтракать; завтрак"
+  },
+  "dinar": {
+   "tr": "обедать; обед"
+  },
+  "berenar": {
+   "tr": "полдничать; полдник"
+  },
+  "sopar": {
+   "tr": "ужинать; ужин"
+  },
+  "feina": {
+   "tr": "работа"
+  },
+  "plegar": {
+   "tr": "заканчивать работу"
+  },
+  "tornar": {
+   "tr": "возвращаться домой"
+  },
+  "descansar": {
+   "tr": "отдыхать"
+  },
+  "anar-a-dormir": {
+   "tr": "ложиться спать"
+  },
+  "passejar": {
+   "tr": "гулять"
+  },
+  "fer-esport": {
+   "tr": "заниматься спортом"
+  },
+  "jugar": {
+   "tr": "играть в карты",
+   "note": "jugar a + игра"
+  },
+  "mirar-la-tele": {
+   "tr": "смотреть телевизор"
+  },
+  "deures": {
+   "tr": "домашнее задание",
+   "note": "fer els deures"
+  },
+  "quedar": {
+   "tr": "встречаться с друзьями"
+  },
+  "sopar-fora": {
+   "tr": "ужинать вне дома"
+  },
+  "videotrucada": {
+   "tr": "видеозвонок"
+  },
+  "sempre": {
+   "tr": "всегда"
+  },
+  "cada-dia": {
+   "tr": "каждый день"
+  },
+  "sovint": {
+   "tr": "часто"
+  },
+  "de-vegades": {
+   "tr": "иногда",
+   "note": "и a vegades"
+  },
+  "de-tant-en-tant": {
+   "tr": "время от времени"
+  },
+  "gairebe": {
+   "tr": "почти",
+   "note": "gairebé mai — почти никогда"
+  },
+  "mai": {
+   "tr": "никогда",
+   "note": "No … mai"
+  },
+  "cop": {
+   "tr": "раз",
+   "note": "un cop per setmana"
+  },
+  "vegada": {
+   "tr": "раз",
+   "note": "una vegada a la setmana"
+  },
+  "amb": {
+   "tr": "с",
+   "note": "amb mi, amb tu"
+  },
+  "sol": {
+   "tr": "один"
+  },
+  "sola": {
+   "tr": "одна"
+  },
+  "junts": {
+   "tr": "вместе (м. р.)"
+  },
+  "juntes": {
+   "tr": "вместе (ж. р.)"
+  }
+ }
+}

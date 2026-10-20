@@ -55,51 +55,60 @@
       "date": "2026-10-07"
     },
     "b1-03": {
-      "topic": "Where I live: address (town, street, number, floor), what's near my home, services in town",
+      "topic": "Where I live: street, number, floor and flat, what's near my home and how to say where it is using landmarks",
       "grammar": [
-        "present tense of regular verbs",
-        "hi ha / és / està: Hi ha una farmàcia (“There's a chemist's”). On és el mercat?",
-        "prepositions of place: a prop de, davant de, al costat de",
-        "ordinals for floor and flat: tercer segona"
+        "viure and addresses: Visc al carrer de la Indústria, 49 (“I live at 49 Indústria Street”). A quin carrer vius? Quina és la teva adreça?",
+        "a / en: Visc a Viladepau, al carrer Nou, a la plaça Gran — but en una plaça (“in a square”)",
+        "ordinals for floor and flat: primer primera, segon segona — 3r 1a (tercer primera, “3rd floor, door 1”)",
+        "prepositions of place: al costat de, davant de / darrere de, a sobre de / a sota de, a prop de / lluny de, entre … i …",
+        "hi ha and és: Al carrer Nou hi ha una fleca (“There's a bakery”). On és el banc? — És davant de l'Ajuntament"
       ],
-      "vocab": "The city, streets, shops and public buildings",
-      "extra": "How to read Barcelona addresses: c/, pl., 3r 2a",
-      "mission": "Spell out your address in Catalan and describe what's near your home in five sentences"
+      "vocab": "Streets (carrer, plaça, avinguda, rambla, passeig), shops and services (fleca, farmàcia, perruqueria, sabateria, llibreria, caixer, parada d'autobús, estació de metro, Ajuntament)",
+      "extra": "Numbers from 100 to 999 (cent, dos-cents, tres-cents vint-i-nou) and how to read addresses: C. de Còrsega, 377, 3r 2a, 08037 Barcelona; forms: nom, cognoms, adreça, població",
+      "mission": "Tell a classmate your address in Catalan (street, number, floor) and where your home is using landmarks: Casa meva és davant de…, al costat de…",
+      "date": "2026-10-20"
     },
     "b1-04": {
-      "topic": "Days and times: what we do on which day, mealtimes, telling the time, opening hours, months, seasons and weather",
+      "topic": "Days and times: what happens on which day, mealtimes, telling the time, opening hours, birthdays, seasons and weather",
       "grammar": [
-        "telling the time with quarts: un quart de deu; A quina hora…?",
-        "days of the week with the article: el dilluns (“on Monday”) / els dilluns (“on Mondays”)",
-        "reflexive verbs: llevar-se, dutxar-se",
-        "prepositions of time: a l'hivern, al matí, a la nit"
+        "days of the week: Quin dia és avui? El dilluns hi ha mercat / els dilluns (“on Mondays”); dilluns with no article — “this coming Monday”",
+        "-ar verbs in the 1st person: esmorzo, dino, berenem, sopo — A quina hora sopes?",
+        "telling the time: Són les tres i cinc, És un quart de quatre, Falten cinc minuts per a les quatre; del matí, de la tarda, del vespre, de la nit",
+        "opening hours: de 9 a 1, de dilluns a divendres; Comença a… i acaba a…; tancat",
+        "weather with fer: Quin temps fa? Fa calor, fa fred, fa vent, plou, neva, hi ha boira"
       ],
-      "vocab": "Àpats: esmorzar, dinar, berenar, sopar; days of the week, months, seasons, weather: fa fred, fa sol, plou",
-      "extra": "The Catalan «quarts» system for telling the time — nothing like it in English",
-      "mission": "Find out the opening hours of a museum or library in Catalan and arrange to meet someone, giving the time with quarts"
+      "vocab": "Àpats (esmorzar, dinar, berenar, sopar), parts of the day (matí, migdia, tarda, vespre, nit, matinada), days of the week, months, seasons, weather",
+      "extra": "The Catalan «quarts» system (dos quarts de nou = 8:30) — nothing like it in English; dates: El meu aniversari és el 23 de gener",
+      "mission": "Write a classmate a short “holiday message” in Catalan: where you are, what the weather is like, when you eat and what you do; give a time with quarts",
+      "date": "2026-10-20"
     },
     "b1-05": {
-      "topic": "Everyday activities and free time: what, who with, on which days and at what time, how often",
+      "topic": "Daily routine: what we do during the day, at what time, who with and how often",
       "grammar": [
-        "present tense: -ar, -er/-re, -ir and -ir verbs with -eix-",
-        "frequency adverbs: sempre, sovint, de vegades, mai",
-        "amb qui?: amb el meu germà, sol / sola",
-        "anar / venir"
+        "reflexive verbs: em llevo, et dutxes, es desperta, ens rentem les dents",
+        "present tense, 1st and 3rd person: treballo / treballa, plego / plega, llegeixo / llegeix",
+        "amb qui?: amb el meu germà, amb la seva dona, sol / sola",
+        "frequency: sempre, sovint, de vegades, de tant en tant, un cop per setmana, una vegada al mes, mai",
+        "anar a + place or infinitive: Vaig a la piscina. Va a comprar amb la seva dona"
       ],
-      "vocab": "Free time, study, chores, expressions of frequency",
-      "extra": "anar and venir: “I’m coming!” is «Ja vaig!» — venir is only for movement towards the speaker",
-      "mission": "Describe your weekly timetable in Catalan"
+      "vocab": "Daily routine (llevar-se, dutxar-se, esmorzar, plegar, descansar, fer els deures, mirar la tele, anar a dormir), free time (passejar, fer esport, jugar a cartes, quedar amb els amics)",
+      "extra": "plegar — “to finish work, knock off”; vaig a comprar (“I’m going shopping”) vs vaig comprar (“I bought”); “I’m coming!” is «Ja vaig!»",
+      "mission": "Tell a classmate about your usual day and week in Catalan: when you get up, who you have lunch with, what you do once a week and what you never do",
+      "date": "2026-10-20"
     },
     "b1-06": {
-      "topic": "Work: jobs, where I work and as what, what I do at work, field and type of job",
+      "topic": "Work: what I do and where, what my job involves, my hours; if I'm out of work — what I'm looking for",
       "grammar": [
-        "treballar de, fer de",
-        "feminine job titles: metge / metgessa",
-        "fer: faig, fas, fa"
+        "treballar de, fer de, ser: Treballa de cambrer (“He works as a waiter”). Fa de dependenta. Soc professora (no article: not “a teacher”)",
+        "feminine job titles: cambrer / cambrera, metge / metgessa, administratiu / administrativa; lampista, paleta — one form",
+        "where I work: Treballo a Sabadell, a la papereria Mots, en un bar, en una fàbrica",
+        "what I do: despatxo, preparo, netejo, tallo; fer: faig classes, fas, fa",
+        "estar a l'atur, buscar feina de…: Busco feina de pintor (“I'm looking for work as a painter”)"
       ],
-      "vocab": "Jobs, workplaces, duties",
-      "extra": "The endings -essa, -ina, -a in job titles",
-      "mission": "Explain in Catalan what you do at work"
+      "vocab": "Jobs (cambrer, cuiner, dependent, infermer, metge, mecànic, perruquer, paleta, lampista), workplaces (oficina, fàbrica, taller, botiga, fleca, escola bressol), tasks at work",
+      "extra": "Feminine endings (-a, -essa, -iva) and job titles with one form; M'agrada la meva feina; fer festa — “to have the day off”",
+      "mission": "Tell a classmate in Catalan what you do and where (or what job you're looking for), your hours and what you do at work",
+      "date": "2026-10-20"
     },
     "b1-07": {
       "topic": "Food and shops: signs, quantities and prices, informal tu and polite vostè in shops, food tastes and Catalan dishes",

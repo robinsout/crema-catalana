@@ -1,0 +1,242 @@
+{
+ "groups": [
+  {
+   "id": "carrers",
+   "words": [
+    {
+     "id": "carrer",
+     "ca": "el carrer",
+     "gender": "m",
+     "plural": "carrers"
+    },
+    {
+     "id": "placa",
+     "ca": "la plaça",
+     "gender": "f",
+     "plural": "places"
+    },
+    {
+     "id": "avinguda",
+     "ca": "l'avinguda",
+     "gender": "f",
+     "plural": "avingudes"
+    },
+    {
+     "id": "passeig",
+     "ca": "el passeig",
+     "gender": "m",
+     "plural": "passeigs"
+    },
+    {
+     "id": "rambla",
+     "ca": "la rambla",
+     "gender": "f",
+     "plural": "rambles"
+    },
+    {
+     "id": "barri",
+     "ca": "el barri",
+     "gender": "m",
+     "plural": "barris"
+    },
+    {
+     "id": "adreca",
+     "ca": "l'adreça",
+     "gender": "f",
+     "plural": "adreces"
+    },
+    {
+     "id": "numero",
+     "ca": "el número",
+     "gender": "m",
+     "plural": "números"
+    },
+    {
+     "id": "pis",
+     "ca": "el pis",
+     "gender": "m",
+     "plural": "pisos"
+    },
+    {
+     "id": "porta",
+     "ca": "la porta",
+     "gender": "f",
+     "plural": "portes"
+    },
+    {
+     "id": "codi-postal",
+     "ca": "el codi postal",
+     "gender": "m",
+     "plural": "codis postals"
+    },
+    {
+     "id": "poblacio",
+     "ca": "la població",
+     "gender": "f",
+     "plural": "poblacions"
+    }
+   ]
+  },
+  {
+   "id": "botigues",
+   "words": [
+    {
+     "id": "botiga",
+     "ca": "la botiga",
+     "gender": "f",
+     "plural": "botigues"
+    },
+    {
+     "id": "fleca",
+     "ca": "la fleca",
+     "gender": "f",
+     "plural": "fleques"
+    },
+    {
+     "id": "mercat",
+     "ca": "el mercat",
+     "gender": "m",
+     "plural": "mercats"
+    },
+    {
+     "id": "supermercat",
+     "ca": "el supermercat",
+     "gender": "m",
+     "plural": "supermercats"
+    },
+    {
+     "id": "farmacia",
+     "ca": "la farmàcia",
+     "gender": "f",
+     "plural": "farmàcies"
+    },
+    {
+     "id": "perruqueria",
+     "ca": "la perruqueria",
+     "gender": "f",
+     "plural": "perruqueries"
+    },
+    {
+     "id": "sabateria",
+     "ca": "la sabateria",
+     "gender": "f",
+     "plural": "sabateries"
+    },
+    {
+     "id": "llibreria",
+     "ca": "la llibreria",
+     "gender": "f",
+     "plural": "llibreries"
+    },
+    {
+     "id": "biblioteca",
+     "ca": "la biblioteca",
+     "gender": "f",
+     "plural": "biblioteques"
+    },
+    {
+     "id": "papereria",
+     "ca": "la papereria",
+     "gender": "f",
+     "plural": "papereries"
+    },
+    {
+     "id": "banc",
+     "ca": "el banc",
+     "gender": "m",
+     "plural": "bancs"
+    },
+    {
+     "id": "caixer",
+     "ca": "el caixer",
+     "gender": "m",
+     "plural": "caixers"
+    },
+    {
+     "id": "quiosc",
+     "ca": "el quiosc",
+     "gender": "m",
+     "plural": "quioscos"
+    },
+    {
+     "id": "ajuntament",
+     "ca": "l'Ajuntament",
+     "gender": "m"
+    },
+    {
+     "id": "esglesia",
+     "ca": "l'església",
+     "gender": "f",
+     "plural": "esglésies"
+    },
+    {
+     "id": "parc-infantil",
+     "ca": "el parc infantil",
+     "gender": "m",
+     "plural": "parcs infantils"
+    },
+    {
+     "id": "parquing",
+     "ca": "el pàrquing",
+     "gender": "m",
+     "plural": "pàrquings"
+    },
+    {
+     "id": "parada",
+     "ca": "la parada",
+     "gender": "f",
+     "plural": "parades"
+    },
+    {
+     "id": "estacio",
+     "ca": "l'estació",
+     "gender": "f",
+     "plural": "estacions"
+    }
+   ]
+  },
+  {
+   "id": "lloc",
+   "words": [
+    {
+     "id": "al-costat",
+     "ca": "al costat de"
+    },
+    {
+     "id": "davant",
+     "ca": "davant de"
+    },
+    {
+     "id": "darrere",
+     "ca": "darrere de"
+    },
+    {
+     "id": "a-sobre",
+     "ca": "a sobre de"
+    },
+    {
+     "id": "a-sota",
+     "ca": "a sota de"
+    },
+    {
+     "id": "a-prop",
+     "ca": "a prop de"
+    },
+    {
+     "id": "lluny",
+     "ca": "lluny de"
+    },
+    {
+     "id": "entre",
+     "ca": "entre"
+    },
+    {
+     "id": "cantonada",
+     "ca": "la cantonada",
+     "gender": "f",
+     "plural": "cantonades"
+    }
+   ]
+  }
+ ]
+}

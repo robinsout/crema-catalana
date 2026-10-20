@@ -1,0 +1,324 @@
+{
+ "marc": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "What time does Marc get up?",
+    "options": [
+     "a les vuit",
+     "a les set",
+     "a les nou"
+    ],
+    "answer": 1,
+    "explain": "Cada dia em llevo a les set."
+   },
+   {
+    "prompt": "Who does he have breakfast with?",
+    "options": [
+     "sol",
+     "amb un company",
+     "amb la seva dona"
+    ],
+    "answer": 2,
+    "explain": "Esmorzo a casa amb la meva dona, la Rosa."
+   },
+   {
+    "prompt": "What time does he finish work?",
+    "options": [
+     "a les sis",
+     "a les nou",
+     "a les onze"
+    ],
+    "answer": 0,
+    "explain": "Plego a les sis."
+   },
+   {
+    "prompt": "How many times a week does Marc go to English class?",
+    "options": [
+     "un cop per setmana",
+     "dos cops per setmana",
+     "cada dia"
+    ],
+    "answer": 1,
+    "explain": "Els dimarts i els dijous — twice a week."
+   },
+   {
+    "prompt": "Who goes to the swimming pool?",
+    "options": [
+     "en Marc",
+     "la Rosa",
+     "tots dos"
+    ],
+    "answer": 1,
+    "explain": "La Rosa va a la piscina dos cops per setmana; Marc never goes."
+   },
+   {
+    "prompt": "What do they do on Saturdays?",
+    "options": [
+     "Treballen a la llibreria.",
+     "Van a la piscina.",
+     "Passegen junts."
+    ],
+    "answer": 2,
+    "explain": "Els dissabtes passegem junts."
+   }
+  ]
+ },
+ "reflexius": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Jo ___ llevo a les set.</span>",
+    "answers": [
+     "em"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">A quina hora ___ lleves?</span>",
+    "answers": [
+     "et"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Maria ___ dutxa al matí.</span>",
+    "answers": [
+     "es"
+    ],
+    "hint": "one short word, starts with a vowel"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Nosaltres ___ rentem les dents després de dinar.</span>",
+    "answers": [
+     "ens"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Vosaltres ___ vestiu molt ràpid.</span>",
+    "answers": [
+     "us"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Pere ___afaita cada dia.</span>",
+    "answers": [
+     "s'"
+    ],
+    "hint": "before a vowel"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Els nens ___ desperten a les vuit.</span>",
+    "answers": [
+     "es"
+    ]
+   }
+  ]
+ },
+ "present": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Jo treballo a Gràcia. La Laia ___ a Sants.</span>",
+    "answers": [
+     "treballa"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Jo plego a les cinc. En Pau ___ a les sis.</span>",
+    "answers": [
+     "plega"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Jo llegeixo al metro. La Rosa ___ al llit.</span>",
+    "answers": [
+     "llegeix"
+    ],
+    "hint": "-eix-"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Jo dormo vuit hores. El meu fill ___ deu hores.</span>",
+    "answers": [
+     "dorm"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Jo surto de casa a les vuit. La meva germana ___ a les set.</span>",
+    "answers": [
+     "surt"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Jo faig esport. En Marc no ___ esport.</span>",
+    "answers": [
+     "fa"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Jo vaig a la feina amb metro. La Núria ___ a peu.</span>",
+    "answers": [
+     "va"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Jo em dutxo al matí. L'Oriol ___ al vespre.</span>",
+    "answers": [
+     "es dutxa"
+    ],
+    "hint": "reflexive verb: two words"
+   }
+  ]
+ },
+ "amb": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Vens al cinema ___?</span> (with me)",
+    "answers": [
+     "amb mi"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Vull parlar ___.</span> (with you, one friend)",
+    "answers": [
+     "amb tu"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Marta dina amb ___ pare.</span> (with her father)",
+    "answers": [
+     "el seu"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Joan viu amb ___ germana.</span> (with his sister)",
+    "answers": [
+     "la seva"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La meva àvia viu ___.</span> (on her own)",
+    "answers": [
+     "sola",
+     "tota sola"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Laia i la Mar estudien ___.</span> (together)",
+    "answers": [
+     "juntes"
+    ],
+    "hint": "two girls"
+   }
+  ]
+ },
+ "frequencia": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "“I never have an afternoon snack.”",
+    "options": [
+     "Bereno mai.",
+     "No bereno mai.",
+     "No bereno sempre."
+    ],
+    "answer": 1,
+    "explain": "After the verb, mai needs no: No bereno mai."
+   },
+   {
+    "prompt": "“We often eat out.”",
+    "options": [
+     "Sopem sovint fora.",
+     "Sopem de tant en tant fora.",
+     "Mai no sopem fora."
+    ],
+    "answer": 0,
+    "explain": "Sovint — often; de tant en tant — from time to time."
+   },
+   {
+    "prompt": "“Once a week I go to the swimming pool.”",
+    "options": [
+     "Una setmana vaig a la piscina.",
+     "Cada setmana vaig dos cops a la piscina.",
+     "Un cop per setmana vaig a la piscina."
+    ],
+    "answer": 2,
+    "explain": "Un cop per setmana = una vegada a la setmana."
+   },
+   {
+    "prompt": "“Sometimes I watch series.”",
+    "options": [
+     "Sempre miro sèries.",
+     "De vegades miro sèries.",
+     "Sovint no miro sèries."
+    ],
+    "answer": 1,
+    "explain": "De vegades (or a vegades) — sometimes."
+   },
+   {
+    "prompt": "“On Saturdays I go for a walk.”",
+    "options": [
+     "Als dissabtes passejo.",
+     "Dissabte passejo.",
+     "Els dissabtes passejo."
+    ],
+    "answer": 2,
+    "explain": "Els dissabtes (or el dissabte) — on Saturdays; als dissabtes is wrong: no a before days. Dissabte without the article — this coming Saturday."
+   }
+  ]
+ },
+ "anar": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "“I’m going to buy bread” (you’re just leaving the house).",
+    "options": [
+     "Vaig comprar pa.",
+     "Vaig a comprar pa.",
+     "Vinc a comprar pa."
+    ],
+    "answer": 1,
+    "explain": "Vaig a + infinitive — going somewhere to do something. Vaig comprar is the past."
+   },
+   {
+    "prompt": "“Yesterday I bought bread.”",
+    "options": [
+     "Ahir vaig comprar pa.",
+     "Ahir vaig a comprar pa.",
+     "Ahir compro pa."
+    ],
+    "answer": 0,
+    "explain": "Vaig + infinitive without a is the passat perifràstic, the past."
+   },
+   {
+    "prompt": "You’re called to dinner: «Vine a sopar!» You answer “I’m coming!”:",
+    "options": [
+     "Ja vinc!",
+     "Ja vaig!",
+     "Ja torno!"
+    ],
+    "answer": 1,
+    "explain": "You’re moving towards the other person — not to where you, the speaker, are now — so it’s anar. Ja vinc is heard colloquially, but Ja vaig is standard."
+   },
+   {
+    "prompt": "“We’re going to the cinema.”",
+    "options": [
+     "Anem a el cinema.",
+     "Anem en el cinema.",
+     "Anem al cinema."
+    ],
+    "answer": 2,
+    "explain": "a + el merge into al."
+   },
+   {
+    "prompt": "You step out for a minute and say “Back in a minute!”:",
+    "options": [
+     "Ara vinc!",
+     "Ara vaig!",
+     "Ara anem!"
+    ],
+    "answer": 0,
+    "explain": "Ara vinc! — “I’ll be right back (here)”."
+   }
+  ]
+ }
+}

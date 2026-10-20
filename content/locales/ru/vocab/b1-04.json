@@ -1,0 +1,179 @@
+{
+ "groups": {
+  "apats": "Приёмы пищи",
+  "dies": "Дни",
+  "horaris": "Время и часы работы",
+  "temps": "Погода",
+  "missatge": "Сообщение"
+ },
+ "words": {
+  "esmorzar-n": {
+   "tr": "завтрак",
+   "note": "и перекус в 10–11"
+  },
+  "dinar-n": {
+   "tr": "обед",
+   "note": "главная еда дня, 13:30–15"
+  },
+  "berenar-n": {
+   "tr": "полдник",
+   "note": "17–18"
+  },
+  "sopar-n": {
+   "tr": "ужин",
+   "note": "21–22"
+  },
+  "apat": {
+   "tr": "приём пищи, трапеза"
+  },
+  "esmorzar": {
+   "tr": "завтракать"
+  },
+  "dinar": {
+   "tr": "обедать",
+   "note": "не dinero: деньги — els diners"
+  },
+  "berenar": {
+   "tr": "полдничать, перекусывать днём"
+  },
+  "sopar": {
+   "tr": "ужинать",
+   "note": "суп — la sopa"
+  },
+  "migdiada": {
+   "tr": "послеобеденный сон",
+   "note": "fer la migdiada"
+  },
+  "avui": {
+   "tr": "сегодня"
+  },
+  "dema": {
+   "tr": "завтра",
+   "note": "demà passat — послезавтра"
+  },
+  "ahir": {
+   "tr": "вчера"
+  },
+  "entre-setmana": {
+   "tr": "по будням"
+  },
+  "aniversari": {
+   "tr": "день рождения; годовщина",
+   "note": "Per molts anys! — С днём рождения!"
+  },
+  "festiu": {
+   "tr": "праздничный день"
+  },
+  "vacances": {
+   "tr": "отпуск, каникулы",
+   "note": "только мн. число"
+  },
+  "rellotge": {
+   "tr": "часы"
+  },
+  "en-punt": {
+   "tr": "ровно (о времени)",
+   "note": "les deu en punt"
+  },
+  "cap-a": {
+   "tr": "около (о времени)",
+   "note": "cap a les vuit"
+  },
+  "faltar": {
+   "tr": "не хватать, оставаться",
+   "note": "falten cinc minuts per a les vuit"
+  },
+  "horari": {
+   "tr": "расписание, часы работы"
+  },
+  "obrir": {
+   "tr": "открывать(ся)",
+   "note": "obre"
+  },
+  "tancar": {
+   "tr": "закрывать(ся)",
+   "note": "tanca"
+  },
+  "obert": {
+   "tr": "открытый",
+   "note": "oberta"
+  },
+  "tancat": {
+   "tr": "закрытый",
+   "note": "tancada"
+  },
+  "comencar": {
+   "tr": "начинать(ся)"
+  },
+  "acabar": {
+   "tr": "заканчивать(ся)"
+  },
+  "temps": {
+   "tr": "погода; время",
+   "note": "Quin temps fa?"
+  },
+  "sol": {
+   "tr": "солнце",
+   "note": "fa sol"
+  },
+  "calor": {
+   "tr": "жара",
+   "note": "женского рода: fa molta calor"
+  },
+  "fred": {
+   "tr": "холод",
+   "note": "fa molt fred"
+  },
+  "fresca": {
+   "tr": "прохлада",
+   "note": "fa fresca"
+  },
+  "vent": {
+   "tr": "ветер",
+   "note": "fa vent"
+  },
+  "fa-bo": {
+   "tr": "хорошая погода"
+  },
+  "pluja": {
+   "tr": "дождь"
+  },
+  "ploure": {
+   "tr": "идти (о дожде)",
+   "note": "plou"
+  },
+  "neu": {
+   "tr": "снег"
+  },
+  "nevar": {
+   "tr": "идти (о снеге)",
+   "note": "neva"
+  },
+  "boira": {
+   "tr": "туман",
+   "note": "hi ha boira"
+  },
+  "nuvol": {
+   "tr": "облако",
+   "note": "està ennuvolat — облачно"
+  },
+  "xafogor": {
+   "tr": "духота"
+  },
+  "abracada": {
+   "tr": "объятие",
+   "note": "Una abraçada! — Обнимаю!"
+  },
+  "peto": {
+   "tr": "поцелуй",
+   "note": "Petons! — Целую!"
+  },
+  "fins-aviat": {
+   "tr": "до скорого"
+  },
+  "trobar-a-faltar": {
+   "tr": "скучать по",
+   "note": "et trobo a faltar"
+  }
+ }
+}

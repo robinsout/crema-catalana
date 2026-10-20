@@ -1,0 +1,334 @@
+{
+ "silvia": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "¿De qué trabaja Sílvia?",
+    "options": [
+     "metgessa",
+     "infermera",
+     "cuinera"
+    ],
+    "answer": 1,
+    "explain": "Soc infermera i treballo a l'Hospital del Mar."
+   },
+   {
+    "prompt": "¿Cuándo trabaja?",
+    "options": [
+     "al matí, de dilluns a divendres",
+     "a la nit, tres nits per setmana",
+     "a la tarda, els caps de setmana"
+    ],
+    "answer": 1,
+    "explain": "Faig el torn de nit… tres nits per setmana."
+   },
+   {
+    "prompt": "¿Qué hace en el trabajo?",
+    "options": [
+     "Cuida els malalts i prepara els medicaments.",
+     "Fa classes i parla amb els alumnes.",
+     "Prepara les amanides i renta els plats."
+    ],
+    "answer": 0
+   },
+   {
+    "prompt": "¿Qué día tiene libre Jordi?",
+    "options": [
+     "el diumenge",
+     "el dissabte",
+     "el dilluns"
+    ],
+    "answer": 2,
+    "explain": "Fa festa els dilluns — libra los lunes (no es que vaya de fiesta)."
+   },
+   {
+    "prompt": "¿Qué sabemos de Pau?",
+    "options": [
+     "Treballa de cambrer.",
+     "No té feina i busca feina de cambrer.",
+     "És cuiner com el seu germà."
+    ],
+    "answer": 1,
+    "explain": "Està a l'atur (en el paro, desempleado): busca feina de cambrer."
+   }
+  ]
+ },
+ "femeni": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">En Marc és infermer i la seva dona també és ___.</span>",
+    "answers": [
+     "infermera"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Pere és metge i la seva germana també és ___.</span>",
+    "answers": [
+     "metgessa"
+    ],
+    "hint": "no basta con -a"
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Joan és administratiu i la Laia també és ___.</span>",
+    "answers": [
+     "administrativa"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Pol és dependent i la Núria també és ___.</span>",
+    "answers": [
+     "dependenta"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Jordi és lampista i la seva filla també és ___.</span>",
+    "answers": [
+     "lampista"
+    ],
+    "hint": "una sola forma"
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Biel és mecànic i la Mar també és ___.</span>",
+    "answers": [
+     "mecànica"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Xavier és estudiant i la Neus també és ___.</span>",
+    "answers": [
+     "estudiant"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Jaume és mestre i la seva dona també és ___.</span>",
+    "answers": [
+     "mestra"
+    ]
+   }
+  ]
+ },
+ "qui": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Talla i renta els cabells.</span>",
+    "options": [
+     "el perruquer",
+     "el fuster",
+     "el cuiner"
+    ],
+    "answer": 0,
+    "explain": "rentar es «lavar»."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Arregla cotxes en un taller.</span>",
+    "options": [
+     "el paleta",
+     "el mecànic",
+     "el dependent"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "<span lang=\"ca\">Fa mobles de fusta.</span>",
+    "options": [
+     "el lampista",
+     "el pintor",
+     "el fuster"
+    ],
+    "answer": 2,
+    "explain": "la fusta es la madera; de ahí fuster, el carpintero."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Arregla les aixetes i les canonades.</span>",
+    "options": [
+     "el lampista",
+     "el metge",
+     "el cambrer"
+    ],
+    "answer": 0,
+    "explain": "El lampista es el plomero, el fontanero: las aixetes son los grifos (las llaves, las canillas) y les canonades, las cañerías."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Fa classes als nens en una escola.</span>",
+    "options": [
+     "la professora d'universitat",
+     "la mestra",
+     "la metgessa"
+    ],
+    "answer": 1,
+    "explain": "A los niños en la escuela les enseña el mestre o la mestra."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Neteja cases i oficines.</span>",
+    "options": [
+     "la mestressa de casa",
+     "la dona de fer feines",
+     "la dependenta"
+    ],
+    "answer": 1,
+    "explain": "La mestressa de casa es el ama de casa: limpia su propia casa, no las de otros."
+   }
+  ]
+ },
+ "on": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Treballo ___ Sabadell.</span>",
+    "answers": [
+     "a"
+    ],
+    "hint": "una ciudad: no en"
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Mar treballa ___ farmàcia de la plaça.</span>",
+    "answers": [
+     "a la"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Pau treballa ___ un bar del port.</span>",
+    "answers": [
+     "en",
+     "a"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Treballo ___ taller de cotxes del meu oncle.</span>",
+    "answers": [
+     "al"
+    ],
+    "hint": "a + el"
+   },
+   {
+    "prompt": "<span lang=\"ca\">La meva germana treballa ___ l'hospital.</span>",
+    "answers": [
+     "a"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Treballen ___ una fàbrica de Terrassa.</span>",
+    "answers": [
+     "en",
+     "a"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Avui treballo ___ casa.</span>",
+    "answers": [
+     "a"
+    ]
+   }
+  ]
+ },
+ "faig": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "(netejar) <span lang=\"ca\">Jo ___ oficines.</span>",
+    "answers": [
+     "netejo"
+    ]
+   },
+   {
+    "prompt": "(fer) <span lang=\"ca\">Jo ___ classes de matemàtiques.</span>",
+    "answers": [
+     "faig"
+    ]
+   },
+   {
+    "prompt": "(vendre) <span lang=\"ca\">Jo ___ roba en una botiga.</span>",
+    "answers": [
+     "venc"
+    ],
+    "hint": "irregular: no es vendo"
+   },
+   {
+    "prompt": "(servir) <span lang=\"ca\">Jo ___ cafès al bar.</span>",
+    "answers": [
+     "serveixo"
+    ],
+    "hint": "-eix-"
+   },
+   {
+    "prompt": "(portar) <span lang=\"ca\">Jo ___ els plats a les taules.</span>",
+    "answers": [
+     "porto"
+    ]
+   },
+   {
+    "prompt": "(pelar) <span lang=\"ca\">Jo ___ patates a la cuina.</span>",
+    "answers": [
+     "pelo"
+    ]
+   },
+   {
+    "prompt": "(conduir) <span lang=\"ca\">Jo ___ un taxi.</span>",
+    "answers": [
+     "condueixo"
+    ]
+   },
+   {
+    "prompt": "(atendre) <span lang=\"ca\">Jo ___ el telèfon.</span>",
+    "answers": [
+     "atenc"
+    ],
+    "hint": "como venc"
+   }
+  ]
+ },
+ "expressions": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">De què ___? — Treballo de cuinera.</span>",
+    "answers": [
+     "treballes"
+    ],
+    "hint": "de tú"
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Marc treballa ___ cambrer.</span>",
+    "answers": [
+     "de",
+     "com a"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">No tinc feina: estic ___ l'atur.</span>",
+    "answers": [
+     "a"
+    ],
+    "hint": "no en"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Busco feina ___ administrativa.</span>",
+    "answers": [
+     "de"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Treballo de dimarts a diumenge i faig ___ els dilluns.</span>",
+    "answers": [
+     "festa"
+    ],
+    "hint": "el día libre"
+   },
+   {
+    "prompt": "<span lang=\"ca\">La meva àvia no treballa: està ___.</span>",
+    "answers": [
+     "jubilada"
+    ],
+    "hint": "como en castellano"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc ___ i estudio a la universitat.</span>",
+    "answers": [
+     "estudiant"
+    ]
+   }
+  ]
+ }
+}

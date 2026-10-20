@@ -1,0 +1,261 @@
+{
+ "missatge": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "Where is Irene now?",
+    "options": [
+     "a Menorca",
+     "a Cadaqués",
+     "a Barcelona"
+    ],
+    "answer": 1,
+    "explain": "Soc a Cadaqués de vacances."
+   },
+   {
+    "prompt": "Who is she on holiday with?",
+    "options": [
+     "amb la seva germana",
+     "amb el seu germà",
+     "amb la seva mare"
+    ],
+    "answer": 0,
+    "explain": "…amb la meva germana."
+   },
+   {
+    "prompt": "What is the weather like at night?",
+    "options": [
+     "Fa molta calor.",
+     "Plou.",
+     "Fa fresca."
+    ],
+    "answer": 2,
+    "explain": "…però a la nit fa fresca."
+   },
+   {
+    "prompt": "What time do they have lunch?",
+    "options": [
+     "a les dues",
+     "a les tres",
+     "a les deu"
+    ],
+    "answer": 1,
+    "explain": "Dinem a les tres. Ten is dinner time: ningú sopa abans de les deu — nobody has dinner before ten."
+   },
+   {
+    "prompt": "What will there be in the square tomorrow?",
+    "options": [
+     "mercat",
+     "un concert",
+     "classe de català"
+    ],
+    "answer": 0,
+    "explain": "Demà és dissabte i hi ha mercat a la plaça."
+   }
+  ]
+ },
+ "rellotge": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "8:15 — <span lang=\"ca\">És ___.</span>",
+    "answers": [
+     "un quart de nou"
+    ],
+    "hint": "quarter past eight"
+   },
+   {
+    "prompt": "10:30 — <span lang=\"ca\">Són ___.</span>",
+    "answers": [
+     "dos quarts d'onze",
+     "les deu i mitja"
+    ],
+    "hint": "before onze: d’"
+   },
+   {
+    "prompt": "13:45 — <span lang=\"ca\">Són ___.</span>",
+    "answers": [
+     "tres quarts de dues",
+     "les dues menys quart"
+    ]
+   },
+   {
+    "prompt": "12:30 — <span lang=\"ca\">Són ___.</span>",
+    "answers": [
+     "dos quarts d'una",
+     "les dotze i mitja"
+    ],
+    "hint": "count towards one o’clock"
+   },
+   {
+    "prompt": "9:20 — <span lang=\"ca\">És ___.</span>",
+    "answers": [
+     "un quart i cinc de deu"
+    ],
+    "hint": "a quarter + five minutes"
+   },
+   {
+    "prompt": "18:50 — <span lang=\"ca\">Són ___.</span>",
+    "answers": [
+     "tres quarts i cinc de set",
+     "les set menys deu"
+    ]
+   },
+   {
+    "prompt": "7:55 — <span lang=\"ca\">Falten ___ per a les vuit.</span>",
+    "answers": [
+     "cinc minuts",
+     "cinc"
+    ]
+   },
+   {
+    "prompt": "3:00 a.m. — <span lang=\"ca\">Són les tres de la ___.</span>",
+    "answers": [
+     "matinada"
+    ],
+    "hint": "after midnight"
+   }
+  ]
+ },
+ "apats": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Jo ___ a les vuit del matí. (esmorzar)</span>",
+    "answers": [
+     "esmorzo"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">A quina hora ___ tu? (dinar)</span>",
+    "answers": [
+     "dines"
+    ],
+    "hint": "tu: -es"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Els nens ___ a les cinc de la tarda. (berenar)</span>",
+    "answers": [
+     "berenen"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Nosaltres ___ a les nou del vespre. (sopar)</span>",
+    "answers": [
+     "sopem"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Vosaltres ___ a casa o a la feina? (dinar)</span>",
+    "answers": [
+     "dineu"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Marta no ___ mai. (berenar)</span>",
+    "answers": [
+     "berena"
+    ]
+   }
+  ]
+ },
+ "horari": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "Can you go to the library on an ordinary Monday morning (not in summer)?",
+    "options": [
+     "Sí, obre a les deu.",
+     "No, el dilluns està tancada.",
+     "Només a la tarda."
+    ],
+    "answer": 1,
+    "explain": "Dilluns: tancat."
+   },
+   {
+    "prompt": "What time does the library close on Thursday evening?",
+    "options": [
+     "a les vuit",
+     "a tres quarts de nou",
+     "a dos quarts de nou"
+    ],
+    "answer": 2,
+    "explain": "20.30 h — dos quarts de nou del vespre."
+   },
+   {
+    "prompt": "Is it open on Wednesday at 3 p.m.?",
+    "options": [
+     "Sí, està oberta.",
+     "No, està tancada: al migdia tanca de dues a quatre."
+    ],
+    "answer": 1,
+    "explain": "De 10 a 14 h i de 16 a 20.30 h: at three it’s the lunch break."
+   },
+   {
+    "prompt": "Can you go on a Tuesday in August at noon?",
+    "options": [
+     "Sí: a l'estiu obre de nou a dues.",
+     "No: a l'agost està tancada.",
+     "Només el dissabte."
+    ],
+    "answer": 0,
+    "explain": "Horari d'estiu: de dilluns a divendres, de 9 a 14 h."
+   }
+  ]
+ },
+ "temps": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "It’s very hot.",
+    "options": [
+     "Fa molt calor.",
+     "Fa molta calor.",
+     "Hi ha molta calor."
+    ],
+    "answer": 1,
+    "explain": "La calor is feminine, so molta."
+   },
+   {
+    "prompt": "It’s raining.",
+    "options": [
+     "Plou.",
+     "Fa pluja.",
+     "Està pluja."
+    ],
+    "answer": 0,
+    "explain": "The verb ploure: plou; right now — està plovent."
+   },
+   {
+    "prompt": "It’s foggy.",
+    "options": [
+     "És boira.",
+     "Està boira.",
+     "Hi ha boira."
+    ],
+    "answer": 2,
+    "explain": "“There is fog”: hi ha boira."
+   },
+   {
+    "prompt": "The weather’s nice.",
+    "options": [
+     "Fa bé.",
+     "Fa bo.",
+     "Està bo."
+    ],
+    "answer": 1,
+    "explain": "Fa bo for the weather; bé is “well”, for how you feel: estic bé."
+   },
+   {
+    "prompt": "It’s very cold.",
+    "options": [
+     "Fa molt fred.",
+     "Fa molta fred.",
+     "Està molt fred."
+    ],
+    "answer": 0,
+    "explain": "El fred is masculine."
+   }
+  ]
+ }
+}

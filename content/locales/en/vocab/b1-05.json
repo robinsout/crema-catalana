@@ -1,0 +1,131 @@
+{
+ "groups": {
+  "rutina": "Daily routine",
+  "lleure": "Free time",
+  "frequencia": "How often",
+  "amb": "Who with"
+ },
+ "words": {
+  "despertar-se": {
+   "tr": "to wake up"
+  },
+  "llevar-se": {
+   "tr": "to get up",
+   "note": "out of bed"
+  },
+  "dutxar-se": {
+   "tr": "to have a shower"
+  },
+  "rentar-se": {
+   "tr": "to brush your teeth",
+   "note": "rentar — to wash"
+  },
+  "vestir-se": {
+   "tr": "to get dressed",
+   "note": "em vesteixo"
+  },
+  "esmorzar": {
+   "tr": "to have breakfast; breakfast"
+  },
+  "dinar": {
+   "tr": "to have lunch; lunch",
+   "note": "not dinner!"
+  },
+  "berenar": {
+   "tr": "to have an afternoon snack; snack"
+  },
+  "sopar": {
+   "tr": "to have dinner; dinner"
+  },
+  "feina": {
+   "tr": "work, job"
+  },
+  "plegar": {
+   "tr": "to finish work",
+   "note": "also “to fold”"
+  },
+  "tornar": {
+   "tr": "to go back home"
+  },
+  "descansar": {
+   "tr": "to rest"
+  },
+  "anar-a-dormir": {
+   "tr": "to go to bed"
+  },
+  "passejar": {
+   "tr": "to go for a walk"
+  },
+  "fer-esport": {
+   "tr": "to do sport"
+  },
+  "jugar": {
+   "tr": "to play cards",
+   "note": "jugar a + game"
+  },
+  "mirar-la-tele": {
+   "tr": "to watch TV"
+  },
+  "deures": {
+   "tr": "homework",
+   "note": "fer els deures"
+  },
+  "quedar": {
+   "tr": "to meet up with friends"
+  },
+  "sopar-fora": {
+   "tr": "to eat out"
+  },
+  "videotrucada": {
+   "tr": "video call"
+  },
+  "sempre": {
+   "tr": "always"
+  },
+  "cada-dia": {
+   "tr": "every day"
+  },
+  "sovint": {
+   "tr": "often"
+  },
+  "de-vegades": {
+   "tr": "sometimes",
+   "note": "also a vegades"
+  },
+  "de-tant-en-tant": {
+   "tr": "from time to time"
+  },
+  "gairebe": {
+   "tr": "almost",
+   "note": "gairebé mai — hardly ever"
+  },
+  "mai": {
+   "tr": "never",
+   "note": "No … mai"
+  },
+  "cop": {
+   "tr": "time (once, twice)",
+   "note": "un cop per setmana — once a week"
+  },
+  "vegada": {
+   "tr": "time (once, twice)",
+   "note": "una vegada a la setmana"
+  },
+  "amb": {
+   "tr": "with",
+   "note": "amb mi, amb tu"
+  },
+  "sol": {
+   "tr": "alone (m.)"
+  },
+  "sola": {
+   "tr": "alone (f.)"
+  },
+  "junts": {
+   "tr": "together (m.)"
+  },
+  "juntes": {
+   "tr": "together (f.)"
+  }
+ }
+}

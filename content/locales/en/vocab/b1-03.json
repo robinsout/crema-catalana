@@ -1,0 +1,135 @@
+{
+ "groups": {
+  "carrers": "Streets and addresses",
+  "botigues": "Shops and services",
+  "lloc": "Where things are"
+ },
+ "words": {
+  "carrer": {
+   "tr": "street"
+  },
+  "placa": {
+   "tr": "square"
+  },
+  "avinguda": {
+   "tr": "avenue"
+  },
+  "passeig": {
+   "tr": "boulevard, promenade"
+  },
+  "rambla": {
+   "tr": "rambla",
+   "note": "a street with a pedestrian walkway down the middle"
+  },
+  "barri": {
+   "tr": "neighbourhood"
+  },
+  "adreca": {
+   "tr": "address"
+  },
+  "numero": {
+   "tr": "number"
+  },
+  "pis": {
+   "tr": "floor; flat"
+  },
+  "porta": {
+   "tr": "door"
+  },
+  "codi-postal": {
+   "tr": "postcode"
+  },
+  "poblacio": {
+   "tr": "town, city",
+   "note": "on forms"
+  },
+  "botiga": {
+   "tr": "shop"
+  },
+  "fleca": {
+   "tr": "bakery",
+   "note": "also el forn de pa"
+  },
+  "mercat": {
+   "tr": "market"
+  },
+  "supermercat": {
+   "tr": "supermarket"
+  },
+  "farmacia": {
+   "tr": "chemist’s, pharmacy"
+  },
+  "perruqueria": {
+   "tr": "hairdresser’s"
+  },
+  "sabateria": {
+   "tr": "shoe shop"
+  },
+  "llibreria": {
+   "tr": "bookshop",
+   "note": "not a library"
+  },
+  "biblioteca": {
+   "tr": "library"
+  },
+  "papereria": {
+   "tr": "stationer’s"
+  },
+  "banc": {
+   "tr": "bank; bench"
+  },
+  "caixer": {
+   "tr": "cash machine; cashier"
+  },
+  "quiosc": {
+   "tr": "newsstand"
+  },
+  "ajuntament": {
+   "tr": "town hall"
+  },
+  "esglesia": {
+   "tr": "church"
+  },
+  "parc-infantil": {
+   "tr": "playground"
+  },
+  "parquing": {
+   "tr": "car park"
+  },
+  "parada": {
+   "tr": "stop; market stall",
+   "note": "la parada d'autobús, de taxis"
+  },
+  "estacio": {
+   "tr": "station",
+   "note": "l'estació de metro"
+  },
+  "al-costat": {
+   "tr": "next to"
+  },
+  "davant": {
+   "tr": "in front of, opposite"
+  },
+  "darrere": {
+   "tr": "behind"
+  },
+  "a-sobre": {
+   "tr": "above, on top of"
+  },
+  "a-sota": {
+   "tr": "under, below"
+  },
+  "a-prop": {
+   "tr": "near, close to"
+  },
+  "lluny": {
+   "tr": "far from"
+  },
+  "entre": {
+   "tr": "between"
+  },
+  "cantonada": {
+   "tr": "(street) corner"
+  }
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "groups": {
+  "carrers": "La calle y la dirección",
+  "botigues": "Tiendas y servicios",
+  "lloc": "Dónde está"
+ },
+ "words": {
+  "carrer": {
+   "tr": "la calle",
+   "note": "masculino en catalán"
+  },
+  "placa": {
+   "tr": "la plaza"
+  },
+  "avinguda": {
+   "tr": "la avenida"
+  },
+  "passeig": {
+   "tr": "el paseo"
+  },
+  "rambla": {
+   "tr": "la rambla",
+   "note": "calle con paseo peatonal en el centro"
+  },
+  "barri": {
+   "tr": "el barrio"
+  },
+  "adreca": {
+   "tr": "la dirección (de casa)",
+   "note": "no direcció"
+  },
+  "numero": {
+   "tr": "el número"
+  },
+  "pis": {
+   "tr": "el piso; el departamento, el apartamento"
+  },
+  "porta": {
+   "tr": "la puerta"
+  },
+  "codi-postal": {
+   "tr": "el código postal"
+  },
+  "poblacio": {
+   "tr": "la localidad, la ciudad"
+  },
+  "botiga": {
+   "tr": "la tienda",
+   "note": "no bodega"
+  },
+  "fleca": {
+   "tr": "la panadería",
+   "note": "también el forn de pa"
+  },
+  "mercat": {
+   "tr": "el mercado"
+  },
+  "supermercat": {
+   "tr": "el supermercado"
+  },
+  "farmacia": {
+   "tr": "la farmacia"
+  },
+  "perruqueria": {
+   "tr": "la peluquería"
+  },
+  "sabateria": {
+   "tr": "la zapatería"
+  },
+  "llibreria": {
+   "tr": "la librería"
+  },
+  "biblioteca": {
+   "tr": "la biblioteca"
+  },
+  "papereria": {
+   "tr": "la papelería"
+  },
+  "banc": {
+   "tr": "el banco"
+  },
+  "caixer": {
+   "tr": "el cajero (automático)"
+  },
+  "quiosc": {
+   "tr": "el quiosco de diarios"
+  },
+  "ajuntament": {
+   "tr": "el ayuntamiento, la municipalidad"
+  },
+  "esglesia": {
+   "tr": "la iglesia"
+  },
+  "parc-infantil": {
+   "tr": "el parque infantil, los juegos infantiles"
+  },
+  "parquing": {
+   "tr": "el estacionamiento, el aparcamiento"
+  },
+  "parada": {
+   "tr": "la parada; el puesto del mercado",
+   "note": "la parada d'autobús, de taxis"
+  },
+  "estacio": {
+   "tr": "la estación",
+   "note": "l'estació de metro"
+  },
+  "al-costat": {
+   "tr": "al lado de"
+  },
+  "davant": {
+   "tr": "delante de, enfrente de",
+   "note": "no «debajo»"
+  },
+  "darrere": {
+   "tr": "detrás de"
+  },
+  "a-sobre": {
+   "tr": "encima de"
+  },
+  "a-sota": {
+   "tr": "debajo de"
+  },
+  "a-prop": {
+   "tr": "cerca de"
+  },
+  "lluny": {
+   "tr": "lejos de"
+  },
+  "entre": {
+   "tr": "entre"
+  },
+  "cantonada": {
+   "tr": "la esquina"
+  }
+ }
+}

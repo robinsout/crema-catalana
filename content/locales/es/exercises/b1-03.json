@@ -1,0 +1,383 @@
+{
+ "rui": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "¿Cuál es la dirección de Rui?",
+    "options": [
+     "carrer de Galileu, 213, 4t 2a",
+     "carrer de Galileu, 213, 2n 4a",
+     "carrer de Galileu, 230, 4t 2a"
+    ],
+    "answer": 0,
+    "explain": "número 213, quart segona: cuarto piso, segunda puerta."
+   },
+   {
+    "prompt": "¿Dónde está la panadería?",
+    "options": [
+     "al final del carrer",
+     "davant de casa seva",
+     "al costat del banc"
+    ],
+    "answer": 1,
+    "explain": "La fleca és just davant de casa meva."
+   },
+   {
+    "prompt": "¿Dónde está el supermercado?",
+    "options": [
+     "entre un banc i una perruqueria",
+     "darrere de la farmàcia",
+     "a sota de casa seva"
+    ],
+    "answer": 0,
+    "explain": "El supermercat és al final del carrer, entre un banc i una perruqueria."
+   },
+   {
+    "prompt": "¿Qué hay en la calle de Rui y qué no hay?",
+    "options": [
+     "Hi ha una llibreria, però no hi ha cap farmàcia.",
+     "Hi ha una farmàcia, però no hi ha cap llibreria.",
+     "No hi ha cap bar."
+    ],
+    "answer": 1,
+    "explain": "Hi ha una fleca, una farmàcia i dos bars. No hi ha cap llibreria."
+   },
+   {
+    "prompt": "El trabajo de Rui…",
+    "options": [
+     "és a prop de casa",
+     "és al barri de Sants",
+     "és lluny de casa"
+    ],
+    "answer": 2,
+    "explain": "La meva feina és lluny de casa: treballo a Sant Cugat."
+   }
+  ]
+ },
+ "preposicio": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Visc ___ carrer de Pujades.</span>",
+    "answers": [
+     "al"
+    ],
+    "hint": "el carrer"
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Marta viu ___ plaça del Sol.</span>",
+    "answers": [
+     "a la"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Vivim ___ avinguda Meridiana.</span>",
+    "answers": [
+     "a l'"
+    ],
+    "hint": "ante vocal"
+   },
+   {
+    "prompt": "<span lang=\"ca\">El meu germà viu ___ un carrer molt petit.</span>",
+    "answers": [
+     "en",
+     "a"
+    ],
+    "hint": "ante un, una — normalmente en"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Els meus pares viuen ___ Badalona.</span>",
+    "answers": [
+     "a"
+    ],
+    "hint": "ciudad sin artículo"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Viuen ___ passeig de Sant Joan.</span>",
+    "answers": [
+     "al"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ aquesta plaça hi ha tres bars.</span>",
+    "answers": [
+     "En",
+     "A"
+    ],
+    "hint": "ante aquest, aquesta — normalmente en"
+   }
+  ]
+ },
+ "pis": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">3r 2a</span>",
+    "answers": [
+     "tercer segona"
+    ],
+    "hint": "el piso es masculino, la puerta femenino"
+   },
+   {
+    "prompt": "<span lang=\"ca\">1r 1a</span>",
+    "answers": [
+     "primer primera"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">4t 3a</span>",
+    "answers": [
+     "quart tercera"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">2n 1a</span>",
+    "answers": [
+     "segon primera"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">5è 2a</span>",
+    "answers": [
+     "cinquè segona"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">6è 4a</span>",
+    "answers": [
+     "sisè quarta"
+    ]
+   }
+  ]
+ },
+ "numero": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Visc al número 172.</span>",
+    "answers": [
+     "cent setanta-dos"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Viu al carrer d'Aragó, 263.</span>",
+    "answers": [
+     "dos-cents seixanta-tres"
+    ],
+    "hint": "el número es masculino"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Treballa al passeig de Gràcia, 348.</span>",
+    "answers": [
+     "tres-cents quaranta-vuit"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La biblioteca és al número 591.</span>",
+    "answers": [
+     "cinc-cents noranta-u",
+     "cinc-cents noranta-un"
+    ],
+    "hint": "no quinientos: todas las centenas siguen el mismo esquema"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Vivim a l'avinguda Diagonal, 707.</span>",
+    "answers": [
+     "set-cents set"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">El CAP és al número 999.</span>",
+    "answers": [
+     "nou-cents noranta-nou"
+    ]
+   }
+  ]
+ },
+ "botigues": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "Quieres comprar pan. ¿Adónde vas?",
+    "options": [
+     "a la fleca",
+     "a la llibreria",
+     "a la sabateria"
+    ],
+    "answer": 0,
+    "explain": "La fleca o el forn (de pa) — la panadería."
+   },
+   {
+    "prompt": "Necesitas una novela para esta noche y quieres comprarla.",
+    "options": [
+     "a la biblioteca",
+     "a la llibreria",
+     "a la papereria"
+    ],
+    "answer": 1,
+    "explain": "La llibreria — la librería; en la biblioteca los libros se piden prestados, y en la papereria se venden cuadernos y bolígrafos."
+   },
+   {
+    "prompt": "Necesitas efectivo.",
+    "options": [
+     "al quiosc",
+     "al caixer",
+     "a la parada"
+    ],
+    "answer": 1,
+    "explain": "El caixer — el cajero automático."
+   },
+   {
+    "prompt": "Te toca cortarte el pelo.",
+    "options": [
+     "a la perruqueria",
+     "a la peixateria",
+     "a la pastisseria"
+    ],
+    "answer": 0,
+    "explain": "La perruqueria; la peixateria es pescado, la pastisseria, pasteles."
+   },
+   {
+    "prompt": "Tienes que empadronarte (el padró).",
+    "options": [
+     "al CAP",
+     "a l'Ajuntament",
+     "al mercat"
+    ],
+    "answer": 1,
+    "explain": "L'Ajuntament — el ayuntamiento. El CAP es el centro de salud."
+   },
+   {
+    "prompt": "Tu hijo quiere ir a los columpios.",
+    "options": [
+     "al parc infantil",
+     "al pàrquing",
+     "a la botiga"
+    ],
+    "answer": 0,
+    "explain": "El parc infantil — los juegos infantiles."
+   }
+  ]
+ },
+ "hiha": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">___ una farmàcia a prop d'aquí?</span>",
+    "options": [
+     "Hi ha",
+     "És",
+     "Està"
+    ],
+    "answer": 0,
+    "explain": "Preguntamos si existe alguna farmacia cerca: hi ha, como «hay»."
+   },
+   {
+    "prompt": "<span lang=\"ca\">On ___ la farmàcia Rosés?</span>",
+    "options": [
+     "hi ha",
+     "és",
+     "està"
+    ],
+    "answer": 1,
+    "explain": "Una farmacia conocida (con artículo y nombre): preguntamos dónde está, y eso es és."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Al meu carrer ___ dues fleques.</span>",
+    "options": [
+     "hi ha",
+     "hi han",
+     "són"
+    ],
+    "answer": 0,
+    "explain": "Hi ha no cambia en plural; hi han se oye mucho, pero en la lengua formal (y en clase) es hi ha."
+   },
+   {
+    "prompt": "<span lang=\"ca\">On ___ el mercat?</span>",
+    "options": [
+     "està",
+     "és",
+     "hi ha"
+    ],
+    "answer": 1,
+    "explain": "Los edificios no se mueven: on és, no el castellano ¿dónde está?"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Al meu barri no hi ha ___ biblioteca.</span>",
+    "options": [
+     "ninguna",
+     "ningú",
+     "cap"
+    ],
+    "answer": 2,
+    "explain": "No hi ha cap… — «no hay ningún…». En el habla se dice cap; ningun / ninguna existe, pero suena libresco. Ningú es «nadie»."
+   },
+   {
+    "prompt": "<span lang=\"ca\">L'Ajuntament ___ a la plaça Major.</span>",
+    "options": [
+     "és",
+     "hi ha",
+     "està"
+    ],
+    "answer": 0,
+    "explain": "Algo conocido + lugar: és, donde el castellano dice «está»."
+   }
+  ]
+ },
+ "lloc": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">La fleca és ___ mercat.</span> (enfrente de)",
+    "answers": [
+     "davant del"
+    ],
+    "hint": "de + el = del"
+   },
+   {
+    "prompt": "<span lang=\"ca\">El caixer és ___ banc.</span> (al lado de)",
+    "answers": [
+     "al costat del"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">El bar és ___ la farmàcia i la llibreria.</span> (entre)",
+    "answers": [
+     "entre"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">El pàrquing és ___ supermercat.</span> (debajo de)",
+    "answers": [
+     "a sota del"
+    ],
+    "hint": "no davant: eso es «delante»"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Visc ___ l'estació.</span> (cerca de)",
+    "answers": [
+     "a prop de"
+    ],
+    "hint": "de l' no se contrae"
+   },
+   {
+    "prompt": "<span lang=\"ca\">La parada d'autobús és ___ l'escola.</span> (detrás de)",
+    "answers": [
+     "darrere de"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La platja és ___ casa meva.</span> (lejos de)",
+    "answers": [
+     "lluny de"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">L'escola és ___ carrer.</span> (al final de)",
+    "answers": [
+     "al final del"
+    ]
+   }
+  ]
+ }
+}

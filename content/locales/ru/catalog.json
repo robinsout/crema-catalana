@@ -55,51 +55,60 @@
       "date": "2026-10-07"
     },
     "b1-03": {
-      "topic": "Где я живу: адрес (город, улица, номер, этаж), что рядом с домом, учреждения в городе",
+      "topic": "Где я живу: улица, номер, этаж и квартира, что рядом с домом и как объяснить, где он, по ориентирам",
       "grammar": [
-        "настоящее время правильных глаголов",
-        "hi ha / és / està: Hi ha una farmàcia. On és el mercat?",
-        "предлоги места: a prop de, davant de, al costat de",
-        "порядковые для этажа и квартиры: tercer segona"
+        "viure и адрес: Visc al carrer de la Indústria, 49. A quin carrer vius? Quina és la teva adreça?",
+        "a / en: Visc a Viladepau, al carrer Nou, a la plaça Gran — но en una plaça",
+        "порядковые для этажа и квартиры: primer primera, segon segona — 3r 1a (tercer primera)",
+        "предлоги места: al costat de, davant de / darrere de, a sobre de / a sota de, a prop de / lluny de, entre … i …",
+        "hi ha и és: Al carrer Nou hi ha una fleca. On és el banc? — És davant de l'Ajuntament"
       ],
-      "vocab": "Город, улица, магазины и учреждения",
-      "extra": "Как читать барселонские адреса: c/, pl., 3r 2a",
-      "mission": "Продиктуйте по-каталански свой адрес и опишите в пяти фразах, что есть рядом с домом"
+      "vocab": "Улицы (carrer, plaça, avinguda, rambla, passeig), магазины и службы (fleca, farmàcia, perruqueria, sabateria, llibreria, caixer, parada d'autobús, estació de metro, Ajuntament)",
+      "extra": "Числа от 100 до 999 (cent, dos-cents, tres-cents vint-i-nou) и как читать адреса: C. de Còrsega, 377, 3r 2a, 08037 Barcelona; анкета: nom, cognoms, adreça, població",
+      "mission": "Расскажите одногруппнику по-каталански свой адрес (улица, номер, этаж) и где ваш дом по ориентирам: Casa meva és davant de…, al costat de…",
+      "date": "2026-10-20"
     },
     "b1-04": {
-      "topic": "Дни и часы: что в какой день делаем, когда едим, который час, часы работы, месяцы, времена года и погода",
+      "topic": "Дни и часы: в какой день что бывает, когда едим, который час, часы работы, дни рождения, времена года и погода",
       "grammar": [
-        "время: quarts — un quart de deu; A quina hora…?",
-        "дни недели с артиклем: el dilluns / els dilluns",
-        "возвратные глаголы: llevar-se, dutxar-se",
-        "предлоги времени: a l'hivern, al matí, a la nit"
+        "дни недели: Quin dia és avui? El dilluns hi ha mercat / els dilluns (по понедельникам); dilluns без артикля — в ближайший понедельник",
+        "глаголы на -ar в 1-м лице: esmorzo, dino, berenem, sopo — A quina hora sopes?",
+        "время: Són les tres i cinc, És un quart de quatre, Falten cinc minuts per a les quatre; del matí, de la tarda, del vespre, de la nit",
+        "часы работы: de 9 a 1, de dilluns a divendres; Comença a… i acaba a…; tancat",
+        "погода с fer: Quin temps fa? Fa calor, fa fred, fa vent, plou, neva, hi ha boira"
       ],
-      "vocab": "Àpats: esmorzar, dinar, berenar, sopar; дни недели, месяцы, времена года, погода: fa fred, fa sol, plou",
-      "extra": "Каталанская система «quarts», которой нет в испанском",
-      "mission": "Узнайте по-каталански часы работы музея или библиотеки и договоритесь о встрече, назвав время через quarts"
+      "vocab": "Àpats (esmorzar, dinar, berenar, sopar), части дня (matí, migdia, tarda, vespre, nit, matinada), дни недели, месяцы, времена года, погода",
+      "extra": "Каталанская система quarts (dos quarts de nou = 8:30), которой нет в испанском; даты: El meu aniversari és el 23 de gener",
+      "mission": "Напишите одногруппнику короткое сообщение «из отпуска» по-каталански: где вы, какая погода, во сколько едите и что делаете; назовите время через quarts",
+      "date": "2026-10-20"
     },
     "b1-05": {
-      "topic": "Повседневные дела и досуг: что, с кем, в какие дни и в какое время, как часто",
+      "topic": "Повседневные дела: что делаем в течение дня, в какое время, с кем и как часто",
       "grammar": [
-        "настоящее время: -ar, -er/-re, -ir и -ir с -eix-",
-        "наречия частоты: sempre, sovint, de vegades, mai",
-        "amb qui?: amb el meu germà, sol / sola",
-        "anar / venir"
+        "возвратные глаголы: em llevo, et dutxes, es desperta, ens rentem les dents",
+        "настоящее время в 1-м и 3-м лице: treballo / treballa, plego / plega, llegeixo / llegeix",
+        "amb qui?: amb el meu germà, amb la seva dona, sol / sola",
+        "частота: sempre, sovint, de vegades, de tant en tant, un cop per setmana, una vegada al mes, mai",
+        "anar a + место или инфинитив: Vaig a la piscina. Va a comprar amb la seva dona"
       ],
-      "vocab": "Досуг, учёба, домашние занятия, выражения частоты",
-      "extra": "anar и venir распределены не как ir и venir в испанском",
-      "mission": "Расскажите по-каталански своё расписание на неделю"
+      "vocab": "Распорядок дня (llevar-se, dutxar-se, esmorzar, plegar, descansar, fer els deures, mirar la tele, anar a dormir), досуг (passejar, fer esport, jugar a cartes, quedar amb els amics)",
+      "extra": "plegar — «закончить работу» (по-испански salir del trabajo); vaig a comprar (иду за покупками) — не путать с прошедшим vaig comprar (купил)",
+      "mission": "Расскажите одногруппнику по-каталански свой обычный день и неделю: во сколько встаёте, с кем обедаете, что делаете раз в неделю и чего не делаете никогда",
+      "date": "2026-10-20"
     },
     "b1-06": {
-      "topic": "Работа: профессии, где и кем работаю, что делаю на работе, сфера и тип работы",
+      "topic": "Работа: кем и где работаю, что делаю на работе, график; если работы нет — какую ищу",
       "grammar": [
-        "treballar de, fer de",
-        "женский род профессий: metge / metgessa",
-        "fer: faig, fas, fa"
+        "treballar de, fer de, ser: Treballa de cambrer. Fa de dependenta. Soc professora",
+        "женский род профессий: cambrer / cambrera, metge / metgessa, administratiu / administrativa; lampista, paleta — одна форма",
+        "где работаю: Treballo a Sabadell, a la papereria Mots, en un bar, en una fàbrica",
+        "что делаю: despatxo, preparo, netejo, tallo; fer: faig classes, fas, fa",
+        "estar a l'atur, buscar feina de…: Busco feina de pintor"
       ],
-      "vocab": "Профессии, рабочие места, обязанности",
-      "extra": "Суффиксы -essa, -ina, -a в профессиях",
-      "mission": "Объясните по-каталански, чем вы занимаетесь на работе"
+      "vocab": "Профессии (cambrer, cuiner, dependent, infermer, metge, mecànic, perruquer, paleta, lampista), рабочие места (oficina, fàbrica, taller, botiga, fleca, escola bressol), дела на работе",
+      "extra": "Суффиксы женского рода (-a, -essa, -iva) и профессии с одной формой; M'agrada la meva feina; fer festa — «иметь выходной»",
+      "mission": "Расскажите одногруппнику по-каталански, кем и где вы работаете (или какую работу ищете), какой у вас график и что вы делаете на работе",
+      "date": "2026-10-20"
     },
     "b1-07": {
       "topic": "Продукты и магазины: вывески, количество и цена, «ты» и «Вы» в магазине, вкусы в еде и каталанские блюда",

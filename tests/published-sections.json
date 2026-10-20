@@ -3,5 +3,9 @@
   "x-nombres-calendari": ["nombres", "desenes", "ordinals", "hora", "dia", "setmana", "any", "practica"],
   "x-temps-verbals": ["mapa", "llegir", "historia", "formes", "irregulars", "passat-simple", "subjuntiu", "paranys", "practica"],
   "b1-01": ["salutacions", "presentar-se", "ser", "nacionalitats", "lletres", "nombres", "practica", "possessius"],
-  "b1-02": ["edats", "familia", "aquest", "possessius", "de", "viure", "anys", "noms", "practica"]
+  "b1-02": ["edats", "familia", "aquest", "possessius", "de", "viure", "anys", "noms", "practica"],
+  "b1-03": ["carrer", "adreca", "pis", "botigues", "hiha", "lloc", "adreces", "practica"],
+  "b1-04": ["dies", "apats", "rellotge", "horaris", "temps", "missatge", "practica"],
+  "b1-05": ["dia", "reflexius", "present", "amb", "frequencia", "anar", "practica"],
+  "b1-06": ["oficis", "treballar", "llocs", "feina", "horari", "atur", "practica"]
 }

@@ -1,0 +1,165 @@
+{
+ "groups": {
+  "oficis": "Profesiones",
+  "llocs": "Dónde se trabaja",
+  "feina": "El trabajo y el horario"
+ },
+ "words": {
+  "cambrer": {
+   "tr": "camarero, mesero"
+  },
+  "cuiner": {
+   "tr": "cocinero"
+  },
+  "ajudant-cuina": {
+   "tr": "ayudante de cocina"
+  },
+  "infermer": {
+   "tr": "enfermero"
+  },
+  "metge": {
+   "tr": "médico",
+   "note": "femenino en -essa"
+  },
+  "perruquer": {
+   "tr": "peluquero"
+  },
+  "dependent": {
+   "tr": "dependiente, vendedor (de tienda)"
+  },
+  "administratiu": {
+   "tr": "administrativo, oficinista"
+  },
+  "mecanic": {
+   "tr": "mecánico"
+  },
+  "informatic": {
+   "tr": "informático, programador"
+  },
+  "fuster": {
+   "tr": "carpintero",
+   "note": "de la fusta — la madera"
+  },
+  "pintor": {
+   "tr": "pintor (de paredes o de cuadros)"
+  },
+  "professor": {
+   "tr": "profesor"
+  },
+  "mestre": {
+   "tr": "maestro (de primaria)"
+  },
+  "lampista": {
+   "tr": "plomero, fontanero (a menudo también electricista)",
+   "note": "una sola forma"
+  },
+  "paleta": {
+   "tr": "albañil",
+   "note": "una sola forma"
+  },
+  "estudiant": {
+   "tr": "estudiante"
+  },
+  "dona-feines": {
+   "tr": "empleada de hogar, señora de la limpieza"
+  },
+  "mestressa": {
+   "tr": "ama de casa"
+  },
+  "oficina": {
+   "tr": "oficina"
+  },
+  "fabrica": {
+   "tr": "fábrica"
+  },
+  "taller": {
+   "tr": "taller, taller mecánico"
+  },
+  "botiga": {
+   "tr": "tienda",
+   "note": "no es una bodega"
+  },
+  "fleca": {
+   "tr": "panadería",
+   "note": "también el forn de pa"
+  },
+  "papereria": {
+   "tr": "papelería"
+  },
+  "escola": {
+   "tr": "escuela (primaria)"
+  },
+  "institut": {
+   "tr": "instituto, liceo (secundaria)"
+  },
+  "escola-bressol": {
+   "tr": "guardería, sala cuna (de 0 a 3 años)",
+   "note": "también la llar d'infants"
+  },
+  "hospital": {
+   "tr": "hospital"
+  },
+  "empresa": {
+   "tr": "empresa"
+  },
+  "feina": {
+   "tr": "trabajo",
+   "note": "femenino: Busco feina. Tinc molta feina."
+  },
+  "treballar": {
+   "tr": "trabajar",
+   "note": "treballar de — trabajar de"
+  },
+  "despatxar": {
+   "tr": "atender (a los clientes)",
+   "note": "despedir a alguien: mejor acomiadar"
+  },
+  "netejar": {
+   "tr": "limpiar"
+  },
+  "rentar": {
+   "tr": "lavar",
+   "note": "no «rentar» (alquilar = llogar)"
+  },
+  "tallar": {
+   "tr": "cortar"
+  },
+  "arreglar": {
+   "tr": "arreglar, reparar"
+  },
+  "portar": {
+   "tr": "llevar, traer"
+  },
+  "plegar": {
+   "tr": "salir del trabajo, terminar la jornada",
+   "note": "también «doblar»: plegar un full"
+  },
+  "horari": {
+   "tr": "horario"
+  },
+  "torn": {
+   "tr": "turno",
+   "note": "el torn de nit — el turno de noche"
+  },
+  "fer-festa": {
+   "tr": "librar, tener el día libre",
+   "note": "no «ir de fiesta»"
+  },
+  "cap": {
+   "tr": "jefe, jefa"
+  },
+  "company": {
+   "tr": "compañero de trabajo"
+  },
+  "sou": {
+   "tr": "sueldo"
+  },
+  "atur": {
+   "tr": "estar en el paro, estar desempleado"
+  },
+  "jubilat": {
+   "tr": "jubilado, jubilada",
+   "note": "estic jubilat — estoy jubilado"
+  }
+ }
+}

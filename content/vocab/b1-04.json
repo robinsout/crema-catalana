@@ -1,0 +1,260 @@
+{
+ "groups": [
+  {
+   "id": "apats",
+   "words": [
+    {
+     "id": "esmorzar-n",
+     "ca": "l'esmorzar",
+     "gender": "m",
+     "plural": "esmorzars"
+    },
+    {
+     "id": "dinar-n",
+     "ca": "el dinar",
+     "gender": "m",
+     "plural": "dinars"
+    },
+    {
+     "id": "berenar-n",
+     "ca": "el berenar",
+     "gender": "m",
+     "plural": "berenars"
+    },
+    {
+     "id": "sopar-n",
+     "ca": "el sopar",
+     "gender": "m",
+     "plural": "sopars"
+    },
+    {
+     "id": "apat",
+     "ca": "l'àpat",
+     "gender": "m",
+     "plural": "àpats"
+    },
+    {
+     "id": "esmorzar",
+     "ca": "esmorzar"
+    },
+    {
+     "id": "dinar",
+     "ca": "dinar"
+    },
+    {
+     "id": "berenar",
+     "ca": "berenar"
+    },
+    {
+     "id": "sopar",
+     "ca": "sopar"
+    },
+    {
+     "id": "migdiada",
+     "ca": "la migdiada",
+     "gender": "f",
+     "plural": "migdiades"
+    }
+   ]
+  },
+  {
+   "id": "dies",
+   "words": [
+    {
+     "id": "avui",
+     "ca": "avui"
+    },
+    {
+     "id": "dema",
+     "ca": "demà"
+    },
+    {
+     "id": "ahir",
+     "ca": "ahir"
+    },
+    {
+     "id": "entre-setmana",
+     "ca": "entre setmana"
+    },
+    {
+     "id": "aniversari",
+     "ca": "l'aniversari",
+     "gender": "m",
+     "plural": "aniversaris"
+    },
+    {
+     "id": "festiu",
+     "ca": "el festiu",
+     "gender": "m",
+     "plural": "festius"
+    },
+    {
+     "id": "vacances",
+     "ca": "les vacances",
+     "gender": "f"
+    }
+   ]
+  },
+  {
+   "id": "horaris",
+   "words": [
+    {
+     "id": "rellotge",
+     "ca": "el rellotge",
+     "gender": "m",
+     "plural": "rellotges"
+    },
+    {
+     "id": "en-punt",
+     "ca": "en punt"
+    },
+    {
+     "id": "cap-a",
+     "ca": "cap a"
+    },
+    {
+     "id": "faltar",
+     "ca": "faltar"
+    },
+    {
+     "id": "horari",
+     "ca": "l'horari",
+     "gender": "m",
+     "plural": "horaris"
+    },
+    {
+     "id": "obrir",
+     "ca": "obrir"
+    },
+    {
+     "id": "tancar",
+     "ca": "tancar"
+    },
+    {
+     "id": "obert",
+     "ca": "obert",
+     "gender": "m",
+     "plural": "oberts"
+    },
+    {
+     "id": "tancat",
+     "ca": "tancat",
+     "gender": "m",
+     "plural": "tancats"
+    },
+    {
+     "id": "comencar",
+     "ca": "començar"
+    },
+    {
+     "id": "acabar",
+     "ca": "acabar"
+    }
+   ]
+  },
+  {
+   "id": "temps",
+   "words": [
+    {
+     "id": "temps",
+     "ca": "el temps",
+     "gender": "m",
+     "plural": "temps"
+    },
+    {
+     "id": "sol",
+     "ca": "el sol",
+     "gender": "m",
+     "plural": "sols"
+    },
+    {
+     "id": "calor",
+     "ca": "la calor",
+     "gender": "f"
+    },
+    {
+     "id": "fred",
+     "ca": "el fred",
+     "gender": "m"
+    },
+    {
+     "id": "fresca",
+     "ca": "la fresca",
+     "gender": "f"
+    },
+    {
+     "id": "vent",
+     "ca": "el vent",
+     "gender": "m",
+     "plural": "vents"
+    },
+    {
+     "id": "fa-bo",
+     "ca": "fa bo"
+    },
+    {
+     "id": "pluja",
+     "ca": "la pluja",
+     "gender": "f",
+     "plural": "pluges"
+    },
+    {
+     "id": "ploure",
+     "ca": "ploure"
+    },
+    {
+     "id": "neu",
+     "ca": "la neu",
+     "gender": "f",
+     "plural": "neus"
+    },
+    {
+     "id": "nevar",
+     "ca": "nevar"
+    },
+    {
+     "id": "boira",
+     "ca": "la boira",
+     "gender": "f",
+     "plural": "boires"
+    },
+    {
+     "id": "nuvol",
+     "ca": "el núvol",
+     "gender": "m",
+     "plural": "núvols"
+    },
+    {
+     "id": "xafogor",
+     "ca": "la xafogor",
+     "gender": "f"
+    }
+   ]
+  },
+  {
+   "id": "missatge",
+   "words": [
+    {
+     "id": "abracada",
+     "ca": "l'abraçada",
+     "gender": "f",
+     "plural": "abraçades"
+    },
+    {
+     "id": "peto",
+     "ca": "el petó",
+     "gender": "m",
+     "plural": "petons"
+    },
+    {
+     "id": "fins-aviat",
+     "ca": "fins aviat"
+    },
+    {
+     "id": "trobar-a-faltar",
+     "ca": "trobar a faltar"
+    }
+   ]
+  }
+ ]
+}

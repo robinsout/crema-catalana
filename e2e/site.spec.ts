@@ -27,9 +27,9 @@ test('an old link to a lesson still works', async ({ page }) => {
 });
 
 test('an old link to an unwritten unit shows that unit at the top of the plan', async ({ page }) => {
-  await page.goto('./#b1-04');
-  await expect(page).toHaveURL(/#\/ru\/plan\/b1-04$/);
-  const unit = page.locator('#u-b1-04');
+  await page.goto('./#b1-09');
+  await expect(page).toHaveURL(/#\/ru\/plan\/b1-09$/);
+  const unit = page.locator('#u-b1-09');
   await expect(unit).toHaveClass(/focus/);
   await page.evaluate(() => document.fonts.ready);
   // on narrow screens the header stays on top: the unit lands right below it, not under it
@@ -105,7 +105,8 @@ test('fonts are served with the site', async ({ page }) => {
 });
 
 test('no page scrolls sideways', async ({ page }) => {
-  for (const path of ['#/ru/plan', '#/ru/lesson/intro', '#/ru/lesson/x-temps-verbals', '#/ru/lesson/x-nombres-calendari']) {
+  const lessons = ['intro', 'x-temps-verbals', 'x-nombres-calendari', 'b1-01', 'b1-02', 'b1-03', 'b1-04', 'b1-05', 'b1-06'];
+  for (const path of ['#/ru/plan', ...lessons.map((id) => `#/ru/lesson/${id}`)]) {
     await page.goto(`./${path}`);
     await expect(page.locator('.lesson-head h2')).toBeVisible();
     expect(await noHorizontalScroll(page), path).toBe(true);

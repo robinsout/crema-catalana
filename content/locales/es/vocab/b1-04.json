@@ -1,0 +1,179 @@
+{
+ "groups": {
+  "apats": "Las comidas",
+  "dies": "Los días",
+  "horaris": "La hora y los horarios",
+  "temps": "El tiempo",
+  "missatge": "El mensaje"
+ },
+ "words": {
+  "esmorzar-n": {
+   "tr": "el desayuno",
+   "note": "y el tentempié de las 10–11"
+  },
+  "dinar-n": {
+   "tr": "la comida, el almuerzo",
+   "note": "la comida fuerte, 13:30–15"
+  },
+  "berenar-n": {
+   "tr": "la merienda, las onces",
+   "note": "17–18 h"
+  },
+  "sopar-n": {
+   "tr": "la cena",
+   "note": "21–22 h"
+  },
+  "apat": {
+   "tr": "la comida (cualquiera)"
+  },
+  "esmorzar": {
+   "tr": "desayunar"
+  },
+  "dinar": {
+   "tr": "comer, almorzar",
+   "note": "no dinero: el dinero es els diners"
+  },
+  "berenar": {
+   "tr": "merendar"
+  },
+  "sopar": {
+   "tr": "cenar",
+   "note": "no sopa: la sopa es la sopa"
+  },
+  "migdiada": {
+   "tr": "la siesta",
+   "note": "fer la migdiada"
+  },
+  "avui": {
+   "tr": "hoy"
+  },
+  "dema": {
+   "tr": "mañana (el día siguiente)",
+   "note": "demà passat — pasado mañana; la mañana es el matí"
+  },
+  "ahir": {
+   "tr": "ayer"
+  },
+  "entre-setmana": {
+   "tr": "entre semana"
+  },
+  "aniversari": {
+   "tr": "el cumpleaños; el aniversario",
+   "note": "Per molts anys! — ¡Feliz cumpleaños!"
+  },
+  "festiu": {
+   "tr": "el día festivo, el feriado"
+  },
+  "vacances": {
+   "tr": "las vacaciones",
+   "note": "solo en plural"
+  },
+  "rellotge": {
+   "tr": "el reloj"
+  },
+  "en-punt": {
+   "tr": "en punto",
+   "note": "les deu en punt"
+  },
+  "cap-a": {
+   "tr": "hacia, a eso de (la hora)",
+   "note": "cap a les vuit"
+  },
+  "faltar": {
+   "tr": "faltar",
+   "note": "falten cinc minuts per a les vuit"
+  },
+  "horari": {
+   "tr": "el horario"
+  },
+  "obrir": {
+   "tr": "abrir",
+   "note": "obre"
+  },
+  "tancar": {
+   "tr": "cerrar",
+   "note": "tanca"
+  },
+  "obert": {
+   "tr": "abierto",
+   "note": "oberta"
+  },
+  "tancat": {
+   "tr": "cerrado",
+   "note": "tancada"
+  },
+  "comencar": {
+   "tr": "empezar"
+  },
+  "acabar": {
+   "tr": "terminar, acabar"
+  },
+  "temps": {
+   "tr": "el tiempo (clima y hora)",
+   "note": "Quin temps fa?"
+  },
+  "sol": {
+   "tr": "el sol",
+   "note": "fa sol"
+  },
+  "calor": {
+   "tr": "el calor",
+   "note": "femenino: fa molta calor"
+  },
+  "fred": {
+   "tr": "el frío",
+   "note": "fa molt fred"
+  },
+  "fresca": {
+   "tr": "el fresco",
+   "note": "femenino: fa fresca"
+  },
+  "vent": {
+   "tr": "el viento",
+   "note": "fa vent"
+  },
+  "fa-bo": {
+   "tr": "hace buen tiempo"
+  },
+  "pluja": {
+   "tr": "la lluvia"
+  },
+  "ploure": {
+   "tr": "llover",
+   "note": "plou"
+  },
+  "neu": {
+   "tr": "la nieve"
+  },
+  "nevar": {
+   "tr": "nevar",
+   "note": "neva"
+  },
+  "boira": {
+   "tr": "la niebla",
+   "note": "hi ha boira"
+  },
+  "nuvol": {
+   "tr": "la nube",
+   "note": "està ennuvolat — está nublado"
+  },
+  "xafogor": {
+   "tr": "el bochorno"
+  },
+  "abracada": {
+   "tr": "el abrazo",
+   "note": "Una abraçada! — ¡Un abrazo!"
+  },
+  "peto": {
+   "tr": "el beso",
+   "note": "Petons! — ¡Besos!"
+  },
+  "fins-aviat": {
+   "tr": "hasta pronto"
+  },
+  "trobar-a-faltar": {
+   "tr": "extrañar, echar de menos",
+   "note": "et trobo a faltar"
+  }
+ }
+}

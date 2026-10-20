@@ -60,22 +60,26 @@
         {
           "id": "b1-03",
           "unit": 3,
-          "title": "Visc a Viladepau"
+          "title": "Visc a Viladepau",
+          "hasVocab": true
         },
         {
           "id": "b1-04",
           "unit": 4,
-          "title": "A l'hivern sopo a les nou"
+          "title": "A l'hivern sopo a les nou",
+          "hasVocab": true
         },
         {
           "id": "b1-05",
           "unit": 5,
-          "title": "Estudio català els dimarts i els dijous"
+          "title": "Estudio català els dimarts i els dijous",
+          "hasVocab": true
         },
         {
           "id": "b1-06",
           "unit": 6,
-          "title": "Treballo d'ajudant de cuina"
+          "title": "Treballo d'ajudant de cuina",
+          "hasVocab": true
         },
         {
           "id": "b1-07",

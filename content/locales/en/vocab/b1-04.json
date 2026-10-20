@@ -1,0 +1,179 @@
+{
+ "groups": {
+  "apats": "Meals",
+  "dies": "Days",
+  "horaris": "Time and opening hours",
+  "temps": "Weather",
+  "missatge": "Messages"
+ },
+ "words": {
+  "esmorzar-n": {
+   "tr": "breakfast",
+   "note": "also the mid-morning snack at 10–11"
+  },
+  "dinar-n": {
+   "tr": "lunch",
+   "note": "the main meal of the day, 1.30–3 p.m.; not “dinner”!"
+  },
+  "berenar-n": {
+   "tr": "afternoon snack",
+   "note": "5–6 p.m."
+  },
+  "sopar-n": {
+   "tr": "dinner, supper",
+   "note": "9–10 p.m."
+  },
+  "apat": {
+   "tr": "meal"
+  },
+  "esmorzar": {
+   "tr": "to have breakfast"
+  },
+  "dinar": {
+   "tr": "to have lunch",
+   "note": "false friend: not “to have dinner”"
+  },
+  "berenar": {
+   "tr": "to have an afternoon snack"
+  },
+  "sopar": {
+   "tr": "to have dinner",
+   "note": "soup is la sopa"
+  },
+  "migdiada": {
+   "tr": "after-lunch nap, siesta",
+   "note": "fer la migdiada"
+  },
+  "avui": {
+   "tr": "today"
+  },
+  "dema": {
+   "tr": "tomorrow",
+   "note": "demà passat — the day after tomorrow"
+  },
+  "ahir": {
+   "tr": "yesterday"
+  },
+  "entre-setmana": {
+   "tr": "during the week, on weekdays"
+  },
+  "aniversari": {
+   "tr": "birthday; anniversary",
+   "note": "Per molts anys! — Happy birthday!"
+  },
+  "festiu": {
+   "tr": "public holiday"
+  },
+  "vacances": {
+   "tr": "holidays, vacation",
+   "note": "always plural"
+  },
+  "rellotge": {
+   "tr": "clock, watch"
+  },
+  "en-punt": {
+   "tr": "sharp, on the dot",
+   "note": "les deu en punt"
+  },
+  "cap-a": {
+   "tr": "around, at about (a time)",
+   "note": "cap a les vuit"
+  },
+  "faltar": {
+   "tr": "to be missing, to be left",
+   "note": "falten cinc minuts per a les vuit — five to eight"
+  },
+  "horari": {
+   "tr": "timetable, opening hours"
+  },
+  "obrir": {
+   "tr": "to open",
+   "note": "obre"
+  },
+  "tancar": {
+   "tr": "to close",
+   "note": "tanca"
+  },
+  "obert": {
+   "tr": "open",
+   "note": "oberta"
+  },
+  "tancat": {
+   "tr": "closed",
+   "note": "tancada"
+  },
+  "comencar": {
+   "tr": "to start, to begin"
+  },
+  "acabar": {
+   "tr": "to finish, to end"
+  },
+  "temps": {
+   "tr": "weather; time",
+   "note": "Quin temps fa?"
+  },
+  "sol": {
+   "tr": "sun",
+   "note": "fa sol — it’s sunny"
+  },
+  "calor": {
+   "tr": "heat",
+   "note": "feminine: fa molta calor"
+  },
+  "fred": {
+   "tr": "cold",
+   "note": "fa molt fred"
+  },
+  "fresca": {
+   "tr": "coolness",
+   "note": "fa fresca — it’s chilly"
+  },
+  "vent": {
+   "tr": "wind",
+   "note": "fa vent — it’s windy"
+  },
+  "fa-bo": {
+   "tr": "the weather’s nice"
+  },
+  "pluja": {
+   "tr": "rain"
+  },
+  "ploure": {
+   "tr": "to rain",
+   "note": "plou"
+  },
+  "neu": {
+   "tr": "snow"
+  },
+  "nevar": {
+   "tr": "to snow",
+   "note": "neva"
+  },
+  "boira": {
+   "tr": "fog",
+   "note": "hi ha boira — it’s foggy"
+  },
+  "nuvol": {
+   "tr": "cloud",
+   "note": "està ennuvolat — it’s cloudy"
+  },
+  "xafogor": {
+   "tr": "muggy heat"
+  },
+  "abracada": {
+   "tr": "hug",
+   "note": "Una abraçada! — Big hug!"
+  },
+  "peto": {
+   "tr": "kiss",
+   "note": "Petons! — Love, kisses!"
+  },
+  "fins-aviat": {
+   "tr": "see you soon"
+  },
+  "trobar-a-faltar": {
+   "tr": "to miss (someone)",
+   "note": "et trobo a faltar — I miss you"
+  }
+ }
+}

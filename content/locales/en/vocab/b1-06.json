@@ -1,0 +1,164 @@
+{
+ "groups": {
+  "oficis": "Jobs",
+  "llocs": "Workplaces",
+  "feina": "Work and hours"
+ },
+ "words": {
+  "cambrer": {
+   "tr": "waiter, waitress"
+  },
+  "cuiner": {
+   "tr": "cook, chef"
+  },
+  "ajudant-cuina": {
+   "tr": "kitchen assistant"
+  },
+  "infermer": {
+   "tr": "nurse"
+  },
+  "metge": {
+   "tr": "doctor",
+   "note": "feminine in -essa"
+  },
+  "perruquer": {
+   "tr": "hairdresser"
+  },
+  "dependent": {
+   "tr": "shop assistant",
+   "note": "not “dependant”"
+  },
+  "administratiu": {
+   "tr": "office worker, admin assistant"
+  },
+  "mecanic": {
+   "tr": "mechanic, car mechanic"
+  },
+  "informatic": {
+   "tr": "IT worker, programmer"
+  },
+  "fuster": {
+   "tr": "carpenter",
+   "note": "from la fusta — wood"
+  },
+  "pintor": {
+   "tr": "painter (walls or pictures)"
+  },
+  "professor": {
+   "tr": "teacher (university, secondary school, courses)"
+  },
+  "mestre": {
+   "tr": "primary school teacher"
+  },
+  "lampista": {
+   "tr": "plumber (often also electrician)",
+   "note": "one form; an electrician is electricista"
+  },
+  "paleta": {
+   "tr": "bricklayer, builder",
+   "note": "one form"
+  },
+  "estudiant": {
+   "tr": "student"
+  },
+  "dona-feines": {
+   "tr": "cleaner"
+  },
+  "mestressa": {
+   "tr": "housewife, homemaker"
+  },
+  "oficina": {
+   "tr": "office"
+  },
+  "fabrica": {
+   "tr": "factory",
+   "note": "not “fabric”"
+  },
+  "taller": {
+   "tr": "workshop, garage"
+  },
+  "botiga": {
+   "tr": "shop"
+  },
+  "fleca": {
+   "tr": "bakery",
+   "note": "also el forn de pa"
+  },
+  "papereria": {
+   "tr": "stationer’s"
+  },
+  "escola": {
+   "tr": "(primary) school"
+  },
+  "institut": {
+   "tr": "secondary school"
+  },
+  "escola-bressol": {
+   "tr": "nursery (0–3)",
+   "note": "also la llar d’infants"
+  },
+  "hospital": {
+   "tr": "hospital"
+  },
+  "empresa": {
+   "tr": "company, firm"
+  },
+  "feina": {
+   "tr": "work, job",
+   "note": "Busco feina. Tinc molta feina."
+  },
+  "treballar": {
+   "tr": "to work",
+   "note": "treballar de — to work as"
+  },
+  "despatxar": {
+   "tr": "to serve (customers)"
+  },
+  "netejar": {
+   "tr": "to clean"
+  },
+  "rentar": {
+   "tr": "to wash",
+   "note": "not “to rent”"
+  },
+  "tallar": {
+   "tr": "to cut; to cut hair"
+  },
+  "arreglar": {
+   "tr": "to fix, repair"
+  },
+  "portar": {
+   "tr": "to carry, bring"
+  },
+  "horari": {
+   "tr": "hours, timetable"
+  },
+  "torn": {
+   "tr": "shift",
+   "note": "el torn de nit — the night shift"
+  },
+  "fer-festa": {
+   "tr": "to have the day off"
+  },
+  "cap": {
+   "tr": "boss"
+  },
+  "company": {
+   "tr": "colleague"
+  },
+  "sou": {
+   "tr": "salary, pay"
+  },
+  "plegar": {
+   "tr": "to finish work for the day",
+   "note": "also “to fold”"
+  },
+  "atur": {
+   "tr": "to be unemployed"
+  },
+  "jubilat": {
+   "tr": "retired (person)",
+   "note": "estic jubilat — I’m retired (think jubilee)"
+  }
+ }
+}

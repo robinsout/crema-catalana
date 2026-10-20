@@ -55,51 +55,60 @@
       "date": "2026-10-07"
     },
     "b1-03": {
-      "topic": "Dónde vivo: la dirección (ciudad, calle, número, piso), qué hay cerca de casa, servicios de la ciudad",
+      "topic": "Dónde vivo: calle, número, piso y puerta, qué hay cerca de casa y cómo explicar dónde está con puntos de referencia",
       "grammar": [
-        "presente de los verbos regulares",
-        "hi ha / és / està: Hi ha una farmàcia. On és el mercat? (ubicación con ser, no «está»)",
-        "preposiciones de lugar: a prop de, davant de, al costat de",
-        "ordinales para piso y puerta: tercer segona"
+        "viure y la dirección: Visc al carrer de la Indústria, 49. A quin carrer vius? Quina és la teva adreça?",
+        "a / en: Visc a Viladepau, al carrer Nou, a la plaça Gran — pero en una plaça (no «a una»)",
+        "ordinales para piso y puerta: primer primera, segon segona — 3r 1a (tercer primera, «tercero primera»)",
+        "preposiciones de lugar: al costat de, davant de / darrere de, a sobre de / a sota de, a prop de / lluny de, entre … i …",
+        "hi ha y és: Al carrer Nou hi ha una fleca. On és el banc? — És davant de l'Ajuntament (ubicación con ser, no «està»)"
       ],
-      "vocab": "La ciudad, la calle, tiendas y servicios",
-      "extra": "Cómo leer las direcciones de Barcelona: c/, pl., 3r 2a",
-      "mission": "Dicta tu dirección en catalán y describe en cinco frases qué hay cerca de tu casa"
+      "vocab": "Calles (carrer, plaça, avinguda, rambla, passeig), tiendas y servicios (fleca, farmàcia, perruqueria, sabateria, llibreria, caixer, parada d'autobús, estació de metro, Ajuntament)",
+      "extra": "Números del 100 al 999 (cent, dos-cents, tres-cents vint-i-nou) y cómo leer direcciones: C. de Còrsega, 377, 3r 2a, 08037 Barcelona; formularios: nom, cognoms, adreça, població",
+      "mission": "Dile a un compañero tu dirección en catalán (calle, número, piso) y dónde está tu casa con puntos de referencia: Casa meva és davant de…, al costat de…",
+      "date": "2026-10-20"
     },
     "b1-04": {
-      "topic": "Días y horas: qué hacemos cada día, cuándo comemos, qué hora es, horarios, meses, estaciones y el tiempo",
+      "topic": "Días y horas: qué hay cada día, cuándo comemos, qué hora es, horarios, cumpleaños, estaciones y el tiempo",
       "grammar": [
-        "la hora con quarts: un quart de deu; A quina hora…?",
-        "días de la semana con artículo: el dilluns / els dilluns",
-        "verbos reflexivos: llevar-se (¡levantarse!), dutxar-se",
-        "preposiciones de tiempo: a l'hivern, al matí, a la nit"
+        "días de la semana: Quin dia és avui? El dilluns hi ha mercat / els dilluns (los lunes); dilluns sin artículo — «este lunes, el próximo»",
+        "verbos en -ar en 1.ª persona: esmorzo, dino, berenem, sopo — A quina hora sopes? (dinar es «comer», sopar es «cenar»)",
+        "la hora: Són les tres i cinc, És un quart de quatre, Falten cinc minuts per a les quatre; del matí, de la tarda, del vespre, de la nit",
+        "horarios: de 9 a 1, de dilluns a divendres; Comença a… i acaba a…; tancat",
+        "el tiempo con fer: Quin temps fa? Fa calor, fa fred, fa vent, plou, neva, hi ha boira"
       ],
-      "vocab": "Àpats: esmorzar, dinar, berenar, sopar; días de la semana, meses, estaciones, el tiempo: fa fred, fa sol, plou",
-      "extra": "El sistema catalán de «quarts», que no existe en castellano",
-      "mission": "Pregunta en catalán el horario de un museo o una biblioteca y queda con alguien diciendo la hora con quarts"
+      "vocab": "Àpats (esmorzar, dinar, berenar, sopar), partes del día (matí, migdia, tarda, vespre, nit, matinada), días de la semana, meses, estaciones, el tiempo",
+      "extra": "El sistema catalán de «quarts» (dos quarts de nou = 8:30), que no existe en castellano; fechas: El meu aniversari és el 23 de gener",
+      "mission": "Escríbele a un compañero un mensaje corto «desde las vacaciones» en catalán: dónde estás, qué tiempo hace, a qué hora comes y qué haces; di una hora con quarts",
+      "date": "2026-10-20"
     },
     "b1-05": {
-      "topic": "Actividades diarias y tiempo libre: qué, con quién, qué días y a qué hora, con qué frecuencia",
+      "topic": "La rutina diaria: qué hacemos durante el día, a qué hora, con quién y con qué frecuencia",
       "grammar": [
-        "presente: -ar, -er/-re, -ir y -ir con -eix-",
-        "adverbios de frecuencia: sempre, sovint, de vegades, mai",
-        "amb qui?: amb el meu germà, sol / sola",
-        "anar / venir"
+        "verbos reflexivos: em llevo, et dutxes, es desperta, ens rentem les dents (llevar-se es «levantarse»)",
+        "presente en 1.ª y 3.ª persona: treballo / treballa, plego / plega, llegeixo / llegeix",
+        "amb qui?: amb el meu germà, amb la seva dona (con artículo), sol / sola",
+        "frecuencia: sempre, sovint, de vegades, de tant en tant, un cop per setmana, una vegada al mes, mai",
+        "anar a + lugar o infinitivo: Vaig a la piscina. Va a comprar amb la seva dona"
       ],
-      "vocab": "Tiempo libre, estudios, tareas de casa, expresiones de frecuencia",
-      "extra": "anar y venir no se reparten como ir y venir: «Ja vinc!» → «Ja vaig!»",
-      "mission": "Cuenta en catalán tu horario de la semana"
+      "vocab": "La rutina (llevar-se, dutxar-se, esmorzar, plegar, descansar, fer els deures, mirar la tele, anar a dormir), el tiempo libre (passejar, fer esport, jugar a cartes, quedar amb els amics)",
+      "extra": "plegar — «salir del trabajo», no «plegar»; vaig a comprar (voy a comprar) no es lo mismo que vaig comprar (compré): el pasado perifrástico",
+      "mission": "Cuéntale a un compañero en catalán tu día normal y tu semana: a qué hora te levantas, con quién comes, qué haces una vez a la semana y qué no haces nunca",
+      "date": "2026-10-20"
     },
     "b1-06": {
-      "topic": "El trabajo: profesiones, dónde y de qué trabajo, qué hago en el trabajo, sector y tipo de empleo",
+      "topic": "El trabajo: de qué y dónde trabajo, qué hago en el trabajo, el horario; si no tengo trabajo — qué busco",
       "grammar": [
-        "treballar de, fer de",
-        "femenino de las profesiones: metge / metgessa",
-        "fer: faig, fas, fa"
+        "treballar de, fer de, ser: Treballa de cambrer. Fa de dependenta. Soc professora",
+        "femenino de las profesiones: cambrer / cambrera, metge / metgessa, administratiu / administrativa; lampista, paleta — una sola forma",
+        "dónde trabajo: Treballo a Sabadell, a la papereria Mots, en un bar, en una fàbrica",
+        "qué hago: despatxo, preparo, netejo, tallo; fer: faig classes, fas, fa",
+        "estar a l'atur, buscar feina de…: Busco feina de pintor (estar en el paro)"
       ],
-      "vocab": "Profesiones, lugares de trabajo, tareas",
-      "extra": "Los sufijos -essa, -ina, -a en las profesiones",
-      "mission": "Explica en catalán a qué te dedicas"
+      "vocab": "Profesiones (cambrer, cuiner, dependent, infermer, metge, mecànic, perruquer, paleta, lampista), lugares de trabajo (oficina, fàbrica, taller, botiga, fleca, escola bressol), tareas",
+      "extra": "Terminaciones del femenino (-a, -essa, -iva) y profesiones con una sola forma; M'agrada la meva feina; fer festa — «tener el día libre», no «ir de fiesta»",
+      "mission": "Cuéntale a un compañero en catalán de qué y dónde trabajas (o qué trabajo buscas), tu horario y qué haces en el trabajo",
+      "date": "2026-10-20"
     },
     "b1-07": {
       "topic": "Comida y tiendas: carteles, cantidades y precios, tu y vostè en la tienda, gustos y platos catalanes",
