@@ -78,7 +78,8 @@ full() {
     apt-get install -y -qq caddy >/dev/null
   fi
   caddy version
-  caddy validate --config "$APP/deploy/Caddyfile" --adapter caddyfile >/dev/null 2>&1
+  # errors are shown: a silent failure here would hide a broken routes file of another service
+  caddy validate --config "$APP/deploy/Caddyfile" --adapter caddyfile >/dev/null
   if ! cmp -s "$APP/deploy/Caddyfile" /etc/caddy/Caddyfile; then
     install -m 644 "$APP/deploy/Caddyfile" /etc/caddy/Caddyfile
     systemctl restart caddy   # the admin API is off, so "reload" cannot work

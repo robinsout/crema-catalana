@@ -2,6 +2,17 @@
 # IP certificates exist only in the "shortlived" profile (about 6 days); Caddy renews them itself.
 {
 	admin off
+	# slow clients must not hold connections open (Caddy has no read timeouts by default)
+	servers {
+		# neither service needs big headers (Go's default is 1 MB per request)
+		max_header_size 16KB
+		timeouts {
+			read_header 10s
+			read_body 15s
+			write 30s
+			idle 2m
+		}
+	}
 }
 
 188.245.182.47 {
@@ -14,9 +25,15 @@
 		-Server
 		Strict-Transport-Security "max-age=31536000"
 	}
-	# progress blobs are a few hundred bytes; the server refuses more than 16 KB anyway
-	request_body {
-		max_size 64KB
+	# other services of this machine add their routes here: robinsout/counter (/c/*, /stats),
+	# written by its deploy/install.sh. A glob that matches nothing is not an error.
+	import /etc/caddy/routes.d/*.caddy
+	# everything else: the sync server (handle blocks are exclusive; one without a matcher goes last)
+	handle {
+		# progress blobs are a few hundred bytes; the server refuses more than 16 KB anyway
+		request_body {
+			max_size 64KB
+		}
+		reverse_proxy 127.0.0.1:8787
 	}
-	reverse_proxy 127.0.0.1:8787
 }
