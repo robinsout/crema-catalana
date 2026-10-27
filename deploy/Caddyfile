@@ -37,3 +37,6 @@
 		reverse_proxy 127.0.0.1:8787
 	}
 }
+
+# other sites of this machine on their own ports, one file per project: home-hub (:8123, Home Assistant)
+import /etc/caddy/sites.d/*.caddy
