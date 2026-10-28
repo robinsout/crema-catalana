@@ -70,9 +70,9 @@ test('every language folder is listed as available or as a draft', () => {
   assert.deepEqual(dirs.sort(), contentLanguages(locales).sort());
 });
 
-test('a published language has no Russian text left in its interface and plan (a draft may)', () => {
+test('a published language has no Russian text left in its interface, plan and verbs (a draft may)', () => {
   for (const lang of locales.available) {
-    for (const file of ['ui.json', 'catalog.json']) {
+    for (const file of ['ui.json', 'catalog.json', 'verbs.json']) {
       const data = JSON.parse(readFileSync(join(root, 'content', 'locales', lang, file), 'utf8')) as object;
       assert.deepEqual(cyrillicLeftovers(data, lang), [], `${lang}/${file}`);
     }

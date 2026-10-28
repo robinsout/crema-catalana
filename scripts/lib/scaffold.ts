@@ -19,6 +19,7 @@ const paths = (root: string) => ({
   locale: (lang: string) => join(root, 'content/locales', lang),
   catalog: (lang: string) => join(root, 'content/locales', lang, 'catalog.json'),
   ui: (lang: string) => join(root, 'content/locales', lang, 'ui.json'),
+  verbs: (lang: string) => join(root, 'content/locales', lang, 'verbs.json'),
   lesson: (lang: string, id: string) => join(root, 'content/locales', lang, 'lessons', `${id}.html`),
   exercises: (lang: string, id: string) => join(root, 'content/locales', lang, 'exercises', `${id}.json`),
   vocab: (lang: string, id: string) => join(root, 'content/locales', lang, 'vocab', `${id}.json`),
@@ -45,13 +46,14 @@ export function newLanguage(root: string, code: string, name: string): string[] 
   const catalog = readJson<LocaleCatalog>(p.catalog(base));
   for (const texts of Object.values(catalog.lessons ?? {})) delete texts.date;
   writeJson(p.catalog(code), catalog);
+  writeJson(p.verbs(code), readJson<Record<string, string>>(p.verbs(base))); // verb translations, to translate
   mkdirSync(join(p.locale(code), 'lessons'), { recursive: true });
   if (!existsSync(p.profile(code))) {
     mkdirSync(dirname(p.profile(code)), { recursive: true });
     writeFileSync(p.profile(code), readFileSync(p.profileTemplate, 'utf8').replaceAll('{name}', name).replaceAll('{code}', code));
   }
   writeJson(p.index, { ...index, names: { ...index.names, [code]: name }, drafts: [...(index.drafts ?? []), code] });
-  return [p.ui(code), p.catalog(code), p.profile(code), p.index];
+  return [p.ui(code), p.catalog(code), p.verbs(code), p.profile(code), p.index];
 }
 
 // A draft goes to the language switcher.
@@ -59,7 +61,7 @@ export function publishLanguage(root: string, code: string): void {
   const p = paths(root);
   const index = readJson<LocalesIndex>(p.index);
   if (!index.drafts?.includes(code)) throw new Error(`"${code}" is not a draft language`);
-  const left = [p.ui(code), p.catalog(code)].flatMap((file) => cyrillicLeftovers(readJson<object>(file), code).map((t) => `${file}: ${t}`));
+  const left = [p.ui(code), p.catalog(code), p.verbs(code)].flatMap((file) => cyrillicLeftovers(readJson<object>(file), code).map((t) => `${file}: ${t}`));
   if (left.length) throw new Error(`Russian text left, translate it first:\n  ${left.slice(0, 20).join('\n  ')}${left.length > 20 ? `\n  … ${left.length - 20} more` : ''}`);
   const drafts = index.drafts.filter((l) => l !== code);
   const { drafts: _, ...rest } = index;

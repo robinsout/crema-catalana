@@ -1,5 +1,5 @@
 // Content scaffolding (BACKLOG F-4). Files and registrations only; the text is written by hand.
-//   npm run new-language -- <code> <name>        a draft language: ui, plan, profile to fill
+//   npm run new-language -- <code> <name>        a draft language: ui, plan, verbs, profile to fill
 //   npm run publish-language -- <code>           the draft goes to the language switcher
 //   npm run new-lesson -- <id> [--kind topic|overview --title "…" --related b1-01,b1-02]
 //   npm run adapt -- <id> <lang> [--restamp]     a lesson for another language (or renew its stamp)

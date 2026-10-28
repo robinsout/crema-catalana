@@ -77,6 +77,7 @@ async function jumpFromMenu(id: string): Promise<void> {
 
 const summary = computed(() => progress.summary);
 const isPlan = computed(() => route.name === 'plan');
+const isVerbs = computed(() => route.name === 'verbs' || route.name === 'verb');
 const isCurrent = (l: Lesson): boolean => route.name === 'lesson' && route.params.id === l.id;
 const width = computed(() => (summary.value.ready ? `${(summary.value.done / summary.value.ready) * 100}%` : '0'));
 </script>
@@ -112,6 +113,12 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
           <RouterLink class="plan-link" :to="{ name: 'plan', params: { lang: catalog.lang } }" :aria-current="isPlan ? 'page' : undefined" active-class="" exact-active-class="">
             <span class="n">☰</span>
             <span><span class="t">{{ t('nav.plan') }}</span><span class="s">{{ t('nav.planSub', { course: catalog.catalog.course.title ?? '' }) }}</span></span>
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink class="plan-link verbs-link" :to="{ name: 'verbs', params: { lang: catalog.lang } }" :aria-current="isVerbs ? 'page' : undefined" active-class="" exact-active-class="">
+            <span class="n">V</span>
+            <span><span class="t">{{ t('nav.verbs') }}</span><span class="s">{{ t('nav.verbsSub') }}</span></span>
           </RouterLink>
         </li>
         <template v-if="catalog.extras.length">

@@ -26,7 +26,8 @@
     "new-lesson": "node scripts/content.ts new-lesson",
     "adapt": "node scripts/content.ts adapt",
     "register": "node scripts/content.ts register",
-    "look": "node scripts/look.ts"
+    "look": "node scripts/look.ts",
+    "verbs": "node scripts/gen-verbs.ts"
   },
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.3.0",

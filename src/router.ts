@@ -1,4 +1,4 @@
-// Routes: /:lang/plan/:focus? and /:lang/lesson/:id (hash history: GitHub Pages has no server rewrites).
+// Routes: /:lang/plan/:focus?, /:lang/lesson/:id, /:lang/verbs and /:lang/verbs/:verb (hash history: GitHub Pages has no server rewrites).
 // Old links of the form #<id> and #pla, and the saved last view, are resolved by resolveRoute.
 import { createRouter, createWebHashHistory, type RouteLocationRaw, type RouterHistory } from 'vue-router';
 import { PLAN_ID, resolveRoute, type Route } from './services/catalog.ts';
@@ -36,6 +36,8 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     routes: [
       { path: '/:lang/plan/:focus?', name: 'plan', component: () => import('./views/PlanView.vue') },
       { path: '/:lang/lesson/:id', name: 'lesson', component: () => import('./views/LessonView.vue') },
+      { path: '/:lang/verbs', name: 'verbs', component: () => import('./views/VerbsView.vue') },
+      { path: '/:lang/verbs/:verb', name: 'verb', component: () => import('./views/VerbView.vue') },
       { path: '/:lang/sync/:code?', name: 'sync', component: () => import('./views/SyncView.vue') },
       { path: '/:rest(.*)*', name: 'other', component: { render: () => null } },
     ],
@@ -67,6 +69,8 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     if (to.name === 'plan' && lang !== requested) {
       return target({ view: 'plan', focus: param(to.params.focus) || null }, lang);
     }
+    // the verb reference has no lesson content: another language just shows the same page
+    if ((to.name === 'verbs' || to.name === 'verb') && lang !== requested) return { name: to.name, params: { ...to.params, lang }, query: to.query };
     if (to.name === 'sync') {
       // a code from a QR link moves into memory at once, so it does not stay in the browser history
       const code = param(to.params.code);
@@ -84,6 +88,8 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     // fixed page names; the sync page is counted as "sync", never with its code
     if (to.name === 'lesson') useVisitsStore().view(param(to.params.id));
     else if (to.name === 'plan' || to.name === 'sync') useVisitsStore().view(to.name);
+    // the list and every verb page count as "verbs": the reference as a whole
+    else if (to.name === 'verbs' || to.name === 'verb') useVisitsStore().view('verbs');
   });
 
   return router;

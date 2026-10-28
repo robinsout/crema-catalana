@@ -34,6 +34,7 @@ test('a new language starts as a draft: interface and plan to translate, a profi
   assert.ok(catalog.lessons['b1-01'].topic, 'plan texts are there to translate');
   assert.ok(Object.values(catalog.lessons).every((l: any) => !l.date), 'no lesson is written yet');
   assert.match(read('authoring/profiles/xx.md'), /Xish/);
+  assert.deepEqual(Object.keys(json('content/locales/xx/verbs.json')), Object.keys(json('content/locales/ru/verbs.json')), 'verb translations to translate');
   assert.throws(() => newLanguage(root, 'xx', 'Xish'), /exists/);
   assert.throws(() => newLanguage(root, 'EN!', 'x'), /code/);
 });
@@ -43,6 +44,8 @@ test('publishing a draft moves it to the available languages', () => {
   // translated: no Russian left in the interface and the plan
   writeFileSync(join(root, 'content/locales/xx/ui.json'), JSON.stringify(Object.fromEntries(Object.keys(json('content/locales/xx/ui.json')).map((k) => [k, 'text']))));
   writeFileSync(join(root, 'content/locales/xx/catalog.json'), '{}');
+  assert.throws(() => publishLanguage(root, 'xx'), /verbs\.json/, 'the verb translations too');
+  writeFileSync(join(root, 'content/locales/xx/verbs.json'), '{"anar":"to go"}');
   publishLanguage(root, 'xx');
   const index = json('content/locales/index.json');
   assert.ok(index.available.includes('xx'));

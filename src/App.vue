@@ -26,6 +26,8 @@ function pageName(): string {
   if (route.name === 'lesson') return catalog.find(String(route.params.id ?? ''))?.title ?? '';
   if (route.name === 'plan') return t('nav.plan');
   if (route.name === 'sync') return t('nav.sync');
+  if (route.name === 'verbs') return t('nav.verbs');
+  if (route.name === 'verb') return String(route.params.verb ?? '');
   return '';
 }
 

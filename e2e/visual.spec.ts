@@ -20,6 +20,20 @@ for (const scheme of ['light', 'dark'] as const) {
   }
 }
 
+// the verb reference: the list, and a verb with the default tenses
+const verbPages: Record<string, [string, string]> = { verbs: ['#/ru/verbs', '.verb-list li'], 'verb-anar': ['#/ru/verbs/anar', '.conj-card'] };
+for (const scheme of ['light', 'dark'] as const) {
+  for (const [name, [path, ready]] of Object.entries(verbPages)) {
+    test(`${name}, ${scheme} theme @visual`, async ({ page }) => {
+      await page.emulateMedia({ colorScheme: scheme });
+      await page.goto(`./${path}`);
+      await expect(page.locator(ready).first()).toBeVisible();
+      await page.evaluate(() => document.fonts.ready);
+      await expect(page).toHaveScreenshot(`${name}-${scheme}.png`);
+    });
+  }
+}
+
 for (const scheme of ['light', 'dark'] as const) {
   test(`lesson vocabulary, ${scheme} theme @visual`, async ({ page }) => {
     await page.emulateMedia({ colorScheme: scheme });

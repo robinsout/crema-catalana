@@ -12,6 +12,7 @@
 //           + reading: { "<lesson>": { section, at } } — the furthest chapter the reader got to
 //           + lastLesson: id — the last lesson opened (`last` may be the plan); stays on the device
 //   v6      + locale: language code of the last page opened; stays on the device
+//   v7      + verbTenses: [tense id] — tenses shown in the verb reference; stays on the device
 
 import { browserStorage } from '../api/storage.ts';
 import type { ExerciseResult, ReadingPoint, SectionMark, StorageBackend } from '../types/index.ts';
@@ -31,6 +32,7 @@ export interface Progress {
   last: string | null;
   lastLesson?: string;
   locale?: string;
+  verbTenses?: unknown; // checked where it is used (services/verbs.ts: enabledTenses)
   [field: string]: unknown; // fields written by future versions are kept
 }
 

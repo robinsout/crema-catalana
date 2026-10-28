@@ -632,3 +632,44 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
 @media (max-width: 899px) {
   .lesson section, .unit, main [id] { scroll-margin-top: 84px; }
 }
+
+/* ---------- verb reference ---------- */
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.verb-search input {
+  width: 100%; max-width: 32rem; box-sizing: border-box;
+  font: 400 var(--step-1) var(--font-body); color: var(--ink);
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 14px;
+}
+.verb-search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.tense-settings { margin: 14px 0 24px; max-width: 46rem; }
+.tense-settings summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: var(--step--1); }
+.tense-settings fieldset { border: 0; padding: 0; margin: 0 0 12px; display: grid; gap: 4px; }
+.tense-settings legend { font: 500 0.68rem var(--font-display); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.tense-settings label { display: flex; gap: 8px; align-items: baseline; cursor: pointer; }
+.tense-settings input { accent-color: var(--accent); }
+.tense-settings small, .conj-card h4 small { color: var(--muted); font-weight: 400; }
+.lesson .verb-list { list-style: none; margin: 0; padding: 0; max-width: 46rem; }
+.verb-list li { margin: 0; }
+.verb-list a {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px;
+  padding: 8px 4px; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none;
+}
+.verb-list a:hover { background: var(--accent-soft); }
+.verb-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.verb-inf { font-weight: 600; color: var(--accent); }
+.verb-form { font-size: var(--step--1); color: var(--ink); }
+.verb-tr { color: var(--muted); font-size: 0.95rem; }
+.lesson-head .eyebrow a { color: inherit; text-decoration: none; }
+.lesson-head .eyebrow a:hover { text-decoration: underline; }
+.lesson-head .meta a { color: var(--accent); }
+.verb .mood { margin-bottom: 32px; }
+.verb .mood h3 { margin-top: 8px; }
+.conj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 12px; }
+.conj-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 12px 6px; }
+.conj-card h4 { font: 600 0.95rem var(--font-body); margin: 8px 0 2px; }
+.conj-card table, .verb table.nonpers { min-width: 0; width: 100%; }
+.conj-card tbody th { width: 6.5em; }
+.conj-card tr:last-child > * { border-bottom: 0; }
+.verb table.conj td { white-space: normal; }
+.verb .alt { color: var(--muted); }
+.verb-source { margin-top: 32px; }

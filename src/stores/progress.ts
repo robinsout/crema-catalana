@@ -4,6 +4,7 @@ import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { PLAN_ID, progress as summarize } from '../services/catalog.ts';
 import { markDone, markSection, readSavedProgress, recordExercise, recordReading, writeSavedProgress, type Progress } from '../services/progress.ts';
+import { enabledTenses, type TenseId } from '../services/verbs.ts';
 import type { ExerciseResult } from '../types/index.ts';
 import { useCatalogStore } from './catalog.ts';
 import { useVisitsStore } from './visits.ts';
@@ -74,8 +75,14 @@ export const useProgressStore = defineStore('progress', () => {
     data.value.locale = code;
     save();
   }
+  // tenses shown in the verb reference (none chosen yet: the default ones)
+  const verbTenses = computed(() => enabledTenses(data.value.verbTenses));
+  function setVerbTenses(ids: TenseId[]): void {
+    data.value.verbTenses = [...ids];
+    save();
+  }
   const hasHistory = (): boolean => data.value.last !== null || Object.keys(data.value.done).length > 0;
 
-  return { data, done, last, setLocale, hasHistory, lastLesson, summary, isDone, toggleDone, setLast, result, saveResult, applySynced,
+  return { data, done, last, setLocale, verbTenses, setVerbTenses, hasHistory, lastLesson, summary, isDone, toggleDone, setLast, result, saveResult, applySynced,
     isSectionDone, toggleSection, readingPoint, reachSection };
 });

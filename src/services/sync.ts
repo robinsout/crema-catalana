@@ -140,7 +140,7 @@ export interface SyncApi {
 
 // what leaves the device: marks, exercise results, chapter marks and reading points; the last opened view stays local
 export type SyncedProgress = Pick<Progress, 'done' | 'doneAt' | 'exercises' | 'sections' | 'reading'>;
-const syncable = (p: SyncedProgress): SyncedProgress =>
+export const syncable = (p: SyncedProgress): SyncedProgress =>
   ({ done: p.done, doneAt: p.doneAt, exercises: p.exercises, sections: p.sections, reading: p.reading });
 
 // JSON with sorted keys, to compare progress regardless of key order
