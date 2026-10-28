@@ -1,4 +1,4 @@
-// Sections of the current page for the table of contents (filled by the plan and lesson views),
+// Sections of the current page for the table of contents (filled by the plan, lesson and verb views),
 // the section being read (useSectionSpy) and the chapters panel of narrow screens.
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
@@ -6,11 +6,14 @@ import { computed, ref } from 'vue';
 export interface TocSection {
   id: string;
   title: string;
+  group?: string; // a heading above the sections of one group (the mood of a tense)
 }
+
+export type TocKind = 'plan' | 'lesson' | 'verb';
 
 export const useTocStore = defineStore('toc', () => {
   const sections = ref<TocSection[]>([]);
-  const kind = ref<'plan' | 'lesson'>('lesson');
+  const kind = ref<TocKind>('lesson');
   const lesson = ref<string | null>(null); // the lesson whose chapters these are
   const active = ref('');
   const panelOpen = ref(false);
@@ -30,11 +33,19 @@ export const useTocStore = defineStore('toc', () => {
       : [];
   }
 
+  // sections known without reading the page (the tenses of a verb); none for a page without them
+  function show(list: TocSection[], pageKind: TocKind): void {
+    kind.value = pageKind;
+    lesson.value = null;
+    active.value = '';
+    sections.value = list;
+  }
+
   const titleOf = (id: string): string => sections.value.find((s) => s.id === id)?.title ?? '';
   const jump = (id: string): void => {
     panelOpen.value = false;
     document.getElementById(id)?.scrollIntoView();
   };
 
-  return { sections, kind, lesson, active, panelOpen, ids, collect, titleOf, jump };
+  return { sections, kind, lesson, active, panelOpen, ids, collect, show, titleOf, jump };
 });

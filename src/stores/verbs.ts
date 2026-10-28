@@ -1,6 +1,6 @@
 // The verb reference in the current language: verbs, their translations and the search index.
 import { defineStore } from 'pinia';
-import { shallowRef } from 'vue';
+import { ref, shallowRef } from 'vue';
 import { loadVerbs } from '../services/content.ts';
 import { conjugate, DEFAULT_TENSES, IMPERATIVE_PERSONS, MOODS, nonPersonal, PERSONS, searchVerbs, TENSES, type VerbIndex } from '../services/verbs.ts';
 
@@ -8,6 +8,8 @@ export type VerbsState = { state: 'loading' } | { state: 'ready'; index: VerbInd
 
 export const useVerbsStore = defineStore('verbs', () => {
   const current = shallowRef<VerbsState>({ state: 'loading' });
+  // the tense choice is open (the right column and the chapters panel open it)
+  const settingsOpen = ref(false);
   let lang = '';
   let pending: Promise<void> | null = null;
 
@@ -27,6 +29,6 @@ export const useVerbsStore = defineStore('verbs', () => {
   const find = (id: string) => index()?.byId.get(id) ?? null;
 
   // the grammar of the reference, for the pages
-  return { current, load, search, find, conjugate, nonPersonal,
+  return { current, settingsOpen, load, search, find, conjugate, nonPersonal,
     tenses: TENSES, moods: MOODS, defaultTenses: DEFAULT_TENSES, persons: PERSONS, imperativePersons: IMPERATIVE_PERSONS };
 });

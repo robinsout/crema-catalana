@@ -27,3 +27,20 @@ test('the menu leads to the verbs; a form finds its verb; the tense choice stays
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow).toBeLessThanOrEqual(0);
 });
+
+test('the search field stays on screen while the list scrolls, below the phone header', async ({ page }) => {
+  await page.goto('./#/ru/verbs');
+  await expect(page.locator('.verb-list li').first()).toBeVisible();
+  await page.evaluate(() => window.scrollTo(0, 3000));
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(1000);
+  const input = page.getByRole('searchbox');
+  await expect(input).toBeInViewport();
+  // nothing covers it: the element under its middle is the field itself
+  const covered = await input.evaluate((el) => {
+    const r = el.getBoundingClientRect();
+    return document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2) !== el;
+  });
+  expect(covered).toBe(false);
+  await input.fill('fer');
+  await expect(page.locator('.verb-inf').first()).toHaveText('fer');
+});

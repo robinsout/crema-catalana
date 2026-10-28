@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, watch } from 'vue';
+import { computed, onBeforeUnmount, watch } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import { useCatalogStore } from '../stores/catalog.ts';
 import { useProgressStore } from '../stores/progress.ts';
 import { useVerbsStore } from '../stores/verbs.ts';
+import { useTocStore } from '../stores/toc.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import { useTenseNames } from '../composables/useTenseNames.ts';
 import type { Mood } from '../types/index.ts';
@@ -38,6 +39,15 @@ const moods = computed(() => {
   })).filter((m) => m.tenses.length);
 });
 const persons = (mood: Mood): string[] => (mood === 'imp' ? IMPERATIVE_PERSONS : PERSONS);
+
+// the tenses shown, by mood: the right column, the chapters panel and the phone menu jump to them
+const toc = useTocStore();
+watch([moods, () => shown.value.has('nonpers'), verb], () => {
+  const list = moods.value.flatMap((m) => m.tenses.map((x) => ({ id: `t-${x.id}`, title: x.mood === 'imp' ? m.name : x.ca, group: m.name })));
+  if (verb.value && shown.value.has('nonpers')) list.push({ id: 't-nonpers', title: MOODS.nonpers, group: MOODS.nonpers });
+  toc.show(list, 'verb');
+}, { immediate: true, flush: 'post' });
+onBeforeUnmount(() => { verbs.settingsOpen = false; });
 </script>
 
 <template>
@@ -48,17 +58,12 @@ const persons = (mood: Mood): string[] => (mood === 'imp' ? IMPERATIVE_PERSONS :
     <RouterLink class="btn" :to="{ name: 'verbs', params: { lang: catalog.lang } }">{{ t('verbs.back') }}</RouterLink>
   </template>
   <template v-else>
-    <header class="lesson-head">
+    <header class="lesson-head verb-head">
       <p class="eyebrow"><RouterLink :to="{ name: 'verbs', params: { lang: catalog.lang } }">{{ t('verbs.back') }}</RouterLink></p>
       <h2 lang="ca">{{ verb.id }}</h2>
-      <p class="sub">{{ verb.tr }}</p>
-      <p class="meta">
-        {{ t('verbs.rank', { rank: verb.rank }) }}
-        <template v-if="model"> · {{ t('verbs.model') }}
-          <RouterLink v-if="model.listed" :to="{ name: 'verb', params: { lang: catalog.lang, verb: model.name } }" lang="ca">{{ model.name }}</RouterLink>
-          <span v-else lang="ca">{{ model.name }}</span>
-        </template>
-      </p>
+      <p class="sub">{{ verb.tr }} <span class="meta">· {{ t('verbs.rank', { rank: verb.rank }) }}<template v-if="model"> · {{ t('verbs.model') }}
+        <RouterLink v-if="model.listed" :to="{ name: 'verb', params: { lang: catalog.lang, verb: model.name } }" lang="ca">{{ model.name }}</RouterLink>
+        <span v-else lang="ca">{{ model.name }}</span></template></span></p>
     </header>
     <article class="lesson verb">
       <TenseSettings />
@@ -66,26 +71,26 @@ const persons = (mood: Mood): string[] => (mood === 'imp' ? IMPERATIVE_PERSONS :
       <section v-for="m in moods" :key="m.mood" class="mood">
         <h3 lang="ca">{{ m.name }}</h3>
         <div class="conj-grid">
-          <div v-for="x in m.tenses" :key="x.id" class="conj-card" :data-tense="x.id">
+          <div v-for="x in m.tenses" :id="`t-${x.id}`" :key="x.id" class="conj-card" :data-tense="x.id">
             <h4><span lang="ca">{{ x.mood === 'imp' ? 'Afirmatiu' : x.ca }}</span> <small>{{ tenseName(x.id) }}</small></h4>
             <table class="conj">
               <tbody>
                 <tr v-for="r in x.rows" :key="r.person">
                   <th lang="ca">{{ persons(m.mood)[r.person] }}</th>
-                  <td lang="ca"><template v-if="r.forms.length">{{ r.forms[0] }}<span v-for="f in r.forms.slice(1)" :key="f" class="alt"> / {{ f }}</span></template><template v-else>—</template></td>
+                  <td lang="ca"><template v-if="r.forms.length"><span class="form">{{ r.forms[0] }}</span><span v-for="f in r.forms.slice(1)" :key="f" class="alt"> / <span class="form">{{ f }}</span></span></template><template v-else>—</template></td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
       </section>
-      <section v-if="shown.has('nonpers')" class="mood">
+      <section v-if="shown.has('nonpers')" id="t-nonpers" class="mood">
         <h3 lang="ca">{{ MOODS.nonpers }}</h3>
         <table class="conj nonpers">
           <tbody>
             <tr v-for="r in nonPersonal(verb)" :key="r.id">
               <th lang="ca">{{ r.ca }}</th>
-              <td lang="ca">{{ r.forms[0] }}<span v-for="f in r.forms.slice(1)" :key="f" class="alt"> / {{ f }}</span></td>
+              <td lang="ca"><span class="form">{{ r.forms[0] }}</span><span v-for="f in r.forms.slice(1)" :key="f" class="alt"> / <span class="form">{{ f }}</span></span></td>
             </tr>
           </tbody>
         </table>

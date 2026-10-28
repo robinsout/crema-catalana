@@ -65,9 +65,28 @@ watch(open, (v) => { if (v) toc.panelOpen = false; });
 watch(() => toc.panelOpen, (v) => { if (v) open.value = false; });
 // Escape closes the menu and the chapters panel
 const onKey = (e: KeyboardEvent): void => { if (e.key === 'Escape') { open.value = false; toc.panelOpen = false; } };
-onMounted(() => { window.addEventListener('keydown', onKey); document.addEventListener('click', swallowGhostClick, true); });
-onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.removeEventListener('click', swallowGhostClick, true); });
-const hasChapters = computed(() => route.name === 'lesson' && toc.kind === 'lesson' && toc.sections.length > 0);
+// the height of the sticky header of phones (it depends on the notch and the fonts): sticky parts of a
+// page, like the verb search, stay right below it (--phone-header, used only on narrow screens)
+let headerSize: ResizeObserver | null = null;
+const brandBox = ref<HTMLElement | null>(null);
+function measureHeader(): void {
+  if (!side.value || open.value) return; // the open menu fills the screen: keep the closed height
+  document.documentElement.style.setProperty('--phone-header', `${side.value.getBoundingClientRect().height}px`);
+}
+onMounted(() => {
+  window.addEventListener('keydown', onKey);
+  document.addEventListener('click', swallowGhostClick, true);
+  if (typeof ResizeObserver !== 'undefined' && brandBox.value) {
+    headerSize = new ResizeObserver(measureHeader);
+    headerSize.observe(brandBox.value);
+  }
+});
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', onKey);
+  document.removeEventListener('click', swallowGhostClick, true);
+  headerSize?.disconnect();
+});
+const hasChapters = computed(() => ((route.name === 'lesson' && toc.kind === 'lesson') || (route.name === 'verb' && toc.kind === 'verb')) && toc.sections.length > 0);
 // a chapter from the phone menu: the open menu pushes the page down, so it closes before the jump
 async function jumpFromMenu(id: string): Promise<void> {
   open.value = false;
@@ -84,10 +103,10 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
 
 <template>
   <div ref="side" class="side" :class="{ 'menu-open': open }">
-    <div class="brand">
+    <div ref="brandBox" class="brand">
       <h1>Quadern de català<span>{{ t('brand.subtitle') }}</span></h1>
       <div class="brand-actions">
-        <button v-if="hasChapters" class="nav-toggle toc-toggle" type="button" aria-controls="toc-panel" :aria-expanded="toc.panelOpen" @click="toc.panelOpen = !toc.panelOpen">{{ t('toc.toggle') }}</button>
+        <button v-if="hasChapters" class="nav-toggle toc-toggle" type="button" aria-controls="toc-panel" :aria-expanded="toc.panelOpen" @click="toc.panelOpen = !toc.panelOpen">{{ toc.kind === 'verb' ? t('toc.toggleVerb') : t('toc.toggle') }}</button>
         <button class="nav-toggle menu-toggle" type="button" aria-controls="nav" :aria-expanded="open" :aria-label="t('nav.toggle')" @click="open = !open"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path v-if="open" d="M4 4l10 10M14 4L4 14" /><path v-else d="M2 4h14M2 9h14M2 14h14" /></svg></button>
       </div>
     </div>

@@ -122,7 +122,7 @@
   "verbs.tenses": "Tenses: {on} of {total} shown",
   "verbs.tensesHint": "Switch off the tenses you have not studied yet: they disappear from every verb page. The choice is kept in this browser.",
   "verbs.tensesAll": "All",
-  "verbs.tensesDefault": "Default (A1–A2)",
+  "verbs.tensesDefault": "Only A1–A2",
   "verbs.noTenses": "All tenses are switched off: turn on the ones you need above.",
   "verbs.source": "Forms from the Softcatalà dictionary (catalan-dict-tools, GPL/LGPL), IEC 2016 spelling. Translations are ours.",
   "tense.indPres": "present",
@@ -143,5 +143,8 @@
   "tense.subjPlusq": "pluperfect subjunctive",
   "tense.subjPerif": "periphrastic past subjunctive",
   "tense.imp": "imperative",
-  "tense.nonpers": "infinitive, gerund, participle"
+  "tense.nonpers": "infinitive, gerund, participle",
+  "toc.verb": "In this verb",
+  "toc.toggleVerb": "Tenses",
+  "verbs.configure": "Tenses: {on} of {total} — choose"
 }

@@ -122,3 +122,36 @@ test('every verb has a translation in every language, and no other keys', () => 
     assert.deepEqual(Object.keys(tr).filter((k) => !ids.includes(k)), [], `${lang}: extra`);
   }
 });
+
+test('the right column of a verb page lists its tenses by mood, not the chapters of the last lesson', async () => {
+  const { w, router } = await openApp('/ru/lesson/b1-01');
+  assert.ok(w.find('aside.toc li').exists(), 'a lesson shows its chapters');
+  await router.push('/ru/verbs');
+  await flushPromises();
+  assert.ok(!w.find('aside.toc li').exists(), 'the list: nothing on the right');
+  await router.push('/ru/verbs/cantar');
+  await flushPromises();
+  const toc = w.find('aside.toc');
+  assert.match(toc.find('p').text(), /В этом глаголе/);
+  assert.deepEqual(toc.findAll('li.toc-group').map((e) => e.text()), ['Indicatiu', 'Subjuntiu', 'Imperatiu', 'Formes no personals']);
+  const items = toc.findAll('li:not(.toc-group) a').map((e) => e.text());
+  assert.equal(items.length, 7, 'the indicative and subjunctive tenses switched on');
+  assert.equal(items[0], 'Present');
+  // a mood of one section is a link itself, not a heading over the same name
+  assert.deepEqual(toc.findAll('li.toc-group a').map((e) => e.text()), ['Imperatiu', 'Formes no personals']);
+  assert.ok(document.getElementById('t-ind.pres'), 'each tense is a jump target');
+  // the last line opens the tense choice
+  await toc.find('a.toc-settings').trigger('click');
+  await flushPromises();
+  assert.equal((w.find('article.verb details.tense-settings').element as HTMLDetailsElement).open, true);
+  await w.find('article.verb input[data-tense="ind.cond"]').setValue(false);
+  await flushPromises();
+  assert.equal(w.find('aside.toc').findAll('li:not(.toc-group) a').length, 6);
+});
+
+test('the chapters button and the phone menu offer the tenses of a verb page', async () => {
+  const { w } = await openApp('/ru/verbs/cantar');
+  const button = w.find('.toc-toggle');
+  assert.equal(button.text(), 'Времена');
+  assert.ok(w.find('#nav .nav-chapters li').exists());
+});

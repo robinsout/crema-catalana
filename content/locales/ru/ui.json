@@ -122,7 +122,7 @@
   "verbs.tenses": "Времена: показано {on} из {total}",
   "verbs.tensesHint": "Выключите времена, которые ещё не проходили, — они скроются на страницах всех глаголов. Выбор хранится в этом браузере.",
   "verbs.tensesAll": "Все",
-  "verbs.tensesDefault": "Как было (A1–A2)",
+  "verbs.tensesDefault": "Только A1–A2",
   "verbs.noTenses": "Все времена выключены — включите нужные выше.",
   "verbs.source": "Формы — из словаря Softcatalà (catalan-dict-tools, GPL/LGPL), орфография IEC 2016. Перевод — наш.",
   "tense.indPres": "настоящее",
@@ -143,5 +143,8 @@
   "tense.subjPlusq": "сослагательное предпрошедшее",
   "tense.subjPerif": "сослагательное перифрастическое",
   "tense.imp": "повелительное",
-  "tense.nonpers": "инфинитив, герундий, причастие"
+  "tense.nonpers": "инфинитив, герундий, причастие",
+  "toc.verb": "В этом глаголе",
+  "toc.toggleVerb": "Времена",
+  "verbs.configure": "Времена: {on} из {total} — настроить"
 }

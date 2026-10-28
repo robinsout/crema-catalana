@@ -7,7 +7,8 @@ import { useI18n } from '../composables/useI18n.ts';
 import { useTenseNames } from '../composables/useTenseNames.ts';
 
 const progress = useProgressStore();
-const { tenses: TENSES, moods: MOODS, defaultTenses: DEFAULT_TENSES } = useVerbsStore();
+const verbs = useVerbsStore();
+const { tenses: TENSES, moods: MOODS, defaultTenses: DEFAULT_TENSES } = verbs;
 const { t } = useI18n();
 const tenseName = useTenseNames();
 
@@ -23,19 +24,19 @@ function toggle(id: TenseId): void {
 </script>
 
 <template>
-  <details class="tense-settings">
+  <details id="tense-settings" class="tense-settings" :open="verbs.settingsOpen" @toggle="verbs.settingsOpen = ($event.target as HTMLDetailsElement).open">
     <summary>{{ t('verbs.tenses', { on: on.size, total: TENSES.length }) }}</summary>
     <p class="meta">{{ t('verbs.tensesHint') }}</p>
-    <fieldset v-for="g in groups" :key="g.mood">
-      <legend lang="ca">{{ g.name }}</legend>
-      <label v-for="x in g.tenses" :key="x.id">
-        <input type="checkbox" :checked="on.has(x.id)" :data-tense="x.id" @change="toggle(x.id)">
-        <span><span lang="ca">{{ x.ca }}</span> <small>{{ tenseName(x.id) }}</small></span>
-      </label>
-    </fieldset>
     <div class="head-actions">
       <button class="btn tenses-all" type="button" @click="set(TENSES.map((x) => x.id))">{{ t('verbs.tensesAll') }}</button>
       <button class="btn tenses-default" type="button" @click="set(DEFAULT_TENSES)">{{ t('verbs.tensesDefault') }}</button>
     </div>
+    <fieldset v-for="g in groups" :key="g.mood">
+      <legend lang="ca">{{ g.name }}</legend>
+      <label v-for="x in g.tenses" :key="x.id">
+        <input type="checkbox" :checked="on.has(x.id)" :data-tense="x.id" @change="toggle(x.id)">
+        <span><span lang="ca">{{ x.ca }}</span><small>{{ tenseName(x.id) }}</small></span>
+      </label>
+    </fieldset>
   </details>
 </template>

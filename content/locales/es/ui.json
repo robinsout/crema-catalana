@@ -122,7 +122,7 @@
   "verbs.tenses": "Tiempos: {on} de {total} visibles",
   "verbs.tensesHint": "Desactiva los tiempos que aún no has estudiado: desaparecen de la página de cada verbo. La elección se guarda en este navegador.",
   "verbs.tensesAll": "Todos",
-  "verbs.tensesDefault": "Por defecto (A1–A2)",
+  "verbs.tensesDefault": "Solo A1–A2",
   "verbs.noTenses": "Todos los tiempos están desactivados: activa arriba los que necesites.",
   "verbs.source": "Formas del diccionario de Softcatalà (catalan-dict-tools, GPL/LGPL), ortografía IEC 2016. Traducciones nuestras.",
   "tense.indPres": "presente",
@@ -143,5 +143,8 @@
   "tense.subjPlusq": "pluscuamperfecto de subjuntivo",
   "tense.subjPerif": "perifrástico de subjuntivo",
   "tense.imp": "imperativo",
-  "tense.nonpers": "infinitivo, gerundio, participio"
+  "tense.nonpers": "infinitivo, gerundio, participio",
+  "toc.verb": "En este verbo",
+  "toc.toggleVerb": "Tiempos",
+  "verbs.configure": "Tiempos: {on} de {total} — elegir"
 }
