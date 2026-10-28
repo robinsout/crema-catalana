@@ -172,7 +172,7 @@ main:focus { outline: none; }
 .lesson-list a.soon { color: var(--muted); }
 .lesson-list a.soon .t { font-weight: 400; }
 .lesson-list a.soon .n { border-style: dashed; }
-.lesson-list .plan-link .n { border-color: var(--accent); color: var(--accent); font-size: 0.8rem; }
+.lesson-list .plan-link .n, .lesson-list .verbs-link .n { border-color: var(--accent); color: var(--accent); font-size: 0.8rem; }
 .lesson-list .part-h {
   font: 500 0.66rem var(--font-display);
   letter-spacing: .08em;

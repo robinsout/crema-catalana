@@ -116,7 +116,7 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
           </RouterLink>
         </li>
         <li>
-          <RouterLink class="plan-link verbs-link" :to="{ name: 'verbs', params: { lang: catalog.lang } }" :aria-current="isVerbs ? 'page' : undefined" active-class="" exact-active-class="">
+          <RouterLink class="verbs-link" :to="{ name: 'verbs', params: { lang: catalog.lang } }" :aria-current="isVerbs ? 'page' : undefined" active-class="" exact-active-class="">
             <span class="n">V</span>
             <span><span class="t">{{ t('nav.verbs') }}</span><span class="s">{{ t('nav.verbsSub') }}</span></span>
           </RouterLink>
