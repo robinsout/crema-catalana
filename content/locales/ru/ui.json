@@ -161,6 +161,7 @@
   "trainer.right": "Верно",
   "trainer.almost": "Почти",
   "trainer.almostAccent": "нужно ударение:",
+  "trainer.accentPending": "Не хватает ударения — поставьте его или нажмите «Дальше»",
   "trainer.almostShort": "почти",
   "trainer.previous": "Предыдущее:",
   "trainer.allTenses": "все времена",

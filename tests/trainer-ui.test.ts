@@ -117,14 +117,41 @@ test('after a hint the task waits for "Next" and shows the tense row', async () 
   assert.ok(!w.find('.tr-row').exists());
 });
 
-test('a form without its accent is "almost": counted, but waits for "Next"', async () => {
-  saveProgress(JSON.stringify({ done: {}, last: null, verbTenses: ['ind.pres'], trainer: { settings: { persons: [false, false, true, false, false, false], limit: 300, kinds: { regular: true, irregular: true }, goal: 25 } } }));
+const ellOnly = () => saveProgress(JSON.stringify({ done: {}, last: null, verbTenses: ['ind.pres'], trainer: { settings: { persons: [false, false, true, false, false, false], limit: 300, kinds: { regular: true, irregular: true }, goal: 25 } } }));
+
+test('a form without its accent waits: the accent can still be put on the last letter (press and hold)', async () => {
+  ellOnly();
   const { w } = await openApp('/ru/trainer');
   assert.equal(w.find('.tr-verb').text(), 'ser'); // ell · és
-  await type(w, 'es');
-  assert.match(w.find('.tr-status').text(), /Почти/);
-  assert.match(w.find('.tr-status').text(), /és/);
+  await type(w, 'es'); // the keyboard puts "e", then replaces it with "é"
+  assert.equal(trainer().day?.done ?? 0, 0, 'not counted yet');
+  assert.ok(!w.find('.tr-field').classes().includes('is-almost'));
+  assert.match(w.find('.tr-status').text(), /ударени/);
   assert.equal(w.find('.tr-action').text(), 'Дальше ↵');
+  await type(w, 'és');
+  assert.ok(w.find('.tr-field').classes().includes('is-correct'));
+  assert.equal(trainer().day.exact, 1);
+});
+
+test('a form without its accent, confirmed with Enter: "almost", and the right form under "previous"', async () => {
+  ellOnly();
+  const { w } = await openApp('/ru/trainer');
+  await type(w, 'es');
+  await w.find('.tr-input').trigger('keydown', { key: 'Enter' });
+  await flushPromises();
+  assert.equal(trainer().day.done, 1);
+  assert.equal((trainer().day as { almost?: number }).almost, 1);
+  assert.equal((w.find('.tr-input').element as HTMLInputElement).value, '');
+  assert.match(w.find('.tr-prev').text(), /≈.*ser · ell, ella · Present → és/);
+});
+
+test('the button confirms a form without its accent too', async () => {
+  ellOnly();
+  const { w } = await openApp('/ru/trainer');
+  await type(w, 'es');
+  await w.find('.tr-action').trigger('click');
+  await flushPromises();
+  assert.equal((trainer().day as { almost?: number }).almost, 1);
 });
 
 test('a hint gives the next letter; the form typed with a hint counts as a mistake', async () => {

@@ -143,11 +143,12 @@ const verbLink = (id: string) => ({ name: 'verb', params: { lang: catalog.lang, 
           :aria-label="t('trainer.fieldLabel', { verb: trainer.verb.id, person: personName(trainer.task), tense: caTense(trainer.task.tense) })"
           @input="onInput" @keydown="onKey" @focus="focused = true" @blur="focused = false">
         <button v-if="trainer.phase === 'pause'" class="tr-action tr-check" type="button" :aria-label="t('trainer.next')" @pointerdown="actionOnly" @click="trainer.next()">✓</button>
-        <button v-else-if="trainer.phase === 'review'" class="tr-action btn btn-solid tr-next" type="button" @pointerdown="actionOnly" @click="trainer.next(); focusField()">{{ t('trainer.nextKey') }}</button>
+        <button v-else-if="trainer.phase === 'review' || trainer.accentPending" class="tr-action btn btn-solid tr-next" type="button" @pointerdown="actionOnly" @click="trainer.next(); focusField()">{{ t('trainer.nextKey') }}</button>
         <button v-else class="tr-action tr-hint" type="button" @pointerdown="actionOnly" @click="trainer.hint(); focusField()">{{ t('trainer.hint') }}<kbd>?</kbd></button>
       </div>
       <div class="tr-status" aria-live="polite">
         <span v-if="wrongNow" class="bad">{{ t('trainer.wrong') }}</span>
+        <span v-else-if="trainer.accentPending">{{ t('trainer.accentPending') }}</span>
         <button v-if="trainer.phase === 'typing' && trainer.hinted.length" class="tr-reveal" type="button" @pointerdown="actionOnly" @click="trainer.reveal()">{{ t('trainer.reveal') }}</button>
         <span v-else-if="trainer.phase === 'pause'" class="ok">{{ t('trainer.right') }}</span>
         <span v-else-if="trainer.phase === 'review' && trainer.outcome === 'almost'"><b>{{ t('trainer.almost') }}</b> — {{ t('trainer.almostAccent') }} <b lang="ca">{{ trainer.check.target }}</b></span>

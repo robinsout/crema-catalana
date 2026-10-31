@@ -1,5 +1,7 @@
 // Conjugation trainer (BACKLOG I-12): the current task, what is typed, and the steps between tasks.
-// typing → (right) pause → next task; typing → (with a hint, or only accents wrong) review → next.
+// typing → (right) pause → next task; typing → (with a hint) review → next.
+// A form typed with only accents missing does not finish by itself: the keyboard may still replace the
+// last letter (press and hold: "e", then "é"). Next (Enter) takes it as "almost" and goes on.
 // A wrong letter stops typing until it is deleted; fixed, it is only a typo and the form counts as right.
 // A right form stays on screen for PAUSE_MS; a letter typed meanwhile starts the next task at once.
 // When the day's count reaches the goal, a summary comes instead of the next task.
@@ -43,6 +45,8 @@ export const useTrainerStore = defineStore('trainer', () => {
   const verb = computed(() => (task.value ? index.value?.byId.get(task.value.verb) ?? null : null));
   const forms = computed(() => (task.value && verb.value ? answersFor(verb.value, task.value.tense, task.value.person) : []));
   const check = computed(() => checkTyping(typed.value, forms.value));
+  // typed in full, only accents missing: waits for the accent or for Next
+  const accentPending = computed(() => phase.value === 'typing' && check.value.done === 'almost' && !hinted.value.length);
 
   function clearTimer(): void {
     if (timer) clearTimeout(timer);
@@ -81,7 +85,8 @@ export const useTrainerStore = defineStore('trainer', () => {
 
   function evaluate(): void {
     const c = check.value;
-    if (c.done) finish(hinted.value.length ? 'missed' : c.done);
+    if (hinted.value.length) { if (c.done) finish('missed'); }
+    else if (c.done === 'exact') finish('exact');
   }
 
   function advance(): void {
@@ -129,6 +134,7 @@ export const useTrainerStore = defineStore('trainer', () => {
   }
 
   function next(): void {
+    if (accentPending.value) { finish('almost'); advance(); return; }
     if (phase.value === 'pause' || phase.value === 'review') advance();
   }
 
@@ -154,6 +160,6 @@ export const useTrainerStore = defineStore('trainer', () => {
 
   const leave = (): void => clearTimer();
 
-  return { goals: GOALS, limits: LIMITS, only, task, typed, hinted, phase, outcome, previous, settings, day, pool, verb, forms, check,
+  return { goals: GOALS, limits: LIMITS, only, task, typed, hinted, phase, outcome, previous, settings, day, pool, verb, forms, check, accentPending,
     start, input, hint, reveal, next, more, rest, carryOn, setSettings, refresh, leave };
 });

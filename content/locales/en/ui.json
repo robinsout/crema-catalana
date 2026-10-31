@@ -161,6 +161,7 @@
   "trainer.right": "Right",
   "trainer.almost": "Almost",
   "trainer.almostAccent": "mind the accent:",
+  "trainer.accentPending": "An accent is missing — add it or press Next",
   "trainer.almostShort": "almost",
   "trainer.previous": "Previous:",
   "trainer.allTenses": "all tenses",

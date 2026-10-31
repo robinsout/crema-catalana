@@ -161,6 +161,7 @@
   "trainer.right": "Correcto",
   "trainer.almost": "Casi",
   "trainer.almostAccent": "falta el acento:",
+  "trainer.accentPending": "Falta un acento: ponlo o pulsa «Siguiente»",
   "trainer.almostShort": "casi",
   "trainer.previous": "Anterior:",
   "trainer.allTenses": "todos los tiempos",
