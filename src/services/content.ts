@@ -2,8 +2,7 @@
 import { contentApi } from '../api/content.ts';
 import { browserLanguages } from '../api/browser.ts';
 import { buildVocab } from './vocab.ts';
-import { verbIndex, type VerbIndex } from './verbs.ts';
-import type { AudioIndex, Course, ExerciseSet, Lesson, LocaleCatalog, LocalesIndex, UiStrings, VocabGroup } from '../types/index.ts';
+import type { AudioIndex, Course, ExerciseSet, Lesson, LocaleCatalog, LocalesIndex, UiStrings, VerbListData, VerbsData, VerbTranslations, VocabGroup } from '../types/index.ts';
 
 export interface CourseBase {
   locales: LocalesIndex;
@@ -77,8 +76,8 @@ export async function loadVocab(lesson: Pick<Lesson, 'id' | 'hasVocab'>, lang: s
 export const loadExercises = (lesson: Pick<Lesson, 'id'>, lang: string): Promise<ExerciseSet> =>
   contentApi.exercises(lang, lesson.id);
 
-// The verb reference with translations into a language; missing translations do not hide the verbs.
-export async function loadVerbs(lang: string): Promise<VerbIndex> {
-  const [data, tr] = await Promise.all([contentApi.verbs(), contentApi.localeVerbs(lang).catch(() => null)]);
-  return verbIndex(data, tr);
-}
+// The verb reference: the forms of all verbs (the largest file of the site), the infinitives alone
+// (a small file, shown first) and the translations into a language. Missing translations do not hide the verbs.
+export const loadVerbData = (): Promise<VerbsData> => contentApi.verbs();
+export const loadVerbList = (): Promise<VerbListData> => contentApi.verbList();
+export const loadVerbTranslations = (lang: string): Promise<VerbTranslations | null> => contentApi.localeVerbs(lang).catch(() => null);

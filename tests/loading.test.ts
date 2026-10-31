@@ -9,6 +9,9 @@ import App from '../src/App.vue';
 import { createAppRouter } from '../src/router.ts';
 import { useCatalogStore } from '../src/stores/catalog.ts';
 import { useLessonsStore } from '../src/stores/lessons.ts';
+import { readFileSync } from 'node:fs';
+import { verbList } from '../src/services/verbs.ts';
+import type { VerbsData } from '../src/types/index.ts';
 import { stubSite } from './helpers.ts';
 
 let wrapper: VueWrapper | null = null;
@@ -117,4 +120,58 @@ test('the verb reference has no audio and does not load its index', async () => 
   const requested = stubSite({ 'verbs/verbs.json': { verbs: [] }, 'locales/ru/verbs.json': {} });
   await openApp('/ru/verbs');
   assert.ok(!requested.includes('audio/index.json'), `requested: ${requested.join(', ')}`);
+});
+
+// The verb reference: the full forms (~90 KB) are the largest file of the site.
+const verbData = {
+  source: 'test',
+  verbs: [
+    { id: 'ser', inf: 'ser', ger: 'sent', part: ['estat', 'estada', 'estats', 'estades'], forms: { 'ind.pres': ['soc', 'ets', 'és', 'som', 'sou', 'són'] } },
+    { id: 'anar', inf: 'anar', ger: 'anant', part: ['anat', 'anada', 'anats', 'anades'], forms: { 'ind.pres': ['vaig', 'vas', 'va', 'anem', 'aneu', 'van'] } },
+  ],
+};
+const verbSite = (extra: Record<string, unknown> = {}) => stubSite({
+  'verbs/verbs.json': verbData,
+  'verbs/list.json': verbList(verbData as VerbsData),
+  'locales/ru/verbs.json': { ser: 'быть', anar: 'идти' },
+  'locales/ru/ui.json': JSON.parse(readFileSync('content/locales/ru/ui.json', 'utf8')),
+  ...extra,
+});
+
+test('the verb list is the infinitives of the full reference, in the same order', () => {
+  const full = JSON.parse(readFileSync('content/verbs/verbs.json', 'utf8')) as VerbsData;
+  const list = JSON.parse(readFileSync('content/verbs/list.json', 'utf8')) as unknown;
+  assert.deepEqual(list, verbList(full), 'run npm run verbs (or the list generator) again');
+});
+
+test('a verb page starts loading the verbs together with the course, not after the page code', async () => {
+  const requested = verbSite();
+  const gate = holdBack(/^(course|locales\/index)\.json$/);
+  const router = createAppRouter(createMemoryHistory());
+  const pushed = router.push('/ru/verbs/anar');
+  await vi.waitFor(() => assert.ok(requested.includes('verbs/verbs.json'), `requested: ${requested.join(', ')}`));
+  assert.ok(requested.includes('locales/ru/verbs.json'));
+  gate.release();
+  await pushed;
+});
+
+test('the verb list shows before the forms arrive; a search by a form works once they are there', async () => {
+  verbSite();
+  const gate = holdBack(/^verbs\/verbs\.json$/);
+  await openApp('/ru/verbs');
+  const w = wrapper!;
+  assert.deepEqual(w.findAll('.verb-inf').map((e) => e.text()), ['ser', 'anar']);
+  assert.match(w.find('.verb-list').text(), /идти/);
+  await w.find('.verb-search input').setValue('vaig');
+  assert.ok(!w.find('.verb-list').text().includes('anar'));
+  assert.ok(!w.text().includes('Ничего не нашлось'), 'not "nothing found" while the forms are loading');
+  gate.release();
+  await flushPromises();
+  assert.match(w.find('.verb-list').text(), /anar/);
+});
+
+test('without the list file the verbs still show from the full reference', async () => {
+  verbSite({ 'verbs/list.json': undefined });
+  await openApp('/ru/verbs');
+  assert.deepEqual(wrapper!.findAll('.verb-inf').map((e) => e.text()), ['ser', 'anar']);
 });

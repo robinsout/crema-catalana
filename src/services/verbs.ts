@@ -1,7 +1,7 @@
 // Verb reference (BACKLOG I-11): the tenses of a verb, built from the simple forms stored in
 // content/verbs/verbs.json; compound tenses take haver, periphrastic ones anar. Also the pronoun of
 // pronominal verbs, search over infinitives, forms and translations, and the choice of tenses.
-import type { CompoundTense, Mood, PersonForms, SimpleTense, TenseId, TenseInfo, VerbDef, VerbsData, VerbTranslations } from '../types/index.ts';
+import type { CompoundTense, Mood, PersonForms, SimpleTense, TenseId, TenseInfo, VerbDef, VerbListData, VerbsData, VerbTranslations } from '../types/index.ts';
 
 export type { Mood, TenseId };
 
@@ -146,16 +146,31 @@ export const normalizeQuery = (q: string): string => q.trim().toLowerCase()
   .replace(/l[·.•]l/g, 'll')
   .normalize('NFD').replace(/[̀-ͯ]/g, '').normalize('NFC');
 
-export interface VerbEntry extends VerbDef {
+// What the list and the search need of a verb
+export interface VerbSummary extends Pick<VerbDef, 'id' | 'inf'> {
   tr: string; // translation into the reader's language ('' when missing)
   rank: number; // place in the frequency list, from 1
 }
 
-export interface VerbIndex {
-  verbs: VerbEntry[];
-  byId: Map<string, VerbEntry>;
-  forms: Map<string, { verb: VerbEntry; form: string; tense: TenseId }[]>; // normalized form → where it is
+export interface VerbEntry extends VerbDef, VerbSummary {}
+
+export interface SearchIndex<V extends VerbSummary = VerbEntry> {
+  verbs: V[];
+  forms: Map<string, { verb: V; form: string; tense: TenseId }[]>; // normalized form → where it is
 }
+
+export interface VerbIndex extends SearchIndex<VerbEntry> {
+  byId: Map<string, VerbEntry>;
+}
+
+// content/verbs/list.json: the infinitives of the full reference, in its order
+export const verbList = (data: VerbsData): VerbListData => ({ verbs: data.verbs.map(({ id, inf }) => ({ id, inf })) });
+
+// The list before the forms arrive: search by infinitive and translation only
+export const listIndex = (list: VerbListData, tr: VerbTranslations | null): SearchIndex<VerbSummary> => ({
+  verbs: list.verbs.map(({ id, inf }, i) => ({ id, inf, tr: tr?.[id] ?? '', rank: i + 1 })),
+  forms: new Map(),
+});
 
 export function verbIndex(data: VerbsData, tr: VerbTranslations | null): VerbIndex {
   const verbs = data.verbs.map((v, i): VerbEntry => ({ ...v, tr: tr?.[v.id] ?? '', rank: i + 1 }));
@@ -175,8 +190,8 @@ export function verbIndex(data: VerbsData, tr: VerbTranslations | null): VerbInd
   return { verbs, byId: new Map(verbs.map((v) => [v.id, v])), forms };
 }
 
-export interface SearchHit {
-  verb: VerbEntry;
+export interface SearchHit<V extends VerbSummary = VerbEntry> {
+  verb: V;
   form?: string; // the form the query matched, when it is not the infinitive
   tense?: TenseId;
 }
@@ -184,15 +199,15 @@ export interface SearchHit {
 // The whole list for an empty query. Otherwise: the infinitive itself and infinitives starting with
 // the query, then verbs having the query as a form ("vaig" → anar), then translations containing it,
 // then infinitives containing it; each group in frequency order.
-export function searchVerbs(index: VerbIndex, query: string): SearchHit[] {
+export function searchVerbs<V extends VerbSummary>(index: SearchIndex<V>, query: string): SearchHit<V>[] {
   const q = normalizeQuery(query);
   if (!q) return index.verbs.map((verb) => ({ verb }));
   // a pronoun typed before the form: "m'adono", "em dutxo"
   const bare = q.replace(/^(?:[mts]'|(?:em|et|es|ens|us) )/, '');
-  const name = (v: VerbEntry): string => normalizeQuery(v.id);
-  const groups: SearchHit[][] = [[], [], [], [], []];
-  const seen = new Set<VerbEntry>();
-  const put = (g: number, hit: SearchHit): void => {
+  const name = (v: V): string => normalizeQuery(v.id);
+  const groups: SearchHit<V>[][] = [[], [], [], [], []];
+  const seen = new Set<V>();
+  const put = (g: number, hit: SearchHit<V>): void => {
     if (seen.has(hit.verb)) return;
     seen.add(hit.verb);
     groups[g]!.push(hit);

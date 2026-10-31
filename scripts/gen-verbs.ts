@@ -8,6 +8,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildVerbs, parseFrequencies, parseModels, parseVerbList } from './lib/verbs.ts';
+import { verbList } from '../src/services/verbs.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dict = process.argv[2];
@@ -28,4 +29,7 @@ const data = buildVerbs(read('resultats/lt/diccionari.txt').split('\n'), parseVe
 const out = join(root, 'content/verbs/verbs.json');
 mkdirSync(dirname(out), { recursive: true });
 writeFileSync(out, `{"source":${JSON.stringify(data.source)},"verbs":[\n${data.verbs.map((v) => JSON.stringify(v)).join(',\n')}\n]}\n`);
-console.log(`${data.verbs.length} verbs → content/verbs/verbs.json`);
+// the infinitives alone: the list page shows them before the forms arrive
+const list = verbList(data);
+writeFileSync(join(root, 'content/verbs/list.json'), `{"verbs":[\n${list.verbs.map((v) => JSON.stringify(v)).join(',\n')}\n]}\n`);
+console.log(`${data.verbs.length} verbs → content/verbs/verbs.json, list.json`);

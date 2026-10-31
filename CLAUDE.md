@@ -30,7 +30,7 @@
   - `vocab/<id>.json` и `locales/<lang>/vocab/<id>.json` — словарь урока: каталанские слова (общие) и перевод;
   - `locales/<lang>/exercises/<id>.json` — интерактивные упражнения урока;
   - `audio/index.json` + `audio/clips/<hash>.mp3` — общее хранилище озвучки: одна запись на фразу;
-  - `verbs/verbs.json` — справочник глаголов (генерируется, руками не править) и `locales/<lang>/verbs.json` — перевод глаголов.
+  - `verbs/verbs.json` и `verbs/list.json` — справочник глаголов и его инфинитивы (генерируются, руками не править) и `locales/<lang>/verbs.json` — перевод глаголов.
 - `scripts/gen-audio.ts`, `scripts/gen-icons.ts` (`npm run icons`: PNG-иконки из `content/favicon.svg`), `scripts/lib/` — TypeScript, запускается `node` напрямую (Node 24 убирает типы сам).
 
 ## Как добавить урок
@@ -48,7 +48,7 @@
 
 ## Справочник глаголов
 - Раздел `#/<lang>/verbs` (список с поиском) и `#/<lang>/verbs/<глагол>` (все времена), BACKLOG I-11. Без озвучки.
-- Список глаголов в порядке частоты — `authoring/verbs.txt` (ручная чистка частотного списка Softcatalà; `adonar-se`, `asseure's` — возвратные). Данные: `git clone --depth 1 https://github.com/Softcatala/catalan-dict-tools` и `npm run verbs -- <путь>` → `content/verbs/verbs.json` (только простые времена центрального варианта, орфография 2016; правила отбора и порядка вариантов — `scripts/lib/verbs.ts`, ручные предпочтения — `PREFERRED`). Данные словаря — GPL/LGPL (указано в README).
+- Список глаголов в порядке частоты — `authoring/verbs.txt` (ручная чистка частотного списка Softcatalà; `adonar-se`, `asseure's` — возвратные). Данные: `git clone --depth 1 https://github.com/Softcatala/catalan-dict-tools` и `npm run verbs -- <путь>` → `content/verbs/verbs.json` и `content/verbs/list.json` (только инфинитивы: список показывается до прихода форм, тест сверяет с `verbs.json`) (только простые времена центрального варианта, орфография 2016; правила отбора и порядка вариантов — `scripts/lib/verbs.ts`, ручные предпочтения — `PREFERRED`). Данные словаря — GPL/LGPL (указано в README).
 - Составные и перифрастические времена, местоимения возвратных глаголов, поиск — `src/services/verbs.ts`; интерфейс получает их через стор `verbs`.
 - Новый глагол в списке → перевод во всех языках (`content/locales/<lang>/verbs.json`, тест сверяет полноту).
 

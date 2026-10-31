@@ -7,6 +7,7 @@ import { useCatalogStore } from './stores/catalog.ts';
 import { useProgressStore } from './stores/progress.ts';
 import { useSyncStore } from './stores/sync.ts';
 import { useVisitsStore } from './stores/visits.ts';
+import { useVerbsStore } from './stores/verbs.ts';
 // the main pages come with the app: a lazy page would be one more round trip after the data
 import PlanView from './views/PlanView.vue';
 import LessonView from './views/LessonView.vue';
@@ -51,6 +52,11 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     const catalog = useCatalogStore();
     const progress = useProgressStore();
     const requested = param(to.params.lang);
+    // the verbs (the largest data of the site) start loading together with the course, not after the page code
+    if (to.name === 'verbs' || to.name === 'verb') {
+      const guess = requested || progress.data.locale;
+      if (guess) void useVerbsStore().load(guess);
+    }
     await catalog.load(requested, (locales) =>
       preferredLanguage(locales, { saved: progress.data.locale, hasHistory: progress.hasHistory(), browser: readerLanguages() }),
     requested || progress.data.locale || '');

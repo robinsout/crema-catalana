@@ -206,6 +206,12 @@ export interface VerbsData {
   verbs: VerbDef[]; // in order of frequency
 }
 
+// The infinitives alone, in the same order (content/verbs/list.json, made from verbs.json): the list
+// page shows them before the forms arrive
+export interface VerbListData {
+  verbs: Pick<VerbDef, 'id' | 'inf'>[];
+}
+
 // ...and their translation (content/locales/<lang>/verbs.json): verb id → meaning
 export type VerbTranslations = Record<string, string>;
 
