@@ -8,6 +8,7 @@ import { useTocStore } from '../stores/toc.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import { useTenseNames } from '../composables/useTenseNames.ts';
 import type { Mood } from '../types/index.ts';
+import AreaTabs from '../components/AreaTabs.vue';
 import TenseSettings from '../components/TenseSettings.vue';
 
 const catalog = useCatalogStore();
@@ -51,6 +52,7 @@ onBeforeUnmount(() => { verbs.settingsOpen = false; });
 </script>
 
 <template>
+  <AreaTabs />
   <p v-if="verbs.current.state === 'loading'" class="status">{{ t('verbs.loading') }}</p>
   <p v-else-if="verbs.current.state === 'error'" class="status">{{ t('verbs.loadError') }}</p>
   <template v-else-if="!verb">
@@ -59,7 +61,8 @@ onBeforeUnmount(() => { verbs.settingsOpen = false; });
   </template>
   <template v-else>
     <header class="lesson-head verb-head">
-      <p class="eyebrow"><RouterLink :to="{ name: 'verbs', params: { lang: catalog.lang } }">{{ t('verbs.back') }}</RouterLink></p>
+      <p class="eyebrow"><RouterLink :to="{ name: 'verbs', params: { lang: catalog.lang } }">{{ t('verbs.back') }}</RouterLink>
+        · <RouterLink class="verb-practice" :to="{ name: 'trainer', params: { lang: catalog.lang }, query: { verb: verb.id } }">{{ t('trainer.practise') }}</RouterLink></p>
       <h2 lang="ca">{{ verb.id }}</h2>
       <p class="sub">{{ verb.tr }} <span class="meta">· {{ t('verbs.rank', { rank: verb.rank }) }}<template v-if="model"> · {{ t('verbs.model') }}
         <RouterLink v-if="model.listed" :to="{ name: 'verb', params: { lang: catalog.lang, verb: model.name } }" lang="ca">{{ model.name }}</RouterLink>

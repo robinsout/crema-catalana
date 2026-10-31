@@ -13,6 +13,8 @@
 //           + lastLesson: id — the last lesson opened (`last` may be the plan); stays on the device
 //   v6      + locale: language code of the last page opened; stays on the device
 //   v7      + verbTenses: [tense id] — tenses shown in the verb reference; stays on the device
+//   v8      + trainer: { settings, day, queue, step, last } — the conjugation trainer (services/trainer.ts);
+//             stays on the device
 
 import { browserStorage } from '../api/storage.ts';
 import type { ExerciseResult, ReadingPoint, SectionMark, StorageBackend } from '../types/index.ts';
@@ -33,6 +35,7 @@ export interface Progress {
   lastLesson?: string;
   locale?: string;
   verbTenses?: unknown; // checked where it is used (services/verbs.ts: enabledTenses)
+  trainer?: unknown; // checked where it is used (services/trainer.ts: parseTrainer)
   [field: string]: unknown; // fields written by future versions are kept
 }
 

@@ -6,6 +6,7 @@ import { useVerbsStore } from '../stores/verbs.ts';
 import { useTocStore } from '../stores/toc.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import { useTenseNames } from '../composables/useTenseNames.ts';
+import AreaTabs from '../components/AreaTabs.vue';
 import TenseSettings from '../components/TenseSettings.vue';
 
 const catalog = useCatalogStore();
@@ -32,12 +33,10 @@ const caName = (id: string): string => verbs.tenses.find((x) => x.id === id)?.ca
 </script>
 
 <template>
-  <header class="lesson-head">
-    <p class="eyebrow">{{ t('nav.verbs') }}</p>
-    <h2>{{ t('verbs.title') }}</h2>
-    <p class="sub">{{ t('verbs.sub', { count: index?.verbs.length ?? '' }) }}</p>
-  </header>
+  <AreaTabs />
+  <h2 class="visually-hidden">{{ t('verbs.title') }}</h2>
   <article class="lesson verbs">
+    <p v-if="index" class="verbs-meta">{{ t('verbs.sub', { count: index.verbs.length }) }}</p>
     <label class="verb-search">
       <span class="visually-hidden">{{ t('verbs.searchLabel') }}</span>
       <input v-model="query" type="search" :placeholder="t('verbs.search')" :aria-label="t('verbs.searchLabel')" autocomplete="off" autocapitalize="off" spellcheck="false">

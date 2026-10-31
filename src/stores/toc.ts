@@ -9,7 +9,7 @@ export interface TocSection {
   group?: string; // a heading above the sections of one group (the mood of a tense)
 }
 
-export type TocKind = 'plan' | 'lesson' | 'verb';
+export type TocKind = 'plan' | 'lesson' | 'verb' | 'trainer'; // trainer: its settings in the right column
 
 export const useTocStore = defineStore('toc', () => {
   const sections = ref<TocSection[]>([]);

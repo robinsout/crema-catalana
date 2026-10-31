@@ -29,6 +29,7 @@ function pageName(): string {
   if (route.name === 'sync') return t('nav.sync');
   if (route.name === 'verbs') return t('nav.verbs');
   if (route.name === 'verb') return String(route.params.verb ?? '');
+  if (route.name === 'trainer') return t('nav.trainer');
   return '';
 }
 

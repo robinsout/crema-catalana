@@ -34,6 +34,27 @@ for (const scheme of ['light', 'dark'] as const) {
   }
 }
 
+// the trainer: one known task, empty and after a mistake
+const ONE_TASK = JSON.stringify({ done: {}, last: null, verbTenses: ['ind.pres'],
+  trainer: { settings: { persons: [false, false, false, true, false, false], limit: 300, kinds: { regular: true, irregular: true }, goal: 25 } } });
+for (const scheme of ['light', 'dark'] as const) {
+  test(`trainer, ${scheme} theme @visual`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: scheme });
+    await page.addInitScript((saved) => localStorage.setItem('quadern-catala', saved), ONE_TASK);
+    await page.goto('./#/ru/trainer?verb=servir');
+    await expect(page.locator('.tr-card')).toBeVisible();
+    await page.evaluate(() => document.fonts.ready);
+    await expect(page).toHaveScreenshot(`trainer-${scheme}.png`);
+    await page.locator('.tr-field').click();
+    await page.keyboard.type('servx');
+    await page.keyboard.press('Backspace');
+    await page.keyboard.type('im');
+    await expect(page.locator('.tr-row')).toBeVisible();
+    await page.locator('.tr-input').blur();
+    await expect(page).toHaveScreenshot(`trainer-mistake-${scheme}.png`);
+  });
+}
+
 for (const scheme of ['light', 'dark'] as const) {
   test(`lesson vocabulary, ${scheme} theme @visual`, async ({ page }) => {
     await page.emulateMedia({ colorScheme: scheme });

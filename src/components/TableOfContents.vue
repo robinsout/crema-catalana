@@ -4,6 +4,7 @@ import { useTocStore } from '../stores/toc.ts';
 import { useProgressStore } from '../stores/progress.ts';
 import { useVerbsStore } from '../stores/verbs.ts';
 import { useI18n } from '../composables/useI18n.ts';
+import TrainerSettings from './TrainerSettings.vue';
 
 // `panel`: the chapters panel of mid-width screens, opened from the header;
 // `menu`: the chapters at the top of the phone menu, which closes itself before the jump (`jump`)
@@ -26,7 +27,13 @@ const openSettings = (): void => { verbs.settingsOpen = true; go('tense-settings
 </script>
 
 <template>
-  <aside :id="panel ? 'toc-panel' : undefined" :class="kindClass" :aria-label="t('toc.label')">
+  <template v-if="toc.kind === 'trainer'">
+    <aside v-if="!panel && !menu" class="toc tr-side" :aria-label="t('trainer.set')">
+      <p>{{ t('trainer.set') }}</p>
+      <TrainerSettings />
+    </aside>
+  </template>
+  <aside v-else :id="panel ? 'toc-panel' : undefined" :class="kindClass" :aria-label="t('toc.label')">
     <template v-if="toc.sections.length">
       <p>{{ heading }}</p>
       <ol>
