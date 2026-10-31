@@ -34,6 +34,8 @@ const done = computed(() => (lesson.value ? progress.isDone(lesson.value.id) : f
 const plan = computed(() => ({ name: 'plan', params: { lang: catalog.lang } }));
 
 watch(lesson, (l) => { if (l?.file) lessons.load(l, catalog.lang); }, { immediate: true });
+// the audio index (the largest file of a visit) does not compete with the lesson text
+watch(() => content.value.state, (state) => { if (state !== 'loading') void audio.load(); }, { immediate: true });
 // a lesson not yet written in this language: the languages it can be read in (found by the router)
 const writtenIn = computed(() => (lesson.value && !lesson.value.file ? catalog.writtenIn[lesson.value.id] ?? [] : []));
 const inLanguage = (code: string) => ({ name: 'lesson', params: { lang: code, id: lesson.value?.id ?? '' } });

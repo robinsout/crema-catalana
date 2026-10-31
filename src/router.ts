@@ -7,6 +7,9 @@ import { useCatalogStore } from './stores/catalog.ts';
 import { useProgressStore } from './stores/progress.ts';
 import { useSyncStore } from './stores/sync.ts';
 import { useVisitsStore } from './stores/visits.ts';
+// the main pages come with the app: a lazy page would be one more round trip after the data
+import PlanView from './views/PlanView.vue';
+import LessonView from './views/LessonView.vue';
 
 // "#b1-04" (links before the router) → "/b1-04", resolved by the catch-all route
 export function legacyHashToPath(hash: string): string | null {
@@ -34,8 +37,8 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
   const router = createRouter({
     history,
     routes: [
-      { path: '/:lang/plan/:focus?', name: 'plan', component: () => import('./views/PlanView.vue') },
-      { path: '/:lang/lesson/:id', name: 'lesson', component: () => import('./views/LessonView.vue') },
+      { path: '/:lang/plan/:focus?', name: 'plan', component: PlanView },
+      { path: '/:lang/lesson/:id', name: 'lesson', component: LessonView },
       { path: '/:lang/verbs', name: 'verbs', component: () => import('./views/VerbsView.vue') },
       { path: '/:lang/verbs/:verb', name: 'verb', component: () => import('./views/VerbView.vue') },
       { path: '/:lang/sync/:code?', name: 'sync', component: () => import('./views/SyncView.vue') },
@@ -49,7 +52,8 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     const progress = useProgressStore();
     const requested = param(to.params.lang);
     await catalog.load(requested, (locales) =>
-      preferredLanguage(locales, { saved: progress.data.locale, hasHistory: progress.hasHistory(), browser: readerLanguages() }));
+      preferredLanguage(locales, { saved: progress.data.locale, hasHistory: progress.hasHistory(), browser: readerLanguages() }),
+    requested || progress.data.locale || '');
     const lang = catalog.lang;
 
     if (to.name === 'other') {

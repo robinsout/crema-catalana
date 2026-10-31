@@ -2,6 +2,7 @@
 import { defineStore } from 'pinia';
 import { shallowReactive } from 'vue';
 import { loadExercises, loadLessonHtml, loadVocab } from '../services/content.ts';
+import { exerciseIds } from '../services/exercises.ts';
 import type { ExerciseSet, Lesson, VocabGroup } from '../types/index.ts';
 
 export type LessonContent =
@@ -29,13 +30,15 @@ export const useLessonsStore = defineStore('lessons', () => {
     if (byFile.get(file)?.state === 'ready') return;
     byFile.set(file, { state: 'loading' });
     try {
-      const [html, words] = await Promise.all([
+      // all three together: one round trip; a lesson stays readable without its vocabulary and
+      // exercises (the placeholders just stay empty)
+      const [html, words, set] = await Promise.all([
         loadLessonHtml(lesson),
-        loadVocab(lesson, lang).catch(() => null), // a lesson stays readable without its vocabulary
+        loadVocab(lesson, lang).catch(() => null),
+        loadExercises(lesson, lang).catch(() => ({})),
       ]);
       vocabByFile.set(file, words);
-      // a lesson stays readable without its exercises: the placeholders just stay empty
-      exercisesByFile.set(file, await loadExercises(lesson, lang, html).catch(() => ({})));
+      exercisesByFile.set(file, exerciseIds(html).length ? set : {});
       byFile.set(file, { state: 'ready', html });
     } catch {
       byFile.set(file, { state: 'error' });

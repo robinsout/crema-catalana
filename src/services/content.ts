@@ -2,7 +2,6 @@
 import { contentApi } from '../api/content.ts';
 import { browserLanguages } from '../api/browser.ts';
 import { buildVocab } from './vocab.ts';
-import { exerciseIds } from './exercises.ts';
 import { verbIndex, type VerbIndex } from './verbs.ts';
 import type { AudioIndex, Course, ExerciseSet, Lesson, LocaleCatalog, LocalesIndex, UiStrings, VocabGroup } from '../types/index.ts';
 
@@ -74,11 +73,9 @@ export async function loadVocab(lesson: Pick<Lesson, 'id' | 'hasVocab'>, lang: s
   return buildVocab(source, locale);
 }
 
-// Exercises placed in a lesson; nothing is fetched when the lesson has no placeholders.
-export async function loadExercises(lesson: Pick<Lesson, 'id'>, lang: string, html: string): Promise<ExerciseSet> {
-  if (!exerciseIds(html).length) return {};
-  return contentApi.exercises(lang, lesson.id);
-}
+// Exercises of a lesson, fetched together with its text (a lesson without them gets a 404)
+export const loadExercises = (lesson: Pick<Lesson, 'id'>, lang: string): Promise<ExerciseSet> =>
+  contentApi.exercises(lang, lesson.id);
 
 // The verb reference with translations into a language; missing translations do not hide the verbs.
 export async function loadVerbs(lang: string): Promise<VerbIndex> {

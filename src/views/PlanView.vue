@@ -7,6 +7,7 @@ import { useProgressStore } from '../stores/progress.ts';
 import { useVisitsStore } from '../stores/visits.ts';
 import { useLessonLink } from '../composables/useLessonLink.ts';
 import { useTocStore } from '../stores/toc.ts';
+import { useAudioStore } from '../stores/audio.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import UnitRow from '../components/UnitRow.vue';
 import ExtraRow from '../components/ExtraRow.vue';
@@ -60,6 +61,8 @@ async function scrollToFocus(): Promise<void> {
   release = stop;
 }
 
+// unit titles are voiced; the index (the largest file of a visit) loads after the plan is shown
+onMounted(() => { void useAudioStore().load(); });
 onMounted(() => {
   toc.collect(article.value, 'plan');
   scrollToFocus();

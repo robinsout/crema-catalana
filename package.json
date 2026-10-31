@@ -27,7 +27,8 @@
     "adapt": "node scripts/content.ts adapt",
     "register": "node scripts/content.ts register",
     "look": "node scripts/look.ts",
-    "verbs": "node scripts/gen-verbs.ts"
+    "verbs": "node scripts/gen-verbs.ts",
+    "perf": "node scripts/perf.ts"
   },
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.3.0",

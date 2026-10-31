@@ -67,7 +67,10 @@ export const useCatalogStore = defineStore('catalog', () => {
   }
 
   // Loads a language; an unknown or empty code falls back to `fallback` (the default language by default).
-  async function load(requested: string, fallback?: (locales: LocalesIndex) => string): Promise<void> {
+  // The pack of `guess` (the requested language, or the likely one) starts loading together with the
+  // course: one network round trip instead of two. A wrong guess just costs an unused request.
+  async function load(requested: string, fallback?: (locales: LocalesIndex) => string, guess = requested): Promise<void> {
+    if (guess && guess !== lang.value) loadPack(guess).catch(() => {});
     try {
       base.value = await loadBase();
       const code = pickLanguage(base.value.locales, requested, fallback?.(base.value.locales));

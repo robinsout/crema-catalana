@@ -31,9 +31,7 @@ export function useSay(root: Ref<HTMLElement | null>) {
   // phrases look clickable only when there is audio
   watchEffect(() => document.documentElement.classList.toggle('can-say', audio.available));
 
-  onMounted(() => {
-    root.value?.addEventListener('click', onClick);
-    audio.load();
-  });
+  // the audio index is loaded by the pages with phrases, once their own content is there
+  onMounted(() => root.value?.addEventListener('click', onClick));
   onBeforeUnmount(() => root.value?.removeEventListener('click', onClick));
 }
