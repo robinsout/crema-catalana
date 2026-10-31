@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build } from 'vite';
+import { readManifest } from '../scripts/lib/sw.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -27,6 +28,18 @@ test('vite builds a standalone site with all course data', { timeout: 60_000 }, 
     for (const f of ['favicon.svg', 'favicon-32.png', 'apple-touch-icon.png', 'course.json', 'locales/index.json', 'locales/ru/ui.json', 'locales/ru/catalog.json', 'locales/ru/lessons/intro.html', 'audio/index.json']) {
       assert.ok(existsSync(join(out, f)), `${f} missing in build`);
     }
+    // the service worker (BACKLOG I-6): one script with the manifest of this build
+    const sw = readFileSync(join(out, 'sw.js'), 'utf8');
+    assert.ok(!/^\s*(import|export)\s/m.test(sw), 'a classic script: module workers are not everywhere');
+    const m = readManifest(sw);
+    assert.ok(m, 'the manifest is in sw.js');
+    assert.match(m.version, /^[0-9a-f]{12}$/);
+    const entry = index.match(/src="\.\/(assets\/[^"]+\.js)"/)?.[1] ?? '';
+    assert.ok(m.shell.includes(entry), 'the entry code is kept on install');
+    assert.ok(m.shell.every((f) => /^assets\/.+\.(js|css)$/.test(f)), 'only code in the shell, fonts when used');
+    assert.ok(m.assets.some((f) => f.endsWith('.woff2')));
+    for (const f of [...m.shell, ...m.assets, ...m.data]) assert.ok(existsSync(join(out, f)), `${f} of the manifest is in the build`);
+    assert.ok(m.data.includes('course.json') && m.data.includes('locales/ru/catalog.json'));
   } finally {
     rmSync(out, { recursive: true, force: true });
   }

@@ -10,6 +10,7 @@ export class HttpError extends Error {
 
 async function get(url: string): Promise<Response> {
   // Revalidate on every load: Pages lets browsers cache for 10 min, which hides a fresh deploy.
+  // With the service worker (sw/core.ts) the answer comes from its cache, refreshed with each new version.
   const res = await fetch(url, { cache: 'no-cache' });
   if (!res.ok) throw new HttpError(url, res.status);
   return res;

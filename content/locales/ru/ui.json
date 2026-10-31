@@ -146,5 +146,7 @@
   "tense.nonpers": "инфинитив, герундий, причастие",
   "toc.verb": "В этом глаголе",
   "toc.toggleVerb": "Времена",
-  "verbs.configure": "Времена: {on} из {total} — настроить"
+  "verbs.configure": "Времена: {on} из {total} — настроить",
+  "update.ready": "Сайт обновился",
+  "update.reload": "Обновить"
 }

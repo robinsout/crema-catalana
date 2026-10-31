@@ -14,6 +14,9 @@ export default defineConfig({
     baseURL: 'http://localhost:4173/',
     trace: 'retain-on-failure',
     locale: 'ru-RU', // the main audience; tests of other languages set their own (test.use)
+    // the service worker answers from its cache and hides requests from page.route: only its own
+    // tests (e2e/offline.spec.ts) turn it on
+    serviceWorkers: 'block',
   },
   expect: {
     toHaveScreenshot: { maxDiffPixelRatio: 0.001, animations: 'disabled' },

@@ -146,5 +146,7 @@
   "tense.nonpers": "infinitive, gerund, participle",
   "toc.verb": "In this verb",
   "toc.toggleVerb": "Tenses",
-  "verbs.configure": "Tenses: {on} of {total} — choose"
+  "verbs.configure": "Tenses: {on} of {total} — choose",
+  "update.ready": "The site has been updated",
+  "update.reload": "Reload"
 }

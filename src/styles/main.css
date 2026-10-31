@@ -687,3 +687,13 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
 :is(.toc, .toc-panel, .nav-chapters) .toc-settings { display: block; margin-top: 16px; padding-left: 0; border-left: 0; color: var(--accent); text-decoration: none; }
 :is(.toc, .toc-panel, .nav-chapters) .toc-settings:hover { text-decoration: underline; }
 .verb-source { margin-top: 32px; }
+
+/* ---------- a new version of the site (service worker, BACKLOG I-6) ---------- */
+.update-notice {
+  position: fixed; z-index: 40; left: 16px; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  max-width: 420px; margin-inline: auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 10px 10px 16px; border-radius: 12px;
+  background: var(--surface); border: 1px solid var(--line); box-shadow: 0 10px 30px rgb(0 0 0 / .18);
+  font-size: var(--step--1);
+}

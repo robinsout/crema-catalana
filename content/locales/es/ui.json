@@ -146,5 +146,7 @@
   "tense.nonpers": "infinitivo, gerundio, participio",
   "toc.verb": "En este verbo",
   "toc.toggleVerb": "Tiempos",
-  "verbs.configure": "Tiempos: {on} de {total} — elegir"
+  "verbs.configure": "Tiempos: {on} de {total} — elegir",
+  "update.ready": "El sitio se ha actualizado",
+  "update.reload": "Recargar"
 }

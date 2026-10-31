@@ -3,6 +3,7 @@ import { ref, watchEffect } from 'vue';
 import { RouterView, useRoute } from 'vue-router';
 import SideNav from './components/SideNav.vue';
 import TableOfContents from './components/TableOfContents.vue';
+import UpdateNotice from './components/UpdateNotice.vue';
 import { useCatalogStore } from './stores/catalog.ts';
 import { useTocStore } from './stores/toc.ts';
 import { useI18n } from './composables/useI18n.ts';
@@ -50,5 +51,6 @@ const skipToContent = (): void => main.value?.focus();
     </main>
     <TableOfContents v-if="catalog.ready" />
     <TableOfContents v-if="catalog.ready && toc.panelOpen" panel />
+    <UpdateNotice v-if="catalog.ready" />
   </div>
 </template>

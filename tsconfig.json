@@ -35,6 +35,7 @@
     "e2e/**/*",
     "playwright.config.ts",
     "server/**/*",
-    "shared/**/*"
+    "shared/**/*",
+    "sw/**/*"
   ]
 }
