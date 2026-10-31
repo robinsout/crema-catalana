@@ -162,3 +162,16 @@ test('?verb= trains one verb; a verb page links to it', async () => {
   await flushPromises();
   assert.equal(w.find('a.verb-practice').attributes('href'), '/ru/trainer?verb=fer');
 });
+
+test('after a first hint the whole answer can be shown; it counts as a mistake', async () => {
+  presentOnly();
+  const { w } = await openApp('/ru/trainer');
+  assert.ok(!w.find('.tr-reveal').exists(), 'not before a hint');
+  await w.find('.tr-action').trigger('click');
+  await flushPromises();
+  await w.find('.tr-reveal').trigger('click');
+  await flushPromises();
+  assert.equal((w.find('.tr-input').element as HTMLInputElement).value, 'soc');
+  assert.equal(trainer().day.missed, 1);
+  assert.match(w.find('.tr-row').text(), /som/);
+});

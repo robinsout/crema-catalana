@@ -121,6 +121,15 @@ export const useTrainerStore = defineStore('trainer', () => {
     evaluate();
   }
 
+  // after a hint: the whole form at once (a mistake, like the hint)
+  function reveal(): void {
+    if (phase.value !== 'typing') return;
+    const target = [...check.value.target];
+    hinted.value = target.map((_, i) => i);
+    typed.value = target.join('');
+    evaluate();
+  }
+
   function next(): void {
     if (phase.value === 'pause' || phase.value === 'review') advance();
   }
@@ -148,5 +157,5 @@ export const useTrainerStore = defineStore('trainer', () => {
   const leave = (): void => clearTimer();
 
   return { goals: GOALS, limits: LIMITS, only, task, typed, hinted, slipped, phase, outcome, previous, settings, day, pool, verb, forms, check,
-    start, input, hint, next, more, rest, carryOn, setSettings, refresh, leave };
+    start, input, hint, reveal, next, more, rest, carryOn, setSettings, refresh, leave };
 });

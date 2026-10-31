@@ -49,6 +49,8 @@ watch([moods, () => shown.value.has('nonpers'), verb], () => {
   toc.show(list, 'verb');
 }, { immediate: true, flush: 'post' });
 onBeforeUnmount(() => { verbs.settingsOpen = false; });
+// the menu of the verbs area lists the verbs opened last
+watch(verb, (v) => { if (v) progress.addRecentVerb(v.id); }, { immediate: true });
 </script>
 
 <template>

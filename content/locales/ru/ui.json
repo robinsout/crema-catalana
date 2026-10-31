@@ -1,6 +1,5 @@
 {
   "_dateLocale": "ru-RU",
-  "brand.subtitle": "Уроки к курсу",
   "nav.toggle": "Меню",
   "nav.label": "Уроки",
   "nav.plan": "Учебный план",
@@ -107,7 +106,6 @@
   "visits.code": "Код счётчика открыт.",
   "visits.off": "Не считать мои визиты",
   "nav.verbs": "Глаголы",
-  "nav.verbsSub": "Спряжение по всем временам",
   "verbs.title": "Спряжение глаголов",
   "verbs.sub": "Глаголов: {count} · по частоте · центральный вариант",
   "verbs.search": "глагол, перевод, форма: vaig",
@@ -189,5 +187,11 @@
   "trainer.regular": "правильные",
   "trainer.irregular": "неправильные",
   "trainer.goal": "Цель на день",
-  "trainer.count": "Заданий в наборе: {n}"
+  "trainer.count": "Заданий в наборе: {n}",
+  "nav.areas": "Разделы",
+  "nav.lessons": "Уроки",
+  "nav.trainerToday": "Тренажёр сегодня",
+  "nav.trainerGoal": "{n} из {goal}",
+  "nav.recent": "Недавние",
+  "trainer.reveal": "Показать ответ"
 }

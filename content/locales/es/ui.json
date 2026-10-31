@@ -1,6 +1,5 @@
 {
   "_dateLocale": "es-ES",
-  "brand.subtitle": "Lecciones para el curso",
   "nav.toggle": "Menú",
   "nav.label": "Lecciones",
   "nav.plan": "Plan de estudio",
@@ -107,7 +106,6 @@
   "visits.code": "El código del contador es abierto.",
   "visits.off": "No contar mis visitas",
   "nav.verbs": "Verbos",
-  "nav.verbsSub": "Conjugación en todos los tiempos",
   "verbs.title": "Conjugación de verbos",
   "verbs.sub": "{count} verbos · por frecuencia · catalán central",
   "verbs.search": "verbo, traducción o forma: vaig",
@@ -189,5 +187,11 @@
   "trainer.regular": "regulares",
   "trainer.irregular": "irregulares",
   "trainer.goal": "Objetivo diario",
-  "trainer.count": "Tareas en el conjunto: {n}"
+  "trainer.count": "Tareas en el conjunto: {n}",
+  "nav.areas": "Secciones",
+  "nav.lessons": "Lecciones",
+  "nav.trainerToday": "Práctica de hoy",
+  "nav.trainerGoal": "{n} de {goal}",
+  "nav.recent": "Recientes",
+  "trainer.reveal": "Ver la respuesta"
 }

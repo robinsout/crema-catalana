@@ -832,3 +832,46 @@ details > :not(summary) { margin-top: 8px; padding: 12px 16px; background: var(-
 .toc.tr-side .tr-settings p { font: inherit; letter-spacing: 0; text-transform: none; color: var(--ink); margin: 0; padding: 0; border: 0; }
 .toc.tr-side .tr-settings p.tr-count { color: var(--muted); }
 .toc.tr-side .tr-settings p.tr-count.warn { color: var(--warn); }
+
+/* ===== The two areas of the site: «Уроки | Глаголы» in the header (I-12) ===== */
+.area-switch { flex-shrink: 0; border-radius: 999px; }
+.area-switch > a {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 32px; padding: 4px 14px; border-radius: 999px;
+  font: 600 var(--step--1) var(--font-body); color: var(--accent); text-decoration: none; white-space: nowrap;
+}
+.area-switch > a:hover { background: color-mix(in srgb, var(--surface) 55%, transparent); }
+.area-switch > a[aria-current="page"] { background: var(--surface); color: var(--ink); box-shadow: 0 0 0 1px var(--line); }
+.area-switch > a:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.brand h1 br { display: none; }
+/* phones: «Quadern / de català» on two lines, the switch, then the menu button */
+@media (max-width: 899px) {
+  .brand h1 { font-size: 0.95rem; line-height: 1.12; }
+  .brand h1 br { display: inline; }
+  .brand .area-switch { margin-left: auto; order: 1; }
+  .brand .brand-actions { order: 2; }
+  .side.menu-open .area-switch { background: var(--surface); }
+  .side.menu-open .area-switch > [aria-current="page"] { background: var(--accent-soft); box-shadow: none; }
+}
+/* wide screens: the switch under the title, across the column */
+@media (min-width: 900px) {
+  .brand { flex-wrap: wrap; row-gap: 14px; }
+  .brand h1 { flex: 1; }
+  .brand .area-switch { order: 3; width: 100%; display: flex; }
+  .brand .area-switch > a { flex: 1; }
+}
+
+/* the verbs menu: the trainer's day, search, the tenses, recent verbs */
+.goal-line { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: var(--step--1); color: var(--muted); margin: 0 0 6px; font-variant-numeric: tabular-nums; }
+.goal-line a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.goal-line a:hover { text-decoration: underline; }
+.goal-line b { color: var(--ink); font-weight: 600; }
+.side-search { display: block; margin: 0 0 14px; }
+.side-search input { width: 100%; font: 400 0.95rem var(--font-body); color: var(--ink);
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 8px; padding: 7px 10px; }
+.side-search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.side-tenses { display: block; font-size: var(--step--1); color: var(--accent); text-decoration: none; margin: 0 0 6px; padding: 0 10px; }
+.side-tenses:hover { text-decoration: underline; }
+.lesson-list .recent a { grid-template-columns: minmax(0, 1fr); padding-block: 7px; }
+.lesson-list .recent .t { color: var(--accent); }
+.lesson-list .recent .s { display: inline; margin-left: 6px; }
+.tr-reveal { margin-left: auto; font: 600 var(--step--1) var(--font-body); color: var(--accent); background: none; border: 0; padding: 4px 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }

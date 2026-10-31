@@ -10,6 +10,12 @@ import type { ExerciseResult } from '../types/index.ts';
 import { useCatalogStore } from './catalog.ts';
 import { useVisitsStore } from './visits.ts';
 
+export type Area = 'lessons' | 'verbs' | 'trainer';
+const AREAS: Area[] = ['lessons', 'verbs', 'trainer'];
+const RECENT_MAX = 5;
+// "anar", "adonar-se", "asseure's", "col·laborar"
+const VERB_ID = /^[a-zàèéíïòóúüç·'-]{2,40}$/;
+
 export const useProgressStore = defineStore('progress', () => {
   const data = ref(readSavedProgress());
   const save = () => writeSavedProgress(data.value);
@@ -88,8 +94,25 @@ export const useProgressStore = defineStore('progress', () => {
     data.value.trainer = state;
     save();
   }
+  // the area of the site used last (the site opens there) and, in the verbs area, the tool used last
+  const lastArea = computed<Area | null>(() => (AREAS.includes(data.value.lastArea as Area) ? data.value.lastArea as Area : null));
+  const verbsTab = computed<'verbs' | 'trainer'>(() => (data.value.verbsTab === 'trainer' ? 'trainer' : 'verbs'));
+  function setArea(area: Area): void {
+    if (data.value.lastArea === area && (area === 'lessons' || data.value.verbsTab === area)) return;
+    data.value.lastArea = area;
+    if (area !== 'lessons') data.value.verbsTab = area;
+    save();
+  }
+  // the verb pages opened last, newest first
+  const recentVerbs = computed(() => (Array.isArray(data.value.recentVerbs)
+    ? data.value.recentVerbs.filter((v): v is string => typeof v === 'string' && VERB_ID.test(v)).slice(0, RECENT_MAX) : []));
+  function addRecentVerb(id: string): void {
+    if (!VERB_ID.test(id) || recentVerbs.value[0] === id) return;
+    data.value.recentVerbs = [id, ...recentVerbs.value.filter((v) => v !== id)].slice(0, RECENT_MAX);
+    save();
+  }
   const hasHistory = (): boolean => data.value.last !== null || Object.keys(data.value.done).length > 0;
 
-  return { data, done, last, setLocale, verbTenses, setVerbTenses, trainer, saveTrainer, hasHistory, lastLesson, summary, isDone, toggleDone, setLast, result, saveResult, applySynced,
+  return { data, done, last, setLocale, verbTenses, setVerbTenses, trainer, saveTrainer, lastArea, verbsTab, setArea, recentVerbs, addRecentVerb, hasHistory, lastLesson, summary, isDone, toggleDone, setLast, result, saveResult, applySynced,
     isSectionDone, toggleSection, readingPoint, reachSection };
 });

@@ -15,6 +15,8 @@
 //   v7      + verbTenses: [tense id] — tenses shown in the verb reference; stays on the device
 //   v8      + trainer: { settings, day, queue, step, last } — the conjugation trainer (services/trainer.ts);
 //             stays on the device
+//           + lastArea: 'lessons' | 'verbs' | 'trainer' — the area the site opens in; verbsTab: the
+//             tool of the verbs area used last; recentVerbs: [verb id] — the last verb pages; all on the device
 
 import { browserStorage } from '../api/storage.ts';
 import type { ExerciseResult, ReadingPoint, SectionMark, StorageBackend } from '../types/index.ts';
@@ -36,6 +38,9 @@ export interface Progress {
   locale?: string;
   verbTenses?: unknown; // checked where it is used (services/verbs.ts: enabledTenses)
   trainer?: unknown; // checked where it is used (services/trainer.ts: parseTrainer)
+  lastArea?: unknown; // these three: checked by the progress store
+  verbsTab?: unknown;
+  recentVerbs?: unknown;
   [field: string]: unknown; // fields written by future versions are kept
 }
 

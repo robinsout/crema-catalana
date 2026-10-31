@@ -43,9 +43,9 @@ async function openApp(path: string) {
   return { router, w: wrapper };
 }
 
-test('the menu links to the verbs; the list shows verbs in frequency order with translations', async () => {
+test('the header switch marks the verbs; the list shows verbs in frequency order with translations', async () => {
   const { w } = await openApp('/ru/verbs');
-  assert.equal(w.find('a.verbs-link').attributes('aria-current'), 'page');
+  assert.equal(w.find('.area-switch a[aria-current="page"]').text(), 'Глаголы');
   assert.deepEqual(w.findAll('.verb-inf').map((e) => e.text()), ['ser', 'anar', 'fer', 'adonar-se', 'cantar']);
   assert.match(w.find('.verb-list').text(), /петь/);
   assert.match(document.title, /Глаголы/);

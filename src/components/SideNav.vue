@@ -4,6 +4,8 @@ import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { useCatalogStore } from '../stores/catalog.ts';
 import { useProgressStore } from '../stores/progress.ts';
 import { useTocStore } from '../stores/toc.ts';
+import { useTrainerStore } from '../stores/trainer.ts';
+import { useVerbsStore } from '../stores/verbs.ts';
 import { useI18n } from '../composables/useI18n.ts';
 import { useLessonLink } from '../composables/useLessonLink.ts';
 import type { Lesson } from '../types/index.ts';
@@ -94,9 +96,33 @@ async function jumpFromMenu(id: string): Promise<void> {
   toc.jump(id);
 }
 
+// the two areas: lessons, and verbs (the reference and the trainer); each link goes back to where the reader was
+const inVerbs = computed(() => route.name === 'verbs' || route.name === 'verb' || route.name === 'trainer');
+const lessonsLink = computed(() => {
+  const l = progress.lastLesson ? catalog.find(progress.lastLesson) : null;
+  return l ? linkTo(l) : { name: 'plan', params: { lang: catalog.lang } };
+});
+const verbsLink = computed(() => ({ name: progress.verbsTab, params: { lang: catalog.lang } }));
+// the verbs menu: the trainer's day, search, the tense choice, the verbs opened last
+const trainer = useTrainerStore();
+const verbs = useVerbsStore();
+const goalWidth = computed(() => `${Math.min(100, (trainer.day.done / trainer.settings.goal) * 100)}%`);
+const search = ref('');
+function searchVerbs(): void {
+  const q = search.value.trim();
+  void router.push({ name: 'verbs', params: { lang: catalog.lang }, query: q ? { q } : {} });
+  search.value = '';
+}
+function openTenses(): void {
+  verbs.settingsOpen = true;
+  if (route.name !== 'verbs' && route.name !== 'verb' && route.name !== 'trainer') void router.push({ name: 'verbs', params: { lang: catalog.lang } });
+  else void nextTick(() => toc.jump('tense-settings'));
+}
+watch(() => catalog.lang, (lang) => { if (inVerbs.value) void verbs.load(lang); });
+const recent = computed(() => progress.recentVerbs.map((id) => ({ id, tr: verbs.find(id)?.tr ?? '' })));
+
 const summary = computed(() => progress.summary);
 const isPlan = computed(() => route.name === 'plan');
-const isVerbs = computed(() => route.name === 'verbs' || route.name === 'verb');
 const isCurrent = (l: Lesson): boolean => route.name === 'lesson' && route.params.id === l.id;
 const width = computed(() => (summary.value.ready ? `${(summary.value.done / summary.value.ready) * 100}%` : '0'));
 </script>
@@ -104,7 +130,11 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
 <template>
   <div ref="side" class="side" :class="{ 'menu-open': open }">
     <div ref="brandBox" class="brand">
-      <h1>Quadern de català<span>{{ t('brand.subtitle') }}</span></h1>
+      <h1>Quadern <br>de català</h1>
+      <nav class="pills area-switch" :aria-label="t('nav.areas')">
+        <RouterLink :to="lessonsLink" :aria-current="inVerbs ? undefined : 'page'" active-class="" exact-active-class="">{{ t('nav.lessons') }}</RouterLink>
+        <RouterLink :to="verbsLink" :aria-current="inVerbs ? 'page' : undefined" active-class="" exact-active-class="">{{ t('nav.verbs') }}</RouterLink>
+      </nav>
       <div class="brand-actions">
         <button v-if="hasChapters" class="nav-toggle toc-toggle" type="button" aria-controls="toc-panel" :aria-expanded="toc.panelOpen" @click="toc.panelOpen = !toc.panelOpen">{{ toc.kind === 'verb' ? t('toc.toggleVerb') : t('toc.toggle') }}</button>
         <button class="nav-toggle menu-toggle" type="button" aria-controls="nav" :aria-expanded="open" :aria-label="t('nav.toggle')" @click="open = !open"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path v-if="open" d="M4 4l10 10M14 4L4 14" /><path v-else d="M2 4h14M2 9h14M2 14h14" /></svg></button>
@@ -113,11 +143,17 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
     <div class="panot" aria-hidden="true"></div>
     <nav id="nav" ref="nav" class="nav" :class="{ open }" :aria-label="t('nav.label')">
       <TableOfContents v-if="hasChapters" menu @jump="jumpFromMenu" />
-      <p class="progress">
-        <span>{{ t('progress.done', summary) }}</span>
-        <span>{{ t('progress.ready', summary) }}</span>
-      </p>
-      <div class="progress-bar"><i :style="{ width }"></i></div>
+      <template v-if="inVerbs">
+        <p class="goal-line"><RouterLink :to="{ name: 'trainer', params: { lang: catalog.lang } }">{{ t('nav.trainerToday') }}</RouterLink><b>{{ t('nav.trainerGoal', { n: trainer.day.done, goal: trainer.settings.goal }) }}</b></p>
+        <div class="progress-bar"><i :style="{ width: goalWidth }"></i></div>
+      </template>
+      <template v-else>
+        <p class="progress">
+          <span>{{ t('progress.done', summary) }}</span>
+          <span>{{ t('progress.ready', summary) }}</span>
+        </p>
+        <div class="progress-bar"><i :style="{ width }"></i></div>
+      </template>
       <RouterLink class="sync-link" :to="{ name: 'sync', params: { lang: catalog.lang } }">
         <span class="sync-icon" aria-hidden="true">⇅</span><SyncStatusLine />
       </RouterLink>
@@ -127,17 +163,25 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
           <option v-for="l in catalog.languages" :key="l.code" :value="l.code" :lang="l.code">{{ l.name }}</option>
         </select>
       </label>
-      <ul class="lesson-list">
+      <template v-if="inVerbs">
+        <form class="side-search" role="search" @submit.prevent="searchVerbs">
+          <input v-model="search" type="search" :placeholder="t('verbs.search')" :aria-label="t('verbs.searchLabel')" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
+        </form>
+        <a class="side-tenses" href="#tense-settings" @click.prevent="openTenses">{{ t('verbs.configure', { on: progress.verbTenses.length, total: verbs.tenses.length }) }}</a>
+        <ul v-if="recent.length" class="lesson-list">
+          <li class="part-h">{{ t('nav.recent') }}</li>
+          <li v-for="v in recent" :key="v.id" class="recent">
+            <RouterLink :to="{ name: 'verb', params: { lang: catalog.lang, verb: v.id } }" active-class="" exact-active-class="">
+              <span><span class="t" lang="ca">{{ v.id }}</span><span v-if="v.tr" class="s">{{ v.tr }}</span></span>
+            </RouterLink>
+          </li>
+        </ul>
+      </template>
+      <ul v-else class="lesson-list">
         <li>
           <RouterLink class="plan-link" :to="{ name: 'plan', params: { lang: catalog.lang } }" :aria-current="isPlan ? 'page' : undefined" active-class="" exact-active-class="">
             <span class="n">☰</span>
             <span><span class="t">{{ t('nav.plan') }}</span><span class="s">{{ t('nav.planSub', { course: catalog.catalog.course.title ?? '' }) }}</span></span>
-          </RouterLink>
-        </li>
-        <li>
-          <RouterLink class="verbs-link" :to="{ name: 'verbs', params: { lang: catalog.lang } }" :aria-current="isVerbs ? 'page' : undefined" active-class="" exact-active-class="">
-            <span class="n">V</span>
-            <span><span class="t">{{ t('nav.verbs') }}</span><span class="s">{{ t('nav.verbsSub') }}</span></span>
           </RouterLink>
         </li>
         <template v-if="catalog.extras.length">
@@ -159,7 +203,7 @@ const width = computed(() => (summary.value.ready ? `${(summary.value.done / sum
           </li>
         </template>
       </ul>
-      <p class="say-hint">{{ t('say.hint') }}</p>
+      <p v-if="!inVerbs" class="say-hint">{{ t('say.hint') }}</p>
     </nav>
   </div>
 </template>

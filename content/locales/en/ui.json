@@ -1,6 +1,5 @@
 {
   "_dateLocale": "en-GB",
-  "brand.subtitle": "Lessons for the course",
   "nav.toggle": "Menu",
   "nav.label": "Lessons",
   "nav.plan": "Study plan",
@@ -107,7 +106,6 @@
   "visits.code": "The counter's code is open.",
   "visits.off": "Don't count my visits",
   "nav.verbs": "Verbs",
-  "nav.verbsSub": "Conjugation in every tense",
   "verbs.title": "Verb conjugation",
   "verbs.sub": "{count} verbs · by frequency · central Catalan",
   "verbs.search": "verb, translation or form: vaig",
@@ -189,5 +187,11 @@
   "trainer.regular": "regular",
   "trainer.irregular": "irregular",
   "trainer.goal": "Daily goal",
-  "trainer.count": "Tasks in the set: {n}"
+  "trainer.count": "Tasks in the set: {n}",
+  "nav.areas": "Sections",
+  "nav.lessons": "Lessons",
+  "nav.trainerToday": "Practice today",
+  "nav.trainerGoal": "{n} of {goal}",
+  "nav.recent": "Recent",
+  "trainer.reveal": "Show the answer"
 }

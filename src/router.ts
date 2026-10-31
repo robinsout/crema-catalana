@@ -65,7 +65,12 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
 
     if (to.name === 'other') {
       const rest = Array.isArray(to.params.rest) ? to.params.rest : [];
-      if (rest.length === 0) return target(resolveRoute(catalog.catalog, '', progress.last), lang);
+      if (rest.length === 0) {
+        // the site opens in the area used last: the verb reference, the trainer, or the lessons
+        const area = progress.lastArea;
+        if (area === 'verbs' || area === 'trainer') return { name: area, params: { lang } };
+        return target(resolveRoute(catalog.catalog, '', progress.last), lang);
+      }
       if (rest.length === 1) return target(resolveRoute(catalog.catalog, rest[0] ?? '', null), lang);
       return target({ view: 'plan', focus: null }, lang);
     }
@@ -96,6 +101,9 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     if (lang) useProgressStore().setLocale(lang);
     if (to.name === 'lesson') useProgressStore().setLast(param(to.params.id));
     else if (to.name === 'plan') useProgressStore().setLast(PLAN_ID);
+    if (to.name === 'lesson' || to.name === 'plan') useProgressStore().setArea('lessons');
+    else if (to.name === 'verbs' || to.name === 'verb') useProgressStore().setArea('verbs');
+    else if (to.name === 'trainer') useProgressStore().setArea('trainer');
     // fixed page names; the sync page is counted as "sync", never with its code
     if (to.name === 'lesson') useVisitsStore().view(param(to.params.id));
     else if (to.name === 'plan' || to.name === 'sync') useVisitsStore().view(to.name);

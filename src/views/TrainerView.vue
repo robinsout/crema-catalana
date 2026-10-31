@@ -148,6 +148,7 @@ const verbLink = (id: string) => ({ name: 'verb', params: { lang: catalog.lang, 
       </div>
       <div class="tr-status" aria-live="polite">
         <span v-if="wrongNow" class="bad">{{ t('trainer.wrong') }}</span>
+        <button v-if="trainer.phase === 'typing' && trainer.hinted.length" class="tr-reveal" type="button" @pointerdown="actionOnly" @click="trainer.reveal()">{{ t('trainer.reveal') }}</button>
         <span v-else-if="trainer.phase === 'pause'" class="ok">{{ t('trainer.right') }}</span>
         <span v-else-if="trainer.phase === 'review' && trainer.outcome === 'almost'"><b>{{ t('trainer.almost') }}</b> — {{ t('trainer.almostAccent') }} <b lang="ca">{{ trainer.check.target }}</b></span>
         <span v-else-if="trainer.phase === 'review'" class="bad">{{ t('trainer.missed') }}</span>
