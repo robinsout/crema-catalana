@@ -19,7 +19,8 @@ test('typing: a wrong letter, the tense row and Next; a right form, the pause an
   await expect(page.locator('.tr-input')).toHaveValue('sx');
   await page.keyboard.press('Backspace');
   await page.keyboard.type('oc');
-  await expect(page.locator('.tr-status')).toContainText('С ошибкой');
+  await expect(page.locator('.tr-status')).toContainText('Была ошибка — исправлена');
+  await expect(page.locator('.tr-letters .l-fixed')).toHaveText('o');
   await expect(page.locator('.tr-row .asked')).toHaveText('soc');
   await page.keyboard.press('Enter');
   await expect(page.locator('.tr-input')).toHaveValue('');

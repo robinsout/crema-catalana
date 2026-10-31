@@ -162,7 +162,6 @@
   "trainer.almost": "Almost",
   "trainer.almostAccent": "mind the accent:",
   "trainer.almostShort": "almost",
-  "trainer.missed": "With a mistake · it will come back",
   "trainer.previous": "Previous:",
   "trainer.allTenses": "all tenses",
   "trainer.keyNext": "next",
@@ -193,5 +192,7 @@
   "nav.trainerToday": "Practice today",
   "nav.trainerGoal": "{n} of {goal}",
   "nav.recent": "Recent",
-  "trainer.reveal": "Show the answer"
+  "trainer.reveal": "Show the answer",
+  "trainer.fixed": "A wrong letter, fixed · it will come back",
+  "trainer.hinted": "With a hint · it will come back"
 }

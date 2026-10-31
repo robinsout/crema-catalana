@@ -97,7 +97,8 @@ test('a wrong letter is marked and stops typing; the task then waits for "Next" 
   await type(w, 'sxy');
   assert.equal((w.find('.tr-input').element as HTMLInputElement).value, 'sx', 'nothing after the wrong letter');
   await type(w, 'soc');
-  assert.match(w.find('.tr-status').text(), /С ошибкой/);
+  assert.match(w.find('.tr-status').text(), /Была ошибка — исправлена/, 'all letters are right now: the status says why it is a mistake');
+  assert.deepEqual(w.findAll('.tr-letters .l-fixed').map((e) => e.text()), ['o'], 'the place of the fixed mistake stays marked');
   assert.match(w.find('.tr-row').text(), /som/);
   assert.equal(trainer().day.missed, 1);
   await w.find('.tr-action').trigger('click');
@@ -125,6 +126,7 @@ test('a hint gives the next letter; the form typed with a hint counts as a mista
   assert.equal(w.findAll('.tr-letters .l-hint').length, 1);
   await type(w, 'soc');
   assert.equal(trainer().day.missed, 1);
+  assert.match(w.find('.tr-status').text(), /С подсказкой/);
 });
 
 test('the goal of the day: a summary with the forms to look at again; "more" goes on', async () => {

@@ -28,7 +28,7 @@ export const useTrainerStore = defineStore('trainer', () => {
   const task = shallowRef<Task | null>(null);
   const typed = ref('');
   const hinted = ref<number[]>([]); // letters opened by the hint
-  const slipped = ref(false); // a wrong letter was typed in this task
+  const slips = ref<number[]>([]); // where wrong letters were typed in this task (even if fixed later)
   const phase = ref<Phase>('loading');
   const outcome = ref<Outcome | null>(null);
   const previous = shallowRef<Done | null>(null);
@@ -53,7 +53,7 @@ export const useTrainerStore = defineStore('trainer', () => {
     clearTimer();
     typed.value = '';
     hinted.value = [];
-    slipped.value = false;
+    slips.value = [];
     outcome.value = null;
   }
 
@@ -82,8 +82,8 @@ export const useTrainerStore = defineStore('trainer', () => {
 
   function evaluate(): void {
     const c = check.value;
-    if (c.bad >= 0) slipped.value = true;
-    if (c.done) finish(slipped.value || hinted.value.length ? 'missed' : c.done);
+    if (c.bad >= 0 && !slips.value.includes(c.bad)) slips.value = [...slips.value, c.bad];
+    if (c.done) finish(slips.value.length || hinted.value.length ? 'missed' : c.done);
   }
 
   function advance(): void {
@@ -156,6 +156,6 @@ export const useTrainerStore = defineStore('trainer', () => {
 
   const leave = (): void => clearTimer();
 
-  return { goals: GOALS, limits: LIMITS, only, task, typed, hinted, slipped, phase, outcome, previous, settings, day, pool, verb, forms, check,
+  return { goals: GOALS, limits: LIMITS, only, task, typed, hinted, slips, phase, outcome, previous, settings, day, pool, verb, forms, check,
     start, input, hint, reveal, next, more, rest, carryOn, setSettings, refresh, leave };
 });

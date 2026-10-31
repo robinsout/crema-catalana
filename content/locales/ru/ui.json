@@ -162,7 +162,6 @@
   "trainer.almost": "Почти",
   "trainer.almostAccent": "нужно ударение:",
   "trainer.almostShort": "почти",
-  "trainer.missed": "С ошибкой · повторим позже",
   "trainer.previous": "Предыдущее:",
   "trainer.allTenses": "все времена",
   "trainer.keyNext": "дальше",
@@ -193,5 +192,7 @@
   "nav.trainerToday": "Тренажёр сегодня",
   "nav.trainerGoal": "{n} из {goal}",
   "nav.recent": "Недавние",
-  "trainer.reveal": "Показать ответ"
+  "trainer.reveal": "Показать ответ",
+  "trainer.fixed": "Была ошибка — исправлена · повторим позже",
+  "trainer.hinted": "С подсказкой · повторим позже"
 }

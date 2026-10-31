@@ -162,7 +162,6 @@
   "trainer.almost": "Casi",
   "trainer.almostAccent": "falta el acento:",
   "trainer.almostShort": "casi",
-  "trainer.missed": "Con un error · volverá a salir",
   "trainer.previous": "Anterior:",
   "trainer.allTenses": "todos los tiempos",
   "trainer.keyNext": "siguiente",
@@ -193,5 +192,7 @@
   "nav.trainerToday": "Práctica de hoy",
   "nav.trainerGoal": "{n} de {goal}",
   "nav.recent": "Recientes",
-  "trainer.reveal": "Ver la respuesta"
+  "trainer.reveal": "Ver la respuesta",
+  "trainer.fixed": "Hubo un error, corregido · volverá a salir",
+  "trainer.hinted": "Con pista · volverá a salir"
 }
