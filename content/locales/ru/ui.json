@@ -168,7 +168,7 @@
   "trainer.keyHint": "подсказка",
   "trainer.keyAccents": "ударения — своей раскладкой, l·l можно точкой: col.legi",
   "trainer.goalDone": "Цель на сегодня выполнена",
-  "trainer.dayScore": "Заданий: {n}. Сразу верно — {a}, почти — {b}, с ошибкой или подсказкой — {c}",
+  "trainer.dayScore": "Заданий: {n}. Сразу верно — {a}, почти — {b}, с подсказкой — {c}",
   "trainer.review": "Повторить",
   "trainer.more": "Ещё 10",
   "trainer.rest": "На сегодня всё",
@@ -193,6 +193,5 @@
   "nav.trainerGoal": "{n} из {goal}",
   "nav.recent": "Недавние",
   "trainer.reveal": "Показать ответ",
-  "trainer.fixed": "Была ошибка — исправлена · повторим позже",
   "trainer.hinted": "С подсказкой · повторим позже"
 }

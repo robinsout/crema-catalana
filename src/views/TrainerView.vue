@@ -64,9 +64,7 @@ watch(() => trainer.typed, (v) => { if (input.value && input.value.value !== v) 
 
 const letters = computed(() => [...trainer.typed].map((c, i) => ({
   c,
-  cls: trainer.hinted.includes(i) ? 'l-almost l-hint'
-    : trainer.phase === 'review' && trainer.slips.includes(i) ? 'l-ok l-fixed' // a wrong letter was typed here and fixed
-    : `l-${trainer.check.letters[i] ?? 'ok'}`,
+  cls: trainer.hinted.includes(i) ? 'l-almost l-hint' : `l-${trainer.check.letters[i] ?? 'ok'}`,
 })));
 const wrongNow = computed(() => trainer.phase === 'typing' && trainer.check.bad >= 0);
 const fieldClass = computed(() => ({
@@ -153,8 +151,7 @@ const verbLink = (id: string) => ({ name: 'verb', params: { lang: catalog.lang, 
         <button v-if="trainer.phase === 'typing' && trainer.hinted.length" class="tr-reveal" type="button" @pointerdown="actionOnly" @click="trainer.reveal()">{{ t('trainer.reveal') }}</button>
         <span v-else-if="trainer.phase === 'pause'" class="ok">{{ t('trainer.right') }}</span>
         <span v-else-if="trainer.phase === 'review' && trainer.outcome === 'almost'"><b>{{ t('trainer.almost') }}</b> — {{ t('trainer.almostAccent') }} <b lang="ca">{{ trainer.check.target }}</b></span>
-        <span v-else-if="trainer.phase === 'review' && trainer.hinted.length" class="bad">{{ t('trainer.hinted') }}</span>
-        <span v-else-if="trainer.phase === 'review'" class="bad">{{ t('trainer.fixed') }}</span>
+        <span v-else-if="trainer.phase === 'review'" class="bad">{{ t('trainer.hinted') }}</span>
       </div>
       <div v-if="row" class="tr-row">
         <p><span lang="ca">{{ row.title }}</span><RouterLink :to="verbLink(trainer.verb.id)">{{ t('trainer.allTenses') }}</RouterLink></p>

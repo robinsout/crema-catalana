@@ -88,7 +88,7 @@ test('a letter typed during the pause starts the next task at once', async () =>
   assert.equal((w.find('.tr-input').element as HTMLInputElement).value, 'v');
 });
 
-test('a wrong letter is marked and stops typing; the task then waits for "Next" and shows the tense row', async () => {
+test('a wrong letter is marked and stops typing; fixed, it is only a typo: the form counts as right', async () => {
   presentOnly();
   const { w } = await openApp('/ru/trainer');
   await type(w, 'sx');
@@ -97,10 +97,20 @@ test('a wrong letter is marked and stops typing; the task then waits for "Next" 
   await type(w, 'sxy');
   assert.equal((w.find('.tr-input').element as HTMLInputElement).value, 'sx', 'nothing after the wrong letter');
   await type(w, 'soc');
-  assert.match(w.find('.tr-status').text(), /Была ошибка — исправлена/, 'all letters are right now: the status says why it is a mistake');
-  assert.deepEqual(w.findAll('.tr-letters .l-fixed').map((e) => e.text()), ['o'], 'the place of the fixed mistake stays marked');
+  assert.ok(w.find('.tr-field').classes().includes('is-correct'));
+  assert.match(w.find('.tr-status').text(), /Верно/);
+  assert.equal(trainer().day.exact, 1);
+  assert.equal(trainer().day.missed, 0);
+  assert.equal((saved().trainer as { queue: unknown[] }).queue.length, 0, 'not asked again');
+});
+
+test('after a hint the task waits for "Next" and shows the tense row', async () => {
+  presentOnly();
+  const { w } = await openApp('/ru/trainer');
+  await w.find('.tr-action').trigger('click');
+  await type(w, 'soc');
   assert.match(w.find('.tr-row').text(), /som/);
-  assert.equal(trainer().day.missed, 1);
+  assert.equal(w.find('.tr-action').text(), 'Дальше ↵');
   await w.find('.tr-action').trigger('click');
   await flushPromises();
   assert.equal((w.find('.tr-input').element as HTMLInputElement).value, '');

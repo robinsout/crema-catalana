@@ -1,5 +1,6 @@
 // Conjugation trainer (BACKLOG I-12): the current task, what is typed, and the steps between tasks.
-// typing → (right) pause → next task; typing → (with a mistake, a hint, or only accents wrong) review → next.
+// typing → (right) pause → next task; typing → (with a hint, or only accents wrong) review → next.
+// A wrong letter stops typing until it is deleted; fixed, it is only a typo and the form counts as right.
 // A right form stays on screen for PAUSE_MS; a letter typed meanwhile starts the next task at once.
 // When the day's count reaches the goal, a summary comes instead of the next task.
 import { defineStore } from 'pinia';
@@ -28,7 +29,6 @@ export const useTrainerStore = defineStore('trainer', () => {
   const task = shallowRef<Task | null>(null);
   const typed = ref('');
   const hinted = ref<number[]>([]); // letters opened by the hint
-  const slips = ref<number[]>([]); // where wrong letters were typed in this task (even if fixed later)
   const phase = ref<Phase>('loading');
   const outcome = ref<Outcome | null>(null);
   const previous = shallowRef<Done | null>(null);
@@ -53,7 +53,6 @@ export const useTrainerStore = defineStore('trainer', () => {
     clearTimer();
     typed.value = '';
     hinted.value = [];
-    slips.value = [];
     outcome.value = null;
   }
 
@@ -82,8 +81,7 @@ export const useTrainerStore = defineStore('trainer', () => {
 
   function evaluate(): void {
     const c = check.value;
-    if (c.bad >= 0 && !slips.value.includes(c.bad)) slips.value = [...slips.value, c.bad];
-    if (c.done) finish(slips.value.length || hinted.value.length ? 'missed' : c.done);
+    if (c.done) finish(hinted.value.length ? 'missed' : c.done);
   }
 
   function advance(): void {
@@ -156,6 +154,6 @@ export const useTrainerStore = defineStore('trainer', () => {
 
   const leave = (): void => clearTimer();
 
-  return { goals: GOALS, limits: LIMITS, only, task, typed, hinted, slips, phase, outcome, previous, settings, day, pool, verb, forms, check,
+  return { goals: GOALS, limits: LIMITS, only, task, typed, hinted, phase, outcome, previous, settings, day, pool, verb, forms, check,
     start, input, hint, reveal, next, more, rest, carryOn, setSettings, refresh, leave };
 });

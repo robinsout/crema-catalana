@@ -6,7 +6,7 @@ import { test, expect } from './fixtures.ts';
 const ONE_TASK = JSON.stringify({ done: {}, last: null, verbTenses: ['ind.pres'],
   trainer: { settings: { persons: [true, false, false, false, false, false], limit: 300, kinds: { regular: true, irregular: true }, goal: 25 } } });
 
-test('typing: a wrong letter, the tense row and Next; a right form, the pause and the previous one', async ({ page }) => {
+test('typing: a fixed typo counts as right, the pause and the previous one; a hint, the tense row and Next', async ({ page }) => {
   await page.addInitScript((saved) => { if (!localStorage.getItem('quadern-catala')) localStorage.setItem('quadern-catala', saved); }, ONE_TASK);
   await page.goto('./#/ru/trainer?verb=ser');
   await expect(page.locator('.tr-ask')).toContainText('jo · Present');
@@ -18,18 +18,18 @@ test('typing: a wrong letter, the tense row and Next; a right form, the pause an
   await page.keyboard.type('y');
   await expect(page.locator('.tr-input')).toHaveValue('sx');
   await page.keyboard.press('Backspace');
+  await page.keyboard.type('oc'); // a typo fixed: right
+  await expect(page.locator('.tr-field')).toHaveClass(/is-correct/);
+  await expect(page.locator('.tr-prev')).toContainText('soc', { timeout: 3000 });
+  await expect(page.locator('.tr-input')).toHaveValue('');
+
+  await page.keyboard.type('?'); // a hint: the task waits for Next and shows the tense row
   await page.keyboard.type('oc');
-  await expect(page.locator('.tr-status')).toContainText('Была ошибка — исправлена');
-  await expect(page.locator('.tr-letters .l-fixed')).toHaveText('o');
+  await expect(page.locator('.tr-status')).toContainText('С подсказкой');
   await expect(page.locator('.tr-row .asked')).toHaveText('soc');
   await page.keyboard.press('Enter');
   await expect(page.locator('.tr-input')).toHaveValue('');
   await expect(page.locator('.tr-input')).toBeFocused();
-
-  await page.keyboard.type('soc');
-  await expect(page.locator('.tr-field')).toHaveClass(/is-correct/);
-  await expect(page.locator('.tr-prev')).toContainText('soc', { timeout: 3000 });
-  await expect(page.locator('.tr-input')).toHaveValue('');
 
   await page.reload();
   await expect(page.locator('.tr-goal')).toContainText('2 / 25');

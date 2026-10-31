@@ -168,7 +168,7 @@
   "trainer.keyHint": "pista",
   "trainer.keyAccents": "los acentos, con tu teclado; l·l se puede escribir con punto: col.legi",
   "trainer.goalDone": "Objetivo de hoy cumplido",
-  "trainer.dayScore": "{n} tareas. Bien a la primera — {a}, casi — {b}, con error o pista — {c}",
+  "trainer.dayScore": "{n} tareas. Bien a la primera — {a}, casi — {b}, con pista — {c}",
   "trainer.review": "Repasar",
   "trainer.more": "10 más",
   "trainer.rest": "Por hoy, basta",
@@ -193,6 +193,5 @@
   "nav.trainerGoal": "{n} de {goal}",
   "nav.recent": "Recientes",
   "trainer.reveal": "Ver la respuesta",
-  "trainer.fixed": "Hubo un error, corregido · volverá a salir",
   "trainer.hinted": "Con pista · volverá a salir"
 }

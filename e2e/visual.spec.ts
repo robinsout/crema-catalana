@@ -46,9 +46,7 @@ for (const scheme of ['light', 'dark'] as const) {
     await page.evaluate(() => document.fonts.ready);
     await expect(page).toHaveScreenshot(`trainer-${scheme}.png`);
     await page.locator('.tr-field').click();
-    await page.keyboard.type('servx');
-    await page.keyboard.press('Backspace');
-    await page.keyboard.type('im');
+    await page.keyboard.type('serv?m'); // with a hint
     await expect(page.locator('.tr-row')).toBeVisible();
     await page.locator('.tr-input').blur();
     await expect(page).toHaveScreenshot(`trainer-mistake-${scheme}.png`);

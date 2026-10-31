@@ -168,7 +168,7 @@
   "trainer.keyHint": "hint",
   "trainer.keyAccents": "accents with your keyboard layout, l·l can be typed with a dot: col.legi",
   "trainer.goalDone": "Today’s goal reached",
-  "trainer.dayScore": "{n} tasks. Right at once — {a}, almost — {b}, with a mistake or a hint — {c}",
+  "trainer.dayScore": "{n} tasks. Right at once — {a}, almost — {b}, with a hint — {c}",
   "trainer.review": "Look again",
   "trainer.more": "10 more",
   "trainer.rest": "Done for today",
@@ -193,6 +193,5 @@
   "nav.trainerGoal": "{n} of {goal}",
   "nav.recent": "Recent",
   "trainer.reveal": "Show the answer",
-  "trainer.fixed": "A wrong letter, fixed · it will come back",
   "trainer.hinted": "With a hint · it will come back"
 }

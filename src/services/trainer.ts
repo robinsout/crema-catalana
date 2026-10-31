@@ -123,7 +123,7 @@ export function candidates(verbs: VerbEntry[], tenses: TenseId[], s: TrainerSett
 
 // The day and the queue of mistakes ---------------------------------------------------------
 
-export type Outcome = 'exact' | 'almost' | 'missed'; // missed: with a wrong letter or a hint
+export type Outcome = 'exact' | 'almost' | 'missed'; // missed: with a hint (a fixed typo is not a mistake)
 
 export interface ReviewItem { key: string; form: string; almost?: boolean }
 
