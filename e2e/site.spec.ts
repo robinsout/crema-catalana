@@ -27,9 +27,9 @@ test('an old link to a lesson still works', async ({ page }) => {
 });
 
 test('an old link to an unwritten unit shows that unit at the top of the plan', async ({ page }) => {
-  await page.goto('./#b1-09');
-  await expect(page).toHaveURL(/#\/ru\/plan\/b1-09$/);
-  const unit = page.locator('#u-b1-09');
+  await page.goto('./#b2-03');
+  await expect(page).toHaveURL(/#\/ru\/plan\/b2-03$/);
+  const unit = page.locator('#u-b2-03');
   await expect(unit).toHaveClass(/focus/);
   await page.evaluate(() => document.fonts.ready);
   // on narrow screens the header stays on top: the unit lands right below it, not under it
