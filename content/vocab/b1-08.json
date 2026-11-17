@@ -1,0 +1,380 @@
+{
+ "groups": [
+  {
+   "id": "aspecte",
+   "words": [
+    {
+     "id": "alt",
+     "ca": "alt, alta",
+     "gender": "mf",
+     "plural": "alts, altes"
+    },
+    {
+     "id": "baix",
+     "ca": "baix, baixa",
+     "gender": "mf",
+     "plural": "baixos, baixes"
+    },
+    {
+     "id": "prim",
+     "ca": "prim, prima",
+     "gender": "mf",
+     "plural": "prims, primes"
+    },
+    {
+     "id": "gras",
+     "ca": "gras, grassa",
+     "gender": "mf",
+     "plural": "grassos, grasses"
+    },
+    {
+     "id": "calb",
+     "ca": "calb, calba",
+     "gender": "mf",
+     "plural": "calbs, calbes"
+    },
+    {
+     "id": "jove",
+     "ca": "jove",
+     "gender": "mf",
+     "plural": "joves"
+    },
+    {
+     "id": "mitjana-edat",
+     "ca": "de mitjana edat",
+     "gender": "mf"
+    },
+    {
+     "id": "maco",
+     "ca": "maco, maca",
+     "gender": "mf",
+     "plural": "macos, maques"
+    }
+   ]
+  },
+  {
+   "id": "cabells",
+   "words": [
+    {
+     "id": "cabells",
+     "ca": "els cabells",
+     "gender": "m",
+     "plural": "cabells"
+    },
+    {
+     "id": "ulls",
+     "ca": "els ulls",
+     "gender": "m",
+     "plural": "ulls"
+    },
+    {
+     "id": "ros",
+     "ca": "ros, rossa",
+     "gender": "mf",
+     "plural": "rossos, rosses"
+    },
+    {
+     "id": "moreno",
+     "ca": "moreno, morena",
+     "gender": "mf",
+     "plural": "morenos, morenes"
+    },
+    {
+     "id": "castany",
+     "ca": "castany, castanya",
+     "gender": "mf",
+     "plural": "castanys, castanyes"
+    },
+    {
+     "id": "pel-roig",
+     "ca": "pèl-roig, pèl-roja",
+     "gender": "mf",
+     "plural": "pèl-rojos, pèl-roges"
+    },
+    {
+     "id": "llis",
+     "ca": "llis, llisa",
+     "gender": "mf",
+     "plural": "llisos, llises"
+    },
+    {
+     "id": "arrissat",
+     "ca": "arrissat, arrissada",
+     "gender": "mf",
+     "plural": "arrissats, arrissades"
+    },
+    {
+     "id": "cua",
+     "ca": "la cua",
+     "gender": "f",
+     "plural": "cues"
+    },
+    {
+     "id": "monyo",
+     "ca": "el monyo",
+     "gender": "m",
+     "plural": "monyos"
+    },
+    {
+     "id": "trena",
+     "ca": "la trena",
+     "gender": "f",
+     "plural": "trenes"
+    },
+    {
+     "id": "serrell",
+     "ca": "el serrell",
+     "gender": "m",
+     "plural": "serrells"
+    },
+    {
+     "id": "barba",
+     "ca": "la barba",
+     "gender": "f",
+     "plural": "barbes"
+    },
+    {
+     "id": "bigoti",
+     "ca": "el bigoti",
+     "gender": "m",
+     "plural": "bigotis"
+    },
+    {
+     "id": "ulleres",
+     "ca": "les ulleres",
+     "gender": "f",
+     "plural": "ulleres"
+    },
+    {
+     "id": "arracada",
+     "ca": "l'arracada",
+     "gender": "f",
+     "plural": "arracades"
+    },
+    {
+     "id": "mocador",
+     "ca": "el mocador",
+     "gender": "m",
+     "plural": "mocadors"
+    }
+   ]
+  },
+  {
+   "id": "roba",
+   "words": [
+    {
+     "id": "jersei",
+     "ca": "el jersei",
+     "gender": "m",
+     "plural": "jerseis"
+    },
+    {
+     "id": "samarreta",
+     "ca": "la samarreta",
+     "gender": "f",
+     "plural": "samarretes"
+    },
+    {
+     "id": "camisa",
+     "ca": "la camisa",
+     "gender": "f",
+     "plural": "camises"
+    },
+    {
+     "id": "faldilla",
+     "ca": "la faldilla",
+     "gender": "f",
+     "plural": "faldilles"
+    },
+    {
+     "id": "vestit",
+     "ca": "el vestit",
+     "gender": "m",
+     "plural": "vestits"
+    },
+    {
+     "id": "pantalons",
+     "ca": "els pantalons",
+     "gender": "m",
+     "plural": "pantalons"
+    },
+    {
+     "id": "texans",
+     "ca": "els texans",
+     "gender": "m",
+     "plural": "texans"
+    },
+    {
+     "id": "abric",
+     "ca": "l'abric",
+     "gender": "m",
+     "plural": "abrics"
+    },
+    {
+     "id": "jaqueta",
+     "ca": "la jaqueta",
+     "gender": "f",
+     "plural": "jaquetes"
+    },
+    {
+     "id": "sabates",
+     "ca": "les sabates",
+     "gender": "f",
+     "plural": "sabates"
+    },
+    {
+     "id": "vambes",
+     "ca": "les vambes",
+     "gender": "f",
+     "plural": "vambes"
+    },
+    {
+     "id": "sabatilles",
+     "ca": "les sabatilles",
+     "gender": "f",
+     "plural": "sabatilles"
+    },
+    {
+     "id": "mitjons",
+     "ca": "els mitjons",
+     "gender": "m",
+     "plural": "mitjons"
+    },
+    {
+     "id": "bufanda",
+     "ca": "la bufanda",
+     "gender": "f",
+     "plural": "bufandes"
+    }
+   ]
+  },
+  {
+   "id": "colors",
+   "words": [
+    {
+     "id": "vermell",
+     "ca": "vermell, vermella",
+     "gender": "mf",
+     "plural": "vermells, vermelles"
+    },
+    {
+     "id": "groc",
+     "ca": "groc, groga",
+     "gender": "mf",
+     "plural": "grocs, grogues"
+    },
+    {
+     "id": "blau",
+     "ca": "blau, blava",
+     "gender": "mf",
+     "plural": "blaus, blaves"
+    },
+    {
+     "id": "verd",
+     "ca": "verd, verda",
+     "gender": "mf",
+     "plural": "verds, verdes"
+    },
+    {
+     "id": "gris",
+     "ca": "gris, grisa",
+     "gender": "mf",
+     "plural": "grisos, grises"
+    },
+    {
+     "id": "marro",
+     "ca": "marró",
+     "gender": "mf",
+     "plural": "marrons"
+    },
+    {
+     "id": "taronja",
+     "ca": "taronja",
+     "gender": "mf"
+    },
+    {
+     "id": "blau-mari",
+     "ca": "blau marí",
+     "gender": "mf"
+    }
+   ]
+  },
+  {
+   "id": "caracter",
+   "words": [
+    {
+     "id": "simpatic",
+     "ca": "simpàtic, simpàtica",
+     "gender": "mf",
+     "plural": "simpàtics, simpàtiques"
+    },
+    {
+     "id": "tranquil",
+     "ca": "tranquil, tranquil·la",
+     "gender": "mf",
+     "plural": "tranquils, tranquil·les"
+    },
+    {
+     "id": "nervios",
+     "ca": "nerviós, nerviosa",
+     "gender": "mf",
+     "plural": "nerviosos, nervioses"
+    },
+    {
+     "id": "obert",
+     "ca": "obert, oberta",
+     "gender": "mf",
+     "plural": "oberts, obertes"
+    },
+    {
+     "id": "timid",
+     "ca": "tímid, tímida",
+     "gender": "mf",
+     "plural": "tímids, tímides"
+    },
+    {
+     "id": "treballador",
+     "ca": "treballador, treballadora",
+     "gender": "mf",
+     "plural": "treballadors, treballadores"
+    },
+    {
+     "id": "gandul",
+     "ca": "gandul, gandula",
+     "gender": "mf",
+     "plural": "ganduls, gandules"
+    },
+    {
+     "id": "pacient",
+     "ca": "pacient",
+     "gender": "mf",
+     "plural": "pacients"
+    },
+    {
+     "id": "discret",
+     "ca": "discret, discreta",
+     "gender": "mf",
+     "plural": "discrets, discretes"
+    },
+    {
+     "id": "tafaner",
+     "ca": "tafaner, tafanera",
+     "gender": "mf",
+     "plural": "tafaners, tafaneres"
+    },
+    {
+     "id": "xerraire",
+     "ca": "xerraire",
+     "gender": "mf",
+     "plural": "xerraires"
+    },
+    {
+     "id": "ximple",
+     "ca": "ximple",
+     "gender": "mf",
+     "plural": "ximples"
+    }
+   ]
+  }
+ ]
+}

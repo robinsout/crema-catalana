@@ -1,0 +1,191 @@
+{
+ "groups": {
+  "fruita": "Fruit and vegetables",
+  "aliments": "Other food",
+  "quantitats": "Quantities and packaging",
+  "botigues": "Shops and shopping"
+ },
+ "words": {
+  "poma": {
+   "tr": "apple"
+  },
+  "taronja": {
+   "tr": "orange"
+  },
+  "llimona": {
+   "tr": "lemon",
+   "note": "feminine"
+  },
+  "platan": {
+   "tr": "banana"
+  },
+  "raim": {
+   "tr": "grapes",
+   "note": "singular, like “fruit”; one grape is un gra de raïm; not “raisin” (una pansa)"
+  },
+  "maduixa": {
+   "tr": "strawberry"
+  },
+  "cirera": {
+   "tr": "cherry"
+  },
+  "pressec": {
+   "tr": "peach"
+  },
+  "sindria": {
+   "tr": "watermelon"
+  },
+  "enciam": {
+   "tr": "lettuce"
+  },
+  "ceba": {
+   "tr": "onion"
+  },
+  "tomaquet": {
+   "tr": "tomato"
+  },
+  "pebrot": {
+   "tr": "(bell) pepper",
+   "note": "the spice is el pebre"
+  },
+  "carxofa": {
+   "tr": "artichoke"
+  },
+  "carbasso": {
+   "tr": "courgette",
+   "note": "pumpkin is la carbassa"
+  },
+  "bolet": {
+   "tr": "mushroom"
+  },
+  "llet": {
+   "tr": "milk"
+  },
+  "formatge": {
+   "tr": "cheese"
+  },
+  "mantega": {
+   "tr": "butter"
+  },
+  "ou": {
+   "tr": "egg"
+  },
+  "pernil": {
+   "tr": "ham",
+   "note": "pernil salat — cured, pernil dolç — cooked"
+  },
+  "carn-picada": {
+   "tr": "mince, minced meat"
+  },
+  "lluc": {
+   "tr": "hake"
+  },
+  "bacalla": {
+   "tr": "cod (usually salt cod)"
+  },
+  "tonyina": {
+   "tr": "tuna"
+  },
+  "cigrons": {
+   "tr": "chickpeas"
+  },
+  "oli": {
+   "tr": "oil",
+   "note": "on its own: olive oil"
+  },
+  "fruita-seca": {
+   "tr": "nuts",
+   "note": "not dried fruit"
+  },
+  "postres": {
+   "tr": "dessert",
+   "note": "feminine, always plural"
+  },
+  "quilo": {
+   "tr": "kilo"
+  },
+  "mig": {
+   "tr": "half",
+   "note": "mig quilo, mitja dotzena — no article"
+  },
+  "gram": {
+   "tr": "gram"
+  },
+  "dotzena": {
+   "tr": "dozen"
+  },
+  "tros": {
+   "tr": "piece"
+  },
+  "pot": {
+   "tr": "jar",
+   "note": "not a cooking pot"
+  },
+  "llauna": {
+   "tr": "tin, can"
+  },
+  "bric": {
+   "tr": "carton"
+  },
+  "ampolla": {
+   "tr": "bottle"
+  },
+  "paquet": {
+   "tr": "packet"
+  },
+  "bossa": {
+   "tr": "bag"
+  },
+  "capsa": {
+   "tr": "box"
+  },
+  "mercat": {
+   "tr": "market"
+  },
+  "parada": {
+   "tr": "market stall"
+  },
+  "paradista": {
+   "tr": "stallholder"
+  },
+  "fruiteria": {
+   "tr": "greengrocer's"
+  },
+  "carnisseria": {
+   "tr": "butcher's"
+  },
+  "carnisser": {
+   "tr": "butcher"
+  },
+  "peixateria": {
+   "tr": "fishmonger's"
+  },
+  "peixater": {
+   "tr": "fishmonger"
+  },
+  "forn": {
+   "tr": "bakery; oven",
+   "note": "same as la fleca"
+  },
+  "forner": {
+   "tr": "baker"
+  },
+  "bacallaneria": {
+   "tr": "salt cod shop"
+  },
+  "dependent": {
+   "tr": "shop assistant",
+   "note": "not “dependant”"
+  },
+  "caixer": {
+   "tr": "cashier"
+  },
+  "targeta": {
+   "tr": "bank card",
+   "note": "pagar amb targeta — to pay by card"
+  },
+  "canvi": {
+   "tr": "change (money)"
+  }
+ }
+}

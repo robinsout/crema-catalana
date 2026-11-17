@@ -111,52 +111,60 @@
       "date": "2026-10-20"
     },
     "b1-07": {
-      "topic": "Продукты и магазины: вывески, количество и цена, «ты» и «Вы» в магазине, вкусы в еде и каталанские блюда",
+      "topic": "Продукты и покупки: список покупок, рынок и магазины, количество и цена, «ты» и «Вы» у прилавка, каталанская кухня по сезонам",
       "grammar": [
-        "en с количеством: en vull dos",
-        "quant / quanta / quants / quantes",
-        "un quilo de, mig quilo, una dotzena",
-        "tu и vostè: Què vol? Alguna cosa més?",
-        "agradar: m'agrada / m'agraden"
+        "voler в настоящем: Què vols? Vull cireres. Què vol (vostè)? Vull pollastre. Què voleu? Volem llet",
+        "диалог у прилавка на vostè: Què vol? Alguna cosa més? — Res més. Quant és? — Són 14 euros. Tingui",
+        "quant / quanta / quants / quantes + существительное: Quant lluç vols? Quanta carn picada? Quantes mandarines?",
+        "количество и упаковка: un quilo de, mig quilo, 200 grams de, una dotzena d'ous, un pot de mel, una llauna de tonyina, un bric de llet, una ampolla de vi",
+        "где и у кого покупаю: a la carnisseria, a la peixateria, a la fleca, al forn, al mercat, al supermercat; el carnisser, la peixatera, la fornera, el dependent"
       ],
-      "vocab": "Продукты, магазины (fleca, carnisseria, peixateria), торговые фразы",
-      "extra": "Рынки Барселоны и каталанские блюда: pa amb tomàquet, escudella, crema catalana",
-      "mission": "Сделайте покупку на рынке полностью по-каталански"
+      "vocab": "Группы продуктов (fruita, verdura, llegums, làctics, carn, peix, cereals, dolços), фрукты и овощи по сезонам, прилавки рынка (parada) и магазины, упаковки (pot, llauna, bric, ampolla, garrafa, paquet, bossa), приёмы пищи (esmorzar, dinar, berenar, sopar)",
+      "extra": "Каталанская кухня по сезонам: escudella i carn d'olla зимой, tortell de Reis, bunyols и mona на Пасху, coca de Sant Joan летом, castanyes осенью; berenar — полдник",
+      "mission": "Сделайте покупку на рынке полностью по-каталански",
+      "date": "2026-11-17"
     },
     "b1-08": {
-      "topic": "Внешность, характер и одежда: описать человека и сравнить двух людей",
+      "topic": "Внешность, одежда и характер: описать человека и сравнить двух людей",
       "grammar": [
-        "согласование прилагательных: -a, -ssa, неизменяемые",
-        "сравнение: més… que, menys… que, tan… com",
-        "ser и estar для качеств",
-        "portar: porta texans i jersei"
+        "ser, tenir, portar для внешности: És alta i morena. Té els cabells llisos i els ulls verds. Porta ulleres i barba",
+        "согласование прилагательных: ros / rossa, castany / castanya, pèl-roig / pèl-roja, gras / grassa; уменьшительные baixet, grassonet; одна форма: jove, gran, optimista, intel·ligent",
+        "степень: molt, bastant, força, una mica, més aviat; с отрицанием no… gaire, no… gens: No és gens tímida; ho вместо прилагательного: És alt? — No, no ho és",
+        "сравнение: més… que, tan… com: L'Ivan és més alt que les noies. La Rita és tan baixa com la Milena",
+        "одежда: porta un jersei de llana, una camisa de ratlles, de quadres; цвета: blau cel, blau marí; m'agrada el lila / m'agraden els colors clars"
       ],
-      "vocab": "Внешность, черты характера, одежда по сезону и случаю",
-      "extra": "Прилагательные-ловушки: content, trist, prim",
-      "mission": "Опишите внешность и характер друга так, чтобы его можно было узнать"
+      "vocab": "Возраст (nen, noi, jove, de mitjana edat, gran), рост и телосложение, волосы и причёски (llisos, arrissats, cua, monyo, trena, serrell), аксессуары (ulleres, arracades, mocador), одежда и обувь, цвета, черты характера и их противоположности (pacient / impacient, simpàtic / antipàtic, treballador / gandul)",
+      "extra": "Té els cabells llisos (какие от природы), но els porta llargs (как носит); estar — о состоянии: Està una mica grassoneta, Estan contents; xerraire — болтливый, tafaner — любопытный",
+      "mission": "Опишите внешность и характер друга так, чтобы его можно было узнать",
+      "date": "2026-11-17"
     },
     "b1-09": {
-      "topic": "Вещи: чьё это, какое оно (цвет, размер, форма, материал) и для чего; деньги; предметы в классе",
+      "topic": "Вещи: что в сумке и в карманах, чьё это, для чего служит и какое (размер, форма, материал, цвет); что есть в классе",
       "grammar": [
-        "De qui és? — És meu. És de la Maria.",
-        "согласование цветов: vermell / vermella, blau / blava",
-        "servir per a + инфинитив",
-        "множественное число: clau → claus, butxaca → butxaques"
+        "De qui és? — És meu / meva, són meus / meves. És d'en Daniel, de la Miren; el meu, el teu, el seu: Aquest no és el meu",
+        "aquest / aquesta и aquell / aquella, aquí и allà; això и allò: Què és això d'aquí? Què és allò d'allà?",
+        "servir per + инфинитив: Un paraigua serveix per no mullar-se; с местоимением: per pentinar-te, per protegir-te els ulls",
+        "Hi ha algun / alguna…? — No hi ha cap…; Hi ha algú? — No hi ha ningú; No porto res",
+        "описание вещи: gros, petit, de mida mitjana; de fusta, de metall, de plata, de roba; rodó / rodona, quadrat / quadrada; plegable, de quadres"
       ],
-      "vocab": "Повседневные предметы, цвета, материалы, деньги (euros, cèntims), предметы в классе",
-      "extra": "Орфография множественного числа: -ca → -ques, -ja → -ges",
-      "mission": "Перечислите по-каталански всё, что у вас в рюкзаке"
+      "vocab": "Содержимое сумки и карманов (claus, cartera, moneder, mòbil, estoig, ulleres de sol, mocadors de paper, xiclets, pintallavis, paraigua, agenda), предметы в классе (taula, cadira, pissarra, paperera, guix, ordinador), размеры, формы, материалы, цвета",
+      "extra": "Множественное число с изменением на письме: butxaca → butxaques, -ga → -gues, -ja → -ges; игра «Veig, veig, què veus?» — угадать предмет вопросами «да / нет»",
+      "mission": "Перечислите по-каталански всё, что у вас в рюкзаке",
+      "date": "2026-11-17"
     },
     "b1-10": {
-      "topic": "Повторение модуля Bàsic 1",
+      "topic": "Праздник окончания курса: речь мэра, интервью на радио с директором и с ученицей, ученики представляют друг друга — повторение Bàsic 1",
       "grammar": [
-        "agradar: m'agrada / m'agraden",
-        "voler + инфинитив",
-        "обзор модуля"
+        "вопросы на vostè: Vostè és d'aquí? Viu sola? Quin horari fa? Li agrada la seva feina?",
+        "рассказ о себе: Em dic Joaquim, però em diuen Quim. Soc de Barcelona, visc a Viladepau des de fa 15 anys. Fa set anys que soc alcalde",
+        "что нравится и что нет: M'agrada molt la meva feina. El que no m'agrada gaire és…",
+        "представить другого в 3-м лице: Es diu…, és del Marroc, la seva llengua materna és l'àrab, el seu pare…, viu amb…, fa de…",
+        "повторение модуля: внешность и характер, распорядок дня, работа и график, адрес и телефон"
       ],
-      "vocab": "Праздники, еда, приглашения",
-      "extra": "Зимние праздники: Castanyada, Nadal, Tió, Sant Esteve",
-      "mission": "Пригласите кого-нибудь на праздник письменным сообщением по-каталански"
+      "vocab": "Праздник, приветственная речь, интервью; работа и график, отпуск, год школы (inscripcions, cursos, exàmens), семья, внешность и характер",
+      "extra": "Ajuntament — мэрия, в небольших городках её называют casa de la vila; alcalde / alcaldessa; домашние формы имён: Joaquim → Quim",
+      "mission": "Задайте одногруппнику 5–6 вопросов по-каталански и представьте его группе: откуда он, на каком языке говорит, где живёт и работает, какой он",
+      "date": "2026-11-17"
     },
     "b2-01": {
       "topic": "Детство и молодость: с кем жил, каким был тогда и каков сейчас, во что играл; кто для меня мои близкие",

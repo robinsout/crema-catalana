@@ -111,52 +111,60 @@
       "date": "2026-10-20"
     },
     "b1-07": {
-      "topic": "Comida y tiendas: carteles, cantidades y precios, tu y vostè en la tienda, gustos y platos catalanes",
+      "topic": "Comida y compras: la lista de la compra, el mercado y las tiendas, cantidades y precios, tu y vostè en el mostrador, la cocina catalana según la estación",
       "grammar": [
-        "en con cantidades: en vull dos (no existe en castellano)",
-        "quant / quanta / quants / quantes",
-        "un quilo de, mig quilo, una dotzena",
-        "tu y vostè: Què vol? Alguna cosa més?",
-        "agradar: m'agrada / m'agraden (como gustar)"
+        "voler en presente: Què vols? Vull cireres (vull = quiero). Què vol (vostè)? Vull pollastre. Què voleu? Volem llet",
+        "en el mostrador con vostè: Què vol? Alguna cosa més? — Res més. Quant és? — Són 14 euros. Tingui (tenga)",
+        "quant / quanta / quants / quantes + sustantivo, como cuánto: Quant lluç vols? Quanta carn picada? Quantes mandarines?",
+        "cantidades y envases: un quilo de, mig quilo, 200 grams de, una dotzena d'ous, un pot de mel, una llauna de tonyina, un bric de llet, una ampolla de vi",
+        "dónde y a quién compro: a la carnisseria, a la peixateria, a la fleca, al forn, al mercat, al supermercat; el carnisser, la peixatera, la fornera, el dependent"
       ],
-      "vocab": "Productos, tiendas (fleca, carnisseria, peixateria), frases para comprar",
-      "extra": "Los mercados de Barcelona y los platos catalanes: pa amb tomàquet, escudella, crema catalana",
-      "mission": "Haz la compra en un mercado completamente en catalán"
+      "vocab": "Grupos de alimentos (fruita, verdura, llegums, làctics, carn, peix, cereals, dolços), fruta y verdura de temporada, puestos del mercado (parada) y tiendas, envases (pot, llauna, bric, ampolla, garrafa, paquet, bossa), comidas del día (esmorzar, dinar, berenar, sopar)",
+      "extra": "La cocina catalana según la estación: escudella i carn d'olla en invierno, tortell de Reis, bunyols y mona en Pascua, coca de Sant Joan en verano, castanyes en otoño; berenar es la merienda; ojo: dinar es comer / almorzar (la comida del mediodía)",
+      "mission": "Haz la compra en un mercado completamente en catalán",
+      "date": "2026-11-17"
     },
     "b1-08": {
-      "topic": "Aspecto físico, carácter y ropa: describir a alguien y comparar a dos personas",
+      "topic": "Aspecto físico, ropa y carácter: describir a alguien y comparar a dos personas",
       "grammar": [
-        "concordancia de adjetivos: -a, -ssa, invariables",
-        "comparación: més… que, menys… que, tan… com",
-        "ser y estar para cualidades (no siempre como en castellano)",
-        "portar: porta texans i jersei (portar = llevar puesto)"
+        "ser, tenir, portar para el aspecto: És alta i morena. Té els cabells llisos i els ulls verds. Porta ulleres i barba (portar = llevar)",
+        "concordancia de adjetivos: ros / rossa, castany / castanya, pèl-roig / pèl-roja, gras / grassa; diminutivos baixet, grassonet; una sola forma: jove, gran, optimista, intel·ligent",
+        "grado: molt, bastant, força, una mica, més aviat; con negación no… gaire (no muy), no… gens (nada): No és gens tímida; ho en lugar del adjetivo, como lo: És alt? — No, no ho és",
+        "comparación: més… que, tan… com: L'Ivan és més alt que les noies. La Rita és tan baixa com la Milena",
+        "ropa: porta un jersei de llana, una camisa de ratlles, de quadres (de rayas, de cuadros); colores: blau cel, blau marí; m'agrada el lila / m'agraden els colors clars"
       ],
-      "vocab": "Aspecto físico, rasgos de carácter, ropa según la estación y la ocasión",
-      "extra": "Adjetivos trampa: content, trist, prim (delgado)",
-      "mission": "Describe el aspecto y el carácter de un amigo para que se le pueda reconocer"
+      "vocab": "Edad (nen, noi, jove, de mitjana edat, gran), estatura y complexión, pelo y peinados (llisos, arrissats, cua, monyo, trena, serrell), complementos (ulleres, arracades, mocador), ropa y calzado, colores, rasgos de carácter y sus contrarios (pacient / impacient, simpàtic / antipàtic, treballador / gandul)",
+      "extra": "Té els cabells llisos (cómo es el pelo), pero els porta llargs (cómo lo lleva); estar para un estado: Està una mica grassoneta, Estan contents; ros es «rubio» (pelirrojo es pèl-roig), xerraire «parlanchín», tafaner «chismoso, metiche» (cotilla en España)",
+      "mission": "Describe el aspecto y el carácter de un amigo para que se le pueda reconocer",
+      "date": "2026-11-17"
     },
     "b1-09": {
-      "topic": "Objetos: de quién es, cómo es (color, tamaño, forma, material) y para qué sirve; el dinero; objetos del aula",
+      "topic": "Objetos: qué llevo en el bolso y en los bolsillos, de quién es, para qué sirve y cómo es (tamaño, forma, material, color); qué hay en el aula",
       "grammar": [
-        "De qui és? — És meu. És de la Maria.",
-        "concordancia de colores: vermell / vermella, blau / blava",
-        "servir per a + infinitivo",
-        "plural: clau → claus, butxaca → butxaques"
+        "De qui és? — És meu / meva, són meus / meves. És d'en Daniel, de la Miren; el meu, el teu, el seu (con artículo, a diferencia de mi: el meu mòbil — mi celular): Aquest no és el meu",
+        "aquest / aquesta y aquell / aquella, aquí y allà; això y allò (esto, aquello): Què és això d'aquí? Què és allò d'allà?",
+        "servir per + infinitivo: Un paraigua serveix per no mullar-se; con pronombre: per pentinar-te, per protegir-te els ulls",
+        "Hi ha algun / alguna…? — No hi ha cap… (ningún); Hi ha algú? — No hi ha ningú (nadie); No porto res (nada)",
+        "describir un objeto: gros, petit, de mida mitjana; de fusta, de metall, de plata, de roba; rodó / rodona, quadrat / quadrada; plegable, de quadres"
       ],
-      "vocab": "Objetos cotidianos, colores, materiales, dinero (euros, cèntims), objetos del aula",
-      "extra": "Ortografía del plural: -ca → -ques, -ja → -ges",
-      "mission": "Enumera en catalán todo lo que llevas en la mochila"
+      "vocab": "Lo que hay en el bolso y los bolsillos (claus, cartera, moneder, mòbil, estoig, ulleres de sol, mocadors de paper, xiclets, pintallavis, paraigua, agenda), objetos del aula (taula, cadira, pissarra, paperera, guix, ordinador), tamaños, formas, materiales, colores",
+      "extra": "Plural con cambio ortográfico: butxaca → butxaques, -ga → -gues, -ja → -ges; el juego «Veig, veig, què veus?» (veo, veo) — adivinar un objeto con preguntas de sí o no",
+      "mission": "Enumera en catalán todo lo que llevas en la mochila",
+      "date": "2026-11-17"
     },
     "b1-10": {
-      "topic": "Repaso del módulo Bàsic 1",
+      "topic": "La fiesta de fin de curso: el discurso del alcalde, entrevistas en la radio a la directora y a una alumna, los alumnos se presentan unos a otros — repaso de Bàsic 1",
       "grammar": [
-        "agradar: m’agrada / m’agraden",
-        "voler + infinitivo",
-        "repaso del módulo"
+        "preguntas con vostè (usted): Vostè és d'aquí? Viu sola? Quin horari fa? Li agrada la seva feina?",
+        "hablar de uno mismo: Em dic Joaquim, però em diuen Quim. Soc de Barcelona, visc a Viladepau des de fa 15 anys (desde hace). Fa set anys que soc alcalde",
+        "lo que gusta y lo que no: M'agrada molt la meva feina. El que no m'agrada gaire és… (no mucho)",
+        "presentar a otra persona en 3.ª persona: Es diu…, és del Marroc, la seva llengua materna és l'àrab, el seu pare…, viu amb…, fa de…",
+        "repaso del módulo: aspecto y carácter, rutina diaria, trabajo y horario, dirección y teléfono"
       ],
-      "vocab": "Fiestas, comida, invitaciones",
-      "extra": "Las fiestas de invierno: Castanyada, Nadal, Tió, Sant Esteve",
-      "mission": "Invita a alguien a una fiesta con un mensaje escrito en catalán"
+      "vocab": "La fiesta, el discurso de bienvenida, las entrevistas; trabajo y horario, vacaciones, el año escolar (inscripcions, cursos, exàmens), familia, aspecto y carácter",
+      "extra": "Ajuntament — ayuntamiento, en los pueblos también casa de la vila; alcalde / alcaldessa; formas cortas de los nombres: Joaquim → Quim",
+      "mission": "Hazle a un compañero 5 o 6 preguntas en catalán y preséntalo al grupo: de dónde es, qué lengua habla, dónde vive y trabaja, cómo es",
+      "date": "2026-11-17"
     },
     "b2-01": {
       "topic": "Infancia y juventud: con quién vivía, cómo era antes y cómo soy ahora, a qué jugaba; las personas cercanas",

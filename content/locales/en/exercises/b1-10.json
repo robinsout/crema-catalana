@@ -1,0 +1,458 @@
+{
+ "repas": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "Unit 1. How do you introduce yourself?",
+    "options": [
+     "Soc Maria.",
+     "Soc la Maria.",
+     "Em dic la Maria."
+    ],
+    "answer": 1,
+    "explain": "With soc you need the personal article: Soc la Maria. With em dic, no article: Em dic Maria."
+   },
+   {
+    "prompt": "Unit 2. “This is my daughter.”",
+    "options": [
+     "Aquesta és meva filla.",
+     "Aquesta és la meva filla.",
+     "Aquesta és la mia filla."
+    ],
+    "answer": 1,
+    "explain": "Possessives take the article: la meva filla — literally “the my daughter”."
+   },
+   {
+    "prompt": "Unit 3. “I live on Carrer Nou.”",
+    "options": [
+     "Visc en el carrer Nou.",
+     "Visc al carrer Nou.",
+     "Visc a carrer Nou."
+    ],
+    "answer": 1,
+    "explain": "a + el = al: al carrer Nou."
+   },
+   {
+    "prompt": "Unit 4. It's 4:15.",
+    "options": [
+     "Són un quart de cinc.",
+     "És un quart de cinc.",
+     "És un quart de quatre."
+    ],
+    "answer": 1,
+    "explain": "A quarter counts towards the next hour: un quart de cinc; un quart is one, so és. You can also go by the clock: Són les quatre i quart."
+   },
+   {
+    "prompt": "Unit 5. “She gets up at seven.”",
+    "options": [
+     "Es lleva a les set.",
+     "Se lleva a les set.",
+     "Lleva a les set."
+    ],
+    "answer": 0,
+    "explain": "The reflexive pronoun is es (se is Spanish): es lleva."
+   },
+   {
+    "prompt": "Unit 6. “I work as a waiter.”",
+    "options": [
+     "Treballo com cambrer.",
+     "Treballo de cambrer.",
+     "Soc un cambrer."
+    ],
+    "answer": 1,
+    "explain": "treballar de + job, with no article. “As a” is com a cambrer, not com cambrer."
+   },
+   {
+    "prompt": "Unit 7. “How many oranges?”",
+    "options": [
+     "Quantes taronges?",
+     "Quants taronges?",
+     "Quant taronges?"
+    ],
+    "answer": 0,
+    "explain": "quant agrees with the noun: les taronges → quantes taronges."
+   },
+   {
+    "prompt": "Unit 8. “She isn't shy at all.”",
+    "options": [
+     "No és gens tímida.",
+     "És gens tímida.",
+     "No és nada tímida."
+    ],
+    "answer": 0,
+    "explain": "gens goes with no: No és gens tímida. Nada is Spanish."
+   },
+   {
+    "prompt": "Unit 9. “Whose bag is this?” — “Mine.”",
+    "options": [
+     "De qui és aquesta bossa? — És meva.",
+     "De qui és aquesta bossa? — És mia.",
+     "De qui és aquesta bossa? — És de mi."
+    ],
+    "answer": 0,
+    "explain": "Possessive after és: És meva (bossa is feminine). Central Catalan says meva (mia is dialectal and here sounds like Spanish)."
+   },
+   {
+    "prompt": "Unit 10. “I've lived here for five years.”",
+    "options": [
+     "Visc aquí des de cinc anys.",
+     "Visc aquí des de fa cinc anys.",
+     "Visc aquí fa cinc anys."
+    ],
+    "answer": 1,
+    "explain": "A period (“for”) takes des de fa: des de fa cinc anys. Or: Fa cinc anys que visc aquí. The verb stays in the Present."
+   }
+  ]
+ },
+ "valentina": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "Where is Valentina from?",
+    "options": [
+     "del Perú",
+     "de Colòmbia",
+     "de Mèxic"
+    ],
+    "answer": 1,
+    "explain": "És de Colòmbia, de Medellín."
+   },
+   {
+    "prompt": "How long has she lived in Barcelona?",
+    "options": [
+     "dos anys",
+     "cinc anys",
+     "dotze anys"
+    ],
+    "answer": 0,
+    "explain": "Viu a Barcelona des de fa dos anys."
+   },
+   {
+    "prompt": "Who does she live with?",
+    "options": [
+     "Amb els seus pares.",
+     "Sola.",
+     "Amb el seu marit i la seva filla."
+    ],
+    "answer": 2
+   },
+   {
+    "prompt": "When are her days off?",
+    "options": [
+     "el dissabte i el diumenge",
+     "el dilluns i el dimarts",
+     "el divendres"
+    ],
+    "answer": 1,
+    "explain": "Fa festa els dilluns i els dimarts."
+   },
+   {
+    "prompt": "What isn't she too keen on about her job?",
+    "options": [
+     "Que treballa al matí.",
+     "Que plega molt tard.",
+     "Que no parla català."
+    ],
+    "answer": 1,
+    "explain": "El que no li agrada gaire és que plega molt tard."
+   },
+   {
+    "prompt": "What is she like?",
+    "options": [
+     "Baixa i rossa, una mica tímida.",
+     "Alta i morena, simpàtica i xerraire.",
+     "Alta i rossa, molt seriosa."
+    ],
+    "answer": 1,
+    "explain": "És alta i morena… És molt simpàtica i una mica xerraire (chatty)."
+   }
+  ]
+ },
+ "voste": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Ets d'aquí?</span> → <span lang=\"ca\">Vostè ___ d'aquí?</span>",
+    "answers": [
+     "és"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">On vius?</span> → <span lang=\"ca\">On ___?</span>",
+    "answers": [
+     "viu"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Tens fills?</span> → <span lang=\"ca\">___ fills?</span>",
+    "answers": [
+     "Té"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Com et dius?</span> → <span lang=\"ca\">Com ___ diu?</span>",
+    "answers": [
+     "es"
+    ],
+    "hint": "3rd-person reflexive pronoun"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Quin horari fas?</span> → <span lang=\"ca\">Quin horari ___?</span>",
+    "answers": [
+     "fa"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">T'agrada la teva feina?</span> → <span lang=\"ca\">___ agrada la seva feina?</span>",
+    "answers": [
+     "Li"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">T'agrada la teva feina?</span> → <span lang=\"ca\">Li agrada la ___ feina?</span>",
+    "answers": [
+     "seva"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">A quina hora et lleves?</span> → <span lang=\"ca\">A quina hora es ___?</span>",
+    "answers": [
+     "lleva"
+    ]
+   }
+  ]
+ },
+ "desde": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Visc a Barcelona ___ tres anys.</span>",
+    "answers": [
+     "des de fa"
+    ],
+    "hint": "a period: “for three years”"
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ dos anys que estudio català.</span>",
+    "answers": [
+     "Fa"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Treballo en aquesta empresa ___ 2021.</span>",
+    "answers": [
+     "des del",
+     "des de"
+    ],
+    "hint": "a point in time: “since 2021”; years usually take the article"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Estic a l'atur ___ dilluns.</span>",
+    "answers": [
+     "des de"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Som amics ___ petits.</span>",
+    "answers": [
+     "des de"
+    ],
+    "hint": "“since we were little”"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Quant de temps ___ que vius aquí?</span>",
+    "answers": [
+     "fa"
+    ]
+   }
+  ]
+ },
+ "agrada": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">(a mi) ___ molt el mar.</span>",
+    "answers": [
+     "m'agrada"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">(a mi) No ___ gaire les festes grans.</span>",
+    "answers": [
+     "m'agraden"
+    ],
+    "hint": "les festes is plural"
+   },
+   {
+    "prompt": "<span lang=\"ca\">(a ella) ___ cuinar i ballar.</span>",
+    "answers": [
+     "Li agrada"
+    ],
+    "hint": "with infinitives — singular"
+   },
+   {
+    "prompt": "<span lang=\"ca\">(a ells) ___ els gats.</span>",
+    "answers": [
+     "Els agraden"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">(a vosaltres) ___ el curs?</span>",
+    "answers": [
+     "Us agrada"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">(a vostè) ___ la seva feina?</span>",
+    "answers": [
+     "Li agrada"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">M'agrada el te. — A mi ___.</span>",
+    "answers": [
+     "també"
+    ],
+    "hint": "agreeing: “me too”"
+   },
+   {
+    "prompt": "<span lang=\"ca\">No m'agrada el fred. — A mi ___.</span>",
+    "answers": [
+     "tampoc"
+    ],
+    "hint": "agreeing: “me neither”"
+   },
+   {
+    "prompt": "<span lang=\"ca\">El que no m'agrada ___ és que plego tard.</span>",
+    "answers": [
+     "gaire"
+    ],
+    "hint": "“not much”"
+   }
+  ]
+ },
+ "tercera": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Em dic Karim.</span> → <span lang=\"ca\">___ Karim.</span>",
+    "answers": [
+     "Es diu"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Soc del Marroc.</span> → <span lang=\"ca\">___ del Marroc.</span>",
+    "answers": [
+     "És"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La meva llengua materna és l'àrab.</span> → <span lang=\"ca\">La ___ llengua materna és l'àrab.</span>",
+    "answers": [
+     "seva"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Visc a Badalona des de fa sis anys.</span> → <span lang=\"ca\">___ a Badalona des de fa sis anys.</span>",
+    "answers": [
+     "Viu"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Tinc dos fills.</span> → <span lang=\"ca\">___ dos fills.</span>",
+    "answers": [
+     "Té"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Faig de jardiner.</span> → <span lang=\"ca\">___ de jardiner.</span>",
+    "answers": [
+     "Fa"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Em llevo a les sis.</span> → <span lang=\"ca\">___ a les sis.</span>",
+    "answers": [
+     "Es lleva"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">M'agrada molt el futbol.</span> → <span lang=\"ca\">___ molt el futbol.</span>",
+    "answers": [
+     "Li agrada"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Els meus pares viuen a Tànger.</span> → <span lang=\"ca\">Els ___ pares viuen a Tànger.</span>",
+    "answers": [
+     "seus"
+    ]
+   }
+  ]
+ },
+ "correcte": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "Introducing Karim to the group:",
+    "options": [
+     "Us presento a en Karim.",
+     "Us presento en Karim.",
+     "Os presento a Karim."
+    ],
+    "answer": 1,
+    "explain": "No preposition before the person, and the personal article: Us presento en Karim."
+   },
+   {
+    "prompt": "“They like dancing”:",
+    "options": [
+     "Les agrada ballar.",
+     "Els agrada ballar.",
+     "Els agraden ballar."
+    ],
+    "answer": 1,
+    "explain": "“To them” is els; with an infinitive, agrada (singular)."
+   },
+   {
+    "prompt": "“What I like most is the sea”:",
+    "options": [
+     "Lo que més m'agrada és el mar.",
+     "El que més m'agrada és el mar.",
+     "Què més m'agrada és el mar."
+    ],
+    "answer": 1,
+    "explain": "“What” in this sense is el que, not the question word què; lo que is Spanish."
+   },
+   {
+    "prompt": "Asking your elderly neighbour if she lives alone:",
+    "options": [
+     "Vius sola?",
+     "Vostè viu sola?",
+     "Vostè vius sola?"
+    ],
+    "answer": 1,
+    "explain": "With vostè the verb is 3rd person: Vostè viu sola?"
+   },
+   {
+    "prompt": "“Everyone likes parties”:",
+    "options": [
+     "A tothom li agraden les festes.",
+     "Tothom els agraden les festes.",
+     "A tothom els agrada les festes."
+    ],
+    "answer": 0,
+    "explain": "tothom is singular: a tothom li…; les festes is plural: agraden."
+   },
+   {
+    "prompt": "“Me too” (in reply to M'agrada el cafè):",
+    "options": [
+     "A mí també.",
+     "A mi també.",
+     "Jo també."
+    ],
+    "answer": 1,
+    "explain": "With agradar you answer a mi també; mi has no accent. Jo també replies to an ordinary verb: Soc anglès. — Jo també."
+   }
+  ]
+ }
+}

@@ -1,0 +1,191 @@
+{
+ "groups": {
+  "fruita": "Frutas y verduras",
+  "aliments": "Otros alimentos",
+  "quantitats": "Cantidades y envases",
+  "botigues": "Tiendas y compras"
+ },
+ "words": {
+  "poma": {
+   "tr": "manzana"
+  },
+  "taronja": {
+   "tr": "naranja"
+  },
+  "llimona": {
+   "tr": "limón",
+   "note": "femenino, a diferencia de el limón"
+  },
+  "platan": {
+   "tr": "plátano, banana"
+  },
+  "raim": {
+   "tr": "uva(s)",
+   "note": "en singular: el raïm; un grano es un gra de raïm"
+  },
+  "maduixa": {
+   "tr": "fresa, frutilla"
+  },
+  "cirera": {
+   "tr": "cereza"
+  },
+  "pressec": {
+   "tr": "melocotón, durazno"
+  },
+  "sindria": {
+   "tr": "sandía"
+  },
+  "enciam": {
+   "tr": "lechuga"
+  },
+  "ceba": {
+   "tr": "cebolla"
+  },
+  "tomaquet": {
+   "tr": "tomate"
+  },
+  "pebrot": {
+   "tr": "pimiento, morrón",
+   "note": "la pimienta es el pebre"
+  },
+  "carxofa": {
+   "tr": "alcachofa, alcaucil"
+  },
+  "carbasso": {
+   "tr": "calabacín, zapallito, calabacita",
+   "note": "la calabaza o el zapallo es la carbassa"
+  },
+  "bolet": {
+   "tr": "seta, hongo"
+  },
+  "llet": {
+   "tr": "leche"
+  },
+  "formatge": {
+   "tr": "queso"
+  },
+  "mantega": {
+   "tr": "mantequilla, manteca (Río de la Plata)",
+   "note": "la grasa de cerdo es el llard"
+  },
+  "ou": {
+   "tr": "huevo"
+  },
+  "pernil": {
+   "tr": "jamón",
+   "note": "pernil salat: serrano; pernil dolç: cocido, de York"
+  },
+  "carn-picada": {
+   "tr": "carne picada, carne molida"
+  },
+  "lluc": {
+   "tr": "merluza"
+  },
+  "bacalla": {
+   "tr": "bacalao (normalmente salado)"
+  },
+  "tonyina": {
+   "tr": "atún"
+  },
+  "cigrons": {
+   "tr": "garbanzos"
+  },
+  "oli": {
+   "tr": "aceite",
+   "note": "sin más, de oliva"
+  },
+  "fruita-seca": {
+   "tr": "frutos secos",
+   "note": "nueces, almendras…; las frutas desecadas son fruita dessecada"
+  },
+  "postres": {
+   "tr": "postre",
+   "note": "femenino y siempre en plural"
+  },
+  "quilo": {
+   "tr": "kilo"
+  },
+  "mig": {
+   "tr": "medio, media",
+   "note": "mig quilo, mitja dotzena"
+  },
+  "gram": {
+   "tr": "gramo"
+  },
+  "dotzena": {
+   "tr": "docena"
+  },
+  "tros": {
+   "tr": "trozo, pedazo"
+  },
+  "pot": {
+   "tr": "frasco, bote, tarro (de vidrio)"
+  },
+  "llauna": {
+   "tr": "lata"
+  },
+  "bric": {
+   "tr": "brik, cartón (de leche)"
+  },
+  "ampolla": {
+   "tr": "botella"
+  },
+  "paquet": {
+   "tr": "paquete"
+  },
+  "bossa": {
+   "tr": "bolsa"
+  },
+  "capsa": {
+   "tr": "caja",
+   "note": "la caja donde se paga es la caixa"
+  },
+  "mercat": {
+   "tr": "mercado"
+  },
+  "parada": {
+   "tr": "puesto (del mercado)"
+  },
+  "paradista": {
+   "tr": "vendedor del mercado, puestero"
+  },
+  "fruiteria": {
+   "tr": "frutería, verdulería"
+  },
+  "carnisseria": {
+   "tr": "carnicería"
+  },
+  "carnisser": {
+   "tr": "carnicero"
+  },
+  "peixateria": {
+   "tr": "pescadería"
+  },
+  "peixater": {
+   "tr": "pescadero"
+  },
+  "forn": {
+   "tr": "panadería; horno",
+   "note": "lo mismo que la fleca"
+  },
+  "forner": {
+   "tr": "panadero"
+  },
+  "bacallaneria": {
+   "tr": "tienda de bacalao salado"
+  },
+  "dependent": {
+   "tr": "dependiente, vendedor (de tienda)"
+  },
+  "caixer": {
+   "tr": "cajero"
+  },
+  "targeta": {
+   "tr": "tarjeta",
+   "note": "pagar amb targeta"
+  },
+  "canvi": {
+   "tr": "cambio, vuelto"
+  }
+ }
+}

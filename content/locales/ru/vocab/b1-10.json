@@ -1,0 +1,42 @@
+{
+ "groups": {
+  "festa": "Праздник и мэрия",
+  "curs": "Учебный год",
+  "parlar": "Разговор и знакомство"
+ },
+ "words": {
+  "festa": { "tr": "праздник, вечеринка", "note": "fer festa — иметь выходной" },
+  "sala-actes": { "tr": "актовый зал" },
+  "berenar": { "tr": "полдник", "note": "и глагол: полдничать" },
+  "ajuntament": { "tr": "мэрия, городской совет" },
+  "casa-vila": { "tr": "мэрия (в небольшом городке)" },
+  "alcalde": { "tr": "мэр" },
+  "regidor": { "tr": "член городского совета" },
+  "director": { "tr": "директор" },
+  "locutor": { "tr": "диктор, ведущий на радио" },
+  "entrevista": { "tr": "интервью" },
+  "tothom": { "tr": "все, каждый", "note": "глагол в ед. числе: tothom parla" },
+  "benvingut": { "tr": "добро пожаловать" },
+  "enhorabona": { "tr": "поздравляю! (с успехом)" },
+  "felicitats": { "tr": "поздравляю!" },
+  "curs": { "tr": "курс; учебный год" },
+  "inscripcio": { "tr": "запись, регистрация" },
+  "examen": { "tr": "экзамен" },
+  "sortida": { "tr": "экскурсия, выезд; выход" },
+  "conferencia": { "tr": "лекция, доклад" },
+  "vacances": { "tr": "отпуск, каникулы", "note": "только мн. число; fer vacances" },
+  "aprovar": { "tr": "сдать (экзамен)" },
+  "suspendre": { "tr": "провалить (экзамен)" },
+  "curs-que-ve": { "tr": "следующий учебный год" },
+  "voste": { "tr": "Вы (вежливое)", "note": "глагол в 3-м лице" },
+  "senyor": { "tr": "господин, госпожа" },
+  "presentar": { "tr": "представлять", "note": "Us presento en Karim — без a" },
+  "agradar": { "tr": "нравиться", "note": "m'agrada, li agrada, els agrada" },
+  "encantar": { "tr": "очень нравиться", "note": "m'encanta — обожаю" },
+  "gaire": { "tr": "не очень" },
+  "gens": { "tr": "совсем не" },
+  "des-de-fa": { "tr": "уже (столько-то времени)", "note": "des de fa tres anys" },
+  "llengua-materna": { "tr": "родной язык" },
+  "xerraire": { "tr": "болтливый, разговорчивый" }
+ }
+}

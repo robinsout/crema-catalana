@@ -1,0 +1,42 @@
+{
+ "groups": {
+  "festa": "The party and the town hall",
+  "curs": "The school year",
+  "parlar": "Conversation and introductions"
+ },
+ "words": {
+  "festa": { "tr": "party, celebration", "note": "fer festa — to have a day off" },
+  "sala-actes": { "tr": "main hall, assembly hall" },
+  "berenar": { "tr": "afternoon snack", "note": "also the verb: to have an afternoon snack" },
+  "ajuntament": { "tr": "town hall, city council" },
+  "casa-vila": { "tr": "town hall (in a small town)" },
+  "alcalde": { "tr": "mayor" },
+  "regidor": { "tr": "town councillor" },
+  "director": { "tr": "director, head (of a school)" },
+  "locutor": { "tr": "radio presenter, announcer" },
+  "entrevista": { "tr": "interview" },
+  "tothom": { "tr": "everyone, everybody", "note": "singular verb: tothom parla" },
+  "benvingut": { "tr": "welcome" },
+  "enhorabona": { "tr": "congratulations! (on an achievement)" },
+  "felicitats": { "tr": "congratulations! happy birthday!" },
+  "curs": { "tr": "course; school year" },
+  "inscripcio": { "tr": "enrolment, registration" },
+  "examen": { "tr": "exam", "note": "masculine; plural els exàmens" },
+  "sortida": { "tr": "outing, group trip; exit" },
+  "conferencia": { "tr": "talk, lecture" },
+  "vacances": { "tr": "holidays (US vacation)", "note": "always plural; fer vacances" },
+  "aprovar": { "tr": "to pass (an exam)" },
+  "suspendre": { "tr": "to fail (an exam)", "note": "about exams: to fail (not “suspend”)" },
+  "curs-que-ve": { "tr": "next school year" },
+  "voste": { "tr": "you (polite)", "note": "3rd-person verb" },
+  "senyor": { "tr": "Mr, Mrs; gentleman, lady" },
+  "presentar": { "tr": "to introduce (a person)", "note": "Us presento en Karim — no a" },
+  "agradar": { "tr": "to like (literally “to please”)", "note": "m'agrada, li agrada, els agrada" },
+  "encantar": { "tr": "to love (a thing, an activity)", "note": "m'encanta — I love it" },
+  "gaire": { "tr": "not much, not very" },
+  "gens": { "tr": "not at all" },
+  "des-de-fa": { "tr": "for (a period of time)", "note": "des de fa tres anys — for three years" },
+  "llengua-materna": { "tr": "mother tongue" },
+  "xerraire": { "tr": "chatty, talkative" }
+ }
+}

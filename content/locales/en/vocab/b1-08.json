@@ -1,0 +1,197 @@
+{
+ "groups": {
+  "aspecte": "Looks",
+  "cabells": "Hair, eyes, accessories",
+  "roba": "Clothes and footwear",
+  "colors": "Colours",
+  "caracter": "Character"
+ },
+ "words": {
+  "alt": {
+   "tr": "tall"
+  },
+  "baix": {
+   "tr": "short (of a person)",
+   "note": "softer: baixet"
+  },
+  "prim": {
+   "tr": "thin, slim"
+  },
+  "gras": {
+   "tr": "fat",
+   "note": "softer: grassonet"
+  },
+  "calb": {
+   "tr": "bald"
+  },
+  "jove": {
+   "tr": "young"
+  },
+  "mitjana-edat": {
+   "tr": "middle-aged"
+  },
+  "maco": {
+   "tr": "good-looking, attractive; lovely, nice"
+  },
+  "cabells": {
+   "tr": "hair",
+   "note": "usually plural in Catalan"
+  },
+  "ulls": {
+   "tr": "eyes"
+  },
+  "ros": {
+   "tr": "blond, blonde"
+  },
+  "moreno": {
+   "tr": "dark-haired; dark-skinned"
+  },
+  "castany": {
+   "tr": "brown (of hair); chestnut"
+  },
+  "pel-roig": {
+   "tr": "red-haired, a redhead"
+  },
+  "llis": {
+   "tr": "straight (of hair)"
+  },
+  "arrissat": {
+   "tr": "curly"
+  },
+  "cua": {
+   "tr": "ponytail"
+  },
+  "monyo": {
+   "tr": "bun"
+  },
+  "trena": {
+   "tr": "plait, braid"
+  },
+  "serrell": {
+   "tr": "fringe, bangs"
+  },
+  "barba": {
+   "tr": "beard"
+  },
+  "bigoti": {
+   "tr": "moustache"
+  },
+  "ulleres": {
+   "tr": "glasses"
+  },
+  "arracada": {
+   "tr": "earring"
+  },
+  "mocador": {
+   "tr": "headscarf; handkerchief"
+  },
+  "jersei": {
+   "tr": "jumper, sweater"
+  },
+  "samarreta": {
+   "tr": "T-shirt",
+   "note": "not a shirt"
+  },
+  "camisa": {
+   "tr": "shirt, blouse"
+  },
+  "faldilla": {
+   "tr": "skirt"
+  },
+  "vestit": {
+   "tr": "dress; suit",
+   "note": "not a vest"
+  },
+  "pantalons": {
+   "tr": "trousers"
+  },
+  "texans": {
+   "tr": "jeans"
+  },
+  "abric": {
+   "tr": "coat"
+  },
+  "jaqueta": {
+   "tr": "jacket"
+  },
+  "sabates": {
+   "tr": "shoes"
+  },
+  "vambes": {
+   "tr": "trainers, sneakers"
+  },
+  "sabatilles": {
+   "tr": "slippers",
+   "note": "sabatilles esportives — trainers"
+  },
+  "mitjons": {
+   "tr": "socks"
+  },
+  "bufanda": {
+   "tr": "scarf"
+  },
+  "vermell": {
+   "tr": "red"
+  },
+  "groc": {
+   "tr": "yellow"
+  },
+  "blau": {
+   "tr": "blue"
+  },
+  "verd": {
+   "tr": "green"
+  },
+  "gris": {
+   "tr": "grey"
+  },
+  "marro": {
+   "tr": "brown"
+  },
+  "taronja": {
+   "tr": "orange"
+  },
+  "blau-mari": {
+   "tr": "navy blue",
+   "note": "doesn't change"
+  },
+  "simpatic": {
+   "tr": "nice, likeable",
+   "note": "not “sympathetic”"
+  },
+  "tranquil": {
+   "tr": "calm"
+  },
+  "nervios": {
+   "tr": "nervous, restless"
+  },
+  "obert": {
+   "tr": "open, outgoing"
+  },
+  "timid": {
+   "tr": "shy"
+  },
+  "treballador": {
+   "tr": "hard-working"
+  },
+  "gandul": {
+   "tr": "lazy"
+  },
+  "pacient": {
+   "tr": "patient"
+  },
+  "discret": {
+   "tr": "discreet, tactful"
+  },
+  "tafaner": {
+   "tr": "nosy"
+  },
+  "xerraire": {
+   "tr": "chatty, talkative"
+  },
+  "ximple": {
+   "tr": "silly",
+   "note": "not “simple”"
+  }
+ }
+}

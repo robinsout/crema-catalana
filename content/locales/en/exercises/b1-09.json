@@ -1,0 +1,500 @@
+{
+ "irina": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "Why does Irina empty her backpack onto the table?",
+    "options": [
+     "Busca el mòbil.",
+     "Busca les claus.",
+     "Busca el llibre de català."
+    ],
+    "answer": 0,
+    "explain": "No trobo el mòbil."
+   },
+   {
+    "prompt": "What's in the pencil case?",
+    "options": [
+     "un mirall i una pinta",
+     "tres bolígrafs i un llapis",
+     "els mocadors de paper"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "Whose are the sunglasses?",
+    "options": [
+     "Són de la Irina.",
+     "Són d'un company.",
+     "Són de la seva germana."
+    ],
+    "answer": 2,
+    "explain": "No són meves: són de la meva germana."
+   },
+   {
+    "prompt": "Where is the phone?",
+    "options": [
+     "a la butxaca de l'abric",
+     "al costat de la finestra",
+     "a sobre de la taula del professor"
+    ],
+    "answer": 1,
+    "explain": "aquell mòbil d'allà, al costat de la finestra"
+   },
+   {
+    "prompt": "What is Irina's phone like?",
+    "options": [
+     "negre i petit",
+     "vermell, amb una funda de quadres",
+     "blau, amb una funda de ratlles"
+    ],
+    "answer": 1
+   }
+  ]
+ },
+ "meu": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">De qui és aquesta cartera? — És ___.</span> (mine)",
+    "answers": [
+     "meva"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">De qui són aquestes claus? — Són ___.</span> (mine)",
+    "answers": [
+     "meves"
+    ],
+    "hint": "les claus — feminine plural"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Aquest rellotge és ___?</span> (yours)",
+    "answers": [
+     "teu"
+    ],
+    "hint": "rellotge — masculine singular"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Aquests auriculars són ___?</span> (yours, plural)",
+    "answers": [
+     "vostres"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Quin és el teu paraigua? — ___ meu és el negre.</span>",
+    "answers": [
+     "El"
+    ],
+    "hint": "which one — with the article"
+   },
+   {
+    "prompt": "<span lang=\"ca\">De qui és el moneder? — És ___ Marta.</span>",
+    "answers": [
+     "de la"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Les ulleres són ___ Pau.</span>",
+    "answers": [
+     "d'en"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">És el llibre ___ professor?</span>",
+    "answers": [
+     "del"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Aquesta bossa és de la Núria? — Sí, és ___.</span> (hers)",
+    "answers": [
+     "d'ella",
+     "seva"
+    ]
+   }
+  ]
+ },
+ "aixo": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "“What's this?” — about something you don't know",
+    "options": [
+     "Què és aquest?",
+     "Què és això?",
+     "Què és aquesta?"
+    ],
+    "answer": 1,
+    "explain": "No noun — això."
+   },
+   {
+    "prompt": "“That backpack over there is mine.”",
+    "options": [
+     "Aquesta motxilla d'aquí és meva.",
+     "Allò motxilla és meva.",
+     "Aquella motxilla d'allà és meva."
+    ],
+    "answer": 2
+   },
+   {
+    "prompt": "“These are my keys”, showing them",
+    "options": [
+     "Aquestes són les meves claus.",
+     "Això és les meves claus.",
+     "Aquest són les meves claus."
+    ],
+    "answer": 0,
+    "explain": "les claus — feminine plural, so the verb is plural too."
+   },
+   {
+    "prompt": "“What's that over there, on the shelf?”",
+    "options": [
+     "Què és això d'aquí, al prestatge?",
+     "Què és allò d'allà, al prestatge?",
+     "Què és aquell, al prestatge?"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "“Is this watch yours?”",
+    "options": [
+     "Aquests rellotges és teu?",
+     "Això rellotge és teu?",
+     "Aquest rellotge és teu?"
+    ],
+    "answer": 2,
+    "explain": "el rellotge — singular."
+   },
+   {
+    "prompt": "“Your wallet is here.”",
+    "options": [
+     "La teva cartera és aquí.",
+     "La teva cartera hi ha aquí.",
+     "La teva cartera és allà."
+    ],
+    "answer": 0,
+    "explain": "Where something is — ser; aquí — here."
+   }
+  ]
+ },
+ "serveix": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Un paraigua serveix…</span>",
+    "options": [
+     "per pentinar-se.",
+     "per no mullar-se.",
+     "per apuntar coses."
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "<span lang=\"ca\">Una agenda serveix…</span>",
+    "options": [
+     "per apuntar coses.",
+     "per portar monedes.",
+     "per mocar-se."
+    ],
+    "answer": 0
+   },
+   {
+    "prompt": "<span lang=\"ca\">Un moneder serveix…</span>",
+    "options": [
+     "per trucar.",
+     "per protegir-se els ulls.",
+     "per portar monedes."
+    ],
+    "answer": 2
+   },
+   {
+    "prompt": "<span lang=\"ca\">Les ulleres de sol serveixen…</span>",
+    "options": [
+     "per protegir-se els ulls.",
+     "per obrir les portes.",
+     "per escriure."
+    ],
+    "answer": 0
+   },
+   {
+    "prompt": "<span lang=\"ca\">Una pinta serveix…</span>",
+    "options": [
+     "per pintar-se els llavis.",
+     "per pentinar-se.",
+     "per llegir."
+    ],
+    "answer": 1,
+    "explain": "La pinta — comb; lipstick is el pintallavis."
+   },
+   {
+    "prompt": "“What do you want the umbrella for? It isn't raining.”",
+    "options": [
+     "Per què serveix el paraigua? No plou.",
+     "Per a què vols el paraigua? No plou.",
+     "Per a qui vols el paraigua? No plou."
+    ],
+    "answer": 1,
+    "explain": "What for — per a què; why — per què."
+   },
+   {
+    "prompt": "“It's no use at all.”",
+    "options": [
+     "No serveix per a res.",
+     "No serveix per a ningú.",
+     "No serveix per a cap."
+    ],
+    "answer": 0
+   }
+  ]
+ },
+ "cap": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Hi ha ___ ordinador a l'aula?</span> (any)",
+    "answers": [
+     "algun",
+     "cap"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">No, no hi ha ___ ordinador.</span> (not a single one)",
+    "answers": [
+     "cap"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Hi ha ___ a la porta?</span> (anybody)",
+    "answers": [
+     "algú",
+     "ningú"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">No, no hi ha ___.</span> (nobody)",
+    "answers": [
+     "ningú"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Portes ___ cosa a la butxaca?</span>",
+    "answers": [
+     "alguna"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">No, no porto ___.</span> (nothing)",
+    "answers": [
+     "res"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Hi ha ___ paperera a l'aula?</span> (any)",
+    "answers": [
+     "alguna",
+     "cap"
+    ],
+    "hint": "paperera — feminine"
+   },
+   {
+    "prompt": "<span lang=\"ca\">No tinc ___ cadira.</span> (no chair)",
+    "answers": [
+     "cap"
+    ],
+    "hint": "cap never changes for gender"
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ porta paraigua: fa sol.</span> (nobody)",
+    "answers": [
+     "Ningú"
+    ]
+   }
+  ]
+ },
+ "com": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">una motxilla ___</span> (gros)",
+    "answers": [
+     "grossa"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">les claus ___</span> (groc)",
+    "answers": [
+     "grogues"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">una cartera ___</span> (blau)",
+    "answers": [
+     "blava"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">unes ulleres ___</span> (rodó)",
+    "answers": [
+     "rodones"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">una bossa ___</span> (blanc)",
+    "answers": [
+     "blanca"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">uns paraigües ___</span> (gris)",
+    "answers": [
+     "grisos"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">una pissarra ___</span> (verd)",
+    "answers": [
+     "verda"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">una bufanda ___</span> (taronja)",
+    "answers": [
+     "taronja"
+    ],
+    "hint": "doesn't change"
+   },
+   {
+    "prompt": "<span lang=\"ca\">un anell ___</span> (gold)",
+    "answers": [
+     "d'or"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">una taula ___</span> (wooden)",
+    "answers": [
+     "de fusta"
+    ]
+   }
+  ]
+ },
+ "plural": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">la butxaca → les ___</span>",
+    "answers": [
+     "butxaques"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">la botiga → les ___</span>",
+    "answers": [
+     "botigues"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">la platja → les ___</span>",
+    "answers": [
+     "platges"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">la plaça → les ___</span>",
+    "answers": [
+     "places"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">el paraigua → els ___</span>",
+    "answers": [
+     "paraigües"
+    ],
+    "hint": "don't forget the two dots over the u"
+   },
+   {
+    "prompt": "<span lang=\"ca\">la taronja → les ___</span>",
+    "answers": [
+     "taronges"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">una bossa blanca → unes bosses ___</span>",
+    "answers": [
+     "blanques"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">un llibre gros → uns llibres ___</span>",
+    "answers": [
+     "grossos"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">el llapis → els ___</span>",
+    "answers": [
+     "llapis"
+    ]
+   }
+  ]
+ },
+ "endevina": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">És petita, és de metall i serveix per obrir la porta.</span>",
+    "options": [
+     "la clau",
+     "la pinta",
+     "la cartera"
+    ],
+    "answer": 0
+   },
+   {
+    "prompt": "<span lang=\"ca\">És blanc, és petit i serveix per escriure a la pissarra.</span>",
+    "options": [
+     "el full",
+     "el guix",
+     "el llum"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "<span lang=\"ca\">És plegable i serveix per no mullar-se quan plou.</span>",
+    "options": [
+     "el penjador",
+     "el necesser",
+     "el paraigua"
+    ],
+    "answer": 2
+   },
+   {
+    "prompt": "<span lang=\"ca\">És de paper i serveix per mocar-se.</span>",
+    "options": [
+     "un mocador de paper",
+     "una llibreta",
+     "una targeta"
+    ],
+    "answer": 0
+   },
+   {
+    "prompt": "<span lang=\"ca\">És de vidre i serveix per mirar-se.</span>",
+    "options": [
+     "les ulleres",
+     "el mirall",
+     "la finestra"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "<span lang=\"ca\">És de plàstic i serveix per llençar papers.</span>",
+    "options": [
+     "l'armari",
+     "la paperera",
+     "la motxilla"
+    ],
+    "answer": 1
+   }
+  ]
+ }
+}

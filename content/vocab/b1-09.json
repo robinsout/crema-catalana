@@ -1,0 +1,338 @@
+{
+ "groups": [
+  {
+   "id": "bossa",
+   "words": [
+    {
+     "id": "bossa",
+     "ca": "la bossa",
+     "gender": "f",
+     "plural": "bosses"
+    },
+    {
+     "id": "motxilla",
+     "ca": "la motxilla",
+     "gender": "f",
+     "plural": "motxilles"
+    },
+    {
+     "id": "butxaca",
+     "ca": "la butxaca",
+     "gender": "f",
+     "plural": "butxaques"
+    },
+    {
+     "id": "clau",
+     "ca": "la clau",
+     "gender": "f",
+     "plural": "claus"
+    },
+    {
+     "id": "cartera",
+     "ca": "la cartera",
+     "gender": "f",
+     "plural": "carteres"
+    },
+    {
+     "id": "moneder",
+     "ca": "el moneder",
+     "gender": "m",
+     "plural": "moneders"
+    },
+    {
+     "id": "mobil",
+     "ca": "el mòbil",
+     "gender": "m",
+     "plural": "mòbils"
+    },
+    {
+     "id": "targeta",
+     "ca": "la targeta",
+     "gender": "f",
+     "plural": "targetes"
+    },
+    {
+     "id": "estoig",
+     "ca": "l'estoig",
+     "gender": "m",
+     "plural": "estoigs"
+    },
+    {
+     "id": "ulleres-sol",
+     "ca": "les ulleres de sol",
+     "gender": "f"
+    },
+    {
+     "id": "mocador",
+     "ca": "el mocador",
+     "gender": "m",
+     "plural": "mocadors"
+    },
+    {
+     "id": "xiclet",
+     "ca": "el xiclet",
+     "gender": "m",
+     "plural": "xiclets"
+    },
+    {
+     "id": "pintallavis",
+     "ca": "el pintallavis",
+     "gender": "m",
+     "plural": "pintallavis"
+    },
+    {
+     "id": "paraigua",
+     "ca": "el paraigua",
+     "gender": "m",
+     "plural": "paraigües"
+    },
+    {
+     "id": "agenda",
+     "ca": "l'agenda",
+     "gender": "f",
+     "plural": "agendes"
+    },
+    {
+     "id": "boligraf",
+     "ca": "el bolígraf",
+     "gender": "m",
+     "plural": "bolígrafs"
+    },
+    {
+     "id": "llapis",
+     "ca": "el llapis",
+     "gender": "m",
+     "plural": "llapis"
+    },
+    {
+     "id": "rellotge",
+     "ca": "el rellotge",
+     "gender": "m",
+     "plural": "rellotges"
+    },
+    {
+     "id": "mirall",
+     "ca": "el mirall",
+     "gender": "m",
+     "plural": "miralls"
+    },
+    {
+     "id": "pinta",
+     "ca": "la pinta",
+     "gender": "f",
+     "plural": "pintes"
+    },
+    {
+     "id": "carregador",
+     "ca": "el carregador",
+     "gender": "m",
+     "plural": "carregadors"
+    }
+   ]
+  },
+  {
+   "id": "aula",
+   "words": [
+    {
+     "id": "aula",
+     "ca": "l'aula",
+     "gender": "f",
+     "plural": "aules"
+    },
+    {
+     "id": "taula",
+     "ca": "la taula",
+     "gender": "f",
+     "plural": "taules"
+    },
+    {
+     "id": "cadira",
+     "ca": "la cadira",
+     "gender": "f",
+     "plural": "cadires"
+    },
+    {
+     "id": "pissarra",
+     "ca": "la pissarra",
+     "gender": "f",
+     "plural": "pissarres"
+    },
+    {
+     "id": "guix",
+     "ca": "el guix",
+     "gender": "m",
+     "plural": "guixos"
+    },
+    {
+     "id": "paperera",
+     "ca": "la paperera",
+     "gender": "f",
+     "plural": "papereres"
+    },
+    {
+     "id": "ordinador",
+     "ca": "l'ordinador",
+     "gender": "m",
+     "plural": "ordinadors"
+    },
+    {
+     "id": "penjador",
+     "ca": "el penjador",
+     "gender": "m",
+     "plural": "penjadors"
+    },
+    {
+     "id": "llum",
+     "ca": "el llum",
+     "gender": "m",
+     "plural": "llums"
+    },
+    {
+     "id": "llibreta",
+     "ca": "la llibreta",
+     "gender": "f",
+     "plural": "llibretes"
+    },
+    {
+     "id": "full",
+     "ca": "el full",
+     "gender": "m",
+     "plural": "fulls"
+    },
+    {
+     "id": "tisores",
+     "ca": "les tisores",
+     "gender": "f"
+    }
+   ]
+  },
+  {
+   "id": "descripcio",
+   "words": [
+    {
+     "id": "gros",
+     "ca": "gros, grossa",
+     "gender": "mf",
+     "plural": "grossos, grosses"
+    },
+    {
+     "id": "petit",
+     "ca": "petit, petita",
+     "gender": "mf",
+     "plural": "petits, petites"
+    },
+    {
+     "id": "mida",
+     "ca": "la mida",
+     "gender": "f",
+     "plural": "mides"
+    },
+    {
+     "id": "rodo",
+     "ca": "rodó, rodona",
+     "gender": "mf",
+     "plural": "rodons, rodones"
+    },
+    {
+     "id": "quadrat",
+     "ca": "quadrat, quadrada",
+     "gender": "mf",
+     "plural": "quadrats, quadrades"
+    },
+    {
+     "id": "fusta",
+     "ca": "la fusta",
+     "gender": "f"
+    },
+    {
+     "id": "metall",
+     "ca": "el metall",
+     "gender": "m",
+     "plural": "metalls"
+    },
+    {
+     "id": "pell",
+     "ca": "la pell",
+     "gender": "f",
+     "plural": "pells"
+    },
+    {
+     "id": "roba",
+     "ca": "la roba",
+     "gender": "f"
+    },
+    {
+     "id": "vidre",
+     "ca": "el vidre",
+     "gender": "m",
+     "plural": "vidres"
+    },
+    {
+     "id": "plegable",
+     "ca": "plegable",
+     "gender": "mf",
+     "plural": "plegables"
+    },
+    {
+     "id": "blau",
+     "ca": "blau, blava",
+     "gender": "mf",
+     "plural": "blaus, blaves"
+    },
+    {
+     "id": "groc",
+     "ca": "groc, groga",
+     "gender": "mf",
+     "plural": "grocs, grogues"
+    },
+    {
+     "id": "marro",
+     "ca": "marró",
+     "gender": "mf",
+     "plural": "marrons"
+    }
+   ]
+  },
+  {
+   "id": "paraules",
+   "words": [
+    {
+     "id": "portar",
+     "ca": "portar"
+    },
+    {
+     "id": "servir",
+     "ca": "servir per"
+    },
+    {
+     "id": "fer-servir",
+     "ca": "fer servir"
+    },
+    {
+     "id": "veure",
+     "ca": "veure"
+    },
+    {
+     "id": "cap",
+     "ca": "cap"
+    },
+    {
+     "id": "ningu",
+     "ca": "ningú"
+    },
+    {
+     "id": "res",
+     "ca": "res"
+    },
+    {
+     "id": "aixo",
+     "ca": "això"
+    },
+    {
+     "id": "allo",
+     "ca": "allò"
+    }
+   ]
+  }
+ ]
+}

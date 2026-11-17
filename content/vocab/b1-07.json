@@ -1,0 +1,347 @@
+{
+ "groups": [
+  {
+   "id": "fruita",
+   "words": [
+    {
+     "id": "poma",
+     "ca": "la poma",
+     "gender": "f",
+     "plural": "les pomes"
+    },
+    {
+     "id": "taronja",
+     "ca": "la taronja",
+     "gender": "f",
+     "plural": "les taronges"
+    },
+    {
+     "id": "llimona",
+     "ca": "la llimona",
+     "gender": "f",
+     "plural": "les llimones"
+    },
+    {
+     "id": "platan",
+     "ca": "el plàtan",
+     "gender": "m",
+     "plural": "els plàtans"
+    },
+    {
+     "id": "raim",
+     "ca": "el raïm",
+     "gender": "m"
+    },
+    {
+     "id": "maduixa",
+     "ca": "la maduixa",
+     "gender": "f",
+     "plural": "les maduixes"
+    },
+    {
+     "id": "cirera",
+     "ca": "la cirera",
+     "gender": "f",
+     "plural": "les cireres"
+    },
+    {
+     "id": "pressec",
+     "ca": "el préssec",
+     "gender": "m",
+     "plural": "els préssecs"
+    },
+    {
+     "id": "sindria",
+     "ca": "la síndria",
+     "gender": "f",
+     "plural": "les síndries"
+    },
+    {
+     "id": "enciam",
+     "ca": "l'enciam",
+     "gender": "m",
+     "plural": "els enciams"
+    },
+    {
+     "id": "ceba",
+     "ca": "la ceba",
+     "gender": "f",
+     "plural": "les cebes"
+    },
+    {
+     "id": "tomaquet",
+     "ca": "el tomàquet",
+     "gender": "m",
+     "plural": "els tomàquets"
+    },
+    {
+     "id": "pebrot",
+     "ca": "el pebrot",
+     "gender": "m",
+     "plural": "els pebrots"
+    },
+    {
+     "id": "carxofa",
+     "ca": "la carxofa",
+     "gender": "f",
+     "plural": "les carxofes"
+    },
+    {
+     "id": "carbasso",
+     "ca": "el carbassó",
+     "gender": "m",
+     "plural": "els carbassons"
+    },
+    {
+     "id": "bolet",
+     "ca": "el bolet",
+     "gender": "m",
+     "plural": "els bolets"
+    }
+   ]
+  },
+  {
+   "id": "aliments",
+   "words": [
+    {
+     "id": "llet",
+     "ca": "la llet",
+     "gender": "f"
+    },
+    {
+     "id": "formatge",
+     "ca": "el formatge",
+     "gender": "m",
+     "plural": "els formatges"
+    },
+    {
+     "id": "mantega",
+     "ca": "la mantega",
+     "gender": "f"
+    },
+    {
+     "id": "ou",
+     "ca": "l'ou",
+     "gender": "m",
+     "plural": "els ous"
+    },
+    {
+     "id": "pernil",
+     "ca": "el pernil",
+     "gender": "m"
+    },
+    {
+     "id": "carn-picada",
+     "ca": "la carn picada",
+     "gender": "f"
+    },
+    {
+     "id": "lluc",
+     "ca": "el lluç",
+     "gender": "m",
+     "plural": "els lluços"
+    },
+    {
+     "id": "bacalla",
+     "ca": "el bacallà",
+     "gender": "m"
+    },
+    {
+     "id": "tonyina",
+     "ca": "la tonyina",
+     "gender": "f"
+    },
+    {
+     "id": "cigrons",
+     "ca": "els cigrons",
+     "gender": "m"
+    },
+    {
+     "id": "oli",
+     "ca": "l'oli",
+     "gender": "m"
+    },
+    {
+     "id": "fruita-seca",
+     "ca": "la fruita seca",
+     "gender": "f"
+    },
+    {
+     "id": "postres",
+     "ca": "les postres",
+     "gender": "f"
+    }
+   ]
+  },
+  {
+   "id": "quantitats",
+   "words": [
+    {
+     "id": "quilo",
+     "ca": "el quilo",
+     "gender": "m",
+     "plural": "els quilos"
+    },
+    {
+     "id": "mig",
+     "ca": "mig, mitja",
+     "gender": "mf"
+    },
+    {
+     "id": "gram",
+     "ca": "el gram",
+     "gender": "m",
+     "plural": "els grams"
+    },
+    {
+     "id": "dotzena",
+     "ca": "la dotzena",
+     "gender": "f",
+     "plural": "les dotzenes"
+    },
+    {
+     "id": "tros",
+     "ca": "el tros",
+     "gender": "m",
+     "plural": "els trossos"
+    },
+    {
+     "id": "pot",
+     "ca": "el pot",
+     "gender": "m",
+     "plural": "els pots"
+    },
+    {
+     "id": "llauna",
+     "ca": "la llauna",
+     "gender": "f",
+     "plural": "les llaunes"
+    },
+    {
+     "id": "bric",
+     "ca": "el bric",
+     "gender": "m",
+     "plural": "els brics"
+    },
+    {
+     "id": "ampolla",
+     "ca": "l'ampolla",
+     "gender": "f",
+     "plural": "les ampolles"
+    },
+    {
+     "id": "paquet",
+     "ca": "el paquet",
+     "gender": "m",
+     "plural": "els paquets"
+    },
+    {
+     "id": "bossa",
+     "ca": "la bossa",
+     "gender": "f",
+     "plural": "les bosses"
+    },
+    {
+     "id": "capsa",
+     "ca": "la capsa",
+     "gender": "f",
+     "plural": "les capses"
+    }
+   ]
+  },
+  {
+   "id": "botigues",
+   "words": [
+    {
+     "id": "mercat",
+     "ca": "el mercat",
+     "gender": "m",
+     "plural": "els mercats"
+    },
+    {
+     "id": "parada",
+     "ca": "la parada",
+     "gender": "f",
+     "plural": "les parades"
+    },
+    {
+     "id": "paradista",
+     "ca": "el paradista, la paradista",
+     "gender": "mf",
+     "plural": "els paradistes, les paradistes"
+    },
+    {
+     "id": "fruiteria",
+     "ca": "la fruiteria",
+     "gender": "f",
+     "plural": "les fruiteries"
+    },
+    {
+     "id": "carnisseria",
+     "ca": "la carnisseria",
+     "gender": "f",
+     "plural": "les carnisseries"
+    },
+    {
+     "id": "carnisser",
+     "ca": "el carnisser, la carnissera",
+     "gender": "mf",
+     "plural": "els carnissers, les carnisseres"
+    },
+    {
+     "id": "peixateria",
+     "ca": "la peixateria",
+     "gender": "f",
+     "plural": "les peixateries"
+    },
+    {
+     "id": "peixater",
+     "ca": "el peixater, la peixatera",
+     "gender": "mf",
+     "plural": "els peixaters, les peixateres"
+    },
+    {
+     "id": "forn",
+     "ca": "el forn",
+     "gender": "m",
+     "plural": "els forns"
+    },
+    {
+     "id": "forner",
+     "ca": "el forner, la fornera",
+     "gender": "mf",
+     "plural": "els forners, les forneres"
+    },
+    {
+     "id": "bacallaneria",
+     "ca": "la bacallaneria",
+     "gender": "f",
+     "plural": "les bacallaneries"
+    },
+    {
+     "id": "dependent",
+     "ca": "el dependent, la dependenta",
+     "gender": "mf",
+     "plural": "els dependents, les dependentes"
+    },
+    {
+     "id": "caixer",
+     "ca": "el caixer, la caixera",
+     "gender": "mf",
+     "plural": "els caixers, les caixeres"
+    },
+    {
+     "id": "targeta",
+     "ca": "la targeta",
+     "gender": "f",
+     "plural": "les targetes"
+    },
+    {
+     "id": "canvi",
+     "ca": "el canvi",
+     "gender": "m"
+    }
+   ]
+  }
+ ]
+}

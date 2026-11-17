@@ -84,22 +84,26 @@
         {
           "id": "b1-07",
           "unit": 7,
-          "title": "Compro la fruita al mercat"
+          "title": "Compro la fruita al mercat",
+          "hasVocab": true
         },
         {
           "id": "b1-08",
           "unit": 8,
-          "title": "Soc jove i optimista"
+          "title": "Soc jove i optimista",
+          "hasVocab": true
         },
         {
           "id": "b1-09",
           "unit": 9,
-          "title": "Porto les claus a la butxaca"
+          "title": "Porto les claus a la butxaca",
+          "hasVocab": true
         },
         {
           "id": "b1-10",
           "unit": 10,
-          "title": "Participo a la festa de final de curs"
+          "title": "Participo a la festa de final de curs",
+          "hasVocab": true
         }
       ]
     },

@@ -105,8 +105,8 @@ test('fonts are served with the site', async ({ page }) => {
 });
 
 test('no page scrolls sideways', async ({ page }) => {
-  const lessons = ['intro', 'x-temps-verbals', 'x-nombres-calendari', 'b1-01', 'b1-02', 'b1-03', 'b1-04', 'b1-05', 'b1-06'];
-  for (const path of ['#/ru/plan', ...lessons.map((id) => `#/ru/lesson/${id}`)]) {
+  const lessons = ['intro', 'x-temps-verbals', 'x-nombres-calendari', 'b1-01', 'b1-02', 'b1-03', 'b1-04', 'b1-05', 'b1-06', 'b1-07', 'b1-08', 'b1-09', 'b1-10'];
+  for (const path of ['#/ru/plan', ...['ru', 'en', 'es'].flatMap((l) => lessons.map((id) => `#/${l}/lesson/${id}`))]) {
     await page.goto(`./${path}`);
     await expect(page.locator('.lesson-head h2')).toBeVisible();
     expect(await noHorizontalScroll(page), path).toBe(true);

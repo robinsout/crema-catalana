@@ -1,0 +1,404 @@
+{
+ "lectura": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "How does Anna find her place in the queue?",
+    "options": [
+     "She takes a ticket.",
+     "She asks «Qui és l'última?»",
+     "She waits to be called by name."
+    ],
+    "answer": 1,
+    "explain": "Hi ha molta gent i pregunta: «Qui és l'última?»"
+   },
+   {
+    "prompt": "How does the greengrocer address Anna?",
+    "options": [
+     "with tu",
+     "with vostè"
+    ],
+    "answer": 0,
+    "explain": "Què et poso? uses tu; with vostè it would be Què li poso?"
+   },
+   {
+    "prompt": "Why doesn't Anna buy strawberries?",
+    "options": [
+     "It's autumn, and strawberries are very expensive.",
+     "She doesn't like strawberries.",
+     "There are no strawberries on the stall."
+    ],
+    "answer": 0,
+    "explain": "Ara és tardor i les maduixes són molt cares."
+   },
+   {
+    "prompt": "What does she buy at the fishmonger's?",
+    "options": [
+     "un quilo de sardines",
+     "dos-cents grams de gambes i un lluç",
+     "una llauna de tonyina"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "Why doesn't she buy anything at the butcher's?",
+    "options": [
+     "The butcher's is closed.",
+     "Today she wants to make a fish dinner.",
+     "She buys her meat at the supermarket."
+    ],
+    "answer": 1,
+    "explain": "Avui vol fer un sopar de peix."
+   },
+   {
+    "prompt": "What does she buy at the bakery for her mother?",
+    "options": [
+     "una barra de pa",
+     "un tortell de Reis",
+     "mitja dotzena de panellets"
+    ],
+    "answer": 2,
+    "explain": "I, per a la seva mare, mitja dotzena de panellets."
+   }
+  ]
+ },
+ "voler": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Jo ___ un quilo de pomes.</span>",
+    "answers": [
+     "vull"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Què ___ per dinar, tu?</span>",
+    "answers": [
+     "vols"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Bon dia, senyor. Què ___?</span>",
+    "answers": [
+     "vol"
+    ],
+    "hint": "with vostè"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Nosaltres ___ comprar peix fresc.</span>",
+    "answers": [
+     "volem"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Nens, ___ pa amb xocolata per berenar?</span>",
+    "answers": [
+     "voleu"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Els meus fills sempre ___ macarrons.</span>",
+    "answers": [
+     "volen"
+    ]
+   }
+  ]
+ },
+ "quant": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">___ mandarines vol?</span> — <span lang=\"ca\">Un quilo.</span>",
+    "answers": [
+     "Quantes"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ formatge vols?</span> — <span lang=\"ca\">Dos-cents grams.</span>",
+    "answers": [
+     "Quant"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ ous vol?</span> — <span lang=\"ca\">Una dotzena.</span>",
+    "answers": [
+     "Quants"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ carn picada vols?</span> — <span lang=\"ca\">Mig quilo.</span>",
+    "answers": [
+     "Quanta"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ llaunes de tonyina compres?</span> — <span lang=\"ca\">Tres.</span>",
+    "answers": [
+     "Quantes"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Gràcies. ___ és?</span> — <span lang=\"ca\">Són nou euros.</span>",
+    "answers": [
+     "Quant"
+    ],
+    "hint": "no noun after it"
+   }
+  ]
+ },
+ "envasos": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">una ___ de tonyina</span>",
+    "answers": [
+     "llauna"
+    ],
+    "hint": "a tin, a can"
+   },
+   {
+    "prompt": "<span lang=\"ca\">un ___ de llet</span>",
+    "answers": [
+     "bric"
+    ],
+    "hint": "a carton"
+   },
+   {
+    "prompt": "<span lang=\"ca\">un ___ de mel</span>",
+    "answers": [
+     "pot"
+    ],
+    "hint": "a glass jar"
+   },
+   {
+    "prompt": "<span lang=\"ca\">una ___ d'oli</span>",
+    "answers": [
+     "ampolla"
+    ],
+    "hint": "a bottle"
+   },
+   {
+    "prompt": "<span lang=\"ca\">una ___ d'ous</span>",
+    "answers": [
+     "dotzena"
+    ],
+    "hint": "twelve"
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ quilo de cireres</span>",
+    "answers": [
+     "mig"
+    ],
+    "hint": "half a kilo"
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ dotzena d'ous</span>",
+    "answers": [
+     "mitja"
+    ],
+    "hint": "six"
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ ampolles de vi</span>",
+    "answers": [
+     "dues"
+    ],
+    "hint": "two (feminine noun)"
+   }
+  ]
+ },
+ "botigues": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Compro el lluç i les sardines…</span>",
+    "options": [
+     "a la carnisseria",
+     "a la peixateria",
+     "a la fleca"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "<span lang=\"ca\">Compro una barra de pa…</span>",
+    "options": [
+     "al forn",
+     "a la fruiteria",
+     "a la xarcuteria"
+    ],
+    "answer": 0,
+    "explain": "El forn and la fleca both mean the bakery."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Compro el bacallà salat…</span>",
+    "options": [
+     "a la pastisseria",
+     "a la bacallaneria",
+     "a la carnisseria"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "<span lang=\"ca\">Compro la vedella i el pollastre…</span>",
+    "options": [
+     "a la peixateria",
+     "a la fruiteria",
+     "a la carnisseria"
+    ],
+    "answer": 2
+   },
+   {
+    "prompt": "Who sells fruit and vegetables?",
+    "options": [
+     "el fruiter",
+     "el forner",
+     "el caixer"
+    ],
+    "answer": 0
+   },
+   {
+    "prompt": "Who works at the till in a supermarket?",
+    "options": [
+     "la paradista",
+     "la caixera",
+     "la peixatera"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "Which preposition is right?",
+    "options": [
+     "Compro la carn en la carnisseria.",
+     "Compro la carn a la carnisseria.",
+     "Compro la carn de la carnisseria."
+    ],
+    "answer": 1,
+    "explain": "With places it's a + article: a la carnisseria, al mercat."
+   }
+  ]
+ },
+ "parada": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">— Bon dia. Qui és ___?</span> (who's last)",
+    "answers": [
+     "l'últim",
+     "l'última"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">— Bon dia, senyora. Què li ___?</span> (what can I get you)",
+    "answers": [
+     "poso"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">— ___ un quilo de pomes, si us plau.</span> (the polite form, not vull)",
+    "answers": [
+     "Voldria"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">— Alguna cosa ___?</span>",
+    "answers": [
+     "més"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">— A quant ___ les cireres?</span> (how much — by weight)",
+    "answers": [
+     "van"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">— No, ___ més, gràcies. Quant és?</span>",
+    "answers": [
+     "res"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">— Són sis euros ___ trenta.</span>",
+    "answers": [
+     "amb"
+    ]
+   },
+   {
+    "prompt": "— ___. (here you are — vostè)",
+    "answers": [
+     "Tingui"
+    ],
+    "hint": "with tu it would be Té"
+   }
+  ]
+ },
+ "temporada": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Fa molt de fred. Què mengem?</span>",
+    "options": [
+     "escudella i carn d'olla",
+     "coca de Sant Joan",
+     "síndria"
+    ],
+    "answer": 0
+   },
+   {
+    "prompt": "On 6 January people eat…",
+    "options": [
+     "la mona",
+     "el tortell de Reis",
+     "els panellets"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "At Easter, godparents give…",
+    "options": [
+     "la mona",
+     "les castanyes",
+     "els canelons"
+    ],
+    "answer": 0
+   },
+   {
+    "prompt": "<span lang=\"ca\">La revetlla de Sant Joan</span> is…",
+    "options": [
+     "1 November, with chestnuts",
+     "23 June, with coca and cava",
+     "25 December, with broth"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "<span lang=\"ca\">Castanyes, moniatos i panellets</span> are eaten…",
+    "options": [
+     "a la primavera",
+     "a l'estiu",
+     "a la tardor"
+    ],
+    "answer": 2,
+    "explain": "La Castanyada, 31 October – 1 November."
+   },
+   {
+    "prompt": "Which of these is a summer food?",
+    "options": [
+     "les carxofes",
+     "els préssecs",
+     "les mandarines"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "Which of these is a spring food?",
+    "options": [
+     "les maduixes",
+     "la carbassa",
+     "la magrana"
+    ],
+    "answer": 0
+   }
+  ]
+ }
+}

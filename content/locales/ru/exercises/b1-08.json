@@ -1,0 +1,336 @@
+{
+ "festa": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "Кто такой Макс?",
+    "options": [
+     "отец Лайи",
+     "брат Лайи",
+     "друг Карлы"
+    ],
+    "answer": 1,
+    "explain": "El seu germà, en Max…"
+   },
+   {
+    "prompt": "Как выглядит Карла?",
+    "options": [
+     "És alta i porta ulleres.",
+     "És calba i porta barba.",
+     "Té els ulls verds i porta una cua."
+    ],
+    "answer": 2,
+    "explain": "Té els ulls verds i porta els cabells recollits en una cua."
+   },
+   {
+    "prompt": "Какой у Карлы характер?",
+    "options": [
+     "És molt xerraire.",
+     "És una mica tímida.",
+     "És molt tranquil·la."
+    ],
+    "answer": 0,
+    "explain": "És molt xerraire i no és gens tímida."
+   },
+   {
+    "prompt": "Кто такого же роста, как Макс?",
+    "options": [
+     "la Carla",
+     "el pare de la Laia",
+     "la Laia"
+    ],
+    "answer": 1,
+    "explain": "El pare… és tan alt com en Max."
+   },
+   {
+    "prompt": "Что думает рассказчик о Лайе?",
+    "options": [
+     "Que és molt pacient.",
+     "Que és més alta que en Max.",
+     "Que no és gaire pacient."
+    ],
+    "answer": 2,
+    "explain": "Jo crec que no ho és gaire — ho заменяет pacient."
+   }
+  ]
+ },
+ "verbs": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">La Marta ___ alta i morena.</span>",
+    "answers": [
+     "és"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Joan ___ els ulls verds.</span>",
+    "answers": [
+     "té"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La meva àvia ___ ulleres per llegir.</span>",
+    "answers": [
+     "porta"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Marc ___ barba i bigoti.</span>",
+    "answers": [
+     "porta",
+     "té"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Laia ___ els cabells llisos, però avui els porta recollits.</span>",
+    "answers": [
+     "té"
+    ],
+    "hint": "какие волосы от природы"
+   },
+   {
+    "prompt": "<span lang=\"ca\">El meu avi ___ calb.</span>",
+    "answers": [
+     "és"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Avui els nens ___ molt contents.</span>",
+    "answers": [
+     "estan"
+    ],
+    "hint": "состояние"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Avui (jo) ___ un jersei de llana perquè fa fred.</span>",
+    "answers": [
+     "porto"
+    ]
+   }
+  ]
+ },
+ "concordanca": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">En Pere és ros i la seva germana també és ___.</span>",
+    "answers": [
+     "rossa"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Biel és pèl-roig i la seva filla també és ___.</span>",
+    "answers": [
+     "pèl-roja"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La meva àvia té els cabells ___ (gris).</span>",
+    "answers": [
+     "grisos"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Porta una camisa ___ (blau).</span>",
+    "answers": [
+     "blava"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Porta una samarreta ___ (groc).</span>",
+    "answers": [
+     "groga"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Porta unes sabates ___ (blanc).</span>",
+    "answers": [
+     "blanques"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Núria és molt ___ (tranquil).</span>",
+    "answers": [
+     "tranquil·la"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Els meus fills són molt ___ (nerviós).</span>",
+    "answers": [
+     "nerviosos"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Les meves cosines són ___ (jove).</span>",
+    "answers": [
+     "joves"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Porta uns pantalons ___ (blau marí).</span>",
+    "answers": [
+     "blau marí"
+    ],
+    "hint": "составной цвет не меняется"
+   }
+  ]
+ },
+ "roba": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">unes vambes</span>",
+    "options": [
+     "домашние тапочки",
+     "кроссовки",
+     "сандалии"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "<span lang=\"ca\">unes sabatilles</span>",
+    "options": [
+     "домашние тапочки",
+     "кроссовки",
+     "туфли"
+    ],
+    "answer": 0,
+    "explain": "Sabatilles — прежде всего домашние тапочки; кроссовки — vambes (или sabatilles esportives)."
+   },
+   {
+    "prompt": "<span lang=\"ca\">una samarreta</span>",
+    "options": [
+     "рубашка",
+     "свитер",
+     "футболка"
+    ],
+    "answer": 2,
+    "explain": "Рубашка — una camisa."
+   },
+   {
+    "prompt": "<span lang=\"ca\">una faldilla</span>",
+    "options": [
+     "юбка",
+     "платье",
+     "шарф"
+    ],
+    "answer": 0
+   },
+   {
+    "prompt": "<span lang=\"ca\">uns mitjons</span>",
+    "options": [
+     "колготки",
+     "носки",
+     "перчатки"
+    ],
+    "answer": 1,
+    "explain": "Колготки — unes mitges, перчатки — uns guants."
+   },
+   {
+    "prompt": "<span lang=\"ca\">un vestit</span>",
+    "options": [
+     "только платье",
+     "пальто",
+     "платье или мужской костюм"
+    ],
+    "answer": 2
+   },
+   {
+    "prompt": "<span lang=\"ca\">uns texans</span>",
+    "options": [
+     "джинсы",
+     "шорты",
+     "сапоги"
+    ],
+    "answer": 0
+   }
+  ]
+ },
+ "grau": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">La Carla no és ___ tímida: parla amb tothom.</span>",
+    "answers": [
+     "gens"
+    ],
+    "hint": "совсем не"
+   },
+   {
+    "prompt": "<span lang=\"ca\">En Pau no és ___ alt: fa un metre seixanta-cinc.</span>",
+    "answers": [
+     "gaire"
+    ],
+    "hint": "не очень"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Ets tímid? — No, no ___ soc.</span>",
+    "answers": [
+     "ho"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">És alta la teva germana? — Sí, sí que ___ és.</span>",
+    "answers": [
+     "ho"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">És simpàtic, però una ___ gandul.</span>",
+    "answers": [
+     "mica"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">No és ni alta ni baixa: és més ___ alta.</span>",
+    "answers": [
+     "aviat"
+    ],
+    "hint": "скорее"
+   }
+  ]
+ },
+ "comparar": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">En Max fa un metre noranta i la Carla, un metre seixanta: en Max és ___ alt que la Carla.</span>",
+    "answers": [
+     "més"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Carla és tan xerraire ___ la Laia.</span>",
+    "answers": [
+     "com"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">El meu germà és més gran ___ jo.</span>",
+    "answers": [
+     "que"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">La Carla parla molt: és ___ tímida que en Max.</span>",
+    "answers": [
+     "menys"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Tinc trenta anys i la meva germana en té trenta-cinc: ella és més ___ que jo.</span>",
+    "answers": [
+     "gran"
+    ],
+    "hint": "старше"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Les dues són iguals: la Laia és ___ alta com la seva mare.</span>",
+    "answers": [
+     "tan"
+    ]
+   }
+  ]
+ }
+}

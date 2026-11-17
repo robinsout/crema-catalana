@@ -1,0 +1,202 @@
+{
+ "groups": {
+  "bossa": "El bolso y los bolsillos",
+  "aula": "En el salón de clase",
+  "descripcio": "Cómo es la cosa",
+  "paraules": "Verbos y palabras de la unidad"
+ },
+ "words": {
+  "bossa": {
+   "tr": "bolso, cartera (de mujer); bolsa"
+  },
+  "motxilla": {
+   "tr": "mochila"
+  },
+  "butxaca": {
+   "tr": "bolsillo",
+   "note": "bolsa en México"
+  },
+  "clau": {
+   "tr": "llave"
+  },
+  "cartera": {
+   "tr": "billetera; portafolios",
+   "note": "no es el bolso de mujer: eso es la bossa"
+  },
+  "moneder": {
+   "tr": "monedero"
+  },
+  "mobil": {
+   "tr": "celular, móvil"
+  },
+  "targeta": {
+   "tr": "tarjeta (del banco, del transporte)",
+   "note": "con g"
+  },
+  "estoig": {
+   "tr": "estuche, cartuchera; funda"
+  },
+  "ulleres-sol": {
+   "tr": "lentes de sol, anteojos de sol, gafas de sol",
+   "note": "solo plural"
+  },
+  "mocador": {
+   "tr": "pañuelo",
+   "note": "mocador de paper — pañuelo de papel"
+  },
+  "xiclet": {
+   "tr": "chicle"
+  },
+  "pintallavis": {
+   "tr": "pintalabios, labial"
+  },
+  "paraigua": {
+   "tr": "paraguas",
+   "note": "masculino; sin -s en singular"
+  },
+  "agenda": {
+   "tr": "agenda"
+  },
+  "boligraf": {
+   "tr": "bolígrafo, pluma, lapicero"
+  },
+  "llapis": {
+   "tr": "lápiz",
+   "note": "plural: els llapis"
+  },
+  "rellotge": {
+   "tr": "reloj"
+  },
+  "mirall": {
+   "tr": "espejo"
+  },
+  "pinta": {
+   "tr": "peine",
+   "note": "femenino, y el peine es masculino"
+  },
+  "carregador": {
+   "tr": "cargador"
+  },
+  "aula": {
+   "tr": "salón de clase, aula"
+  },
+  "taula": {
+   "tr": "mesa"
+  },
+  "cadira": {
+   "tr": "silla"
+  },
+  "pissarra": {
+   "tr": "pizarra, pizarrón"
+  },
+  "guix": {
+   "tr": "tiza, gis",
+   "note": "masculino, y la tiza es femenino"
+  },
+  "paperera": {
+   "tr": "papelera, cesto o bote de basura"
+  },
+  "ordinador": {
+   "tr": "computadora, ordenador"
+  },
+  "penjador": {
+   "tr": "perchero"
+  },
+  "llum": {
+   "tr": "lámpara",
+   "note": "la llum — la luz"
+  },
+  "llibreta": {
+   "tr": "cuaderno, libreta"
+  },
+  "full": {
+   "tr": "hoja (de papel)",
+   "note": "masculino, y la hoja es femenino"
+  },
+  "tisores": {
+   "tr": "tijeras",
+   "note": "solo plural"
+  },
+  "gros": {
+   "tr": "grande, grueso",
+   "note": "de una persona: gordo"
+  },
+  "petit": {
+   "tr": "pequeño, chico"
+  },
+  "mida": {
+   "tr": "tamaño; talla",
+   "note": "de mida mitjana — mediano"
+  },
+  "rodo": {
+   "tr": "redondo"
+  },
+  "quadrat": {
+   "tr": "cuadrado"
+  },
+  "fusta": {
+   "tr": "madera",
+   "note": "de fusta — de madera"
+  },
+  "metall": {
+   "tr": "metal"
+  },
+  "pell": {
+   "tr": "cuero; piel",
+   "note": "de pell — de cuero"
+  },
+  "roba": {
+   "tr": "ropa; tela",
+   "note": "de roba — de tela"
+  },
+  "vidre": {
+   "tr": "vidrio"
+  },
+  "plegable": {
+   "tr": "plegable"
+  },
+  "blau": {
+   "tr": "azul"
+  },
+  "groc": {
+   "tr": "amarillo"
+  },
+  "marro": {
+   "tr": "marrón, café",
+   "note": "no cambia en femenino"
+  },
+  "portar": {
+   "tr": "llevar, traer (encima)",
+   "note": "no llevar-se, que es «levantarse»"
+  },
+  "servir": {
+   "tr": "servir para",
+   "note": "serveix per + infinitivo"
+  },
+  "fer-servir": {
+   "tr": "usar, utilizar"
+  },
+  "veure": {
+   "tr": "ver",
+   "note": "veig, veus, veu…"
+  },
+  "cap": {
+   "tr": "ningún, ninguno",
+   "note": "en pregunta: «algún»"
+  },
+  "ningu": {
+   "tr": "nadie",
+   "note": "en pregunta: «alguien»"
+  },
+  "res": {
+   "tr": "nada",
+   "note": "en pregunta: «algo»"
+  },
+  "aixo": {
+   "tr": "esto, eso"
+  },
+  "allo": {
+   "tr": "aquello, eso (lejos)"
+  }
+ }
+}

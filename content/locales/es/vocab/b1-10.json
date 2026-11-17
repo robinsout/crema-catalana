@@ -1,0 +1,117 @@
+{
+ "groups": {
+  "festa": "Fiesta y ayuntamiento",
+  "curs": "El año escolar",
+  "parlar": "Conversación y presentaciones"
+ },
+ "words": {
+  "festa": {
+   "tr": "fiesta",
+   "note": "fer festa — tener el día libre"
+  },
+  "sala-actes": {
+   "tr": "salón de actos"
+  },
+  "berenar": {
+   "tr": "merienda (en Chile, onces; en Perú, lonche)",
+   "note": "también verbo: merendar"
+  },
+  "ajuntament": {
+   "tr": "ayuntamiento, municipalidad, alcaldía"
+  },
+  "casa-vila": {
+   "tr": "ayuntamiento (de un pueblo pequeño)"
+  },
+  "alcalde": {
+   "tr": "alcalde, alcaldesa"
+  },
+  "regidor": {
+   "tr": "concejal, concejala"
+  },
+  "director": {
+   "tr": "director, directora"
+  },
+  "locutor": {
+   "tr": "locutor, locutora"
+  },
+  "entrevista": {
+   "tr": "entrevista"
+  },
+  "tothom": {
+   "tr": "todos, todo el mundo",
+   "note": "el verbo va en singular: tothom parla"
+  },
+  "benvingut": {
+   "tr": "bienvenido, bienvenida"
+  },
+  "enhorabona": {
+   "tr": "¡enhorabuena! (por un logro; en LatAm: felicitaciones)"
+  },
+  "felicitats": {
+   "tr": "¡felicidades!"
+  },
+  "curs": {
+   "tr": "curso; año escolar"
+  },
+  "inscripcio": {
+   "tr": "inscripción, matrícula"
+  },
+  "examen": {
+   "tr": "examen"
+  },
+  "sortida": {
+   "tr": "excursión, salida; salida (puerta)"
+  },
+  "conferencia": {
+   "tr": "conferencia"
+  },
+  "vacances": {
+   "tr": "vacaciones",
+   "note": "solo plural; fer vacances"
+  },
+  "aprovar": {
+   "tr": "aprobar"
+  },
+  "suspendre": {
+   "tr": "suspender, reprobar (LatAm)"
+  },
+  "curs-que-ve": {
+   "tr": "el curso próximo, el año escolar que viene"
+  },
+  "voste": {
+   "tr": "usted, ustedes",
+   "note": "el verbo va en 3.ª persona, como con usted"
+  },
+  "senyor": {
+   "tr": "señor, señora"
+  },
+  "presentar": {
+   "tr": "presentar (a alguien)",
+   "note": "Us presento en Karim — sin a (no *presento a Karim)"
+  },
+  "agradar": {
+   "tr": "gustar",
+   "note": "m'agrada, li agrada, els agrada"
+  },
+  "encantar": {
+   "tr": "encantar",
+   "note": "m'encanta — me encanta"
+  },
+  "gaire": {
+   "tr": "no mucho"
+  },
+  "gens": {
+   "tr": "nada, en absoluto"
+  },
+  "des-de-fa": {
+   "tr": "desde hace (un tiempo)",
+   "note": "des de fa tres anys"
+  },
+  "llengua-materna": {
+   "tr": "lengua materna"
+  },
+  "xerraire": {
+   "tr": "hablador, conversador"
+  }
+ }
+}

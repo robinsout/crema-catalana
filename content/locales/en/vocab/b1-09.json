@@ -1,0 +1,195 @@
+{
+ "groups": {
+  "bossa": "Bag and pockets",
+  "aula": "In the classroom",
+  "descripcio": "What it's like",
+  "paraules": "Verbs and key words"
+ },
+ "words": {
+  "bossa": {
+   "tr": "bag, handbag; plastic bag"
+  },
+  "motxilla": {
+   "tr": "backpack, rucksack"
+  },
+  "butxaca": {
+   "tr": "pocket"
+  },
+  "clau": {
+   "tr": "key"
+  },
+  "cartera": {
+   "tr": "wallet; briefcase, school bag",
+   "note": "not a folder: that's la carpeta"
+  },
+  "moneder": {
+   "tr": "coin purse"
+  },
+  "mobil": {
+   "tr": "mobile phone"
+  },
+  "targeta": {
+   "tr": "card (bank card, travel card)"
+  },
+  "estoig": {
+   "tr": "pencil case; case"
+  },
+  "ulleres-sol": {
+   "tr": "sunglasses",
+   "note": "plural only"
+  },
+  "mocador": {
+   "tr": "handkerchief; scarf",
+   "note": "mocador de paper — tissue"
+  },
+  "xiclet": {
+   "tr": "chewing gum"
+  },
+  "pintallavis": {
+   "tr": "lipstick"
+  },
+  "paraigua": {
+   "tr": "umbrella",
+   "note": "masculine"
+  },
+  "agenda": {
+   "tr": "diary, planner"
+  },
+  "boligraf": {
+   "tr": "pen"
+  },
+  "llapis": {
+   "tr": "pencil",
+   "note": "plural: els llapis"
+  },
+  "rellotge": {
+   "tr": "watch; clock"
+  },
+  "mirall": {
+   "tr": "mirror"
+  },
+  "pinta": {
+   "tr": "comb"
+  },
+  "carregador": {
+   "tr": "charger"
+  },
+  "aula": {
+   "tr": "classroom"
+  },
+  "taula": {
+   "tr": "table; desk"
+  },
+  "cadira": {
+   "tr": "chair"
+  },
+  "pissarra": {
+   "tr": "board (in a classroom)"
+  },
+  "guix": {
+   "tr": "chalk"
+  },
+  "paperera": {
+   "tr": "bin, wastepaper basket"
+  },
+  "ordinador": {
+   "tr": "computer"
+  },
+  "penjador": {
+   "tr": "coat rack; hanger"
+  },
+  "llum": {
+   "tr": "lamp",
+   "note": "la llum — light"
+  },
+  "llibreta": {
+   "tr": "notebook"
+  },
+  "full": {
+   "tr": "sheet of paper"
+  },
+  "tisores": {
+   "tr": "scissors",
+   "note": "plural only"
+  },
+  "gros": {
+   "tr": "big, bulky, thick",
+   "note": "of a person: fat"
+  },
+  "petit": {
+   "tr": "small, little"
+  },
+  "mida": {
+   "tr": "size",
+   "note": "de mida mitjana — medium-sized"
+  },
+  "rodo": {
+   "tr": "round"
+  },
+  "quadrat": {
+   "tr": "square"
+  },
+  "fusta": {
+   "tr": "wood (material)",
+   "note": "de fusta — wooden"
+  },
+  "metall": {
+   "tr": "metal"
+  },
+  "pell": {
+   "tr": "leather; skin",
+   "note": "de pell — leather"
+  },
+  "roba": {
+   "tr": "fabric; clothes",
+   "note": "de roba — made of fabric"
+  },
+  "vidre": {
+   "tr": "glass (material)"
+  },
+  "plegable": {
+   "tr": "folding"
+  },
+  "blau": {
+   "tr": "blue"
+  },
+  "groc": {
+   "tr": "yellow"
+  },
+  "marro": {
+   "tr": "brown"
+  },
+  "portar": {
+   "tr": "to carry, to have on you; to bring; to wear"
+  },
+  "servir": {
+   "tr": "to be for, to be used for",
+   "note": "Per a què serveix? — What's it for?"
+  },
+  "fer-servir": {
+   "tr": "to use"
+  },
+  "veure": {
+   "tr": "to see",
+   "note": "veig, veus, veu…"
+  },
+  "cap": {
+   "tr": "no, not any",
+   "note": "in a question: any"
+  },
+  "ningu": {
+   "tr": "nobody",
+   "note": "in a question: anybody"
+  },
+  "res": {
+   "tr": "nothing",
+   "note": "in a question: anything"
+  },
+  "aixo": {
+   "tr": "this, that (without a noun)"
+  },
+  "allo": {
+   "tr": "that (over there, without a noun)"
+  }
+ }
+}

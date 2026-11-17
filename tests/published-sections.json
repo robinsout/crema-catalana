@@ -7,5 +7,9 @@
   "b1-03": ["carrer", "adreca", "pis", "botigues", "hiha", "lloc", "adreces", "practica"],
   "b1-04": ["dies", "apats", "rellotge", "horaris", "temps", "missatge", "practica"],
   "b1-05": ["dia", "reflexius", "present", "amb", "frequencia", "anar", "practica"],
-  "b1-06": ["oficis", "treballar", "llocs", "feina", "horari", "atur", "practica"]
+  "b1-06": ["oficis", "treballar", "llocs", "feina", "horari", "atur", "practica"],
+  "b1-07": ["aliments", "temporada", "voler", "parada", "quantitat", "botigues", "cuina", "practica"],
+  "b1-08": ["aspecte", "cabells", "adjectius", "roba", "caracter", "grau", "comparar", "practica"],
+  "b1-09": ["bossa", "qui", "aquest", "servir", "com", "aula", "cap", "plurals", "veig", "practica"],
+  "b1-10": ["festa", "voste", "jo", "agradar", "presentar", "repas", "practica"]
 }

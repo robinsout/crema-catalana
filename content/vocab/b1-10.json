@@ -1,0 +1,52 @@
+{
+ "groups": [
+  {
+   "id": "festa",
+   "words": [
+    { "id": "festa", "ca": "la festa", "gender": "f", "plural": "les festes" },
+    { "id": "sala-actes", "ca": "la sala d'actes", "gender": "f", "plural": "les sales d'actes" },
+    { "id": "berenar", "ca": "el berenar", "gender": "m", "plural": "els berenars" },
+    { "id": "ajuntament", "ca": "l'ajuntament", "gender": "m", "plural": "els ajuntaments" },
+    { "id": "casa-vila", "ca": "la casa de la vila", "gender": "f", "plural": "les cases de la vila" },
+    { "id": "alcalde", "ca": "alcalde, alcaldessa", "gender": "mf", "plural": "alcaldes, alcaldesses" },
+    { "id": "regidor", "ca": "regidor, regidora", "gender": "mf", "plural": "regidors, regidores" },
+    { "id": "director", "ca": "director, directora", "gender": "mf", "plural": "directors, directores" },
+    { "id": "locutor", "ca": "locutor, locutora", "gender": "mf", "plural": "locutors, locutores" },
+    { "id": "entrevista", "ca": "l'entrevista", "gender": "f", "plural": "les entrevistes" },
+    { "id": "tothom", "ca": "tothom" },
+    { "id": "benvingut", "ca": "benvingut, benvinguda" },
+    { "id": "enhorabona", "ca": "enhorabona!" },
+    { "id": "felicitats", "ca": "felicitats!" }
+   ]
+  },
+  {
+   "id": "curs",
+   "words": [
+    { "id": "curs", "ca": "el curs", "gender": "m", "plural": "els cursos" },
+    { "id": "inscripcio", "ca": "la inscripció", "gender": "f", "plural": "les inscripcions" },
+    { "id": "examen", "ca": "l'examen", "gender": "m", "plural": "els exàmens" },
+    { "id": "sortida", "ca": "la sortida", "gender": "f", "plural": "les sortides" },
+    { "id": "conferencia", "ca": "la conferència", "gender": "f", "plural": "les conferències" },
+    { "id": "vacances", "ca": "les vacances", "gender": "f" },
+    { "id": "aprovar", "ca": "aprovar" },
+    { "id": "suspendre", "ca": "suspendre" },
+    { "id": "curs-que-ve", "ca": "el curs que ve" }
+   ]
+  },
+  {
+   "id": "parlar",
+   "words": [
+    { "id": "voste", "ca": "vostè, vostès" },
+    { "id": "senyor", "ca": "senyor, senyora", "gender": "mf", "plural": "senyors, senyores" },
+    { "id": "presentar", "ca": "presentar" },
+    { "id": "agradar", "ca": "agradar" },
+    { "id": "encantar", "ca": "encantar" },
+    { "id": "gaire", "ca": "no… gaire" },
+    { "id": "gens", "ca": "no… gens" },
+    { "id": "des-de-fa", "ca": "des de fa" },
+    { "id": "llengua-materna", "ca": "la llengua materna", "gender": "f", "plural": "les llengües maternes" },
+    { "id": "xerraire", "ca": "xerraire", "gender": "mf", "plural": "xerraires" }
+   ]
+  }
+ ]
+}

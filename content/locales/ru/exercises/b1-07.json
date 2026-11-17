@@ -1,0 +1,404 @@
+{
+ "lectura": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "Как Анна узнаёт своё место в очереди?",
+    "options": [
+     "Берёт номерок.",
+     "Спрашивает «Qui és l'última?»",
+     "Ждёт, пока её позовут по имени."
+    ],
+    "answer": 1,
+    "explain": "Hi ha molta gent i pregunta: «Qui és l'última?»"
+   },
+   {
+    "prompt": "Как фруктовщица обращается к Анне?",
+    "options": [
+     "на tu",
+     "на vostè"
+    ],
+    "answer": 0,
+    "explain": "Què et poso? — на tu; на vostè было бы Què li poso?"
+   },
+   {
+    "prompt": "Почему Анна не покупает клубнику?",
+    "options": [
+     "Сейчас осень, и клубника очень дорогая.",
+     "Она не любит клубнику.",
+     "Клубники нет на прилавке."
+    ],
+    "answer": 0,
+    "explain": "Ara és tardor i les maduixes són molt cares."
+   },
+   {
+    "prompt": "Что она покупает в рыбном?",
+    "options": [
+     "un quilo de sardines",
+     "dos-cents grams de gambes i un lluç",
+     "una llauna de tonyina"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "Почему она ничего не берёт в мясном?",
+    "options": [
+     "Мясной закрыт.",
+     "Сегодня она хочет приготовить ужин из рыбы.",
+     "Мясо она покупает в супермаркете."
+    ],
+    "answer": 1,
+    "explain": "Avui vol fer un sopar de peix."
+   },
+   {
+    "prompt": "Что она покупает в булочной для мамы?",
+    "options": [
+     "una barra de pa",
+     "un tortell de Reis",
+     "mitja dotzena de panellets"
+    ],
+    "answer": 2,
+    "explain": "I, per a la seva mare, mitja dotzena de panellets."
+   }
+  ]
+ },
+ "voler": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Jo ___ un quilo de pomes.</span>",
+    "answers": [
+     "vull"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Què ___ per dinar, tu?</span>",
+    "answers": [
+     "vols"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Bon dia, senyor. Què ___?</span>",
+    "answers": [
+     "vol"
+    ],
+    "hint": "на vostè"
+   },
+   {
+    "prompt": "<span lang=\"ca\">Nosaltres ___ comprar peix fresc.</span>",
+    "answers": [
+     "volem"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Nens, ___ pa amb xocolata per berenar?</span>",
+    "answers": [
+     "voleu"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Els meus fills sempre ___ macarrons.</span>",
+    "answers": [
+     "volen"
+    ]
+   }
+  ]
+ },
+ "quant": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">___ mandarines vol?</span> — <span lang=\"ca\">Un quilo.</span>",
+    "answers": [
+     "Quantes"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ formatge vols?</span> — <span lang=\"ca\">Dos-cents grams.</span>",
+    "answers": [
+     "Quant"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ ous vol?</span> — <span lang=\"ca\">Una dotzena.</span>",
+    "answers": [
+     "Quants"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ carn picada vols?</span> — <span lang=\"ca\">Mig quilo.</span>",
+    "answers": [
+     "Quanta"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ llaunes de tonyina compres?</span> — <span lang=\"ca\">Tres.</span>",
+    "answers": [
+     "Quantes"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">Gràcies. ___ és?</span> — <span lang=\"ca\">Són nou euros.</span>",
+    "answers": [
+     "Quant"
+    ],
+    "hint": "без существительного"
+   }
+  ]
+ },
+ "envasos": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">una ___ de tonyina</span>",
+    "answers": [
+     "llauna"
+    ],
+    "hint": "консервная банка"
+   },
+   {
+    "prompt": "<span lang=\"ca\">un ___ de llet</span>",
+    "answers": [
+     "bric"
+    ],
+    "hint": "картонный пакет"
+   },
+   {
+    "prompt": "<span lang=\"ca\">un ___ de mel</span>",
+    "answers": [
+     "pot"
+    ],
+    "hint": "стеклянная банка"
+   },
+   {
+    "prompt": "<span lang=\"ca\">una ___ d'oli</span>",
+    "answers": [
+     "ampolla"
+    ],
+    "hint": "бутылка"
+   },
+   {
+    "prompt": "<span lang=\"ca\">una ___ d'ous</span>",
+    "answers": [
+     "dotzena"
+    ],
+    "hint": "двенадцать штук"
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ quilo de cireres</span>",
+    "answers": [
+     "mig"
+    ],
+    "hint": "полкило"
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ dotzena d'ous</span>",
+    "answers": [
+     "mitja"
+    ],
+    "hint": "шесть штук"
+   },
+   {
+    "prompt": "<span lang=\"ca\">___ ampolles de vi</span>",
+    "answers": [
+     "dues"
+    ],
+    "hint": "две"
+   }
+  ]
+ },
+ "botigues": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Compro el lluç i les sardines…</span>",
+    "options": [
+     "a la carnisseria",
+     "a la peixateria",
+     "a la fleca"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "<span lang=\"ca\">Compro una barra de pa…</span>",
+    "options": [
+     "al forn",
+     "a la fruiteria",
+     "a la xarcuteria"
+    ],
+    "answer": 0,
+    "explain": "El forn и la fleca — булочная."
+   },
+   {
+    "prompt": "<span lang=\"ca\">Compro el bacallà salat…</span>",
+    "options": [
+     "a la pastisseria",
+     "a la bacallaneria",
+     "a la carnisseria"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "<span lang=\"ca\">Compro la vedella i el pollastre…</span>",
+    "options": [
+     "a la peixateria",
+     "a la fruiteria",
+     "a la carnisseria"
+    ],
+    "answer": 2
+   },
+   {
+    "prompt": "Кто продаёт фрукты и овощи?",
+    "options": [
+     "el fruiter",
+     "el forner",
+     "el caixer"
+    ],
+    "answer": 0
+   },
+   {
+    "prompt": "Кто работает на кассе в супермаркете?",
+    "options": [
+     "la paradista",
+     "la caixera",
+     "la peixatera"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "Какой предлог верный?",
+    "options": [
+     "Compro la carn en la carnisseria.",
+     "Compro la carn a la carnisseria.",
+     "Compro la carn de la carnisseria."
+    ],
+    "answer": 1,
+    "explain": "С местом — a и артикль: a la carnisseria, al mercat."
+   }
+  ]
+ },
+ "parada": {
+  "type": "fill",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">— Bon dia. Qui és ___?</span> (кто последний)",
+    "answers": [
+     "l'últim",
+     "l'última"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">— Bon dia, senyora. Què li ___?</span> (что вам положить)",
+    "answers": [
+     "poso"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">— ___ un quilo de pomes, si us plau.</span> (я бы хотела)",
+    "answers": [
+     "Voldria"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">— Alguna cosa ___?</span>",
+    "answers": [
+     "més"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">— A quant ___ les cireres?</span> (почём)",
+    "answers": [
+     "van"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">— No, ___ més, gràcies. Quant és?</span>",
+    "answers": [
+     "res"
+    ]
+   },
+   {
+    "prompt": "<span lang=\"ca\">— Són sis euros ___ trenta.</span>",
+    "answers": [
+     "amb"
+    ]
+   },
+   {
+    "prompt": "— ___. (вот, возьмите — на vostè)",
+    "answers": [
+     "Tingui"
+    ],
+    "hint": "на tu было бы Té"
+   }
+  ]
+ },
+ "temporada": {
+  "type": "choice",
+  "items": [
+   {
+    "prompt": "<span lang=\"ca\">Fa molt de fred. Què mengem?</span>",
+    "options": [
+     "escudella i carn d'olla",
+     "coca de Sant Joan",
+     "síndria"
+    ],
+    "answer": 0
+   },
+   {
+    "prompt": "6 января едят…",
+    "options": [
+     "la mona",
+     "el tortell de Reis",
+     "els panellets"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "На Пасху крёстные дарят…",
+    "options": [
+     "la mona",
+     "les castanyes",
+     "els canelons"
+    ],
+    "answer": 0
+   },
+   {
+    "prompt": "<span lang=\"ca\">La revetlla de Sant Joan</span> — это…",
+    "options": [
+     "1 ноября, с каштанами",
+     "23 июня, с coca и кава",
+     "25 декабря, с бульоном"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "<span lang=\"ca\">Castanyes, moniatos i panellets</span> едят…",
+    "options": [
+     "a la primavera",
+     "a l'estiu",
+     "a la tardor"
+    ],
+    "answer": 2,
+    "explain": "La Castanyada, 31 октября — 1 ноября."
+   },
+   {
+    "prompt": "Что из этого — летнее?",
+    "options": [
+     "les carxofes",
+     "els préssecs",
+     "les mandarines"
+    ],
+    "answer": 1
+   },
+   {
+    "prompt": "Что из этого — весеннее?",
+    "options": [
+     "les maduixes",
+     "la carbassa",
+     "la magrana"
+    ],
+    "answer": 0
+   }
+  ]
+ }
+}
