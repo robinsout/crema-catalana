@@ -94,5 +94,5 @@
 
 ## Деплой
 - Репозиторий: git@github.com:robinsout/crema-catalana.git (ветка `master`). Пушить с личным SSH-ключом `~/.ssh/mygithub`, он прописан в `core.sshCommand` этого репозитория.
-- Коммиты делать от личного адреса robinsout@gmail.com (он задан в локальном git config), а не от рабочего.
+- Коммиты делать от личного noreply-адреса GitHub `15253414+robinsout@users.noreply.github.com` (задан в локальном git config), а не от рабочего и не от robinsout@gmail.com: с 2026-11-17 GitHub отклоняет пуши, раскрывающие почту.
 - `.github/workflows/pages.yml`: `npm ci` + `npm run check` на каждый пуш и PR; деплой `dist/` на Pages только из `master` и только если всё прошло.
