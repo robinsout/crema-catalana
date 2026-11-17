@@ -24,7 +24,7 @@ import {
 const REPO = 'robinsout/crema-catalana';
 const SITE = 'https://robinsout.github.io/crema-catalana/';
 const SYNC_HOST = '188.245.182.47';
-const PERSONAL_EMAIL = 'robinsout@gmail.com';
+const PERSONAL_EMAIL = '15253414+robinsout@users.noreply.github.com';
 const SERVICES = ['quadern-sync', 'caddy', 'comoestasbot'];
 
 const args = new Set(process.argv.slice(2));
