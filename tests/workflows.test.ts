@@ -51,16 +51,29 @@ test('CI skips exactly the files the pre-push hook treats as documentation', () 
   assert.ok(isDocsOnly(['README.md', 'deploy/README.md', '.claude/skills/x/SKILL.md', 'LICENSE', 'LICENSE-CONTENT']));
 });
 
-type Job = { if?: string; needs?: string; steps: { uses?: string; run?: string; with?: Record<string, string> }[] };
+type Job = { if?: string; needs?: string | string[]; steps: { uses?: string; run?: string; with?: Record<string, string> }[] };
 const jobs = () => (parseDocument(readFileSync(join(dir, 'pages.yml'), 'utf8')).toJS() as { jobs: Record<string, Job> }).jobs;
 
 // the old Pages address serves only the bridge (BACKLOG H-1)
-test('the bridge job publishes bridge/ to Pages, on a push to master only', () => {
+test('the bridge job publishes bridge/ to Pages, after a successful deploy, on master only (not on pull requests)', () => {
   const job = jobs().bridge!;
-  assert.equal(job.needs, 'test');
-  assert.equal(job.if, "github.event_name == 'push' && github.ref == 'refs/heads/master'");
+  assert.deepEqual([job.needs].flat().sort(), ['deploy', 'test']);
+  assert.equal(job.if, "github.event_name != 'pull_request' && github.ref == 'refs/heads/master'");
   assert.equal(job.steps.find((s) => s.uses?.startsWith('actions/upload-pages-artifact@'))?.with?.path, 'bridge');
   assert.ok(job.steps.some((s) => s.uses?.startsWith('actions/deploy-pages@')));
+});
+
+test('deploy runs on master (push or manual) and checks the live site after the upload', () => {
+  const job = jobs().deploy!;
+  assert.equal(job.if, "github.event_name != 'pull_request' && github.ref == 'refs/heads/master'");
+  const rsync = job.steps.findIndex((s) => /rsync /.test(s.run ?? ''));
+  const check = job.steps.findIndex((s) => /crema-catalana\.makeitforfun\.es/.test(s.run ?? '') && /curl/.test(s.run ?? ''));
+  assert.ok(check > rsync && rsync >= 0, 'a live check after rsync');
+});
+
+test('a run on master is never cancelled in the middle of a deploy', () => {
+  const wf = parseDocument(readFileSync(join(dir, 'pages.yml'), 'utf8')).toJS() as { concurrency: { 'cancel-in-progress': string } };
+  assert.equal(wf.concurrency['cancel-in-progress'], "${{ github.event_name == 'pull_request' }}");
 });
 
 test('the deploy job still uploads dist/ to the server by rsync', () => {

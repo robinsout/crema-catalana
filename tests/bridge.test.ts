@@ -127,6 +127,7 @@ function runWorker() {
   const clients = [
     { url: 'https://x/a', navigate: async () => { log.push('navigate a'); throw new Error('gone'); } },
     { url: 'https://x/b', navigate: async (u: string) => { log.push('navigate b ' + u); } },
+    { url: 'https://x/c/?q=1#/ru/plan', navigate: async (u: string) => { log.push('navigate c ' + u); } },
   ];
   const self = {
     addEventListener: (t: string, f: (typeof handlers)[string]) => { handlers[t] = f; },
@@ -160,7 +161,13 @@ test('sw.js: activation clears only quadern- caches, then claims, unregisters an
   assert.ok(i('claim') > Math.max(i('delete quadern-data'), i('delete quadern-shell-abc')));
   assert.ok(i('unregister') > i('claim'));
   assert.ok(i('navigate a') > i('unregister'));
-  assert.ok(log.includes('navigate b https://x/b'), 'one failing client does not stop the others');
+  assert.ok(log.some((l) => l.startsWith('navigate b ')), 'one failing client does not stop the others');
+  // a URL with a hash would only be a same-document navigation (no reload in Safari): a query param forces a real load
+  const c = log.find((l) => l.startsWith('navigate c '))!.slice('navigate c '.length);
+  assert.notEqual(c, 'https://x/c/?q=1#/ru/plan');
+  assert.ok(c.endsWith('#/ru/plan'), 'the hash is kept');
+  assert.equal(new URL(c).searchParams.get('moved'), '1');
+  assert.equal(new URL(c).searchParams.get('q'), '1');
 });
 
 test('sw.js never touches storage', () => {

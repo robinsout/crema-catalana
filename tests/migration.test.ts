@@ -62,12 +62,32 @@ test('bad ids and __proto__ are dropped', async () => {
   assert.deepEqual(r?.progress?.done, { 'b1-01': true });
 });
 
-test('merge: the later change wins on either side', () => {
-  const local = p({ done: { a: true, b: false }, doneAt: { a: 200, b: 100 } });
-  const incoming = p({ done: { a: false, b: true, c: true }, doneAt: { a: 100, b: 200, c: 50 } });
+// Import is additive: a crafted link must not be able to un-mark or overwrite anything on this device.
+test('import never removes a local done mark, and only takes done: true', () => {
+  const local = p({ done: { a: true, b: false }, doneAt: { a: 100, b: 100 } });
+  const incoming = p({ done: { a: false, b: true, c: true, d: false }, doneAt: { a: NOW + 5, b: 200, c: 50, d: 60 } });
   const r = importProgress(local, incoming, NOW);
   assert.deepEqual(r.done, { a: true, b: true, c: true });
-  assert.equal(r.doneAt.a, 200);
+  assert.equal(r.doneAt.a, 100);
+  assert.equal(r.doneAt.b, 200);
+  assert.equal('d' in r.done, false);
+});
+
+test('import never overwrites an existing exercise result, reading position or section mark', () => {
+  const local = p({
+    exercises: { 'x/e': { score: 1, total: 4, at: 10 } },
+    reading: { x: { section: 's1', at: 10 } },
+    sections: { 'x/s': { done: false, at: 10 } },
+  });
+  const incoming = p({
+    exercises: { 'x/e': { score: 4, total: 4, at: 20 }, 'x/f': { score: 2, total: 4, at: 20 } },
+    reading: { x: { section: 's9', at: 20 }, y: { section: 's1', at: 20 } },
+    sections: { 'x/s': { done: true, at: 20 }, 'x/t': { done: true, at: 20 }, 'x/u': { done: false, at: 20 } },
+  });
+  const r = importProgress(local, incoming, NOW);
+  assert.deepEqual(r.exercises, { 'x/e': { score: 1, total: 4, at: 10 }, 'x/f': { score: 2, total: 4, at: 20 } });
+  assert.deepEqual(r.reading, { x: { section: 's1', at: 10 }, y: { section: 's1', at: 20 } });
+  assert.deepEqual(r.sections, { 'x/s': { done: false, at: 10 }, 'x/t': { done: true, at: 20 } });
 });
 
 test('timestamps from the future are clamped to now', () => {
@@ -83,7 +103,7 @@ test('timestamps from the future are clamped to now', () => {
   assert.equal(r.exercises['x/e']?.at, NOW);
   assert.equal(r.sections['x/s']?.at, NOW);
   assert.equal(r.reading.x?.at, NOW);
-  // a later real change on this device beats the imported one
+  // an explicit later un-mark on this device is not undone by importing again
   const later = { ...r, done: { a: false }, doneAt: { a: NOW + 1 } };
   assert.equal(importProgress(later, incoming, NOW).done.a, false);
 });

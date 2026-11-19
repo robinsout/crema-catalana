@@ -70,19 +70,30 @@ export async function decodeImport(payload: string): Promise<Imported | null> {
 const clampTimes = <T extends { at: number }>(map: Record<string, T>, now: number): Record<string, T> =>
   Object.fromEntries(Object.entries(map).map(([k, v]) => [k, { ...v, at: Math.min(v.at, now) }]));
 
-// Merges imported progress into this device's: the later change wins, so newer local data is never
-// overwritten. Times are cut to `now`: a crafted link must not plant entries "from the future" that
-// would beat every later real change (here and on synced devices). Device-only fields are taken
-// only when this device has none; no other incoming fields are copied.
+// Adds imported progress to this device's, additively: a crafted link must not be able to un-mark or
+// overwrite anything here. Only `done: true` marks are taken (an explicit later un-mark on this device
+// stays), section marks only when done and missing locally, exercise results and reading positions only
+// for keys missing locally. Times are cut to `now`, so nothing "from the future" is planted. Device-only
+// fields are taken only when this device has none; no other incoming fields are copied.
 export function importProgress(local: Progress, incoming: Progress, now: number): Progress {
-  const clamped: Progress = {
-    ...incoming,
-    doneAt: Object.fromEntries(Object.entries(incoming.doneAt).map(([k, v]) => [k, Math.min(v, now)])),
-    exercises: clampTimes(incoming.exercises, now),
-    sections: clampTimes(incoming.sections, now),
-    reading: clampTimes(incoming.reading, now),
+  const out: Progress = {
+    ...local,
+    done: { ...local.done },
+    doneAt: { ...local.doneAt },
+    exercises: { ...local.exercises },
+    sections: { ...local.sections },
+    reading: { ...local.reading },
   };
-  const out = mergeProgress(local, clamped);
+  for (const [id, mark] of Object.entries(incoming.done)) {
+    if (mark !== true || local.done[id] === true) continue;
+    const at = Math.min(incoming.doneAt[id] ?? 0, now);
+    if (local.done[id] === false && (local.doneAt[id] ?? 0) >= at) continue;
+    out.done[id] = true;
+    out.doneAt[id] = at;
+  }
+  for (const [k, v] of Object.entries(clampTimes(incoming.exercises, now))) if (!(k in local.exercises)) out.exercises[k] = v;
+  for (const [k, v] of Object.entries(clampTimes(incoming.reading, now))) if (!(k in local.reading)) out.reading[k] = v;
+  for (const [k, v] of Object.entries(clampTimes(incoming.sections, now))) if (v.done && !(k in local.sections)) out.sections[k] = v;
   if (local.last === null && incoming.last !== null) out.last = incoming.last;
   for (const f of ['lastLesson', 'locale', 'verbTenses', 'trainer', 'lastArea', 'verbsTab', 'recentVerbs'] as const) {
     if (local[f] === undefined && incoming[f] !== undefined) out[f] = incoming[f] as never;

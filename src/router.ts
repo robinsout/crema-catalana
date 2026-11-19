@@ -82,7 +82,8 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     if (to.name === 'import') {
       if (offered) return { name: 'sync', params: { lang }, replace: true };
       const original = to.fullPath.slice(`/import/${param(to.params.data)}`.length);
-      return { ...router.resolve(original || '/'), replace: true };
+      const target = router.resolve(original || '/');
+      return { path: target.path, query: target.query, hash: target.hash, replace: true };
     }
     if (to.name === 'other') {
       const rest = Array.isArray(to.params.rest) ? to.params.rest : [];

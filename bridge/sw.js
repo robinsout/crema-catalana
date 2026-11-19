@@ -18,7 +18,13 @@ self.addEventListener('activate', function (event) {
     await self.registration.unregister();
     var clients = await self.clients.matchAll({ type: 'window' });
     for (var i = 0; i < clients.length; i++) {
-      try { await clients[i].navigate(clients[i].url); } catch (e) { /* a client may be gone */ }
+      // old app URLs carry a hash: navigating to the same URL would be a same-document navigation (Safari does not
+      // reload); an extra query parameter forces a real load (the bridge reads only location.hash)
+      try {
+        var u = new URL(clients[i].url);
+        u.searchParams.set('moved', '1');
+        await clients[i].navigate(u.href);
+      } catch (e) { /* a client may be gone */ }
     }
   })());
 });
