@@ -22,7 +22,7 @@ import {
 } from './lib/session.ts';
 
 const REPO = 'robinsout/crema-catalana';
-const SITE = 'https://robinsout.github.io/crema-catalana/';
+const SITE = 'https://crema-catalana.makeitforfun.es/';
 const SYNC_HOST = '188.245.182.47';
 const PERSONAL_EMAIL = '15253414+robinsout@users.noreply.github.com';
 const SERVICES = ['quadern-sync', 'caddy', 'comoestasbot'];
@@ -155,7 +155,7 @@ else {
 
   // ------------------------------------------------------------ sync server
   console.log('\n## Сервер синхронизации');
-  const health = await getText(`https://${SYNC_HOST}/v1/health`, { Origin: 'https://robinsout.github.io' });
+  const health = await getText(`https://${SYNC_HOST}/v1/health`, { Origin: 'https://crema-catalana.makeitforfun.es' });
   report(health?.status === 200 ? 'ok' : 'fail', 'Health', health ? `${health.status} ${health.text}` : 'нет связи');
   const end = await certificateEnd(SYNC_HOST);
   const left = end ? daysUntil(end) : null;

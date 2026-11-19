@@ -52,7 +52,7 @@ const serviceWorker = (): Plugin => {
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_');
   return {
-    // relative paths: the site works under any path (GitHub Pages serves it at /crema-catalana/)
+    // relative paths: the site works under any path (it was at /crema-catalana/ on GitHub Pages; now the root of its own domain)
     base: './',
     // course data, lessons and audio are fetched at runtime and copied to the site as is
     publicDir: 'content',

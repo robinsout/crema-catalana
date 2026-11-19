@@ -1,7 +1,7 @@
 # Quadern de català
 
-[![CI and Pages](https://github.com/robinsout/crema-catalana/actions/workflows/pages.yml/badge.svg?branch=master)](https://github.com/robinsout/crema-catalana/actions/workflows/pages.yml)
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Frobinsout.github.io%2Fcrema-catalana%2F&label=site)](https://robinsout.github.io/crema-catalana/)
+[![CI and deploy](https://github.com/robinsout/crema-catalana/actions/workflows/pages.yml/badge.svg?branch=master)](https://github.com/robinsout/crema-catalana/actions/workflows/pages.yml)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fcrema-catalana.makeitforfun.es%2F&label=site)](https://crema-catalana.makeitforfun.es/)
 [![Node](https://img.shields.io/badge/node-24-339933?logo=nodedotjs&logoColor=white)](.nvmrc)
 [![Vue](https://img.shields.io/badge/vue-3-42b883?logo=vuedotjs&logoColor=white)](package.json)
 [![TypeScript](https://img.shields.io/badge/typescript-strict-3178c6?logo=typescript&logoColor=white)](tsconfig.json)
@@ -11,7 +11,7 @@
 
 Личный учебник каталанского языка: уроки к курсу **Passos 1** (Octaedro, уровни Bàsic 1–3, A2) для русскоязычного ученика, который знает испанский.
 
-**Сайт:** https://robinsout.github.io/crema-catalana/
+**Сайт:** https://crema-catalana.makeitforfun.es/
 
 ## Что внутри
 
@@ -70,7 +70,7 @@ e2e/                          тесты в браузере (Playwright) и э�
 
 ## CI/CD
 
-Workflow [`pages.yml`](.github/workflows/pages.yml) на каждый пуш и pull request запускает `npm run check`: проверку типов, тесты и сборку. Из ветки `master` сайт публикуется на GitHub Pages, но только если всё прошло. Затем запускаются функциональные тесты в браузере (Playwright). Локально хук [`.githooks/pre-commit`](.githooks/pre-commit) проверяет типы, а [`.githooks/pre-push`](.githooks/pre-push) выполняет полную проверку и браузерные тесты. Скриншотные тесты — только локальный инструмент: macOS и Linux по-разному рисуют шрифты.
+Workflow [`pages.yml`](.github/workflows/pages.yml) на каждый пуш и pull request запускает `npm run check`: проверку типов, тесты и сборку. Затем запускаются функциональные тесты в браузере (Playwright). Из ветки `master` сайт публикуется на собственный сервер (rsync по SSH, Caddy), но только если всё прошло. Локально хук [`.githooks/pre-commit`](.githooks/pre-commit) проверяет типы, а [`.githooks/pre-push`](.githooks/pre-push) выполняет полную проверку и браузерные тесты. Скриншотные тесты — только локальный инструмент: macOS и Linux по-разному рисуют шрифты.
 
 ## Совместимость сохранённого прогресса
 

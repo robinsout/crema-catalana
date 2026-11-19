@@ -1,4 +1,4 @@
-name: CI and Pages
+name: CI and deploy
 
 on:
   # documentation does not reach the site: no checks, no deploy (same list as isDocsOnly in scripts/lib/session.ts)
@@ -14,7 +14,8 @@ permissions:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # never cancel a run on master: it could stop a deploy in the middle of the upload
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   test:
@@ -35,22 +36,72 @@ jobs:
           name: playwright-traces
           path: test-results/
           retention-days: 7
-      - run: npm run build   # deployed by Actions: Jekyll never runs, no .nojekyll needed
-      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
-        with:
-          path: dist
 
   deploy:
     needs: test
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     permissions:
+      contents: read
+    environment:
+      name: production
+      url: https://crema-catalana.makeitforfun.es/
+    concurrency:
+      group: deploy
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build   # production defaults for the sync server and the counter stay as in the repo
+      # The key is limited to rsync into the site folder (rrsync), so the remote path is "/".
+      - name: Upload to the server
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          rsync -rlt --delete --delay-updates dist/ catala-deploy@188.245.182.47:/
+      # The live site must serve the build just uploaded (same entry script as in dist/index.html), otherwise the
+      # job fails and the bridge to the new address is not published.
+      - name: Check the live site serves this build
+        run: |
+          entry() { grep -oE '<script type="module"[^>]*src="\./assets/[^"]+\.js"' | grep -oE 'assets/[^"]+\.js'; }
+          built=$(entry < dist/index.html)
+          [ -n "$built" ] || { echo "no entry script in dist/index.html"; exit 1; }
+          for i in 1 2 3 4 5 6; do
+            live=$(curl -fsS "https://crema-catalana.makeitforfun.es/?nocache=$(date +%s)" | entry || true)
+            [ "$live" = "$built" ] && { echo "live site serves $built"; exit 0; }
+            echo "attempt $i: live '$live', expected '$built'"; sleep 10
+          done
+          exit 1
+
+  # The old address (GitHub Pages) serves only the bridge to the new site (BACKLOG H-1); remove this job later.
+  bridge:
+    needs: [test, deploy]
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: bridge
       - id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

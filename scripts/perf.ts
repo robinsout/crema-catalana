@@ -5,7 +5,7 @@
 import { chromium, type Page, type Request } from '@playwright/test';
 
 const SLOW = { offline: false, latency: 150, downloadThroughput: 1.6e6 / 8, uploadThroughput: 750e3 / 8 }; // "fast 3G"
-const [site = 'https://robinsout.github.io/crema-catalana/', ...routes] = process.argv.slice(2);
+const [site = 'https://crema-catalana.makeitforfun.es/', ...routes] = process.argv.slice(2);
 const pages = routes.length ? routes : ['#/ru/plan', '#/ru/lesson/b1-04'];
 
 interface Row { url: string; start: number; end: number; bytes: number }
