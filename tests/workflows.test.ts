@@ -50,3 +50,21 @@ test('CI skips exactly the files the pre-push hook treats as documentation', () 
   assert.deepEqual(wf.on.pull_request?.['paths-ignore'], ignored);
   assert.ok(isDocsOnly(['README.md', 'deploy/README.md', '.claude/skills/x/SKILL.md', 'LICENSE', 'LICENSE-CONTENT']));
 });
+
+type Job = { if?: string; needs?: string; steps: { uses?: string; run?: string; with?: Record<string, string> }[] };
+const jobs = () => (parseDocument(readFileSync(join(dir, 'pages.yml'), 'utf8')).toJS() as { jobs: Record<string, Job> }).jobs;
+
+// the old Pages address serves only the bridge (BACKLOG H-1)
+test('the bridge job publishes bridge/ to Pages, on a push to master only', () => {
+  const job = jobs().bridge!;
+  assert.equal(job.needs, 'test');
+  assert.equal(job.if, "github.event_name == 'push' && github.ref == 'refs/heads/master'");
+  assert.equal(job.steps.find((s) => s.uses?.startsWith('actions/upload-pages-artifact@'))?.with?.path, 'bridge');
+  assert.ok(job.steps.some((s) => s.uses?.startsWith('actions/deploy-pages@')));
+});
+
+test('the deploy job still uploads dist/ to the server by rsync', () => {
+  const job = jobs().deploy!;
+  assert.ok(job.steps.some((s) => /rsync .*dist\//.test(s.run ?? '')));
+  assert.ok(!job.steps.some((s) => s.uses?.startsWith('actions/deploy-pages@')));
+});

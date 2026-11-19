@@ -1,6 +1,8 @@
-// Routes: /:lang/plan/:focus?, /:lang/lesson/:id, /:lang/verbs, /:lang/verbs/:verb and /:lang/trainer (hash history: GitHub Pages has no server rewrites).
+// Routes: /:lang/plan/:focus?, /:lang/lesson/:id, /:lang/verbs, /:lang/verbs/:verb, /:lang/trainer and /import/:data/… (hash history: no server rewrites).
+// #/import/<payload><route> comes from the bridge page on the old address: it brings progress, see services/migration.ts.
 // Old links of the form #<id> and #pla, and the saved last view, are resolved by resolveRoute.
 import { createRouter, createWebHashHistory, type RouteLocationRaw, type RouterHistory } from 'vue-router';
+import { decodeImport } from './services/migration.ts';
 import { PLAN_ID, resolveRoute, type Route } from './services/catalog.ts';
 import { preferredLanguage, readerLanguages } from './services/content.ts';
 import { useCatalogStore } from './stores/catalog.ts';
@@ -44,6 +46,7 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
       { path: '/:lang/verbs/:verb', name: 'verb', component: () => import('./views/VerbView.vue') },
       { path: '/:lang/trainer', name: 'trainer', component: () => import('./views/TrainerView.vue') },
       { path: '/:lang/sync/:code?', name: 'sync', component: () => import('./views/SyncView.vue') },
+      { path: '/import/:data/:rest(.*)*', name: 'import', component: { render: () => null } },
       { path: '/:rest(.*)*', name: 'other', component: { render: () => null } },
     ],
     scrollBehavior: (to, from) => scrollFor(to, from),
@@ -52,6 +55,19 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
   router.beforeEach(async (to) => {
     const catalog = useCatalogStore();
     const progress = useProgressStore();
+    // progress moved from the old address: merged before the course loads, so an imported language is used.
+    // Nothing of it stays in the address or history (replace). A crafted link must never turn sync on
+    // or switch it by itself (anyone could make a victim upload progress to the attacker's code): a code
+    // is only offered, like a QR link, and the reader decides; a device that already syncs ignores it.
+    let offered = false;
+    if (to.name === 'import') {
+      const imported = await decodeImport(param(to.params.data));
+      if (imported?.progress) progress.importFrom(imported.progress);
+      if (imported?.syncCode && !useSyncStore().enabled) {
+        useSyncStore().offer(imported.syncCode);
+        offered = true;
+      }
+    }
     const requested = param(to.params.lang);
     // the verbs (the largest data of the site) start loading together with the course, not after the page code
     if (to.name === 'verbs' || to.name === 'verb' || to.name === 'trainer') {
@@ -63,6 +79,11 @@ export function createAppRouter(history: RouterHistory = createWebHashHistory())
     requested || progress.data.locale || '');
     const lang = catalog.lang;
 
+    if (to.name === 'import') {
+      if (offered) return { name: 'sync', params: { lang }, replace: true };
+      const original = to.fullPath.slice(`/import/${param(to.params.data)}`.length);
+      return { ...router.resolve(original || '/'), replace: true };
+    }
     if (to.name === 'other') {
       const rest = Array.isArray(to.params.rest) ? to.params.rest : [];
       if (rest.length === 0) {

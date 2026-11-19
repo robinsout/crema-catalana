@@ -3,6 +3,7 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { PLAN_ID, progress as summarize } from '../services/catalog.ts';
+import { importProgress } from '../services/migration.ts';
 import { markDone, markSection, readSavedProgress, recordExercise, recordReading, writeSavedProgress, type Progress } from '../services/progress.ts';
 import { enabledTenses, type TenseId } from '../services/verbs.ts';
 import { parseTrainer, type TrainerState } from '../services/trainer.ts';
@@ -68,6 +69,12 @@ export const useProgressStore = defineStore('progress', () => {
     save();
   }
 
+  // progress from the old address (#/import/…), merged: newer local data stays
+  function importFrom(incoming: Progress): void {
+    data.value = importProgress(data.value, incoming, Date.now());
+    save();
+  }
+
   function setLast(id: string | typeof PLAN_ID): void {
     if (data.value.last === id) return;
     if (id !== PLAN_ID) data.value.lastLesson = id;
@@ -113,6 +120,6 @@ export const useProgressStore = defineStore('progress', () => {
   }
   const hasHistory = (): boolean => data.value.last !== null || Object.keys(data.value.done).length > 0;
 
-  return { data, done, last, setLocale, verbTenses, setVerbTenses, trainer, saveTrainer, lastArea, verbsTab, setArea, recentVerbs, addRecentVerb, hasHistory, lastLesson, summary, isDone, toggleDone, setLast, result, saveResult, applySynced,
+  return { data, done, last, setLocale, verbTenses, setVerbTenses, trainer, saveTrainer, lastArea, verbsTab, setArea, recentVerbs, addRecentVerb, hasHistory, lastLesson, summary, isDone, toggleDone, setLast, result, saveResult, applySynced, importFrom,
     isSectionDone, toggleSection, readingPoint, reachSection };
 });
