@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Health
         run: |
-          curl -fsS --max-time 20 -H 'Origin: https://robinsout.github.io' https://188.245.182.47/v1/health
+          curl -fsS --max-time 20 -H 'Origin: https://crema-catalana.makeitforfun.es' https://188.245.182.47/v1/health
       - name: Certificate has at least 3 days left
         run: |
           end=$(echo | openssl s_client -connect 188.245.182.47:443 2>/dev/null | openssl x509 -noout -enddate | cut -d= -f2)

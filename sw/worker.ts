@@ -1,6 +1,6 @@
 // The service worker of the site (BACKLOG I-6): wires the browser's events to sw/core.ts.
 // Built into dist/sw.js by the service-worker plugin (vite.config.ts) as a classic script, with the
-// manifest of the build. Its scope is the site's folder only (/crema-catalana/), not the whole origin.
+// manifest of the build. Its scope is the site's folder only (the site's own path), not the whole origin.
 import { activate, install, respond, routeOf, type Manifest, type SwDeps } from './core.ts';
 import { MANIFEST_MARK, SW_UPDATED } from '../shared/sw-api.ts';
 

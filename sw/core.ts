@@ -6,7 +6,7 @@
 //   version refreshes the data already kept on install, and open pages are told (they offer a reload);
 // - the previous version stays one more round, for pages still open with its code;
 // - audio clips, the sync server, the counter and other sites of the origin are not touched.
-// Cache names start with "quadern-": other sites of robinsout.github.io share the Cache Storage.
+// Cache names start with "quadern-": the prefix keeps them apart from anything else on the origin (on robinsout.github.io the Cache Storage was shared).
 
 export const SHELL_PREFIX = 'quadern-shell-';
 export const DATA_CACHE = 'quadern-data';

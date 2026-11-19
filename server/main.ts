@@ -99,7 +99,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     port: Number(env.PORT ?? 8787),
     host: env.HOST ?? '127.0.0.1',
     dbPath: env.DB_PATH ?? join(env.STATE_DIRECTORY ?? '.', 'sync.db'),
-    allowedOrigins: (env.ALLOWED_ORIGINS ?? 'https://robinsout.github.io').split(',').map((s) => s.trim()).filter(Boolean),
+    // robinsout.github.io is the old address (GitHub Pages): kept for now so progress can be carried over by sync code; remove later
+    allowedOrigins: (env.ALLOWED_ORIGINS ?? 'https://crema-catalana.makeitforfun.es,https://robinsout.github.io').split(',').map((s) => s.trim()).filter(Boolean),
     perMinute: Number(env.RATE_PER_MINUTE ?? 120),
     maxBodyBytes: Number(env.MAX_BODY_BYTES ?? 32768),
     newBlobsPerHour: Number(env.NEW_BLOBS_PER_HOUR ?? 20),

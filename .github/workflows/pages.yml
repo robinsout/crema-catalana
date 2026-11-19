@@ -1,4 +1,4 @@
-name: CI and Pages
+name: CI and deploy
 
 on:
   # documentation does not reach the site: no checks, no deploy (same list as isDocsOnly in scripts/lib/session.ts)
@@ -35,22 +35,35 @@ jobs:
           name: playwright-traces
           path: test-results/
           retention-days: 7
-      - run: npm run build   # deployed by Actions: Jekyll never runs, no .nojekyll needed
-      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
-        with:
-          path: dist
 
   deploy:
     needs: test
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     permissions:
-      pages: write
-      id-token: write
+      contents: read
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      name: production
+      url: https://crema-catalana.makeitforfun.es/
+    concurrency:
+      group: deploy
+      cancel-in-progress: false
     steps:
-      - id: deployment
-        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build   # production defaults for the sync server and the counter stay as in the repo
+      # The key is limited to rsync into the site folder (rrsync), so the remote path is "/".
+      - name: Upload to the server
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          rsync -rlt --delete --delay-updates dist/ catala-deploy@188.245.182.47:/

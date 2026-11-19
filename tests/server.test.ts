@@ -6,7 +6,7 @@ import { createHandler } from '../server/app.ts';
 import { SqliteBlobStore } from '../server/store.ts';
 import { RateLimiter } from '../server/ratelimit.ts';
 
-const SITE = 'https://robinsout.github.io';
+const SITE = 'https://crema-catalana.makeitforfun.es';
 const ID = 'a'.repeat(32);
 let now = 0;
 let handle: ReturnType<typeof createHandler>;

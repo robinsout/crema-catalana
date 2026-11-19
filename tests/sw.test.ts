@@ -6,7 +6,7 @@ import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import { activate, DATA_CACHE, install, respond, routeOf, SHELL_PREFIX, type Manifest, type SwDeps } from '../sw/core.ts';
 
-const SCOPE = 'https://robinsout.github.io/crema-catalana/';
+const SCOPE = 'https://crema-catalana.makeitforfun.es/';
 
 // Cache Storage in memory: caches in the order of creation, like the browser's
 class FakeCache {
@@ -71,7 +71,7 @@ test('what the worker handles: the page, the code, the data; not audio, other si
   assert.equal(routeOf(get('course.json', 'navigate'), SCOPE), 'pass', 'a data file opened in a tab');
   assert.equal(routeOf({ method: 'POST', url: `${SCOPE}course.json`, mode: 'cors' }, SCOPE), 'pass');
   assert.equal(routeOf({ method: 'GET', url: 'https://188.245.182.47/v1/blob/x', mode: 'cors' }, SCOPE), 'pass', 'sync server');
-  assert.equal(routeOf({ method: 'GET', url: 'https://robinsout.github.io/other-site/', mode: 'navigate' }, SCOPE), 'pass', 'another site of the origin');
+  assert.equal(routeOf({ method: 'GET', url: 'https://other.example/', mode: 'navigate' }, SCOPE), 'pass', 'another origin');
 });
 
 test('install keeps the page, its code and the main data of this version', async () => {
